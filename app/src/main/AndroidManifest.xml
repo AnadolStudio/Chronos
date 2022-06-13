@@ -10,15 +10,24 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Chronos">
+
         <activity
-            android:name=".SingleActivity"
-            android:exported="true">
+            android:name=".view.screens.splash.SplashActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".view.screens.SingleActivity"
+            android:exported="true">
+        </activity>
+
     </application>
 
 </manifest>

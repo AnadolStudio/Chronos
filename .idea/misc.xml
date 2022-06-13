@@ -3,7 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/tereh/Desktop/My_Projects/Chronos/app/src/main/res/drawable/item_ripple.xml" value="0.1675" />
+        <entry key="..\:/Users/tereh/Desktop/My_Projects/Chronos/app/src/main/res/drawable/splash.xml" value="0.1675" />
         <entry key="..\:/Users/tereh/Desktop/My_Projects/Chronos/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/tereh/Desktop/My_Projects/Chronos/core-base/src/main/res/drawable-anydpi/ic_broken_image.xml" value="0.1675" />
+        <entry key="..\:/Users/tereh/Desktop/My_Projects/Chronos/core-base/src/main/res/drawable/ic_broken_image.xml" value="0.1675" />
+        <entry key="..\:/Users/tereh/Desktop/My_Projects/Chronos/core-base/src/main/res/drawable/ic_image_placeholder.xml" value="0.1675" />
+        <entry key="..\:/Users/tereh/Desktop/My_Projects/Chronos/core-base/src/main/res/drawable/ic_share.xml" value="0.1675" />
+        <entry key="..\:/Users/tereh/Desktop/My_Projects/Chronos/shared_util/src/main/res/drawable/ic_share.xml" value="0.1675" />
       </map>
     </option>
   </component>

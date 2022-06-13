@@ -29,7 +29,7 @@ interface BitmapDecoder {
             DecoderFlags.CIRCUMSCRIBED -> height >= reqHeight && width >= reqWidth
         }
 
-        open fun calculateInSampleSize(
+        open fun calculateInSampleSize( //TODO Нужны тесты
             options: BitmapFactory.Options,
             reqWidth: Int,
             reqHeight: Int,
