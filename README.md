@@ -1,7 +1,3 @@
 # Chronos
-## Пример использования:
-1. Навигации от гугла
-2. DI dagger2
-3. Корутины
-4. MVVM
-5. Submodule
+
+### [Макеты](https://www.figma.com/file/7lSQRRpbTCXr3DBX5dNXDR/Chronos?type=design&node-id=0%3A1&mode=design&t=ew483IdyOZaNVR3e-1)
