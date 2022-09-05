@@ -1,5 +1,3 @@
 package com.anadolstudio.chronos.ui
 
-sealed class SimpleViewState {
-
-}
+sealed class SimpleViewState
