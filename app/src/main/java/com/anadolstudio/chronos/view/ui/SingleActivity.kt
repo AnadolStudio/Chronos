@@ -1,4 +1,4 @@
-package com.anadolstudio.chronos.view.screens
+package com.anadolstudio.chronos.view.ui
 
 import android.content.Context
 import android.content.Intent

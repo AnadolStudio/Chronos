@@ -14,4 +14,3 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Chronos"
 include ':app'
-include ':core-base'

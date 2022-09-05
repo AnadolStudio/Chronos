@@ -45,7 +45,6 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.fragment:fragment-ktx:1.4.1'
     implementation 'androidx.activity:activity-ktx:1.4.0'
-    implementation project(path: ':core-base')
 
     def lifecycle_version = "2.4.1"
     implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"

@@ -6,6 +6,6 @@
     <item>
         <bitmap
             android:gravity="center"
-            android:src="@drawable/share_instagram" />
+            android:src="@drawable/item_ripple_oval" />
     </item>
 </layer-list>

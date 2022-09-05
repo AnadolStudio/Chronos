@@ -12,7 +12,7 @@
         android:theme="@style/Theme.Chronos">
 
         <activity
-            android:name=".view.screens.splash.SplashActivity"
+            android:name=".view.ui.splash.SplashActivity"
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/SplashActivity">
@@ -24,7 +24,7 @@
         </activity>
 
         <activity
-            android:name=".view.screens.SingleActivity"
+            android:name=".view.ui.SingleActivity"
             android:exported="true">
         </activity>
 
