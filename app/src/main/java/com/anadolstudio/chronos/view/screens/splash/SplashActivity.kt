@@ -1,8 +1,8 @@
-package com.anadolstudio.chronos.view.ui.splash
+package com.anadolstudio.chronos.view.screens.splash
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.anadolstudio.chronos.view.ui.SingleActivity
+import com.anadolstudio.chronos.view.screens.SingleActivity
 
 class SplashActivity : AppCompatActivity() {
 
