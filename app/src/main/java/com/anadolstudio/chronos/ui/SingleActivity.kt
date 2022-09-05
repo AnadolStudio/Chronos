@@ -1,5 +1,7 @@
 package com.anadolstudio.chronos.ui
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -10,7 +12,11 @@ import com.anadolstudio.chronos.R
 import com.anadolstudio.chronos.databinding.ActivityMainBinding
 import com.google.android.material.snackbar.Snackbar
 
-class MainActivity : AppCompatActivity() {
+class SingleActivity : AppCompatActivity() {
+
+    companion object {
+        fun start(context: Context) = context.startActivity(Intent(context, SingleActivity::class.java))
+    }
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
@@ -35,7 +41,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
-        return navController.navigateUp(appBarConfiguration)
-                || super.onSupportNavigateUp()
+
+        return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 }
