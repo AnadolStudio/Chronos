@@ -5,7 +5,7 @@ import android.view.View
 import com.anadolstudio.chronos.R
 import com.anadolstudio.chronos.databinding.FragmentFirstBinding
 import com.anadolstudio.chronos.navigation.Screens
-import com.anadolstudio.chronos.extensions.navigate
+import com.anadolstudio.chronos.extensions.navigateTo
 import com.anadolstudio.chronos.ui.SimpleViewState
 import com.anadolstudio.core.fragment.CoreBaseFragment
 import com.anadolstudio.core.viewbinding.viewBinding
@@ -22,7 +22,7 @@ class FirstFragment : CoreBaseFragment<SimpleViewState>(R.layout.fragment_first)
         super.onViewCreated(view, savedInstanceState)
 
         binding.buttonFirst.setOnClickListener {
-            navigate(Screens.SECOND_SCREEN)
+            navigateTo(Screens.SECOND_SCREEN)
         }
     }
 
