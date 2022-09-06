@@ -10,7 +10,7 @@ interface CategoryRepository {
 
     fun renameCategory(categoryId: String, newName: String): Category
 
-    fun getAllCategories():List<Category>
+    fun getAllCategories(): List<Category>
 
     fun getCategory(categoryId: String): Category
 
