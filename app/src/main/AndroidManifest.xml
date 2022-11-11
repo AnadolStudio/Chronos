@@ -9,10 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Chronos">
+
         <activity
             android:name=".ui.SplashActivity"
             android:exported="true"
-            android:label="@string/title_activity_main"
             android:theme="@style/Theme.Chronos.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,7 +24,6 @@
         <activity
             android:name=".ui.SingleActivity"
             android:exported="true"
-            android:label="@string/title_activity_main"
             android:theme="@style/Theme.Chronos.NoActionBar" >
         </activity>
 
