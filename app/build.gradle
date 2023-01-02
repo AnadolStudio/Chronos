@@ -88,6 +88,24 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
     annotationProcessor "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
 
+    // Dagger
+    def dagger = "2.16"
+    implementation "com.google.dagger:dagger:$dagger"
+    annotationProcessor "com.google.dagger:dagger-compiler:$dagger"
+
+    // Rx
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+
+    // Groupie
+    def groupie = "2.10.1"
+    implementation "com.github.lisawray.groupie:groupie:$groupie"
+    implementation "com.github.lisawray.groupie:groupie-kotlin-android-extensions:$groupie"
+    implementation "com.github.lisawray.groupie:groupie-viewbinding:$groupie"
+
+    // JodaTime
+    def joda_time = "2.10.3"
+    implementation "joda-time:joda-time:$joda_time"
+
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
