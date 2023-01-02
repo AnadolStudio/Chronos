@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/firstFragment"
-        android:name="com.anadolstudio.chronos.ui.statistic.FirstFragment"
+        android:name="com.anadolstudio.chronos.ui.days.DaysFragment"
         android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
+        tools:layout="@layout/fragment_days">
 
         <action
             android:id="@+id/action_firstFragment_to_secondFragment"
@@ -18,9 +18,9 @@
 
     <fragment
         android:id="@+id/secondFragment"
-        android:name="com.anadolstudio.chronos.ui.today.SecondFragment"
+        android:name="com.anadolstudio.chronos.ui.settings.SettingsFragment"
         android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
+        tools:layout="@layout/fragment_settings">
 
         <action
             android:id="@+id/action_secondFragment_to_firstFragment"
