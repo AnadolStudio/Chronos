@@ -19,12 +19,6 @@ class SettingsFragment : CoreBaseFragment<BaseViewState<Unit>>(R.layout.fragment
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        binding.buttonSecond.setOnClickListener {
-//            navigateTo(Screens.FIRST_SCREEN)
-            findNavController().popBackStack()
-
-        }
     }
 
 }

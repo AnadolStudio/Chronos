@@ -22,7 +22,7 @@ class DaysFragment : CoreBaseFragment<BaseViewState<Unit>>(R.layout.fragment_day
         super.onViewCreated(view, savedInstanceState)
 
         binding.buttonFirst.setOnClickListener {
-            navigateTo(Screens.SECOND_SCREEN)
+            navigateTo(Screens.SETTINGS_SCREEN)
         }
     }
 

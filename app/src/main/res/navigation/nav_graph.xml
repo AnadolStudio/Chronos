@@ -1,31 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/firstFragment">
+    app:startDestination="@id/daysFragment">
 
     <fragment
-        android:id="@+id/firstFragment"
+        android:id="@+id/daysFragment"
         android:name="com.anadolstudio.chronos.ui.days.DaysFragment"
-        android:label="@string/first_fragment_label"
         tools:layout="@layout/fragment_days">
 
         <action
-            android:id="@+id/action_firstFragment_to_secondFragment"
-            app:destination="@id/secondFragment" />
+            android:id="@+id/navigation_to_settings"
+            app:destination="@id/settingsFragment" />
+
     </fragment>
 
     <fragment
-        android:id="@+id/secondFragment"
+        android:id="@+id/settingsFragment"
         android:name="com.anadolstudio.chronos.ui.settings.SettingsFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_settings">
-
-        <action
-            android:id="@+id/action_secondFragment_to_firstFragment"
-            app:destination="@id/firstFragment" />
-
-    </fragment>
+        tools:layout="@layout/fragment_settings" />
 
 </navigation>
