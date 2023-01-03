@@ -20,9 +20,6 @@ interface CategoryDao {
     @Query("SELECT * FROM $CATEGORY_TABLE WHERE category_id = :categoryId")
     fun getCategoryById(categoryId: String): CategoryEntity
 
-    @Query("SELECT * FROM $CATEGORY_TABLE WHERE name = :categoryName")
-    fun getCategoryByName(categoryName: String): List<CategoryEntity>
-
     @Delete
     fun deleteCategory(category: CategoryEntity)
 
