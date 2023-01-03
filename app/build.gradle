@@ -4,6 +4,18 @@ plugins {
 }
 
 android {
+
+    signingConfigs {
+
+        debug {
+
+        }
+
+        release {
+
+        }
+    }
+
     compileSdk 32
 
     defaultConfig {
@@ -17,46 +29,82 @@ android {
     }
 
     buildTypes {
+
+        debug {
+            applicationIdSuffix ".debug"
+            debuggable true
+            minifyEnabled false
+
+            signingConfig signingConfigs.debug
+        }
+
         release {
+            debuggable false
+
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+//            signingConfig signingConfigs.release
+            signingConfig signingConfigs.debug
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_11
         targetCompatibility JavaVersion.VERSION_11
     }
+
     kotlinOptions {
         jvmTarget = '11'
     }
+
     buildFeatures {
         viewBinding true
     }
 }
 
 dependencies {
-
-    implementation 'androidx.core:core-ktx:1.8.0'
-    implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.7.0'
-    implementation "androidx.work:work-runtime-ktx:2.7.1"
-
-    implementation 'com.google.android.material:material:1.6.1'
-    implementation 'androidx.appcompat:appcompat:1.4.2'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    implementation 'androidx.fragment:fragment-ktx:1.4.1'
-    implementation 'androidx.activity:activity-ktx:1.4.0'
     implementation project(path: ':core')
     implementation project(path: ':domain')
     implementation project(path: ':data')
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.4.2'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.4.2'
 
-    def lifecycle_version = "2.4.1"
+    implementation 'androidx.core:core-ktx:1.8.0'
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.7.1'
+    implementation "androidx.work:work-runtime-ktx:2.7.1"
+
+    implementation 'androidx.appcompat:appcompat:1.5.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.fragment:fragment-ktx:1.5.2'
+    implementation 'androidx.activity:activity-ktx:1.5.1'
+
+    implementation 'com.google.android.material:material:1.6.1'
+
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.1'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.5.1'
+
+    def lifecycle_version = "2.5.1"
     implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
     annotationProcessor "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
+
+    // Dagger
+    def dagger = "2.16"
+    implementation "com.google.dagger:dagger:$dagger"
+    annotationProcessor "com.google.dagger:dagger-compiler:$dagger"
+
+    // Rx
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+
+    // Groupie
+    def groupie = "2.10.1"
+    implementation "com.github.lisawray.groupie:groupie:$groupie"
+    implementation "com.github.lisawray.groupie:groupie-kotlin-android-extensions:$groupie"
+    implementation "com.github.lisawray.groupie:groupie-viewbinding:$groupie"
+
+    // JodaTime
+    def joda_time = "2.10.3"
+    implementation "joda-time:joda-time:$joda_time"
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
