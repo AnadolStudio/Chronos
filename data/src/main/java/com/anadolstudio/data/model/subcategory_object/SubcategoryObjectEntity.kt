@@ -1,9 +1,9 @@
-package com.anadolstudio.domain.model.subcategory_object
+package com.anadolstudio.data.model.subcategory_object
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.anadolstudio.domain.model.subcategory.SubcategoryEntity
+import com.anadolstudio.data.model.subcategory.SubcategoryEntity
 import java.util.UUID
 
 @Entity(tableName = SubcategoryObjectEntity.SUBCATEGORY_OBJECT_TABLE)

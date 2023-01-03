@@ -1,8 +1,8 @@
-package com.anadolstudio.domain.database.category
+package com.anadolstudio.data.database.category
 
 import androidx.room.*
-import com.anadolstudio.domain.model.category.CategoryEntity
-import com.anadolstudio.domain.model.category.CategoryEntity.Companion.CATEGORY_TABLE
+import com.anadolstudio.data.model.category.CategoryEntity
+import com.anadolstudio.data.model.category.CategoryEntity.Companion.CATEGORY_TABLE
 import java.util.UUID
 
 @Dao

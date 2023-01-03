@@ -1,4 +1,4 @@
-package com.anadolstudio.domain.model.subcategory
+package com.anadolstudio.data.model.subcategory
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

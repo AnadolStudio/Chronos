@@ -1,12 +1,12 @@
-package com.anadolstudio.domain.database.subcategory_object
+package com.anadolstudio.data.database.subcategory_object
 
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.anadolstudio.domain.model.subcategory_object.SubcategoryObjectEntity
-import com.anadolstudio.domain.model.subcategory_object.SubcategoryObjectEntity.Companion.SUBCATEGORY_OBJECT_TABLE
+import com.anadolstudio.data.model.subcategory_object.SubcategoryObjectEntity
+import com.anadolstudio.data.model.subcategory_object.SubcategoryObjectEntity.Companion.SUBCATEGORY_OBJECT_TABLE
 import java.util.UUID
 
 @Dao
