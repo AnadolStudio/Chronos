@@ -1,4 +1,4 @@
-package com.anadolstudio.data.model.task
+package com.anadolstudio.data.database.task
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

@@ -1,18 +1,18 @@
-package com.anadolstudio.data.model.category
+package com.anadolstudio.data.database.subcategory
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.util.UUID
 
-@Entity(tableName = CategoryEntity.CATEGORY_TABLE)
-data class CategoryEntity(
+@Entity(tableName = SubcategoryEntity.SUBCATEGORY_TABLE)
+data class SubcategoryEntity(
         @PrimaryKey(autoGenerate = true) val id: Int = 0,
+        @ColumnInfo(name = "subcategory_id") val subcategoryId: UUID,
         @ColumnInfo(name = "category_id") val categoryId: UUID,
         @ColumnInfo(name = "name") val name: String,
-        @ColumnInfo(name = "color") val color: Int
 ) {
     companion object {
-        const val CATEGORY_TABLE = "category_table"
+        const val SUBCATEGORY_TABLE = "subcategory_table"
     }
 }

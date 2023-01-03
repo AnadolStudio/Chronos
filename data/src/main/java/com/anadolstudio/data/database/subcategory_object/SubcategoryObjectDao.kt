@@ -5,8 +5,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.anadolstudio.data.model.subcategory_object.SubcategoryObjectEntity
-import com.anadolstudio.data.model.subcategory_object.SubcategoryObjectEntity.Companion.SUBCATEGORY_OBJECT_TABLE
+import com.anadolstudio.data.database.subcategory_object.SubcategoryObjectEntity.Companion.SUBCATEGORY_OBJECT_TABLE
 import java.util.UUID
 
 @Dao

@@ -1,8 +1,7 @@
 package com.anadolstudio.data.database.subcategory
 
 import androidx.room.*
-import com.anadolstudio.data.model.subcategory.SubcategoryEntity
-import com.anadolstudio.data.model.subcategory.SubcategoryEntity.Companion.SUBCATEGORY_TABLE
+import com.anadolstudio.data.database.subcategory.SubcategoryEntity.Companion.SUBCATEGORY_TABLE
 import java.util.UUID
 
 @Dao

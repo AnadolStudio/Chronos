@@ -5,8 +5,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.anadolstudio.data.model.task.TaskEntity
-import com.anadolstudio.data.model.task.TaskEntity.Companion.TASK_TABLE
+import com.anadolstudio.data.database.task.TaskEntity.Companion.TASK_TABLE
 import org.joda.time.DateTime
 import java.util.UUID
 
