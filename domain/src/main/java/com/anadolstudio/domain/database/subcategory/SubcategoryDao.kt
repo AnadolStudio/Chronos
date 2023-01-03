@@ -14,8 +14,8 @@ interface SubcategoryDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertSubcategory(subcategory: SubcategoryEntity)
 
-    @Query("UPDATE $SUBCATEGORY_TABLE SET name = :name  WHERE subcategory_id = :subcategoryId")
-    fun updateSubcategory(subcategoryId: UUID, name: String, color: Int): Int
+    @Query("UPDATE $SUBCATEGORY_TABLE SET name = :name WHERE subcategory_id = :subcategoryId")
+    fun updateSubcategory(subcategoryId: UUID, name: String): Int
 
     @Query("SELECT * FROM $SUBCATEGORY_TABLE WHERE subcategory_id = :subcategoryId")
     fun getSubcategoryById(subcategoryId: String): SubcategoryEntity
