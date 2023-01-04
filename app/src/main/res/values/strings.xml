@@ -3,5 +3,7 @@
 
     <string name="global_remove_title">Удалить</string>
     <string name="global_text_item_list"> • %s</string>
+    <string name="global_apply">Подтвердить</string>
+    <string name="global_add">Добавить</string>
 
 </resources>
