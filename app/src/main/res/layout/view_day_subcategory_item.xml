@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_marginTop="6dp"
+    android:layout_height="wrap_content">
+
+    <com.anadolstudio.chronos.view.day.DayTaskItemView
+        android:id="@+id/subcategory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:paddingVertical="10dp"
+        tools:time="15м"
+        tools:title=" • Отдых" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="2.5dp"
+        android:background="@color/divider_color"
+        android:layout_marginHorizontal="16dp"
+        app:layout_constraintTop_toBottomOf="@id/subcategory"
+        android:orientation="vertical"/>
+
+    <LinearLayout
+        android:id="@+id/subcategory_object_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:paddingBottom="6dp"
+        android:paddingTop="5dp"
+        app:layout_constraintTop_toBottomOf="@id/divider"
+        android:orientation="vertical" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/objects_group"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:constraint_referenced_ids="divider,subcategory_object_container"
+        android:visibility="gone" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
