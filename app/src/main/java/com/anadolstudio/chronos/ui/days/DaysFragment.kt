@@ -35,6 +35,4 @@ class DaysFragment : BaseFragment<BaseViewState<Unit>>(R.layout.fragment_days) {
         addIconButton(getDrawable(R.drawable.ic_settings)) { showMessageToast(SingleMessageToast.Short("settings")) }
     }
 
-    //TODO Temp
-
 }
