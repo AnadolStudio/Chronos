@@ -23,6 +23,7 @@ class DayTaskItemView @JvmOverloads constructor(
         context.withStyledAttributes(attrs, R.styleable.DayTaskItemView, defStyleAttr, 0) {
             setTitle(getString(R.styleable.DayTaskItemView_title).orEmpty())
             setTime(getString(R.styleable.DayTaskItemView_time).orEmpty())
+            setColor(getColor(R.styleable.DayTaskItemView_color, context.getColor(R.color.black)))
         }
     }
 
