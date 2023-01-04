@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Serif" parent="android:Widget.TextView">
+        <item name="android:fontFamily">serif</item>
+        <item name="fontFamily">serif</item>
+    </style>
+
+    <style name="Serif.Black">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Serif.Black.16">
+        <item name="android:textSize">16dp</item>
+    </style>
+
+    <style name="Serif.Black.16.Bold">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Serif.Gray">
+        <item name="android:textColor">@color/gray</item>
+    </style>
+
+    <style name="Serif.Gray.16">
+        <item name="android:textSize">16dp</item>
+    </style>
+
+</resources>
