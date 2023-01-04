@@ -6,7 +6,6 @@
     <color name="colorAccent">#FF1B1B1B</color>
     <color name="colorPrimaryShadow">#99FAFAFA</color>
     <color name="colorAccentShadow">#991B1B1B</color>
-    <color name="colorTextRipple">#bdbdbd</color>
 
     <color name="colorPrimaryInverse">#424242</color>
     <color name="colorSecondaryInverse">#616161</color>
