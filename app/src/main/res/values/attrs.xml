@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="DayTaskItemView">
+        <attr name="title" format="string" />
+        <attr name="time" format="string" />
+    </declare-styleable>
+
+
+</resources>
