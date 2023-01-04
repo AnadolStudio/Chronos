@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingVertical="10dp"
+    android:background="?attr/selectableItemBackground"
     tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
 
     <TextView

@@ -12,6 +12,8 @@ import com.anadolstudio.chronos.databinding.ViewDaySubcategoryItemBinding
 import com.anadolstudio.chronos.ui.days.model.Subcategory
 import com.anadolstudio.core.common_util.dpToPx
 
+typealias SubcategoryClickListener = (subcategory: String, subcategoryObject: String?) -> Unit
+
 class DaySubcategoryItemView @JvmOverloads constructor(
         context: Context,
         attrs: AttributeSet? = null,
@@ -20,9 +22,11 @@ class DaySubcategoryItemView @JvmOverloads constructor(
 
     private companion object {
         val PADDING_VERTICAL = 5.dpToPx()
+        val PADDING_START = 16.dpToPx()
     }
 
     private val binding: ViewDaySubcategoryItemBinding
+    private var onSubcategoryClickListener: SubcategoryClickListener? = null
 
     init {
         val view = LayoutInflater.from(context).inflate(R.layout.view_day_subcategory_item, this)
@@ -31,23 +35,35 @@ class DaySubcategoryItemView @JvmOverloads constructor(
 
     fun setSubcategory(data: Subcategory) {
         with(binding) {
-            subcategory.setTitle(data.title)
+            subcategory.setTitle(text = data.title, isSubItem = true)
             subcategory.setTime(data.time)
+            subcategory.onSubcategoryClickListener(subcategory = data.title)
 
             objectsGroup.isVisible = data.objectsList.isNotEmpty()
-
             subcategoryObjectContainer.removeAllViews()
+
             data.objectsList.forEach { subcategoryObject ->
                 val view = DayTaskItemView(context).apply {
                     layoutParams = LayoutParams(MATCH_PARENT, WRAP_CONTENT)
-                    setPadding(0, PADDING_VERTICAL, 0, PADDING_VERTICAL)
-                    setTitle(context.getString(R.string.global_text_item_list, subcategoryObject.title))
+                    setPadding(PADDING_START, PADDING_VERTICAL, 0, PADDING_VERTICAL)
+                    setTitle(text = subcategoryObject.title, isSubItem = true)
                     setTime(subcategoryObject.time)
                     setColor(context.getColor(R.color.gray))
+                    onSubcategoryClickListener(subcategory = data.title, withObjectName = true)
                 }
 
                 subcategoryObjectContainer.addView(view)
             }
         }
     }
+
+    private fun DayTaskItemView.onSubcategoryClickListener(subcategory: String, withObjectName: Boolean = false) =
+            setOnTaskItemClickListener { objectName ->
+                onSubcategoryClickListener?.invoke(subcategory, if (withObjectName) objectName else null)
+            }
+
+    fun setOnSubcategoryClickListener(listener: SubcategoryClickListener) {
+        onSubcategoryClickListener = listener
+    }
+
 }
