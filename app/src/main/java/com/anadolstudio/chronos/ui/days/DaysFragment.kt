@@ -8,6 +8,8 @@ import com.anadolstudio.chronos.databinding.FragmentDaysBinding
 import com.anadolstudio.chronos.extensions.navigateTo
 import com.anadolstudio.chronos.navigation.Screens
 import com.anadolstudio.chronos.ui.BaseViewState
+import com.anadolstudio.core.common_extention.getDrawable
+import com.anadolstudio.core.event.SingleMessageToast
 import com.anadolstudio.core.viewbinding.viewBinding
 
 class DaysFragment : BaseFragment<BaseViewState<Unit>>(R.layout.fragment_days) {
@@ -21,9 +23,18 @@ class DaysFragment : BaseFragment<BaseViewState<Unit>>(R.layout.fragment_days) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setupToolbar()
         binding.buttonFirst.setOnClickListener {
             navigateTo(Screens.SETTINGS_SCREEN)
         }
     }
+
+    private fun setupToolbar() = binding.toolbar.apply {
+        setBackClickListener { showMessageToast(SingleMessageToast.Short("toolbar")) }
+        addIconButton(getDrawable(R.drawable.ic_add)) { showMessageToast(SingleMessageToast.Short("add")) }
+        addIconButton(getDrawable(R.drawable.ic_settings)) { showMessageToast(SingleMessageToast.Short("settings")) }
+    }
+
+    //TODO Temp
 
 }
