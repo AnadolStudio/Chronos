@@ -10,12 +10,20 @@
         <item name="android:textColor">@color/black</item>
     </style>
 
+    <style name="Serif.Black.Bold">
+        <item name="android:textStyle">bold</item>
+    </style>
+
     <style name="Serif.Black.16">
         <item name="android:textSize">16dp</item>
     </style>
 
-    <style name="Serif.Black.16.Bold">
-        <item name="android:textStyle">bold</item>
+    <style name="Serif.Black.Bold.16">
+        <item name="android:textSize">16dp</item>
+    </style>
+
+    <style name="Serif.Black.18">
+        <item name="android:textSize">16dp</item>
     </style>
 
     <style name="Serif.Gray">
