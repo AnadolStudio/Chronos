@@ -26,8 +26,12 @@
         <item name="android:textSize">18dp</item>
     </style>
 
+    <style name="Serif.Black.Bold.32">
+        <item name="android:textSize">32dp</item>
+    </style>
+
     <style name="Serif.Gray">
-        <item name="android:textColor">@color/gray</item>
+        <item name="android:textColor">@color/common_gray_color</item>
     </style>
 
     <style name="Serif.Gray.16">

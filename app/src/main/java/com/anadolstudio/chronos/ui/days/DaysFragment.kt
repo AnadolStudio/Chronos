@@ -5,8 +5,6 @@ import android.view.View
 import com.anadolstudio.chronos.R
 import com.anadolstudio.chronos.base.BaseFragment
 import com.anadolstudio.chronos.databinding.FragmentDaysBinding
-import com.anadolstudio.chronos.extensions.navigateTo
-import com.anadolstudio.chronos.navigation.Screens
 import com.anadolstudio.chronos.ui.BaseViewState
 import com.anadolstudio.core.common_extention.getDrawable
 import com.anadolstudio.core.event.SingleMessageToast
@@ -24,9 +22,15 @@ class DaysFragment : BaseFragment<BaseViewState<Unit>>(R.layout.fragment_days) {
         super.onViewCreated(view, savedInstanceState)
 
         setupToolbar()
-        binding.buttonFirst.setOnClickListener {
-            navigateTo(Screens.SETTINGS_SCREEN)
-        }
+        binding.chronometerView.addListeners(
+                onAddButtonAction = { showMessageToast(SingleMessageToast.Short("add")) },
+                onRemoveButtonAction = {
+                    binding.chronometerView.setup()
+                    showMessageToast(SingleMessageToast.Short("remove"))
+                },
+                onStartButtonAction = { showMessageToast(SingleMessageToast.Short("start")) },
+                onStopButtonAction = { showMessageToast(SingleMessageToast.Short("stop")) }
+        )
     }
 
     private fun setupToolbar() = binding.toolbar.apply {
