@@ -5,5 +5,8 @@
     <string name="global_text_item_list"> • %s</string>
     <string name="global_apply">Подтвердить</string>
     <string name="global_add">Добавить</string>
+    <string name="global_start">Старт</string>
+    <string name="global_stop">Стоп</string>
+    <string name="global_chronometer_text">%1$s : %2$s</string>
 
 </resources>

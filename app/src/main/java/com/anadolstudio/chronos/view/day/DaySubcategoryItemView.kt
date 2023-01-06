@@ -48,7 +48,7 @@ class DaySubcategoryItemView @JvmOverloads constructor(
                     setPadding(PADDING_START, PADDING_VERTICAL, 0, PADDING_VERTICAL)
                     setTitle(text = subcategoryObject.title, isSubItem = true)
                     setTime(subcategoryObject.time)
-                    setColor(context.getColor(R.color.gray))
+                    setColor(context.getColor(R.color.common_gray_color))
                     onSubcategoryClickListener(subcategory = data.title, withObjectName = true)
                 }
 

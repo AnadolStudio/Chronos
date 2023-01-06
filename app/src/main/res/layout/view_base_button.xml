@@ -4,7 +4,7 @@
     android:layout_width="295dp"
     android:layout_height="40dp"
     android:layout_gravity="center"
-    android:background="@drawable/base_button_ripple"
+    android:background="@drawable/ripple_base_button"
     android:gravity="center">
 
     <TextView
