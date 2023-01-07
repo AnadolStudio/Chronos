@@ -5,10 +5,13 @@ import android.view.View
 import com.anadolstudio.chronos.R
 import com.anadolstudio.chronos.base.BaseFragment
 import com.anadolstudio.chronos.databinding.FragmentDaysBinding
+import com.anadolstudio.chronos.di.DI
 import com.anadolstudio.chronos.ui.BaseViewState
 import com.anadolstudio.core.common_extention.getDrawable
 import com.anadolstudio.core.event.SingleMessageToast
 import com.anadolstudio.core.viewbinding.viewBinding
+import com.anadolstudio.data.repository.DataSource
+import javax.inject.Inject
 
 class DaysFragment : BaseFragment<BaseViewState<Unit>>(R.layout.fragment_days) {
 
@@ -16,10 +19,19 @@ class DaysFragment : BaseFragment<BaseViewState<Unit>>(R.layout.fragment_days) {
         TODO("Not yet implemented")
     }
 
+    @Inject
+    lateinit var dataSource: DataSource
+
     private val binding by viewBinding(FragmentDaysBinding::bind)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        DI.appComponent.inject(this)
+        dataSource.getAllTask()
+                .subscribe{ list ->
+                    showMessageToast(SingleMessageToast.Short(list.size.toString()))
+                }
 
         setupToolbar()
         binding.chronometerView.addListeners(
