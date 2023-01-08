@@ -16,4 +16,16 @@
         app:layout_constraintTop_toTopOf="parent"
         app:navGraph="@navigation/nav_graph" />
 
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:itemIconTint="@color/tint_bottom_navigation_view"
+        app:itemTextColor="@color/tint_bottom_navigation_view"
+        app:itemTextAppearanceActive="@style/Serif.Black.Bold.12"
+        app:itemTextAppearanceInactive="@style/Serif.Black.12"
+        app:menu="@menu/menu_bottom_navigation"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

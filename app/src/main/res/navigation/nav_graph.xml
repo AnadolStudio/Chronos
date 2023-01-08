@@ -9,17 +9,16 @@
     <fragment
         android:id="@+id/daysFragment"
         android:name="com.anadolstudio.chronos.ui.days.DaysFragment"
-        tools:layout="@layout/fragment_days">
-
-        <action
-            android:id="@+id/navigation_to_settings"
-            app:destination="@id/settingsFragment" />
-
-    </fragment>
+        tools:layout="@layout/fragment_days"/>
 
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.anadolstudio.chronos.ui.settings.SettingsFragment"
+        tools:layout="@layout/fragment_settings" />
+
+    <fragment
+        android:id="@+id/timerFragment"
+        android:name="com.anadolstudio.chronos.ui.chronometer.ChronometerFragment"
         tools:layout="@layout/fragment_settings" />
 
 </navigation>
