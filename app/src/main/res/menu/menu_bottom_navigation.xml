@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/settingsFragment"
+        android:id="@+id/timerFragment"
         android:icon="@drawable/ic_timer"
         android:title="@string/title_clock" />
 
@@ -13,7 +13,7 @@
         android:title="@string/title_home" />
 
     <item
-        android:id="@+id/timerFragment"
+        android:id="@+id/settingsFragment"
         android:icon="@drawable/ic_settings"
         android:title="@string/title_settings" />
 

@@ -19,6 +19,6 @@
     <fragment
         android:id="@+id/timerFragment"
         android:name="com.anadolstudio.chronos.ui.chronometer.ChronometerFragment"
-        tools:layout="@layout/fragment_settings" />
+        tools:layout="@layout/fragment_stop_watcher" />
 
 </navigation>

@@ -11,5 +11,7 @@
     <string name="title_home">Главная</string>
     <string name="title_clock">Секундомер</string>
     <string name="title_settings">Настройки</string>
+    <string name="settings_color_title">Цвет</string>
+    <string name="settings_category_name_hint">Название</string>
 
 </resources>
