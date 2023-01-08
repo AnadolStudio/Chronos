@@ -19,6 +19,9 @@ class SettingsFragment : CoreBaseFragment<BaseViewState<Unit>>(R.layout.fragment
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.toolbar.setBackIconVisible(true)
+        binding.toolbar.setBackClickListener { findNavController().navigateUp() }
     }
 
 }
