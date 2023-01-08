@@ -24,7 +24,7 @@ class SettingsFragment : CoreBaseFragment<BaseViewState<Unit>>(R.layout.fragment
         binding.toolbar.setBackIconVisible(true)
         binding.toolbar.setBackClickListener { findNavController().navigateUp() }
         binding.colorContainer.setOnClickListener {
-            ColorPickerBottomSheet.newInstance(Color.BLUE)
+            ColorPickerBottomSheet.newInstance(binding.colorButton.getColor())
                     .show(childFragmentManager)
         }
     }

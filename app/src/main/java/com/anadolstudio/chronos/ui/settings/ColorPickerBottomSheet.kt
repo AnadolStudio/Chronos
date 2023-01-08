@@ -1,5 +1,7 @@
 package com.anadolstudio.chronos.ui.settings
 
+import android.content.DialogInterface
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import codes.side.andcolorpicker.converter.setFromColorInt
@@ -9,7 +11,6 @@ import codes.side.andcolorpicker.view.picker.ColorSeekBar
 import com.anadolstudio.chronos.R
 import com.anadolstudio.chronos.databinding.FragmentColorPickerBinding
 import com.anadolstudio.core.common_extention.toColorHex
-import com.anadolstudio.core.common_util.throttleClick
 import com.anadolstudio.core.dialogs.BaseBottomDialogFragment
 import com.anadolstudio.core.viewbinding.viewBinding
 
@@ -30,20 +31,30 @@ class ColorPickerBottomSheet : BaseBottomDialogFragment(R.layout.fragment_color_
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val color = arguments?.getInt(COLOR_KEY)?.also { defaultColor ->
-            binding.colorPicker.pickedColor = IntegerHSLColor().apply { setFromColorInt(defaultColor) }
-        } ?: let {
-            binding.colorPicker.pickedColor.toColorInt()
-        }
+        val color = getDefaultColor()
+                ?.also { defaultColor ->
+                    binding.colorPicker.pickedColor = IntegerHSLColor().apply { setFromColorInt(defaultColor) }
+                }
+                ?: getCurrentColor()
 
         binding.colorValue.text = color.toColorHex()
         binding.colorPicker.addListener(
                 ColorChangeListener { newColor -> binding.colorValue.text = newColor.toColorHex() }
         )
+    }
 
-        binding.applyButton.throttleClick {
-            (parentFragment as? ColorPick)?.onColorPick(binding.colorPicker.pickedColor.toColorInt())
-            dismiss()
+    private fun getCurrentColor() = binding.colorPicker.pickedColor.toColorInt()
+
+    private fun getDefaultColor(): Int? = arguments
+            ?.getInt(COLOR_KEY)
+            ?.let { color -> if (color == Color.WHITE) null else color }
+
+    override fun onDismiss(dialog: DialogInterface) {
+        super.onDismiss(dialog)
+
+        val currentColor = getCurrentColor()
+        if (getDefaultColor() != currentColor) {
+            (parentFragment as? ColorPick)?.onColorPick(currentColor)
         }
     }
 
