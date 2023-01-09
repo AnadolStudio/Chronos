@@ -1,6 +1,5 @@
 package com.anadolstudio.data.repository.subcategory_object
 
-import com.anadolstudio.core.rx_util.schedulersIoToMain
 import com.anadolstudio.domain.data_source.database.subcategory_object.SubcategoryObjectDao
 import com.anadolstudio.domain.data_source.database.subcategory_object.SubcategoryObjectEntity
 import com.anadolstudio.domain.repository.subcategory_object.SubcategoryObjectRepository
@@ -12,22 +11,17 @@ class SubcategoryObjectRepositoryImpl(private val subcategoryObjectDao: Subcateg
 
     override fun getAllObjects(): Single<List<SubcategoryObjectEntity>> = subcategoryObjectDao
             .getAllObjects()
-            .schedulersIoToMain()
 
-    override fun insertObjects(subcategoryObjectEntity: SubcategoryObjectEntity): Completable = subcategoryObjectDao
-            .insertObjects(subcategoryObjectEntity)
-            .schedulersIoToMain()
+    override fun insertObject(subcategoryObjectEntity: SubcategoryObjectEntity): Completable = subcategoryObjectDao
+            .insertObject(subcategoryObjectEntity)
 
     override fun updateObjects(objectId: UUID, name: String): Single<Int> = subcategoryObjectDao
             .updateObjects(objectId, name)
-            .schedulersIoToMain()
 
     override fun getObjectsById(objectId: String): Single<SubcategoryObjectEntity> = subcategoryObjectDao
             .getObjectsById(objectId)
-            .schedulersIoToMain()
 
     override fun deleteObjects(subcategory: SubcategoryObjectEntity): Completable = subcategoryObjectDao
             .deleteObjects(subcategory)
-            .schedulersIoToMain()
 
 }

@@ -2,47 +2,33 @@ package com.anadolstudio.chronos.ui.days
 
 import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.ViewModel
 import com.anadolstudio.chronos.R
 import com.anadolstudio.chronos.base.BaseFragment
 import com.anadolstudio.chronos.databinding.FragmentDaysBinding
-import com.anadolstudio.chronos.di.DI
-import com.anadolstudio.chronos.ui.BaseViewState
 import com.anadolstudio.core.common_extention.getDrawable
 import com.anadolstudio.core.event.SingleMessageToast
 import com.anadolstudio.core.viewbinding.viewBinding
-import com.anadolstudio.data.repository.DataSource
-import javax.inject.Inject
+import com.anadolstudio.core.viewmodel.obtainViewModel
 
-class DaysFragment : BaseFragment<BaseViewState<Unit>>(R.layout.fragment_days) {
+class DaysFragment : BaseFragment<Unit, DaysViewModel>(R.layout.fragment_days) {
 
-    override fun render(state: BaseViewState<Unit>) {
-        TODO("Not yet implemented")
+    override fun showContent(content: Unit) {
+
     }
 
-    @Inject
-    lateinit var dataSource: DataSource
+    override fun showLoading() {
+
+    }
+
+    override fun createViewModel(): DaysViewModel = obtainViewModel(DaysViewModel.Factory())
 
     private val binding by viewBinding(FragmentDaysBinding::bind)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        DI.appComponent.inject(this)
-        dataSource.getAllTask()
-                .subscribe{ list ->
-                    showMessageToast(SingleMessageToast.Short(list.size.toString()))
-                }
-
         setupToolbar()
-        binding.chronometerView.addListeners(
-                onAddButtonAction = { showMessageToast(SingleMessageToast.Short("add")) },
-                onRemoveButtonAction = {
-                    binding.chronometerView.setup()
-                    showMessageToast(SingleMessageToast.Short("remove"))
-                },
-                onStartButtonAction = { showMessageToast(SingleMessageToast.Short("start")) },
-                onStopButtonAction = { showMessageToast(SingleMessageToast.Short("stop")) }
-        )
     }
 
     private fun setupToolbar() = binding.toolbar.apply {

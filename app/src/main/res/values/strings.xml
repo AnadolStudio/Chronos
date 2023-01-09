@@ -15,5 +15,8 @@
     <string name="settings_category_name_hint">Название</string>
     <string name="settings_subcategory_title">Список подкатегорий:</string>
     <string name="list_empty">Список пуст</string>
+    <string name="settings_empty_category_title">Добавить категорию</string>
+    <string name="message_empty_color">"Выберите цвет "</string>
+    <string name="message_empty_name">Введите имя</string>
 
 </resources>

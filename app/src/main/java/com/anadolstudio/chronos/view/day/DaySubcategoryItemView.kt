@@ -9,8 +9,8 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
 import com.anadolstudio.chronos.R
 import com.anadolstudio.chronos.databinding.ViewDaySubcategoryItemBinding
-import com.anadolstudio.chronos.ui.days.model.Subcategory
 import com.anadolstudio.core.common_util.dpToPx
+import com.anadolstudio.domain.models.days.DaysCategoryModel
 
 typealias SubcategoryClickListener = (subcategory: String, subcategoryObject: String?) -> Unit
 
@@ -33,7 +33,7 @@ class DaySubcategoryItemView @JvmOverloads constructor(
         binding = ViewDaySubcategoryItemBinding.bind(view)
     }
 
-    fun setSubcategory(data: Subcategory) {
+    fun setSubcategory(data: DaysCategoryModel.Subcategory) {
         with(binding) {
             subcategory.setTitle(text = data.title, isSubItem = true)
             subcategory.setTime(data.time)

@@ -9,7 +9,7 @@ interface SubcategoryObjectRepository {
 
     fun getAllObjects(): Single<List<SubcategoryObjectEntity>>
 
-    fun insertObjects(subcategoryObjectEntity: SubcategoryObjectEntity): Completable
+    fun insertObject(subcategoryObjectEntity: SubcategoryObjectEntity): Completable
 
     fun updateObjects(objectId: UUID, name: String): Single<Int>
 

@@ -17,7 +17,7 @@ interface SubcategoryObjectDao {
     fun getAllObjects(): Single<List<SubcategoryObjectEntity>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insertObjects(subcategoryObjectEntity: SubcategoryObjectEntity): Completable
+    fun insertObject(subcategoryObjectEntity: SubcategoryObjectEntity): Completable
 
     @Query("UPDATE $SUBCATEGORY_OBJECT_TABLE SET name = :name WHERE object_id = :objectId")
     fun updateObjects(objectId: UUID, name: String): Single<Int>

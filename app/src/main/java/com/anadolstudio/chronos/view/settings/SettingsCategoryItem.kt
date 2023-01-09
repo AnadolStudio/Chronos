@@ -6,19 +6,19 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.LinearLayout
 import com.anadolstudio.chronos.R
-import com.anadolstudio.chronos.databinding.ViewSettingsViewPagerItemBinding
+import com.anadolstudio.chronos.databinding.ViewSettingsCategoryItemBinding
 
-class SettingsViewPagerItemView @JvmOverloads constructor(
+class SettingsCategoryItem @JvmOverloads constructor(
         context: Context,
         attrs: AttributeSet? = null,
         defStyleAttr: Int = 0
 ) : LinearLayout(context, attrs, defStyleAttr) {
 
-    private val binding: ViewSettingsViewPagerItemBinding
+    private val binding: ViewSettingsCategoryItemBinding
 
     init {
-        val view = LayoutInflater.from(context).inflate(R.layout.view_settings_view_pager_item, this)
-        binding = ViewSettingsViewPagerItemBinding.bind(view)
+        val view = LayoutInflater.from(context).inflate(R.layout.view_settings_category_item, this)
+        binding = ViewSettingsCategoryItemBinding.bind(view)
     }
 
     fun setTitle(title: String) {

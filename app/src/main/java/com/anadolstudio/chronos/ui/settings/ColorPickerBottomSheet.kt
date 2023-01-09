@@ -12,6 +12,7 @@ import com.anadolstudio.chronos.R
 import com.anadolstudio.chronos.databinding.FragmentColorPickerBinding
 import com.anadolstudio.core.common_extention.toColorHex
 import com.anadolstudio.core.dialogs.BaseBottomDialogFragment
+import com.anadolstudio.core.fragment.withArgs
 import com.anadolstudio.core.viewbinding.viewBinding
 
 class ColorPickerBottomSheet : BaseBottomDialogFragment(R.layout.fragment_color_picker) {
@@ -20,9 +21,9 @@ class ColorPickerBottomSheet : BaseBottomDialogFragment(R.layout.fragment_color_
         private const val TAG = "ColorPickerBottomSheet"
         private const val COLOR_KEY = "color_key"
 
-        fun newInstance(color: Int? = null): ColorPickerBottomSheet = ColorPickerBottomSheet().apply {
-            if (color == null) return@apply
-            arguments = Bundle().apply { putInt(COLOR_KEY, color) }
+        fun newInstance(color: Int? = null): ColorPickerBottomSheet = ColorPickerBottomSheet().withArgs {
+            if (color == null) return@withArgs
+            putInt(COLOR_KEY, color)
         }
     }
 
