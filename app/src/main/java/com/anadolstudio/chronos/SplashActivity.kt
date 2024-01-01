@@ -1,14 +1,15 @@
 package com.anadolstudio.chronos
 
-import android.content.Intent
+import android.annotation.SuppressLint
 import android.os.Bundle
-import com.anadolstudio.core.presentation.activity.CoreActivity
+import androidx.appcompat.app.AppCompatActivity
 
-class SplashActivity : CoreActivity() {
+@SuppressLint("CustomSplashScreen")
+class SplashActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        startActivity(Intent(this, SingleActivity::class.java))
+        SingleActivity.start(this)
         finish()
     }
 }
