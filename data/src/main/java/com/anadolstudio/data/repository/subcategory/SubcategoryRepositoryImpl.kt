@@ -1,6 +1,6 @@
 package com.anadolstudio.data.repository.subcategory
 
-import com.anadolstudio.core.rx_util.schedulersIoToMain
+import com.anadolstudio.core.util.rx.schedulersIoToMain
 import com.anadolstudio.domain.data_source.database.subcategory.SubcategoryDao
 import com.anadolstudio.domain.data_source.database.subcategory.SubcategoryEntity
 import com.anadolstudio.domain.repository.subcategory.SubcategoryRepository

@@ -15,8 +15,11 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "Chronos"
-include ':app'
-include ':core'
-project(':core').projectDir = new File(rootDir, '/AndroidCoreBase/core')
-include ':domain'
-include ':data'
+include(
+        ":app",
+        ":core:android-base",
+        ":domain",
+        ":data",
+)
+
+project(':core:android-base').projectDir = new File(rootDir, '/AndroidCoreBase/core')

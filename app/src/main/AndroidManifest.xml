@@ -12,9 +12,9 @@
         android:theme="@style/Theme.Chronos">
 
         <activity
-            android:name=".ui.SplashActivity"
+            android:name=".SplashActivity"
             android:exported="true"
-            android:theme="@style/Theme.Chronos.NoActionBar" >
+            android:theme="@style/Theme.Chronos" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,10 +23,15 @@
         </activity>
 
         <activity
-            android:name=".ui.SingleActivity"
+            android:name=".SingleActivity"
             android:exported="true"
-            android:theme="@style/Theme.Chronos.NoActionBar" >
+            android:theme="@style/Theme.Chronos" >
         </activity>
+
+        <!-- Sample AdMob app ID: ca-app-pub-3940256099942544~3347511713 -->
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-3940256099942544~3347511713" />
 
     </application>
 

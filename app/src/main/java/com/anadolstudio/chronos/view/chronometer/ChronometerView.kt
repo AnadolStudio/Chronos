@@ -8,7 +8,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
 import com.anadolstudio.chronos.R
 import com.anadolstudio.chronos.databinding.ViewClockUpTimerBinding
-import com.anadolstudio.core.common_util.throttleClick
+import com.anadolstudio.core.util.common.throttleClick
 import com.anadolstudio.core.view.animation.AnimateUtil.scaleAnimationOnClick
 
 class ChronometerView @JvmOverloads constructor(
@@ -58,7 +58,7 @@ class ChronometerView @JvmOverloads constructor(
         val (textId, colorId) = when (state) {
             State.NONE -> R.string.global_start to R.color.black
             State.IN_PROGRESS -> R.string.global_stop to R.color.black
-            State.STOP -> R.string.global_start to R.color.common_gray_color
+            State.STOP -> R.string.global_start to R.color.gray
         }
 
         binding.addButton.isVisible = state == State.STOP
@@ -95,10 +95,10 @@ class ChronometerView @JvmOverloads constructor(
     }
 
     fun addListeners(
-            onAddButtonAction: () -> Unit,
-            onRemoveButtonAction: () -> Unit,
-            onStartButtonAction: () -> Unit,
-            onStopButtonAction: () -> Unit,
+        onAddButtonAction: () -> Unit,
+        onRemoveButtonAction: () -> Unit,
+        onStartButtonAction: () -> Unit,
+        onStopButtonAction: () -> Unit,
     ) {
         binding.apply {
             addButton.scaleAnimationOnClick { onAddButtonAction.invoke() }
@@ -114,6 +114,7 @@ class ChronometerView @JvmOverloads constructor(
                     onStopButtonAction.invoke()
                     binding.chronometer.stop()
                 }
+
                 false -> {
                     onStartButtonAction.invoke()
                     this.startTime = SystemClock.elapsedRealtime() - 59 * 60 * 1000L - 50 * 1000L

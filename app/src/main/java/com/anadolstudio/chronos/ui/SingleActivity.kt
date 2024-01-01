@@ -21,12 +21,6 @@ class SingleActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-
-        binding.content.bottomNavigationView.apply {
-            menu.findItem(R.id.daysFragment).isChecked = true
-            setupWithNavController(navigateController())
-        }
     }
 
-    private fun navigateController(): NavController = findNavController(R.id.nav_host_fragment_content_main)
 }
