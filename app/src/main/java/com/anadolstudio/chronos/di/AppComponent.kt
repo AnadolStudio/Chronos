@@ -1,7 +1,6 @@
 package com.anadolstudio.chronos.di
 
 import android.content.Context
-import com.anadolstudio.chronos.ui.days.DaysFragment
 import dagger.BindsInstance
 import dagger.Component
 
@@ -17,5 +16,4 @@ interface AppComponent {
         fun build(): AppComponent
     }
 
-    fun inject(entry: DaysFragment)
 }

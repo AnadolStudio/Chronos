@@ -1,6 +1,6 @@
 package com.anadolstudio.data.repository.task
 
-import com.anadolstudio.core.rx_util.schedulersIoToMain
+import com.anadolstudio.core.util.rx.schedulersIoToMain
 import com.anadolstudio.domain.data_source.database.task.TaskDao
 import com.anadolstudio.domain.data_source.database.task.TaskEntity
 import com.anadolstudio.domain.repository.task.TaskRepository

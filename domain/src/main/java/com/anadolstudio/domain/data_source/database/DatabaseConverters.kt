@@ -1,7 +1,7 @@
 package com.anadolstudio.domain.data_source.database
 
 import androidx.room.TypeConverter
-import com.anadolstudio.core.data_time.safeParseDateTime
+import com.anadolstudio.core.util.data_time.safeParseDateTime
 import org.joda.time.DateTime
 import java.util.UUID
 
