@@ -3,22 +3,21 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/mainFragment"
     android:id="@+id/nav_graph">
-<!--
-
-    app:startDestination="@id/startFragment"
 
     <fragment
-        android:id="@+id/startFragment"
-        android:name="com.anadolstudio.adelaide.feature.start.StartFragment"
-        tools:layout="@layout/fragment_start">
-
+        android:id="@+id/mainFragment"
+        android:name="com.anadolstudio.chronos.presentation.main.MainFragment"
+        tools:layout="@layout/fragment_main">
+<!--
         <action
             android:id="@+id/action_startFragment_to_galleryFragment"
-            app:destination="@id/galleryFragment" />
+            app:destination="@id/galleryFragment" />-->
     </fragment>
 
-    <fragment
+<!--
+    <fragment_start
         android:id="@+id/galleryFragment"
         android:name="com.anadolstudio.adelaide.feature.gallery.presetnation.GalleryFragment"
         tools:layout="@layout/fragment_gallery">
@@ -28,7 +27,8 @@
             app:argType="com.anadolstudio.adelaide.feature.start.EditType"
             android:defaultValue="PHOTO" />
 
-    </fragment>-->
+    </fragment>
+-->
 
 
 </navigation>

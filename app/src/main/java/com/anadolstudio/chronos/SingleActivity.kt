@@ -5,8 +5,9 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.anadolstudio.chronos.databinding.ActivityMainBinding
+import com.anadolstudio.core.presentation.activity.CoreActivity
 
-class SingleActivity : AppCompatActivity() {
+class SingleActivity : CoreActivity() {
 
     companion object {
         fun start(context: Context) = context.startActivity(Intent(context, SingleActivity::class.java))
