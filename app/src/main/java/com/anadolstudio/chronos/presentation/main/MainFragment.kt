@@ -1,5 +1,6 @@
 package com.anadolstudio.chronos.presentation.main
 
+import androidx.fragment.app.viewModels
 import com.anadolstudio.chronos.R
 import com.anadolstudio.chronos.base.fragment.BaseContentFragment
 import com.anadolstudio.chronos.databinding.FragmentMainBinding
@@ -14,6 +15,8 @@ class MainFragment : BaseContentFragment<MainState, MainViewModel, MainControlle
 
     private val binding by viewBinding { FragmentMainBinding.bind(it) }
 
+    override fun createViewModelLazy() = viewModels<MainViewModel> { viewModelFactory }
+
     override fun initView() = with(binding) {
         calendarButton.throttleClick { controller.onCalendarClicked() }
         addButton.scaleAnimationOnClick { controller.onAddClicked() }
@@ -23,7 +26,5 @@ class MainFragment : BaseContentFragment<MainState, MainViewModel, MainControlle
     }
 
     override fun render(state: MainState) = Unit
-
-    override fun createViewModel() = MainViewModel()
 
 }

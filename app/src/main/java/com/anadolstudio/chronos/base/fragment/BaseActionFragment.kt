@@ -2,6 +2,8 @@ package com.anadolstudio.chronos.base.fragment
 
 import androidx.annotation.LayoutRes
 import androidx.navigation.fragment.findNavController
+import com.anadolstudio.chronos.di.SharedComponent
+import com.anadolstudio.chronos.di.getSharedModule
 import com.anadolstudio.chronos.navigation.NavigatableDelegate
 import com.anadolstudio.chronos.navigation.NavigateData
 import com.anadolstudio.core.presentation.Eventable
@@ -19,4 +21,8 @@ abstract class BaseActionFragment<ViewModel : CoreActionViewModel<NavigateData>,
     override val navigatableDelegate: Navigatable<NavigateData> get() = NavigatableDelegate(findNavController())
 
     override var isStatusBarByNightMode: Boolean = true
+
+    protected val viewModelFactory by lazy { getSharedComponent().viewModelsFactory() }
+
+    protected open fun getSharedComponent(): SharedComponent = getSharedModule()
 }
