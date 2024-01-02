@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
+    id 'kotlin-parcelize'
 //    id 'com.google.firebase.crashlytics'
 //    id 'com.google.gms.google-services'google-services
     id 'androidx.navigation.safeargs.kotlin'
@@ -128,6 +129,10 @@ dependencies {
     implementation "androidx.room:room-runtime:$room_version"
     implementation "androidx.room:room-rxjava2:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
+
+    // Preferences
+    def preferences = "1.0.1"
+    implementation "com.github.yandextaxitech:binaryprefs:$preferences"
 
     // Confetti
     implementation 'com.github.jinatonic.confetti:confetti:1.1.2'
