@@ -1,18 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<merge
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="295dp"
-    android:layout_height="40dp"
-    android:layout_gravity="center"
-    android:background="@drawable/ripple_base_button"
-    android:gravity="center">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:parentTag="androidx.appcompat.widget.LinearLayoutCompat">
 
-    <TextView
-        android:id="@+id/title"
-        style="@style/Serif.Black.18"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:lines="1"
-        android:text="@string/global_apply" />
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_margin="@dimen/padding_main"
+        android:background="@drawable/item_ripple_oval_without_mask"
+        app:cardBackgroundColor="@color/colorPrimary"
+        app:cardCornerRadius="@dimen/radius_xlarge"
+        app:cardElevation="@dimen/elevation_normal">
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/title"
+            style="@style/Serif.Black.16"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="@color/colorAccent"
+            android:gravity="center"
+            android:layout_marginHorizontal="@dimen/padding_main"
+            android:lines="1"
+            tools:text="@string/global_apply" />
+
+    </androidx.cardview.widget.CardView>
+
+</merge>

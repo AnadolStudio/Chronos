@@ -8,8 +8,5 @@
     <string name="global_start">Старт</string>
     <string name="global_stop">Стоп</string>
     <string name="global_chronometer_text">%1$s : %2$s</string>
-    <string name="title_home">Главная</string>
-    <string name="title_clock">Секундомер</string>
-    <string name="title_settings">Настройки</string>
 
 </resources>
