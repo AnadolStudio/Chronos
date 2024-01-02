@@ -1,13 +1,11 @@
 package com.anadolstudio.chronos
 
 import android.app.Application
-import android.content.res.Configuration
-import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO
-import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES
-import androidx.appcompat.app.AppCompatDelegate.setDefaultNightMode
 import com.anadolstudio.chronos.di.DI
+import com.anadolstudio.chronos.di.SharedComponent
+import com.anadolstudio.chronos.di.SharedComponentProvider
 
-class App : Application() {
+class App : Application(), SharedComponentProvider {
 
     override fun onCreate() {
         super.onCreate()
@@ -15,4 +13,5 @@ class App : Application() {
         DI.init(applicationContext)
     }
 
+    override fun getModule(): SharedComponent = DI.getComponent()
 }

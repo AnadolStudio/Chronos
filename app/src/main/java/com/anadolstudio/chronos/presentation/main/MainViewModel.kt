@@ -1,8 +1,9 @@
 package com.anadolstudio.chronos.presentation.main
 
 import com.anadolstudio.chronos.base.viewmodel.BaseContentViewModel
+import javax.inject.Inject
 
-class MainViewModel : BaseContentViewModel<MainState>(
+class MainViewModel @Inject constructor() : BaseContentViewModel<MainState>(
     initState = MainState()
 ), MainController {
 

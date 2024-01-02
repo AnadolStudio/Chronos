@@ -1,4 +1,4 @@
-package com.anadolstudio.chronos.di
+package com.anadolstudio.chronos.di.modules
 
 import dagger.Module
 
