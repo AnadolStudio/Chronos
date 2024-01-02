@@ -10,25 +10,16 @@
         android:id="@+id/mainFragment"
         android:name="com.anadolstudio.chronos.presentation.main.MainFragment"
         tools:layout="@layout/fragment_main">
-<!--
         <action
-            android:id="@+id/action_startFragment_to_galleryFragment"
-            app:destination="@id/galleryFragment" />-->
+            android:id="@+id/action_mainFragment_to_stopWatcherFragment"
+            app:destination="@id/stopWatcherFragment" />
     </fragment>
 
-<!--
-    <fragment_start
-        android:id="@+id/galleryFragment"
-        android:name="com.anadolstudio.adelaide.feature.gallery.presetnation.GalleryFragment"
-        tools:layout="@layout/fragment_gallery">
-
-        <argument
-            android:name="editType"
-            app:argType="com.anadolstudio.adelaide.feature.start.EditType"
-            android:defaultValue="PHOTO" />
+    <fragment
+        android:id="@+id/stopWatcherFragment"
+        android:name="com.anadolstudio.chronos.presentation.stopwatcher.StopWatcherFragment"
+        tools:layout="@layout/fragment_stop_watcher">
 
     </fragment>
--->
-
 
 </navigation>

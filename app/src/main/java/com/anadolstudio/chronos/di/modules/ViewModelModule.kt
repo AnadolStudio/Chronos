@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.anadolstudio.chronos.di.viewmodel.ViewModelFactory
 import com.anadolstudio.chronos.di.viewmodel.ViewModelKey
 import com.anadolstudio.chronos.presentation.main.MainViewModel
+import com.anadolstudio.chronos.presentation.stopwatcher.StopWatcherViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -19,4 +20,9 @@ interface ViewModelModule {
     @IntoMap
     @ViewModelKey(MainViewModel::class)
     fun bindMainViewModel(viewModel: MainViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(StopWatcherViewModel::class)
+    fun bindStopWatcherViewModel(viewModel: StopWatcherViewModel): ViewModel
 }

@@ -2,5 +2,10 @@ package com.anadolstudio.chronos.di.modules
 
 import dagger.Module
 
-@Module(includes = [DatabaseModule::class])
+@Module(
+    includes = [
+        DatabaseModule::class,
+        RepositoryModule::class
+    ]
+)
 class AppModule
