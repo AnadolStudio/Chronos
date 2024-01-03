@@ -27,7 +27,7 @@ android {
         versionName "1.0.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        project.archivesBaseName = "Сhronos" + "_" + defaultConfig.versionName + "_(" + defaultConfig.versionCode + ")"
+        project.archivesBaseName = "Chronos" + "_" + defaultConfig.versionName + "_(" + defaultConfig.versionCode + ")"
 
         renderscriptTargetApi 21
         renderscriptSupportModeEnabled true
