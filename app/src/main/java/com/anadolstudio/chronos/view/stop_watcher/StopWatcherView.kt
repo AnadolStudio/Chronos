@@ -1,7 +1,6 @@
 package com.anadolstudio.chronos.view.stop_watcher
 
 import android.content.Context
-import android.os.SystemClock
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.LinearLayout
@@ -14,9 +13,9 @@ import com.anadolstudio.domain.repository.stop_watcher.StopWatcherData
 import com.anadolstudio.domain.repository.stop_watcher.StopWatcherData.State
 
 class StopWatcherView @JvmOverloads constructor(
-    context: Context,
-    attrs: AttributeSet? = null,
-    defStyleAttr: Int = 0
+        context: Context,
+        attrs: AttributeSet? = null,
+        defStyleAttr: Int = 0
 ) : LinearLayout(context, attrs, defStyleAttr) {
 
     private companion object {
@@ -34,7 +33,7 @@ class StopWatcherView @JvmOverloads constructor(
         val time = Time(endTime - startTime)
 
         binding.chronometer.text =
-            context.getString(R.string.global_chronometer_text, time.hoursString, time.minutesString)
+                context.getString(R.string.global_chronometer_text, time.hoursString, time.minutesString)
         binding.secondsText.text = time.secondsString
     }
 
@@ -63,7 +62,8 @@ class StopWatcherView @JvmOverloads constructor(
             }
 
             binding.addButton.isVisible = data.state == State.RESULT
-            binding.addButton.isEnabled = data.state == State.RESULT && data.deltaTime.minutes > 0
+            val delta = data.deltaTime?.minutes ?: 0
+            binding.addButton.isEnabled = data.state == State.RESULT && delta > 0
             binding.removeButton.isVisible = data.state == State.RESULT
         }
     }

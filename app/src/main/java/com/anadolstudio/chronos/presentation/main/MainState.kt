@@ -1,7 +1,11 @@
 package com.anadolstudio.chronos.presentation.main
 
-import org.joda.time.DateTime
+import com.anadolstudio.core.util.data_time.Time
+import com.anadolstudio.domain.repository.chronos.main_category.MainCategoryDomain
+import com.anadolstudio.domain.repository.stop_watcher.StopWatcherData
 
 data class MainState(
-    val currentData: DateTime = DateTime.now()
+        val stopWatcherData: StopWatcherData,
+        val stopWatcherTime: Time? = null,
+        val mainCategoryList: List<MainCategoryDomain> = emptyList()
 )

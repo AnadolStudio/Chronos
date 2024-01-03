@@ -20,6 +20,10 @@
         <attr name="src" />
         <attr name="innerPadding" format="dimension" />
         <attr name="text" />
+        <attr name="state" format="enum" >
+            <enum name="image" value="0"/>
+            <enum name="text" value="1"/>
+        </attr>
     </declare-styleable>
 
 </resources>

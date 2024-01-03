@@ -7,15 +7,19 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class StopWatcherData(
-    val startTime: Long? = null,
-    val endTime: Long? = null,
+        val startTime: Long? = null,
+        val endTime: Long? = null,
 ) : Parcelable {
 
     @IgnoredOnParcel
     val inProgress: Boolean = startTime != null && endTime == null
 
     @IgnoredOnParcel
-    val deltaTime: Time = Time((endTime ?: 0L) - (startTime ?: 0))
+    val deltaTime: Time?
+        get() = when {
+            endTime != null && startTime != null -> Time(endTime - startTime)
+            else -> null
+        }
 
     @IgnoredOnParcel
     val state: State = when {

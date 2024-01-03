@@ -1,4 +1,4 @@
-package com.anadolstudio.data.repository.preferences
+package com.anadolstudio.data.repository.common
 
 import com.anadolstudio.core.util.common_extention.nullIfNotExist
 import com.anadolstudio.core.util.preferences.modify
