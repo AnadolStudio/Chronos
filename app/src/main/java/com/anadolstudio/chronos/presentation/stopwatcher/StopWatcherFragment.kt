@@ -19,6 +19,7 @@ class StopWatcherFragment :
     override fun createViewModelLazy() = viewModels<StopWatcherViewModel> { viewModelFactory }
 
     override fun initView() = with(binding) {
+        binding.toolbar.setBackClickListener(controller::onBackClicked)
         stopWatcher.addListeners(
             onAddButtonAction = { controller.onAddButtonClicked() },
             onRemoveButtonAction = { controller.onRemoveButtonClicked() }

@@ -19,20 +19,21 @@
             android:layout_width="64dp"
             android:layout_height="64dp"
             android:layout_marginEnd="14.5dp"
+            android:background="@drawable/background_oval"
+            android:backgroundTint="@color/chronometer_remove_color"
             android:visibility="gone"
-            tools:visibility="visible"
             app:layout_constraintBottom_toBottomOf="@+id/constraintLayout"
             app:layout_constraintEnd_toStartOf="@+id/constraintLayout"
             app:layout_constraintStart_toStartOf="parent"
-            android:background="@drawable/background_oval"
-            android:backgroundTint="@color/chronometer_remove_color"
-            app:layout_constraintTop_toTopOf="@+id/constraintLayout" >
+            app:layout_constraintTop_toTopOf="@+id/constraintLayout"
+            tools:visibility="visible">
 
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_delete"/>
+                android:src="@drawable/ic_delete"
+                app:tint="@color/colorAccent" />
 
         </FrameLayout>
 
@@ -41,20 +42,21 @@
             android:layout_width="64dp"
             android:layout_height="64dp"
             android:layout_marginStart="14.5dp"
+            android:background="@drawable/background_oval"
+            android:backgroundTint="@color/stop_watcher_add_state_list"
             android:visibility="gone"
-            tools:visibility="visible"
             app:layout_constraintBottom_toBottomOf="@+id/constraintLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/constraintLayout"
-            android:background="@drawable/background_oval"
-            android:backgroundTint="@color/stop_watcher_add_state_list"
-            app:layout_constraintTop_toTopOf="@+id/constraintLayout" >
+            app:layout_constraintTop_toTopOf="@+id/constraintLayout"
+            tools:visibility="visible">
 
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_add"/>
+                android:src="@drawable/ic_add"
+                app:tint="@color/colorAccent" />
 
         </FrameLayout>
 
@@ -77,6 +79,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                android:textColor="@color/colorAccent"
                 tools:format="00 : 00" />
 
             <TextView
@@ -86,6 +89,7 @@
                 android:background="@drawable/item_ripple_rectangle_8"
                 android:textAllCaps="true"
                 android:layout_marginBottom="8dp"
+                android:textColor="@color/colorAccent"
                 android:textAppearance="@style/Serif.Black.Bold.16"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
