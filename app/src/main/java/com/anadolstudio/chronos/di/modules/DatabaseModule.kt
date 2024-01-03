@@ -2,20 +2,11 @@ package com.anadolstudio.chronos.di.modules
 
 import android.content.Context
 import androidx.room.Room
-import com.anadolstudio.data.repository.DataSource
-import com.anadolstudio.data.repository.category.CategoryRepositoryImpl
-import com.anadolstudio.data.repository.subcategory.SubcategoryRepositoryImpl
-import com.anadolstudio.data.repository.subcategory_object.SubcategoryObjectRepositoryImpl
-import com.anadolstudio.data.repository.task.TaskRepositoryImpl
-import com.anadolstudio.domain.data_source.database.Database
-import com.anadolstudio.domain.data_source.database.category.CategoryDao
-import com.anadolstudio.domain.data_source.database.subcategory.SubcategoryDao
-import com.anadolstudio.domain.data_source.database.subcategory_object.SubcategoryObjectDao
-import com.anadolstudio.domain.data_source.database.task.TaskDao
-import com.anadolstudio.domain.repository.category.CategoryRepository
-import com.anadolstudio.domain.repository.subcategory.SubcategoryRepository
-import com.anadolstudio.domain.repository.subcategory_object.SubcategoryObjectRepository
-import com.anadolstudio.domain.repository.task.TaskRepository
+import com.anadolstudio.data.repository.chronos.ChronosRepositoryImpl
+import com.anadolstudio.data.repository.chronos.ChronosDatabase
+import com.anadolstudio.data.repository.chronos.main_category.MainCategoryDao
+import com.anadolstudio.data.repository.chronos.subcategory.SubcategoryDao
+import com.anadolstudio.data.repository.chronos.track.TrackDao
 import dagger.Module
 import dagger.Provides
 
@@ -23,45 +14,28 @@ import dagger.Provides
 class DatabaseModule {
 
     @Provides
-    fun provideDatabase(context: Context): Database = Room
-            .databaseBuilder(context, Database::class.java, Database.DATABASE)
-            .build()
+    fun provideDatabase(context: Context): ChronosDatabase = Room
+        .databaseBuilder(context, ChronosDatabase::class.java, ChronosDatabase.DATABASE)
+        .build()
 
     @Provides
-    fun provideCategoryDao(database: Database): CategoryDao = database.categoryDao
+    fun provideCategoryDao(database: ChronosDatabase): MainCategoryDao = database.mainCategoryDao
 
     @Provides
-    fun provideSubcategoryDao(database: Database): SubcategoryDao = database.subcategoryDao
+    fun provideSubcategoryDao(database: ChronosDatabase): SubcategoryDao = database.subcategoryDao
 
     @Provides
-    fun provideSubcategoryObjectDao(database: Database): SubcategoryObjectDao = database.subcategoryObjectDao
-
-    @Provides
-    fun provideTaskDao(database: Database): TaskDao = database.taskDao
-
-
-    @Provides
-    fun provideCategoryRepository(categoryDao: CategoryDao): CategoryRepository =
-            CategoryRepositoryImpl(categoryDao)
-
-    @Provides
-    fun provideSubcategoryRepository(subcategoryDao: SubcategoryDao): SubcategoryRepository =
-            SubcategoryRepositoryImpl(subcategoryDao)
-
-    @Provides
-    fun provideSubcategoryObjectRepository(subcategoryObjectDao: SubcategoryObjectDao): SubcategoryObjectRepository =
-            SubcategoryObjectRepositoryImpl(subcategoryObjectDao)
-
-    @Provides
-    fun provideTaskRepository(taskDao: TaskDao): TaskRepository =
-            TaskRepositoryImpl(taskDao)
+    fun provideTaskDao(database: ChronosDatabase): TrackDao = database.trackDao
 
     @Provides
     fun provideDataSource(
-            categoryRepository: CategoryRepository,
-            subcategoryRepository: SubcategoryRepository,
-            subcategoryObjectRepository: SubcategoryObjectRepository,
-            taskRepository: TaskRepository
-    ): DataSource = DataSource(categoryRepository, subcategoryRepository, subcategoryObjectRepository, taskRepository)
+        mainCategoryDao: MainCategoryDao,
+        subcategoryDao: SubcategoryDao,
+        trackDao: TrackDao
+    ): ChronosRepositoryImpl = ChronosRepositoryImpl(
+        mainCategoryDao,
+        subcategoryDao,
+        trackDao
+    )
 
 }
