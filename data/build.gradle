@@ -45,14 +45,6 @@ dependencies {
     implementation "com.google.dagger:dagger:$dagger"
     kapt("com.google.dagger:dagger-compiler:$dagger")
 
-    // JodaTime
-    def joda_time = "2.10.3"
-    implementation "joda-time:joda-time:$joda_time"
-
-    // Preferences
-    def preferences = "1.0.1"
-    implementation "com.github.yandextaxitech:binaryprefs:$preferences"
-
     // Room
     def room_version = "2.4.3"
     implementation "androidx.room:room-runtime:$room_version"
