@@ -1,17 +1,16 @@
 package com.anadolstudio.chronos.presentation.stopwatcher
 
-import android.os.SystemClock
 import com.anadolstudio.chronos.base.viewmodel.BaseContentViewModel
-import com.anadolstudio.domain.repository.stop_watcher.PreferenceRepository
 import com.anadolstudio.domain.repository.stop_watcher.StopWatcherData
+import com.anadolstudio.domain.repository.stop_watcher.StopWatcherRepository
 import javax.inject.Inject
 
 class StopWatcherViewModel @Inject constructor(
-    private val preferenceRepository: PreferenceRepository
+        private val stopWatcherRepository: StopWatcherRepository,
 ) : BaseContentViewModel<StopWatcherState>(
-    initState = StopWatcherState(
-        stopWatcherData = preferenceRepository.stopWatcherData
-    )
+        initState = StopWatcherState(
+                stopWatcherData = stopWatcherRepository.stopWatcherData
+        )
 ), StopWatcherController {
 
     override fun onStopWatcherToggleClicked() {
@@ -24,15 +23,15 @@ class StopWatcherViewModel @Inject constructor(
 
     private fun startStopWatcher() {
         val data = StopWatcherData(
-            startTime = System.currentTimeMillis(),
-            endTime = null
+                startTime = System.currentTimeMillis(),
+                endTime = null
         )
         updateStopWatcher(data)
     }
 
     private fun stopStopWatcher() {
         val data = state.stopWatcherData.copy(
-            endTime = System.currentTimeMillis(),
+                endTime = System.currentTimeMillis(),
         )
         updateStopWatcher(data)
     }
@@ -45,6 +44,6 @@ class StopWatcherViewModel @Inject constructor(
 
     private fun updateStopWatcher(stopWatcherData: StopWatcherData) {
         updateState { copy(stopWatcherData = stopWatcherData) }
-        preferenceRepository.stopWatcherData = stopWatcherData
+        stopWatcherRepository.stopWatcherData = stopWatcherData
     }
 }

@@ -3,8 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="96dp"
+    android:layout_height="96dp"
     tools:parentTag="android.widget.FrameLayout">
 
     <androidx.cardview.widget.CardView
@@ -16,12 +16,31 @@
         app:cardCornerRadius="@dimen/radius_medium"
         app:cardElevation="@dimen/elevation_small">
 
-        <ImageView
-            android:id="@+id/imageView"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="@dimen/padding_main"
-            android:src="@android:drawable/sym_def_app_icon" />
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="@dimen/padding_main"
+                android:src="@android:drawable/sym_def_app_icon" />
+
+            <TextView
+                android:id="@+id/textView"
+                style="@style/Caption14"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textColor="@color/colorAccent"
+                android:textStyle="bold"
+                android:visibility="gone"
+                tools:text="100:00:58"
+                tools:visibility="visible" />
+
+        </LinearLayout>
 
     </androidx.cardview.widget.CardView>
 

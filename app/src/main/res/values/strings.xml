@@ -8,5 +8,11 @@
     <string name="global_start">Старт</string>
     <string name="global_stop">Стоп</string>
     <string name="global_chronometer_text">%1$s : %2$s</string>
+    <string name="global_full_time_text">%1$s:%2$s:%3$s</string>
+
+    <string name="global_body">Тело</string>
+    <string name="global_mind">Разум</string>
+    <string name="global_emotions">Эмоции</string>
+    <string name="global_consciousness">Сознание</string>
 
 </resources>
