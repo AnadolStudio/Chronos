@@ -1,4 +1,4 @@
-package com.anadolstudio.domain.data_source.database
+package com.anadolstudio.data.repository.chronos
 
 import androidx.room.TypeConverter
 import com.anadolstudio.core.util.data_time.safeParseDateTime
