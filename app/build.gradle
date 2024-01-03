@@ -120,19 +120,11 @@ dependencies {
     implementation "com.github.lisawray.groupie:groupie-kotlin-android-extensions:$groupie"
     implementation "com.github.lisawray.groupie:groupie-viewbinding:$groupie"
 
-    // JodaTime
-    def joda_time = "2.10.3"
-    implementation "joda-time:joda-time:$joda_time"
-
     // Room
     def room_version = "2.5.2"
     implementation "androidx.room:room-runtime:$room_version"
     implementation "androidx.room:room-rxjava2:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
-
-    // Preferences
-    def preferences = "1.0.1"
-    implementation "com.github.yandextaxitech:binaryprefs:$preferences"
 
     // Confetti
     implementation 'com.github.jinatonic.confetti:confetti:1.1.2'

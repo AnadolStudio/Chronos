@@ -35,9 +35,6 @@ android {
 dependencies {
     implementation project(path: ':core:android-base')
 
-    // JodaTime
-    def joda_time = "2.10.3"
-    implementation "joda-time:joda-time:$joda_time"
 
     // Dagger (kapt don't work on 2.28)
     def dagger = "2.43.2"
