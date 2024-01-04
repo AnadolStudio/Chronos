@@ -10,9 +10,15 @@
         android:id="@+id/mainFragment"
         android:name="com.anadolstudio.chronos.presentation.main.MainFragment"
         tools:layout="@layout/fragment_main">
+
         <action
             android:id="@+id/action_mainFragment_to_stopWatcherFragment"
             app:destination="@id/stopWatcherFragment" />
+
+        <action
+            android:id="@+id/action_mainFragment_to_categoriesBottom"
+            app:destination="@id/categoriesBottom" />
+
     </fragment>
 
     <fragment
@@ -21,5 +27,16 @@
         tools:layout="@layout/fragment_stop_watcher">
 
     </fragment>
+
+    <dialog
+        android:id="@+id/categoriesBottom"
+        android:name="com.anadolstudio.chronos.presentation.categories.CategoriesBottom"
+        tools:layout="@layout/bottom_categories">
+
+        <argument
+            android:name="data"
+            app:argType="com.anadolstudio.chronos.presentation.categories.CategoryNavigationArgs" />
+
+    </dialog>
 
 </navigation>
