@@ -29,7 +29,7 @@ class CategoriesBottom : BaseContentBottom<CategoriesState, CategoriesViewModel,
     override fun createViewModelLazy() = assistedViewModel {
         getSharedComponent()
                 .categoriesViewModelFactory()
-                .create(args.data.mainCategories)
+                .create(args.data.categoryList)
     }
 
     override fun initView() = with(binding) {

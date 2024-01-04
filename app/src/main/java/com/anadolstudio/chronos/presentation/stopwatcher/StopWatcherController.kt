@@ -6,4 +6,5 @@ interface StopWatcherController : BaseController {
     fun onStopWatcherToggleClicked()
     fun onAddButtonClicked()
     fun onRemoveButtonClicked()
+    fun onTimeTracked()
 }

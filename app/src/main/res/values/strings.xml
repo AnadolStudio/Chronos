@@ -3,10 +3,14 @@
 
     <string name="global_remove_title">Удалить</string>
     <string name="global_text_item_list"> • %s</string>
-    <string name="global_apply">Подтвердить</string>
+    <string name="global_change">Изменить</string>
+    <string name="global_create">Создать</string>
     <string name="global_add">Добавить</string>
     <string name="global_start">Старт</string>
     <string name="global_stop">Стоп</string>
+    <string name="global_hours">Часы</string>
+    <string name="global_minutes">Минуты</string>
+    <string name="global_name">Название</string>
     <string name="global_chronometer_text">%1$s : %2$s</string>
     <string name="global_full_time_text">%1$s:%2$s:%3$s</string>
 
@@ -15,5 +19,7 @@
     <string name="global_emotions">Эмоции</string>
     <string name="global_consciousness">Сознание</string>
     <string name="symbol_arrow">➝</string>
+    <string name="common_error_message">Упс, что-то пошло не так</string>
 
+    <string name="last_tracks">Последние:</string>
 </resources>

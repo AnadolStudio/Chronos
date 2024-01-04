@@ -25,7 +25,8 @@
         <activity
             android:name=".SingleActivity"
             android:exported="true"
-            android:theme="@style/Theme.Chronos" >
+            android:theme="@style/Theme.Chronos"
+            android:windowSoftInputMode="adjustPan">
         </activity>
 
         <!-- Sample AdMob app ID: ca-app-pub-3940256099942544~3347511713 -->

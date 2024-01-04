@@ -3,30 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    app:startDestination="@id/mainFragment"
-    android:id="@+id/nav_graph">
-
-    <fragment
-        android:id="@+id/mainFragment"
-        android:name="com.anadolstudio.chronos.presentation.main.MainFragment"
-        tools:layout="@layout/fragment_main">
-
-        <action
-            android:id="@+id/action_mainFragment_to_stopWatcherFragment"
-            app:destination="@id/stopWatcherFragment" />
-
-        <action
-            android:id="@+id/action_mainFragment_to_categoriesBottom"
-            app:destination="@id/categoriesBottom" />
-
-    </fragment>
-
-    <fragment
-        android:id="@+id/stopWatcherFragment"
-        android:name="com.anadolstudio.chronos.presentation.stopwatcher.StopWatcherFragment"
-        tools:layout="@layout/fragment_stop_watcher">
-
-    </fragment>
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/mainFragment">
 
     <dialog
         android:id="@+id/categoriesBottom"
@@ -38,5 +16,45 @@
             app:argType="com.anadolstudio.chronos.presentation.categories.CategoryNavigationArgs" />
 
     </dialog>
+
+    <dialog
+        android:id="@+id/trackBottom"
+        android:name="com.anadolstudio.chronos.presentation.track.TrackBottom"
+        tools:layout="@layout/bottom_track">
+
+        <action
+            android:id="@+id/action_trackBottom_to_categoriesBottom"
+            app:destination="@id/categoriesBottom" />
+
+        <argument
+            android:name="data"
+            app:argType="com.anadolstudio.chronos.presentation.track.TrackNavigationArgs" />
+
+    </dialog>
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.anadolstudio.chronos.presentation.main.MainFragment"
+        tools:layout="@layout/fragment_main">
+
+        <action
+            android:id="@+id/action_mainFragment_to_stopWatcherFragment"
+            app:destination="@id/stopWatcherFragment" />
+
+        <action
+            android:id="@+id/action_mainFragment_to_trackBottom"
+            app:destination="@id/trackBottom" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/stopWatcherFragment"
+        android:name="com.anadolstudio.chronos.presentation.stopwatcher.StopWatcherFragment"
+        tools:layout="@layout/fragment_stop_watcher">
+
+        <action
+            android:id="@+id/action_stopWatcherFragment_to_trackBottom"
+            app:destination="@id/trackBottom" />
+    </fragment>
 
 </navigation>

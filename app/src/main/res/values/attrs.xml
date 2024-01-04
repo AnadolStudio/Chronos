@@ -26,4 +26,13 @@
         </attr>
     </declare-styleable>
 
+    <declare-styleable name="InputView">
+        <attr name="hint" />
+        <attr name="src" />
+        <attr name="imeOptions"/>
+        <attr name="inputType" />
+        <attr name="digits" />
+        <attr name="maxLength" />
+    </declare-styleable>
+
 </resources>
