@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/lastTractText"
+        style="@style/Caption14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/padding_main"
+        android:layout_marginTop="@dimen/padding_medium"
+        android:text="@string/last_tracks"
+        android:textColor="@color/colorAccent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/hoursText" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/lastTrackGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        tools:visibility="visible"
+        app:constraint_referenced_ids="lastTractText,recycler" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/padding_main"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/lastTractText"
+        tools:listitem="@layout/view_chip"
+        tools:itemCount="7"/>
+
+    <com.anadolstudio.chronos.view.button.base.BaseButton
+        android:id="@+id/applyButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/padding_main"
+        android:background="@drawable/gradient_base_button"
+        android:paddingBottom="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/current_item"
+        app:text="@string/global_add" />
+
+    <com.anadolstudio.chronos.view.edit.InputView
+        android:id="@+id/nameText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:hint="@string/global_name"
+        app:imeOptions="actionDone"
+        app:inputType="textCapSentences"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/recycler"
+        app:src="@drawable/ic_search" />
+
+    <com.anadolstudio.chronos.view.edit.InputView
+        android:id="@+id/hoursText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/padding_main"
+        app:digits="@string/edit_text_number_digits"
+        app:hint="@string/global_hours"
+        app:inputType="time"
+        app:layout_constraintEnd_toStartOf="@id/minutesText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/top_line"
+        app:maxLength="2" />
+
+    <com.anadolstudio.chronos.view.edit.InputView
+        android:id="@+id/minutesText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:digits="@string/edit_text_number_digits"
+        app:hint="@string/global_minutes"
+        app:inputType="time"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/hoursText"
+        app:layout_constraintTop_toTopOf="@id/hoursText"
+        app:maxLength="2" />
+
+    <com.anadolstudio.core.view.bottom.BottomTopLine
+        android:id="@+id/top_line"
+        style="@style/BottomTopLine"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <include
+        android:id="@+id/current_item"
+        layout="@layout/item_category"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/padding_main"
+        android:layout_marginTop="@dimen/padding_medium"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/nameText"
+        tools:visibility="visible" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

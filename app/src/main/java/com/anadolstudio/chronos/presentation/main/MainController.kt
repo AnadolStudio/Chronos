@@ -8,4 +8,5 @@ interface MainController : BaseController {
     fun onChartClicked()
     fun onStopWatcherClicked()
     fun onEditItemsClicked()
+    fun onTimeTracked()
 }

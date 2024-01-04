@@ -1,9 +1,11 @@
 package com.anadolstudio.chronos.presentation.stopwatcher
 
+import android.os.Bundle
 import androidx.fragment.app.viewModels
 import com.anadolstudio.chronos.R
 import com.anadolstudio.chronos.base.fragment.BaseContentFragment
 import com.anadolstudio.chronos.databinding.FragmentStopWatcherBinding
+import com.anadolstudio.chronos.presentation.track.TrackBottom
 import com.anadolstudio.core.presentation.fragment.state_util.ViewStateDelegate
 import com.anadolstudio.core.view.animation.AnimateUtil.scaleAnimationOnClick
 import com.anadolstudio.core.viewbinding.viewBinding
@@ -25,10 +27,17 @@ class StopWatcherFragment :
             onRemoveButtonAction = { controller.onRemoveButtonClicked() }
         )
         stopWatcherToggle.scaleAnimationOnClick { controller.onStopWatcherToggleClicked() }
+        initFragmentResultListeners(TrackBottom.TAG)
+    }
+
+    override fun handleFragmentResult(requestKey: String, data: Bundle) = when (requestKey) {
+        TrackBottom.TAG -> controller.onTimeTracked()
+        else -> super.handleFragmentResult(requestKey, data)
     }
 
     override fun render(state: StopWatcherState) {
         renderStopWatcher(state.stopWatcherData)
+        binding.stopWatcherToggle.setLoading(state.isLoading)
     }
 
     private fun renderStopWatcher(stopWatcherData: StopWatcherData) = with(stopWatcherData) {

@@ -17,4 +17,17 @@
         <item name="android:lines">1</item>
     </style>
 
+    <style name="EditText">
+        <item name="android:layout_marginTop">12dp</item>
+        <item name="editTextAppearance">@style/Caption14</item>
+        <item name="errorTextAppearance">@style/Caption12</item>
+        <item name="errorTextColor">@color/colorError</item>
+        <item name="editTextBackgroundTint">@color/divider</item>
+        <item name="hintTextAppearance">@style/Caption12</item>
+        <item name="hintTextColor">@color/colorHint</item>
+        <item name="errorEnabled">false</item>
+        <item name="editTextColor">@color/colorAccent</item>
+        <item name="validatorMode">afterTextChanged</item>
+    </style>
+
 </resources>

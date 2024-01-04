@@ -10,7 +10,7 @@ abstract class BaseActionViewModel : CoreActionViewModel<NavigateData>(), BaseVi
 
     protected val baseViewModelDelegate: BaseViewModelDelegate = BaseViewModelDelegate.Delegate(_singleEvent)
 
-    override fun showTodo() = baseViewModelDelegate.showTodo()
+    override fun showTodo(text: String?) = baseViewModelDelegate.showTodo(text)
 
     protected fun navigateTo(id: Int, args: Bundle = bundleOf()) = _navigationEvent.navigateTo(id, args)
 

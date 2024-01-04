@@ -1,72 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:fitsSystemWindows="true">
 
-    <LinearLayout
-        android:id="@+id/featuresContainer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/padding_main"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar">
-
-        <com.anadolstudio.chronos.view.button.feature.FeatureButton
-            android:id="@+id/chart_button"
-            style="@style/MainFeatureButton"
-            app:src="@drawable/ic_chart" />
-
-        <com.anadolstudio.chronos.view.button.feature.FeatureButton
-            android:id="@+id/stop_watcher_button"
-            style="@style/MainFeatureButton"
-            app:src="@drawable/ic_timer" />
-
-        <com.anadolstudio.chronos.view.button.feature.FeatureButton
-            android:id="@+id/edit_items_button"
-            style="@style/MainFeatureButton"
-            app:src="@drawable/ic_edit" />
-
-    </LinearLayout>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:clipToPadding="false"
-        android:paddingBottom="104dp"
-        android:paddingTop="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/featuresContainer" />
+        android:layout_height="match_parent"
+        android:background="@color/colorSecondary">
 
-    <com.anadolstudio.chronos.view.button.base.BaseButton
-        android:id="@+id/addButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/gradient_base_button"
-        android:paddingBottom="24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:text="@string/global_add" />
-
-    <com.anadolstudio.core.view.toolbar.BaseToolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/colorAccent"
-        app:needDivider="true"
-        app:title="@string/app_name"
-        android:fitsSystemWindows="true">
-
-        <com.anadolstudio.core.view.toolbar.ToolbarIconButton
-            android:id="@+id/calendar_button"
+        <LinearLayout
+            android:id="@+id/featuresContainer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:src="@drawable/ic_calendar" />
+            android:layout_marginTop="@dimen/padding_main"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar">
 
-    </com.anadolstudio.core.view.toolbar.BaseToolbar>
+            <com.anadolstudio.chronos.view.button.feature.FeatureButton
+                android:id="@+id/chart_button"
+                style="@style/MainFeatureButton"
+                app:src="@drawable/ic_chart" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <com.anadolstudio.chronos.view.button.feature.FeatureButton
+                android:id="@+id/stop_watcher_button"
+                style="@style/MainFeatureButton"
+                app:src="@drawable/ic_timer" />
+
+            <com.anadolstudio.chronos.view.button.feature.FeatureButton
+                android:id="@+id/edit_items_button"
+                style="@style/MainFeatureButton"
+                app:src="@drawable/ic_edit" />
+
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:clipToPadding="false"
+            android:paddingBottom="104dp"
+            android:paddingTop="16dp"
+            app:layout_constraintBottom_toTopOf="@id/addButton"
+            app:layout_constraintTop_toBottomOf="@id/featuresContainer" />
+
+        <com.anadolstudio.chronos.view.button.base.BaseButton
+            android:id="@+id/addButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/gradient_base_button"
+            android:paddingBottom="24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:text="@string/global_add" />
+
+        <com.anadolstudio.core.view.toolbar.BaseToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/colorAccent"
+            app:needDivider="true"
+            app:title="@string/app_name">
+
+            <com.anadolstudio.core.view.toolbar.ToolbarIconButton
+                android:id="@+id/calendar_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:src="@drawable/ic_calendar" />
+
+        </com.anadolstudio.core.view.toolbar.BaseToolbar>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

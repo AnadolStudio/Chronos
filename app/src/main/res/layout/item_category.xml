@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:stateListAnimator="@animator/item_card_large"
+    android:stateListAnimator="@animator/item_card_normal"
     app:cardCornerRadius="@dimen/radius_xmedium"
     android:layout_marginHorizontal="@dimen/padding_medium"
     app:cardBackgroundColor="@color/colorPrimary"

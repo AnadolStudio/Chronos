@@ -9,10 +9,10 @@ import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 
 class CategoriesViewModel @AssistedInject constructor(
-        @Assisted mainCategories: List<MainCategoryDomain>
+        @Assisted categoryList: List<CategoryUi>
 ) : BaseContentViewModel<CategoriesState>(
         initState = CategoriesState(
-                categoryList = mainCategories.flatMap { it.toCategoryUi() }
+                categoryList = categoryList
         )
 ), CategoriesController {
 
@@ -23,6 +23,6 @@ class CategoriesViewModel @AssistedInject constructor(
 
     @AssistedFactory
     interface Factory {
-        fun create(mainCategories: List<MainCategoryDomain>): CategoriesViewModel
+        fun create(categoryList: List<CategoryUi>): CategoriesViewModel
     }
 }
