@@ -1,9 +1,13 @@
 package com.anadolstudio.chronos.presentation.categories.model
 
+import android.os.Parcelable
 import com.anadolstudio.domain.repository.chronos.main_category.MainCategoryDomain
 import com.anadolstudio.domain.repository.chronos.subcategory.SubcategoryDomain
+import kotlinx.parcelize.IgnoredOnParcel
+import kotlinx.parcelize.Parcelize
 import java.util.UUID
 
+@Parcelize
 data class CategoryUi(
         val id: UUID,
         val name: String,
@@ -11,7 +15,7 @@ data class CategoryUi(
         val mainCategoryId: UUID,
         val parentCategoryId: UUID?,
         val parentName: String?,
-) {
+) : Parcelable {
 
     constructor(id: UUID, name: String, color: Int) : this(
             id = id,
@@ -22,7 +26,10 @@ data class CategoryUi(
             parentName = null,
     )
 
+    @IgnoredOnParcel
     val isMainCategory: Boolean = id == mainCategoryId
+
+    @IgnoredOnParcel
     val isRootCategory: Boolean = mainCategoryId == parentCategoryId
 }
 
