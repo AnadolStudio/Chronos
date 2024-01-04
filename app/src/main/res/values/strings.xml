@@ -14,5 +14,6 @@
     <string name="global_mind">Разум</string>
     <string name="global_emotions">Эмоции</string>
     <string name="global_consciousness">Сознание</string>
+    <string name="symbol_arrow">➝</string>
 
 </resources>
