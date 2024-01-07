@@ -6,6 +6,7 @@ import com.anadolstudio.chronos.base.viewmodel.BaseContentViewModel
 import com.anadolstudio.chronos.presentation.categories.CategoryNavigationArgs
 import com.anadolstudio.chronos.presentation.categories.model.CategoryUi
 import com.anadolstudio.chronos.presentation.categories.model.toCategoryUi
+import com.anadolstudio.chronos.presentation.create.CreateNavigationArgs
 import com.anadolstudio.core.R.string
 import com.anadolstudio.core.util.rx.smartSubscribe
 import com.anadolstudio.domain.repository.chronos.ChronosRepository
@@ -52,16 +53,46 @@ class TrackViewModel @AssistedInject constructor(
 
     override fun onHoursChanged(hours: String) = updateState { copy(hours = hours.toIntOrNull() ?: 0) }
 
-    override fun onNameChanged(name: String) = updateState { copy(name = name, selectedCategoryUi = state.nameCategoryMap[name]) }
+    override fun onNameChanged(name: String) = updateState { copy(name = name, selectedCategoryUi = state.childNameCategoryMap[name]) }
 
     override fun onSearchButtonClicked() = navigateTo(
             id = R.id.action_trackBottom_to_categoriesBottom,
             args = bundleOf(
-                    resources.getString(string.data) to CategoryNavigationArgs(state.categoryList)
+                    resources.getString(string.data) to CategoryNavigationArgs(state.childCategoryList)
             )
     )
 
-    override fun onCategoriesSelected(categoryUi: CategoryUi?) = updateState { copy(selectedCategoryUi = categoryUi) }
+    override fun onCategoriesSelected(categoryUi: CategoryUi) = updateState {
+        copy(
+                selectedCategoryUi = categoryUi,
+                name = categoryUi.name
+        )
+    }
+
+    override fun onCategoryCreated(categoryUi: CategoryUi) {
+        chronosRepository.getAllMainCategories()
+                .smartSubscribe(
+                        onSubscribe = { updateState { copy(isLoading = true) } },
+                        onSuccess = { mainCategoryDomains ->
+                            updateState {
+                                val newCategoryList = mainCategoryDomains.flatMap { it.toCategoryUi() }
+                                val idCategoryMap = newCategoryList.associateBy { it.id }
+
+                                copy(
+                                        categoryList = newCategoryList,
+                                        nameCategoryMap = newCategoryList.associateBy { it.name },
+                                        idCategoryMap = idCategoryMap,
+                                        selectedCategoryUi = idCategoryMap[categoryUi.id],
+                                        name = categoryUi.name
+                                )
+                            }
+                        },
+                        onError = this::showError,
+                        onFinally = { updateState { copy(isLoading = false) } }
+                )
+                .disposeOnCleared()
+
+    }
 
     override fun onTrackClicked() {
         val currentCategory = state.selectedCategoryUi
@@ -69,7 +100,15 @@ class TrackViewModel @AssistedInject constructor(
         if (currentCategory != null) {
             loadTrackByToday(currentCategory)
         } else {
-            showTodo("Тут будет навигация на создание категории")
+            navigateTo(
+                    id = R.id.action_trackBottom_to_createBottom,
+                    args = bundleOf(
+                            resources.getString(string.data) to CreateNavigationArgs(
+                                    categoryList = state.categoryList,
+                                    name = state.name
+                            )
+                    )
+            )
         }
     }
 
@@ -109,7 +148,7 @@ class TrackViewModel @AssistedInject constructor(
     private fun createNewTrack(currentCategory: CategoryUi): TrackDomain = TrackDomain(
             subcategoryId = currentCategory.id,
             minutes = state.time.totalMinutes,
-            fromStopWatcher = true
+            fromStopWatcher = state.fromStopWatcher
     )
 
     @AssistedFactory

@@ -7,5 +7,6 @@ import com.anadolstudio.domain.repository.stop_watcher.StopWatcherData
 data class MainState(
         val stopWatcherData: StopWatcherData,
         val stopWatcherTime: Time? = null,
-        val mainCategoryList: List<MainCategoryDomain> = emptyList()
+        val mainCategoryList: List<MainCategoryDomain> = emptyList(),
+        val isLoading: Boolean = true
 )

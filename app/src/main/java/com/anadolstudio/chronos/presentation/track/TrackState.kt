@@ -16,6 +16,9 @@ data class TrackState(
         val isLoading: Boolean = false,
         val lastTrackList: List<CategoryUi> = emptyList()
 ) {
+    val childCategoryList: List<CategoryUi> = categoryList.filter { !it.hasChild }
+
+    val childNameCategoryMap: Map<String, CategoryUi> = nameCategoryMap.filter { (_, category) -> !category.hasChild }
 
     val time: Time get() = Time(hours = hours, minutes = minutes, seconds = 0)
 

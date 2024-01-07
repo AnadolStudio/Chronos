@@ -33,11 +33,12 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:paddingHorizontal="@dimen/padding_main"
+        android:clipToPadding="false"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/lastTractText"
-        tools:listitem="@layout/view_chip"
+        tools:listitem="@layout/item_last_track"
         tools:itemCount="7"/>
 
     <com.anadolstudio.chronos.view.button.base.BaseButton

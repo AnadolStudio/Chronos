@@ -8,9 +8,11 @@ import com.anadolstudio.chronos.base.bottom.BaseContentBottom
 import com.anadolstudio.chronos.databinding.BottomTrackBinding
 import com.anadolstudio.chronos.presentation.categories.CategoriesBottom
 import com.anadolstudio.chronos.presentation.categories.model.CategoryUi
+import com.anadolstudio.chronos.presentation.create.CreateBottom
 import com.anadolstudio.core.groupie.BaseGroupAdapter
 import com.anadolstudio.core.presentation.fragment.state_util.ViewStateDelegate
 import com.anadolstudio.core.util.common_extention.getParcelable
+import com.anadolstudio.core.util.common_extention.requireParcelable
 import com.anadolstudio.core.util.common_extention.setFragmentResult
 import com.anadolstudio.core.view.animation.AnimateUtil.scaleAnimationOnClick
 import com.anadolstudio.core.viewbinding.viewBinding
@@ -43,7 +45,7 @@ open class TrackBottom : BaseContentBottom<TrackState, TrackViewModel, TrackCont
     }
 
     override fun initView() = with(binding) {
-        initFragmentResultListeners(CategoriesBottom.TAG)
+        initFragmentResultListeners(CategoriesBottom.TAG, CreateBottom.TAG)
         nameText.setOnIconClickListener(controller::onSearchButtonClicked)
         nameText.addValidateListener(controller::onNameChanged)
         hoursText.addValidateListener(controller::onHoursChanged)
@@ -53,7 +55,8 @@ open class TrackBottom : BaseContentBottom<TrackState, TrackViewModel, TrackCont
     }
 
     override fun handleFragmentResult(requestKey: String, data: Bundle) = when (requestKey) {
-        CategoriesBottom.TAG -> controller.onCategoriesSelected(getParcelable(data))
+        CategoriesBottom.TAG -> controller.onCategoriesSelected(requireParcelable(data))
+        CreateBottom.TAG -> controller.onCategoryCreated(requireParcelable(data))
         else -> super.handleFragmentResult(requestKey, data)
     }
 
@@ -85,7 +88,7 @@ open class TrackBottom : BaseContentBottom<TrackState, TrackViewModel, TrackCont
 
         if (this != null) {
             binding.currentItem.categoryVew.setup(this)
-            binding.nameText.setText(name)
+            binding.nameText.setText(name, withValidate = false)
         }
     }
 

@@ -8,6 +8,7 @@ interface TrackController : BaseController {
     fun onHoursChanged(hours: String)
     fun onNameChanged(name: String)
     fun onSearchButtonClicked()
-    fun onCategoriesSelected(categoryUi: CategoryUi?)
+    fun onCategoriesSelected(categoryUi: CategoryUi)
     fun onTrackClicked()
+    fun onCategoryCreated(categoryUi: CategoryUi)
 }

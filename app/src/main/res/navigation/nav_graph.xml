@@ -29,6 +29,24 @@
         <argument
             android:name="data"
             app:argType="com.anadolstudio.chronos.presentation.track.TrackNavigationArgs" />
+        <action
+            android:id="@+id/action_trackBottom_to_createBottom"
+            app:destination="@id/createBottom" />
+
+    </dialog>
+
+    <dialog
+        android:id="@+id/createBottom"
+        android:name="com.anadolstudio.chronos.presentation.create.CreateBottom"
+        tools:layout="@layout/bottom_create_category">
+
+        <argument
+            android:name="data"
+            app:argType="com.anadolstudio.chronos.presentation.create.CreateNavigationArgs" />
+
+        <action
+            android:id="@+id/action_createBottom_to_categoriesBottom"
+            app:destination="@id/categoriesBottom" />
 
     </dialog>
 

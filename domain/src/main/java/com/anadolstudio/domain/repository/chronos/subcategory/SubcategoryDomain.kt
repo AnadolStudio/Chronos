@@ -11,5 +11,5 @@ data class SubcategoryDomain(
         val name: String,
         val mainCategoryId: UUID,
         val parentCategoryId: UUID,
-        val subcategoryList: List<SubcategoryDomain>
+        val subcategoryList: List<SubcategoryDomain> = emptyList()
 ) : Parcelable
