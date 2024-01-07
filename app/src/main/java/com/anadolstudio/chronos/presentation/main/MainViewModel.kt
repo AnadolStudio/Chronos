@@ -63,11 +63,13 @@ class MainViewModel @Inject constructor(
 
     private fun loadCategories() = chronosRepository.getAllMainCategories()
             .smartSubscribe(
+                    onSubscribe = { updateState { copy(isLoading = true) } },
                     onSuccess = { mainCategoryDomains ->
                         updateState { copy(mainCategoryList = mainCategoryDomains) }
                         initMainCategoriesIfNeed(mainCategoryDomains)
                     },
-                    onError = ::showError
+                    onError = ::showError,
+                    onFinally = { updateState { copy(isLoading = false) } }
             )
             .disposeOnCleared()
 
@@ -76,7 +78,9 @@ class MainViewModel @Inject constructor(
         initMainCategories()
     }
 
-    override fun onTimeTracked() = showTodo("Обновление данных")
+    override fun onTimeTracked() {
+        loadCategories()
+    }
 
     private fun initMainCategories() = with(resources) {
         Completable.concatArray(
@@ -86,11 +90,13 @@ class MainViewModel @Inject constructor(
                 addMainCategory(getString(R.string.global_consciousness), getColor(R.color.consciousnessColor))
         )
                 .smartSubscribe(
+                        onSubscribe = { updateState { copy(isLoading = true) } },
                         onComplete = {
                             loadCategories()
                             showTodo("+ главные категории")
                         },
-                        onError = this@MainViewModel::showError
+                        onError = this@MainViewModel::showError,
+                        onFinally = { updateState { copy(isLoading = true) } }
                 )
                 .disposeOnCleared()
     }

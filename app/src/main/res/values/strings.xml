@@ -22,4 +22,5 @@
     <string name="common_error_message">Упс, что-то пошло не так</string>
 
     <string name="last_tracks">Последние:</string>
+    <string name="parent_category">Родительская категория</string>
 </resources>

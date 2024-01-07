@@ -67,6 +67,7 @@ open class BaseButton @JvmOverloads constructor(
     fun setText(@StringRes textRes: Int) = setText(context.getString(textRes))
 
     fun setLoading(isLoading: Boolean) {
+        super.setEnabled(!isLoading)
         binding.progressContainer.isVisible = isLoading
         binding.title.isVisible = !isLoading
     }

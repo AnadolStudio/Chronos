@@ -2,6 +2,7 @@ package com.anadolstudio.chronos.view.edit
 
 import android.content.Context
 import android.content.res.ColorStateList
+import android.graphics.drawable.Drawable
 import android.text.InputType
 import android.util.AttributeSet
 import android.view.LayoutInflater
@@ -68,4 +69,7 @@ class InputView @JvmOverloads constructor(
     override fun setEnabled(enabled: Boolean) {
         binding.editText.isEnabled = isEnabled
     }
+
+    fun setDrawableEnd(drawable: Drawable?) = binding.editText.setDrawableEnd(drawable)
+
 }

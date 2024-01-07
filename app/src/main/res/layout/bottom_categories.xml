@@ -19,6 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="@dimen/padding_large"
+        android:clipToPadding="false"
         android:paddingTop="@dimen/padding_medium"
         tools:listitem="@layout/item_category"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"

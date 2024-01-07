@@ -21,48 +21,48 @@ import org.joda.time.DateTime
 import java.util.UUID
 
 class ChronosRepositoryImpl(
-    private val mainCategoryDao: MainCategoryDao,
-    private val subcategoryDao: SubcategoryDao,
-    private val trackDao: TrackDao
+        private val mainCategoryDao: MainCategoryDao,
+        private val subcategoryDao: SubcategoryDao,
+        private val trackDao: TrackDao
 ) : ChronosRepository {
 
     // TODO Need Test
     override fun getAllMainCategories(): Single<List<MainCategoryDomain>> = Single.zip(
-        mainCategoryDao.getAllMainCategories(),
-        getAllSubcategories().map { subcategories -> subcategories.groupBy { it.mainCategoryId } }
+            mainCategoryDao.getAllMainCategories(),
+            getAllSubcategories().map { subcategories -> subcategories.groupBy { it.mainCategoryId } }
     ) { mainCategoryList, subcategoryMap ->
         mainCategoryList.map { it.toDomain(subcategoryMap[it.uuid].orEmpty()) }
     }
-        .schedulersIoToMain()
+            .schedulersIoToMain()
 
     override fun insertMainCategory(category: MainCategoryDomain): Completable = mainCategoryDao
-        .insertMainCategory(category.toEntity())
-        .schedulersIoToMain()
+            .insertMainCategory(category.toEntity())
+            .schedulersIoToMain()
 
     override fun updateMainCategory(category: MainCategoryDomain): Completable = mainCategoryDao
-        .updateMainCategory(category.toEntity())
-        .schedulersIoToMain()
+            .updateMainCategory(category.toEntity())
+            .schedulersIoToMain()
 
     override fun deleteMainCategory(category: MainCategoryDomain): Completable = mainCategoryDao
-        .deleteMainCategory(category.toEntity())
-        .schedulersIoToMain()
+            .deleteMainCategory(category.toEntity())
+            .schedulersIoToMain()
 
     // TODO Need Test
     override fun getAllSubcategories(): Single<List<SubcategoryDomain>> = subcategoryDao
-        .getAllSubcategories()
-        .map { subcategories ->
-            val categoriesMap = subcategories.groupBy { it.parentCategoryId }
-            val rootCategories = subcategories
-                .filter { it.isRoot }
-                .map { it.toDomain(findInnerSubcategories(it, categoriesMap)) }
+            .getAllSubcategories()
+            .map { subcategories ->
+                val categoriesMap = subcategories.groupBy { it.parentCategoryId }
+                val rootCategories = subcategories
+                        .filter { it.isRoot }
+                        .flatMap { findInnerSubcategories(it, categoriesMap) }
 
-            return@map rootCategories
-        }
-        .schedulersIoToMain()
+                return@map rootCategories
+            }
+            .schedulersIoToMain()
 
     private fun findInnerSubcategories(
-        subcategory: SubcategoryEntity,
-        categoriesMap: Map<UUID, List<SubcategoryEntity>>
+            subcategory: SubcategoryEntity,
+            categoriesMap: Map<UUID, List<SubcategoryEntity>>
     ): List<SubcategoryDomain> {
         val innerSubcategoriesEntity = categoriesMap[subcategory.uuid].orEmpty()
 
@@ -74,46 +74,46 @@ class ChronosRepositoryImpl(
     }
 
     override fun insertSubcategory(subcategory: SubcategoryDomain): Completable = subcategoryDao
-        .insertSubcategory(subcategory.toEntity())
-        .schedulersIoToMain()
+            .insertSubcategory(subcategory.toEntity())
+            .schedulersIoToMain()
 
     override fun updateSubcategory(subcategory: SubcategoryDomain): Completable = subcategoryDao
-        .updateSubcategory(subcategory.toEntity())
-        .schedulersIoToMain()
+            .updateSubcategory(subcategory.toEntity())
+            .schedulersIoToMain()
 
     override fun deleteSubcategory(subcategory: SubcategoryDomain): Completable = subcategoryDao
-        .deleteSubcategory(subcategory.toEntity())
-        .schedulersIoToMain()
+            .deleteSubcategory(subcategory.toEntity())
+            .schedulersIoToMain()
 
     override fun getAllTracks(): Single<List<TrackDomain>> = trackDao
-        .getAllTracks()
-        .map { trackList -> trackList.toDomain() }
-        .schedulersIoToMain()
+            .getAllTracks()
+            .map { trackList -> trackList.toDomain() }
+            .schedulersIoToMain()
 
     override fun getAllTracksFromStopWatcher(): Single<List<TrackDomain>> = trackDao
-        .getAllTracksFromStopWatcher()
-        .map { it.toDomain() }
-        .schedulersIoToMain()
+            .getAllTracksFromStopWatcher()
+            .map { it.toDomain() }
+            .schedulersIoToMain()
 
     override fun insertTrack(trackDomain: TrackDomain): Completable = trackDao
-        .insertTrack(trackDomain.toEntity())
-        .schedulersIoToMain()
+            .insertTrack(trackDomain.toEntity())
+            .schedulersIoToMain()
 
     override fun updateTrack(
             trackDomain: TrackDomain
     ): Completable = trackDao
-        .updateTrack(trackDomain.uuid, trackDomain.date, trackDomain.minutes, trackDomain.subcategoryId)
-        .schedulersIoToMain()
+            .updateTrack(trackDomain.uuid, trackDomain.date, trackDomain.minutes, trackDomain.subcategoryId)
+            .schedulersIoToMain()
 
     override fun getTrackById(trackId: UUID): Single<TrackDomain> = trackDao
-        .getTrackById(trackId)
-        .map { it.toDomain() }
-        .schedulersIoToMain()
+            .getTrackById(trackId)
+            .map { it.toDomain() }
+            .schedulersIoToMain()
 
     override fun getTrackListByDate(date: DateTime): Single<List<TrackDomain>> = trackDao
-        .getTrackListByDate(date)
-        .map { it.toDomain() }
-        .schedulersIoToMain()
+            .getTrackListByDate(date)
+            .map { it.toDomain() }
+            .schedulersIoToMain()
 
     override fun getLastTrackList(limit: Int): Single<List<TrackDomain>> = trackDao
             .getTrackList(limit)
@@ -121,6 +121,6 @@ class ChronosRepositoryImpl(
             .schedulersIoToMain()
 
     override fun deleteTrack(trackDomain: TrackDomain): Completable = trackDao
-        .deleteTrack(trackDomain.toEntity())
-        .schedulersIoToMain()
+            .deleteTrack(trackDomain.toEntity())
+            .schedulersIoToMain()
 }

@@ -33,14 +33,31 @@ data class CategoryUi(
     val isRootCategory: Boolean = mainCategoryId == parentCategoryId
 }
 
-fun MainCategoryDomain.toCategoryUi(): List<CategoryUi> {
-    val mainCategory = CategoryUi(id = uuid, name = name, color = color)
+fun MainCategoryDomain.toCategoryUi(): List<CategoryUi> = mapInnerCategory(
+        CategoryUi(id = uuid, name = name, color = color),
+        subcategoryList,
+        color
+)
 
+private fun mapInnerCategory(mainCategory: CategoryUi, subcategoryList: List<SubcategoryDomain>, color: Int): List<CategoryUi> {
     val subcategory = subcategoryList.flatMap { subcategory ->
-        subcategory.getAllSubcategory(name, color)
+        subcategory.getAllSubcategory(mainCategory.name, color)
     }
 
     return listOf(mainCategory) + subcategory
+}
+
+fun SubcategoryDomain.toCategoryUi(parentName: String, color: Int): List<CategoryUi> {
+    val rootCategory = CategoryUi(
+            id = uuid,
+            name = name,
+            color = color,
+            mainCategoryId = mainCategoryId,
+            parentCategoryId = parentCategoryId,
+            parentName = parentName
+    )
+
+    return mapInnerCategory(rootCategory, subcategoryList, color)
 }
 
 private fun SubcategoryDomain.getAllSubcategory(parentName: String, color: Int): List<CategoryUi> {
@@ -53,7 +70,9 @@ private fun SubcategoryDomain.getAllSubcategory(parentName: String, color: Int):
             parentName = parentName,
     )
 
-    val innerSubcategory = subcategoryList.flatMap { it.getAllSubcategory(name, color) }
+    val innerSubcategory = subcategoryList
+            .filter { it.uuid != uuid }
+            .flatMap { it.getAllSubcategory(name, color) }
 
     return listOf(category) + innerSubcategory
 }

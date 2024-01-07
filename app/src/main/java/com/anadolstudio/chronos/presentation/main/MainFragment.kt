@@ -36,6 +36,7 @@ class MainFragment : BaseContentFragment<MainState, MainViewModel, MainControlle
     }
 
     override fun render(state: MainState) {
+        binding.addButton.setLoading(state.isLoading)
         renderStopWatcher(state.stopWatcherTime)
     }
 
