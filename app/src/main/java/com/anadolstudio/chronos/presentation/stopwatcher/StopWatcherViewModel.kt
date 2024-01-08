@@ -31,7 +31,7 @@ class StopWatcherViewModel @Inject constructor(
                 updateState { copy(isLoading = true) }
             }
             .smartSubscribe(
-                    onSuccess = { mainCategoryDomains -> updateState { copy(mainCategoryList = mainCategoryDomains) } },
+                    onSuccess = { mainCategoryList -> updateState { copy(mainCategoryList = mainCategoryList) } },
                     onError = ::showError,
                     onFinally = { updateState { copy(isLoading = false) } }
             )

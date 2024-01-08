@@ -1,14 +1,14 @@
 package com.anadolstudio.chronos.presentation.track
 
 import com.anadolstudio.chronos.presentation.categories.model.CategoryUi
+import com.anadolstudio.chronos.presentation.categories.model.toCategoryUi
 import com.anadolstudio.core.util.data_time.Time
+import com.anadolstudio.domain.repository.chronos.main_category.MainCategoryDomain
 import java.util.UUID
 
 data class TrackState(
-        val categoryList: List<CategoryUi>,
+        val categoryState: CategoryState,
         val fromStopWatcher: Boolean,
-        val nameCategoryMap: Map<String, CategoryUi> = categoryList.associateBy { it.name },
-        val idCategoryMap: Map<UUID, CategoryUi> = categoryList.associateBy { it.id },
         val selectedCategoryUi: CategoryUi? = null,
         val name: String = "",
         val hours: Int = 0,
@@ -16,9 +16,6 @@ data class TrackState(
         val isLoading: Boolean = false,
         val lastTrackList: List<CategoryUi> = emptyList()
 ) {
-    val childCategoryList: List<CategoryUi> = categoryList.filter { !it.hasChild }
-
-    val childNameCategoryMap: Map<String, CategoryUi> = nameCategoryMap.filter { (_, category) -> !category.hasChild }
 
     val time: Time get() = Time(hours = hours, minutes = minutes, seconds = 0)
 
@@ -45,4 +42,17 @@ data class ApplyButtonState(
             isEnable = time.totalMinutes >= MIN_TRACK_MINUTES && name.isNotBlank(),
             hasSelectedCategory = selectedCategoryUi != null,
     )
+}
+
+data class CategoryState(val categoryList: List<CategoryUi>) {
+
+    companion object {
+        @JvmName("fromMainCategoryList")
+        operator fun invoke(mainCategoryList: List<MainCategoryDomain>) = CategoryState(mainCategoryList.toCategoryUi())
+    }
+
+    val nameCategoryMap: Map<String, CategoryUi> = categoryList.associateBy { it.name }
+    val idCategoryMap: Map<UUID, CategoryUi> = categoryList.associateBy { it.id }
+    val childCategoryList: List<CategoryUi> = categoryList.filter { !it.hasChild }
+    val childNameCategoryMap: Map<String, CategoryUi> = nameCategoryMap.filter { (_, category) -> !category.hasChild }
 }

@@ -22,7 +22,7 @@ data class MainCategoryEntity(
 fun MainCategoryDomain.toEntity(): MainCategoryEntity = MainCategoryEntity(
     id = id,
     uuid = uuid,
-    name = name,
+    name = name.trim(),
     color = color
 )
 

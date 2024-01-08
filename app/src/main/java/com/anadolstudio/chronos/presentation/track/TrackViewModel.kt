@@ -24,7 +24,7 @@ class TrackViewModel @AssistedInject constructor(
         private val chronosRepository: ChronosRepository,
 ) : BaseContentViewModel<TrackState>(
         initState = TrackState(
-                categoryList = args.mainCategories.flatMap { it.toCategoryUi() },
+                categoryState = CategoryState(args.mainCategories),
                 hours = args.hours,
                 minutes = args.minutes,
                 fromStopWatcher = args.fromStopWatcher
@@ -42,23 +42,31 @@ class TrackViewModel @AssistedInject constructor(
     private fun loadLastTracks() = chronosRepository.getLastTrackList(LAST_TRACKS_LIMIT)
             .smartSubscribe(
                     onSuccess = { trackList ->
-                        val categories = trackList.mapNotNull { state.idCategoryMap[it.subcategoryId] }
+                        val categories = trackList.mapNotNull {
+                            state.categoryState.idCategoryMap[it.subcategoryId]
+                        }
                         updateState { copy(lastTrackList = categories) }
                     },
                     onError = this::showError
             )
             .disposeOnCleared()
 
-    override fun onMinutesChanged(minutes: String) = updateState { copy(minutes = minutes.toIntOrNull() ?: 0) }
+    override fun onMinutesChanged(minutes: String) = updateState {
+        copy(minutes = minutes.toIntOrNull() ?: 0)
+    }
 
-    override fun onHoursChanged(hours: String) = updateState { copy(hours = hours.toIntOrNull() ?: 0) }
+    override fun onHoursChanged(hours: String) = updateState {
+        copy(hours = hours.toIntOrNull() ?: 0)
+    }
 
-    override fun onNameChanged(name: String) = updateState { copy(name = name, selectedCategoryUi = state.childNameCategoryMap[name]) }
+    override fun onNameChanged(name: String) = updateState {
+        copy(name = name, selectedCategoryUi = state.categoryState.childNameCategoryMap[name])
+    }
 
     override fun onSearchButtonClicked() = navigateTo(
             id = R.id.action_trackBottom_to_categoriesBottom,
             args = bundleOf(
-                    resources.getString(string.data) to CategoryNavigationArgs(state.childCategoryList)
+                    resources.getString(string.data) to CategoryNavigationArgs(state.categoryState.childCategoryList)
             )
     )
 
@@ -73,16 +81,14 @@ class TrackViewModel @AssistedInject constructor(
         chronosRepository.getAllMainCategories()
                 .smartSubscribe(
                         onSubscribe = { updateState { copy(isLoading = true) } },
-                        onSuccess = { mainCategoryDomains ->
+                        onSuccess = { mainCategoryList ->
                             updateState {
-                                val newCategoryList = mainCategoryDomains.flatMap { it.toCategoryUi() }
-                                val idCategoryMap = newCategoryList.associateBy { it.id }
+
+                                val state = CategoryState(mainCategoryList)
 
                                 copy(
-                                        categoryList = newCategoryList,
-                                        nameCategoryMap = newCategoryList.associateBy { it.name },
-                                        idCategoryMap = idCategoryMap,
-                                        selectedCategoryUi = idCategoryMap[categoryUi.id],
+                                        categoryState = state,
+                                        selectedCategoryUi = state.idCategoryMap[categoryUi.id],
                                         name = categoryUi.name
                                 )
                             }
@@ -104,7 +110,7 @@ class TrackViewModel @AssistedInject constructor(
                     id = R.id.action_trackBottom_to_createBottom,
                     args = bundleOf(
                             resources.getString(string.data) to CreateNavigationArgs(
-                                    categoryList = state.categoryList,
+                                    categoryList = state.categoryState.categoryList,
                                     name = state.name
                             )
                     )
