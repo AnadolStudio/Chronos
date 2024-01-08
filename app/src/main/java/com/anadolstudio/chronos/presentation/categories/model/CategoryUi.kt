@@ -15,15 +15,17 @@ data class CategoryUi(
         val mainCategoryId: UUID,
         val parentCategoryId: UUID?,
         val parentName: String?,
+        val hasChild: Boolean,
 ) : Parcelable {
 
-    constructor(id: UUID, name: String, color: Int) : this(
+    constructor(id: UUID, name: String, color: Int, hasChild: Boolean) : this(
             id = id,
             name = name,
             color = color,
             mainCategoryId = id,
             parentCategoryId = null,
             parentName = null,
+            hasChild = hasChild,
     )
 
     @IgnoredOnParcel
@@ -33,8 +35,10 @@ data class CategoryUi(
     val isRootCategory: Boolean = mainCategoryId == parentCategoryId
 }
 
+fun List<MainCategoryDomain>.toCategoryUi(): List<CategoryUi> = flatMap { it.toCategoryUi() }
+
 fun MainCategoryDomain.toCategoryUi(): List<CategoryUi> = mapInnerCategory(
-        CategoryUi(id = uuid, name = name, color = color),
+        CategoryUi(id = uuid, name = name, color = color, hasChild = subcategoryList.isNotEmpty()),
         subcategoryList,
         color
 )
@@ -54,13 +58,16 @@ fun SubcategoryDomain.toCategoryUi(parentName: String, color: Int): List<Categor
             color = color,
             mainCategoryId = mainCategoryId,
             parentCategoryId = parentCategoryId,
-            parentName = parentName
+            parentName = parentName,
+            hasChild = subcategoryList.isNotEmpty()
     )
 
     return mapInnerCategory(rootCategory, subcategoryList, color)
 }
 
 private fun SubcategoryDomain.getAllSubcategory(parentName: String, color: Int): List<CategoryUi> {
+    val innerSubcategory = subcategoryList.flatMap { it.getAllSubcategory(name, color) }
+
     val category = CategoryUi(
             id = uuid,
             name = name,
@@ -68,11 +75,8 @@ private fun SubcategoryDomain.getAllSubcategory(parentName: String, color: Int):
             mainCategoryId = mainCategoryId,
             parentCategoryId = parentCategoryId,
             parentName = parentName,
+            hasChild = innerSubcategory.isNotEmpty()
     )
-
-    val innerSubcategory = subcategoryList
-            .filter { it.uuid != uuid }
-            .flatMap { it.getAllSubcategory(name, color) }
 
     return listOf(category) + innerSubcategory
 }

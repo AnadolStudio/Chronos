@@ -1,5 +1,6 @@
 package com.anadolstudio.chronos.presentation.main
 
+import com.anadolstudio.chronos.presentation.main.model.TrackRootUi
 import com.anadolstudio.core.viewmodel.BaseController
 
 interface MainController : BaseController {
@@ -9,4 +10,5 @@ interface MainController : BaseController {
     fun onStopWatcherClicked()
     fun onEditItemsClicked()
     fun onTimeTracked()
+    fun onTrackClicked(trackRootUi: TrackRootUi)
 }

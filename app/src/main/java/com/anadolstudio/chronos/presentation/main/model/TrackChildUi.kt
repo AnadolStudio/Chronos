@@ -1,0 +1,30 @@
+package com.anadolstudio.chronos.presentation.main.model
+
+import android.os.Parcelable
+import com.anadolstudio.core.util.data_time.Time
+import kotlinx.parcelize.Parcelize
+import java.util.UUID
+import java.util.concurrent.TimeUnit
+
+@Parcelize
+data class TrackChildUi(
+        val id: UUID,
+        val name: String,
+        val children: List<TrackChildUi>,
+        val time: Time = Time(children.sumOf { TimeUnit.MINUTES.toMillis(it.time.totalMinutes.toLong()) })
+) : Parcelable {
+
+    constructor(
+            id: UUID,
+            name: String,
+            children: List<TrackChildUi>,
+            minutes: Int?
+    ) : this(
+            id = id,
+            name = name,
+            children = children,
+            time = minutes
+                    ?.let { Time(TimeUnit.MINUTES.toMillis(minutes.toLong())) }
+                    ?: Time(children.sumOf { TimeUnit.MINUTES.toMillis(it.time.totalMinutes.toLong()) })
+    )
+}

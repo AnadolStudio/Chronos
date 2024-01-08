@@ -28,7 +28,7 @@ fun SubcategoryDomain.toEntity(): SubcategoryEntity = SubcategoryEntity(
     uuid = uuid,
     mainCategoryId = mainCategoryId,
     parentCategoryId = parentCategoryId,
-    name = name
+    name = name.trim()
 )
 
 fun SubcategoryEntity.toDomain(

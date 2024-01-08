@@ -17,6 +17,19 @@
         <item name="android:lines">1</item>
     </style>
 
+    <style name="Category.Tree" >
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">14dp</item>
+        <item name="android:minHeight">36dp</item>
+    </style>
+
+    <style name="Category.Tree.Header" >
+        <item name="android:textSize">16dp</item>
+        <item name="android:minHeight">36dp</item>
+        <item name="android:paddingTop">@dimen/padding_medium</item>
+        <item name="android:paddingBottom">@dimen/padding_medium</item>
+    </style>
+
     <style name="EditText">
         <item name="android:layout_marginTop">12dp</item>
         <item name="editTextAppearance">@style/Caption14</item>

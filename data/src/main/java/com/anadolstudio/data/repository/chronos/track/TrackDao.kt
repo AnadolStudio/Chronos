@@ -23,8 +23,8 @@ interface TrackDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertTrack(trackDomain: TrackEntity): Completable
 
-    @Query("UPDATE $TRACK_TABLE SET minutes = :totalMinutes AND subcategory_id = :subcategoryId WHERE uuid = :trackId AND date = :dateTime")
-    fun updateTrack(trackId: UUID, dateTime: DateTime, totalMinutes: Int, subcategoryId: UUID): Completable
+    @Query("UPDATE $TRACK_TABLE SET minutes = :totalMinutes WHERE uuid = :trackId ")
+    fun updateTrack(trackId: UUID, totalMinutes: Int): Completable
 
     @Query("SELECT * FROM $TRACK_TABLE WHERE uuid = :trackId")
     fun getTrackById(trackId: UUID): Single<TrackEntity>

@@ -58,6 +58,8 @@ class CreateViewModel @AssistedInject constructor(
                             val category = subcategory
                                     .toCategoryUi(parent.name, parent.color)
                                     .first()
+                            // TODO при создании собирамой категории затреканное время
+                            //  переносить в новую дочернуюю категорию Unknown
                             showEvent(CreateBottomEvents.Result(category))
                             navigateUp()
                         },
