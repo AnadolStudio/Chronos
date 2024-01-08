@@ -42,12 +42,11 @@ class StopWatcherView @JvmOverloads constructor(
             val startTime = data.startTime ?: System.currentTimeMillis()
             val endTime = data.endTime ?: System.currentTimeMillis()
 
+            binding.chronometer.base = startTime
             updateTimeTitle(startTime, endTime)
 
             when (data.state) {
                 State.IN_PROGRESS -> {
-                    binding.chronometer.base = startTime
-
                     binding.chronometer.setOnChronometerTickListener { chronometer ->
                         updateTimeTitle(chronometer.base, System.currentTimeMillis())
                     }
