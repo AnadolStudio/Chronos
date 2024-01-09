@@ -38,29 +38,25 @@ class StopWatcherViewModel @Inject constructor(
             )
             .disposeOnCleared()
 
-    override fun onStopWatcherToggleClicked() {
-        when (state.stopWatcherData.state) {
-            StopWatcherData.State.DEFAULT -> startStopWatcher()
-            StopWatcherData.State.IN_PROGRESS -> stopStopWatcher()
-            StopWatcherData.State.RESULT -> Unit
-        }
+    override fun onStopWatcherToggleClicked() = when (state.stopWatcherData.state) {
+        StopWatcherData.State.DEFAULT -> startStopWatcher()
+        StopWatcherData.State.IN_PROGRESS -> stopStopWatcher()
+        StopWatcherData.State.RESULT -> resumeStopWatcher()
     }
 
     override fun onTimeTracked() = clearStopWatcher()
 
-    private fun startStopWatcher() {
-        val data = StopWatcherData(
-                startTime = System.currentTimeMillis(),
-                endTime = null
-        )
-        updateStopWatcher(data)
+    private fun startStopWatcher() = updateStopWatcher {
+        StopWatcherData(startTime = System.currentTimeMillis(), endTime = null)
     }
 
-    private fun stopStopWatcher() {
-        val data = state.stopWatcherData.copy(
-                endTime = System.currentTimeMillis(),
-        )
-        updateStopWatcher(data)
+    private fun resumeStopWatcher() = updateStopWatcher {
+        val delta = (state.stopWatcherData.endTime ?: 0) - (state.stopWatcherData.startTime ?: 0)
+        StopWatcherData(startTime = System.currentTimeMillis() - delta, endTime = null)
+    }
+
+    private fun stopStopWatcher() = updateStopWatcher {
+        state.stopWatcherData.copy(endTime = System.currentTimeMillis())
     }
 
     override fun onAddButtonClicked() = navigateTo(
@@ -78,9 +74,10 @@ class StopWatcherViewModel @Inject constructor(
 
     override fun onRemoveButtonClicked() = clearStopWatcher()
 
-    private fun clearStopWatcher() = updateStopWatcher(StopWatcherData())
+    private fun clearStopWatcher() = updateStopWatcher { StopWatcherData() }
 
-    private fun updateStopWatcher(stopWatcherData: StopWatcherData) {
+    private fun updateStopWatcher(provideData: () -> StopWatcherData) {
+        val stopWatcherData = provideData.invoke()
         updateState { copy(stopWatcherData = stopWatcherData) }
         stopWatcherRepository.stopWatcherData = stopWatcherData
     }

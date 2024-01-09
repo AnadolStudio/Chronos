@@ -42,11 +42,11 @@ class StopWatcherFragment :
 
     private fun renderStopWatcher(stopWatcherData: StopWatcherData) = with(stopWatcherData) {
         binding.stopWatcher.setup(this)
-        binding.stopWatcherToggle.isEnabled = endTime == null
 
-        val toggleTextRes = when (inProgress) {
-            true -> R.string.global_stop
-            false -> R.string.global_start
+        val toggleTextRes = when (state) {
+            StopWatcherData.State.DEFAULT -> R.string.global_start
+            StopWatcherData.State.IN_PROGRESS -> R.string.global_stop
+            StopWatcherData.State.RESULT -> R.string.global_resume
         }
 
         binding.stopWatcherToggle.setText(toggleTextRes)
