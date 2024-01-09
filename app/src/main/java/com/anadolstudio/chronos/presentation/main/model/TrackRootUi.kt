@@ -5,6 +5,7 @@ import com.anadolstudio.core.util.data_time.Time
 import com.anadolstudio.domain.repository.chronos.main_category.MainCategoryDomain
 import com.anadolstudio.domain.repository.chronos.subcategory.SubcategoryDomain
 import com.anadolstudio.domain.repository.chronos.track.TrackDomain
+import kotlinx.parcelize.IgnoredOnParcel
 import kotlinx.parcelize.Parcelize
 import java.util.UUID
 import java.util.concurrent.TimeUnit
@@ -16,7 +17,11 @@ data class TrackRootUi(
         val color: Int,
         val children: List<TrackChildUi>,
         val time: Time = Time(children.sumOf { TimeUnit.MINUTES.toMillis(it.time.totalMinutes.toLong()) })
-) : Parcelable
+) : Parcelable {
+
+    @IgnoredOnParcel
+    val notEmptyChildren: List<TrackChildUi> = children.filter { it.time.totalMinutes > 0 }
+}
 
 fun MainCategoryDomain.toTrackRootUi(trackMap: Map<UUID, TrackDomain>): TrackRootUi = TrackRootUi(
         id = uuid,

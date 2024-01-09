@@ -13,38 +13,12 @@
         android:layout_height="match_parent"
         android:background="@color/colorSecondary">
 
-        <LinearLayout
-            android:id="@+id/featuresContainer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/padding_main"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/toolbar">
-
-            <com.anadolstudio.chronos.view.button.feature.FeatureButton
-                android:id="@+id/chart_button"
-                style="@style/MainFeatureButton"
-                app:src="@drawable/ic_chart" />
-
-            <com.anadolstudio.chronos.view.button.feature.FeatureButton
-                android:id="@+id/stop_watcher_button"
-                style="@style/MainFeatureButton"
-                app:src="@drawable/ic_timer" />
-
-            <com.anadolstudio.chronos.view.button.feature.FeatureButton
-                android:id="@+id/edit_items_button"
-                style="@style/MainFeatureButton"
-                app:src="@drawable/ic_edit" />
-
-        </LinearLayout>
-
         <com.anadolstudio.core.view.TouchFrameLayout
             android:id="@+id/recycler_container"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/featuresContainer">
+            app:layout_constraintTop_toBottomOf="@id/toolbar">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler"
@@ -52,7 +26,7 @@
                 android:layout_height="match_parent"
                 android:clipToPadding="false"
                 android:paddingBottom="104dp"
-                android:paddingTop="16dp"
+                android:paddingTop="@dimen/padding_medium"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/item_track"
                 tools:itemCount="4"/>
@@ -77,6 +51,12 @@
             app:tint="@color/colorAccent"
             app:needDivider="true"
             app:title="@string/app_name">
+
+            <com.anadolstudio.core.view.toolbar.ToolbarIconButton
+                android:id="@+id/edit_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:src="@drawable/ic_edit" />
 
             <com.anadolstudio.core.view.toolbar.ToolbarIconButton
                 android:id="@+id/calendar_button"

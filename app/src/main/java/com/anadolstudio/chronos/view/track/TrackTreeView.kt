@@ -25,7 +25,7 @@ class TrackTreeView @JvmOverloads constructor(
         headerBackground.setBackgroundColor(trackRootUi.color)
 
         childContainer.removeAllViews()
-        trackRootUi.children.forEach {
+        trackRootUi.notEmptyChildren.forEach {
             val child = TrackTreeItemView(context)
             child.layoutParams = LayoutParams(MATCH_PARENT, WRAP_CONTENT)
             child.setup(it)

@@ -3,9 +3,12 @@ package com.anadolstudio.chronos.presentation.main
 import androidx.core.os.bundleOf
 import com.anadolstudio.chronos.R
 import com.anadolstudio.chronos.base.viewmodel.BaseContentViewModel
+import com.anadolstudio.chronos.presentation.delegates.StopWatcherDelegate
 import com.anadolstudio.chronos.presentation.main.model.TrackRootUi
 import com.anadolstudio.chronos.presentation.main.model.toTrackRootUi
 import com.anadolstudio.chronos.presentation.track.TrackNavigationArgs
+import com.anadolstudio.chronos.util.minusDay
+import com.anadolstudio.chronos.util.plusDay
 import com.anadolstudio.core.util.rx.smartSubscribe
 import com.anadolstudio.domain.repository.chronos.ChronosRepository
 import com.anadolstudio.domain.repository.chronos.main_category.MainCategoryDomain
@@ -35,6 +38,12 @@ class MainViewModel @Inject constructor(
         const val STOP_WATCHER_INTERVAL = 1L
     }
 
+    private val stopWatcherDelegate: StopWatcherDelegate = StopWatcherDelegate(
+            provideData = { state.stopWatcherData },
+            onDataChange = { updateState { copy(stopWatcherData = it) } },
+            stopWatcherRepository = stopWatcherRepository,
+    )
+
     init {
         loadAllData()
         observeStopWatcher()
@@ -43,9 +52,7 @@ class MainViewModel @Inject constructor(
     private fun observeStopWatcher() {
         stopWatcherRepository.observeStopWatcherChanges()
                 .smartSubscribe(
-                        onSuccess = {
-                            updateState { copy(stopWatcherData = stopWatcherRepository.stopWatcherData) }
-                        },
+                        onSuccess = { updateState { copy(stopWatcherData = it) } },
                         onError = ::showError
                 )
                 .disposeOnCleared()
@@ -92,7 +99,7 @@ class MainViewModel @Inject constructor(
     private fun loadAllData() {
         Single.zip(
                 chronosRepository.getAllMainCategories(),
-                chronosRepository.getTrackListByDate(state.currentDate)
+                chronosRepository.getTrackListByDate(state.trackState.currentDate)
                         .map { trackList -> trackList.associateBy { it.subcategoryId } }
         ) { mainCategoryList, trackMap ->
             val trackRootList = mainCategoryList.map { it.toTrackRootUi(trackMap) }
@@ -118,7 +125,7 @@ class MainViewModel @Inject constructor(
             .insertMainCategory(MainCategoryDomain(name = name, color = color))
 
     override fun onCalendarClicked() = showEvent(
-            MainEvents.ShowCalendar(currentDateTime = state.currentDate)
+            MainEvents.ShowCalendar(currentDateTime = state.trackState.currentDate)
     )
 
     override fun onAddClicked() = navigateTo(
@@ -126,12 +133,12 @@ class MainViewModel @Inject constructor(
             args = bundleOf(
                     resources.getString(com.anadolstudio.core.R.string.data) to TrackNavigationArgs(
                             mainCategories = state.categoryState.mainCategoryList,
-                            selectedDateTime = state.currentDate
+                            selectedDateTime = state.trackState.currentDate
                     )
             )
     )
 
-    override fun onChartClicked() = showTodo()
+    override fun onDiagramClicked() = showTodo()
 
     override fun onStopWatcherClicked() = navigateTo(R.id.action_mainFragment_to_stopWatcherFragment)
 
@@ -143,15 +150,18 @@ class MainViewModel @Inject constructor(
         changeCurrentDate(DateTime(year, month, dayOfMonth, 0, 0))
     }
 
-    override fun onPreviousDateSelected() = changeCurrentDate(state.currentDate.minusDays(1))
+    override fun onPreviousDateSelected() = changeCurrentDate(state.trackState.currentDate.minusDay())
 
-    override fun onNextDateSelected() = changeCurrentDate(state.currentDate.plusDays(1))
+    override fun onNextDateSelected() = changeCurrentDate(state.trackState.currentDate.plusDay())
 
     private fun changeCurrentDate(currentDate: DateTime) {
-        if (currentDate.isAfter(DateTime.now().withTimeAtStartOfDay())) return showTodo("Нужна заглушка")
+        if (currentDate.isAfter(DateTime.now().withTimeAtStartOfDay())) return
 
         preferenceRepository.lastSelectedDate = currentDate
-        updateState { copy(currentDate = currentDate) }
+        updateState { copy(trackState = trackState.copy(currentDate = currentDate)) }
         loadAllData()
     }
+
+    override fun onStopWatcherToggleClicked() = stopWatcherDelegate.onStopWatcherToggleClicked()
+
 }

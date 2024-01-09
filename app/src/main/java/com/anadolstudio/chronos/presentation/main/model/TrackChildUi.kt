@@ -2,6 +2,7 @@ package com.anadolstudio.chronos.presentation.main.model
 
 import android.os.Parcelable
 import com.anadolstudio.core.util.data_time.Time
+import kotlinx.parcelize.IgnoredOnParcel
 import kotlinx.parcelize.Parcelize
 import java.util.UUID
 import java.util.concurrent.TimeUnit
@@ -27,4 +28,12 @@ data class TrackChildUi(
                     ?.let { Time(TimeUnit.MINUTES.toMillis(minutes.toLong())) }
                     ?: Time(children.sumOf { TimeUnit.MINUTES.toMillis(it.time.totalMinutes.toLong()) })
     )
+
+    @IgnoredOnParcel
+    val notEmptyChildren: List<TrackChildUi> = children
+            .filter { it.time.totalMinutes > 0 }
+            .map {
+                val children = it.notEmptyChildren.filter { children -> children.time.totalMinutes > 0 }
+                it.copy(children = children)
+            }
 }
