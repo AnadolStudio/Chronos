@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/padding_medium"
+    tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
+
+    <TextView
+        android:id="@+id/timeText"
+        style="@style/Caption14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorAccent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginEnd="@dimen/padding_medium"
+        tools:text="16,4 / 24" />
+
+    <LinearLayout
+        android:id="@+id/nextDateContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/progress"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/padding_medium"
+        android:background="@drawable/item_ripple_rectangle_8">
+
+        <TextView
+            android:id="@+id/nextDateText"
+            style="@style/Caption14"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:gravity="center"
+            android:textColor="@color/colorAccent"
+            android:layout_marginStart="@dimen/padding_medium"
+            tools:text="02.01.2023" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_arrow_right"
+            app:tint="@color/colorAccent"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/previousDateContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/progress"
+        app:layout_constraintStart_toStartOf="parent"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/padding_medium"
+        android:background="@drawable/item_ripple_rectangle_8">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_arrow_left"
+            app:tint="@color/colorAccent"/>
+
+        <TextView
+            android:id="@+id/previousDateText"
+            style="@style/Caption14"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:gravity="center"
+            android:textColor="@color/colorAccent"
+            android:layout_marginEnd="@dimen/padding_medium"
+            tools:text="31.12.2022" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/dateText"
+        style="@style/Caption14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorAccent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="@dimen/padding_medium"
+        tools:text="01.01.2023" />
+
+    <com.anadolstudio.chronos.view.diagram.LineProgressView
+        android:id="@+id/progress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/padding_main"
+        app:layout_constraintTop_toBottomOf="@+id/dateText" />
+
+</merge>

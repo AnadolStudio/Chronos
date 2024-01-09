@@ -12,9 +12,6 @@ data class StopWatcherData(
 ) : Parcelable {
 
     @IgnoredOnParcel
-    val inProgress: Boolean = startTime != null && endTime == null
-
-    @IgnoredOnParcel
     val deltaTime: Time?
         get() = when {
             endTime != null && startTime != null -> Time(endTime - startTime)
@@ -24,7 +21,7 @@ data class StopWatcherData(
     @IgnoredOnParcel
     val state: State = when {
         startTime != null && endTime != null -> State.RESULT
-        inProgress -> State.IN_PROGRESS
+        startTime != null && endTime == null -> State.IN_PROGRESS
         else -> State.DEFAULT
     }
 

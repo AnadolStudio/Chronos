@@ -27,7 +27,7 @@ class TrackTreeItemView @JvmOverloads constructor(
     }
 
     private fun ViewTreeTrackItemBinding.inflateChildren(trackChildUi: TrackChildUi) {
-        trackChildUi.children.forEach {
+        trackChildUi.notEmptyChildren.forEach {
             val child = TrackTreeItemView(context)
             child.layoutParams = LayoutParams(MATCH_PARENT, WRAP_CONTENT)
             child.setup(it)

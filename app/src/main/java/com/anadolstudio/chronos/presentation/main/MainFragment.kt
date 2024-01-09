@@ -8,7 +8,7 @@ import com.anadolstudio.chronos.base.fragment.BaseContentFragment
 import com.anadolstudio.chronos.databinding.FragmentMainBinding
 import com.anadolstudio.chronos.presentation.track.TrackBottom
 import com.anadolstudio.chronos.util.CalendarDialog
-import com.anadolstudio.chronos.view.button.feature.FeatureButton
+import com.anadolstudio.chronos.view.diagram.LineProgressView.ProgressData
 import com.anadolstudio.core.groupie.BaseGroupAdapter
 import com.anadolstudio.core.presentation.fragment.state_util.ViewStateDelegate
 import com.anadolstudio.core.util.common.throttleClick
@@ -17,17 +17,21 @@ import com.anadolstudio.core.view.animation.AnimateUtil.scaleAnimationOnClick
 import com.anadolstudio.core.view.gesture.HorizontalMoveGesture
 import com.anadolstudio.core.viewbinding.viewBinding
 import com.anadolstudio.core.viewmodel.livedata.SingleEvent
+import com.anadolstudio.domain.repository.stop_watcher.StopWatcherData
 import com.xwray.groupie.Section
+import java.util.concurrent.TimeUnit
 
 class MainFragment : BaseContentFragment<MainState, MainViewModel, MainController>(R.layout.fragment_main) {
 
     private companion object {
+        val MINUTES_IN_DAY = TimeUnit.DAYS.toMinutes(1).toInt()
         const val RENDER_TRACK = "RENDER_TRACK"
     }
 
     override val viewStateDelegate: ViewStateDelegate = ViewStateDelegate()
 
     private val binding by viewBinding { FragmentMainBinding.bind(it) }
+    private val stopWatcherSection: Section = Section()
     private val trackSection: Section = Section()
     private val diagramSection: Section = Section()
 
@@ -48,10 +52,8 @@ class MainFragment : BaseContentFragment<MainState, MainViewModel, MainControlle
         initFragmentResultListeners(TrackBottom.TAG)
         calendarButton.throttleClick { controller.onCalendarClicked() }
         addButton.scaleAnimationOnClick { controller.onAddClicked() }
-        chartButton.scaleAnimationOnClick { controller.onChartClicked() }
-        stopWatcherButton.scaleAnimationOnClick { controller.onStopWatcherClicked() }
-        editItemsButton.scaleAnimationOnClick { controller.onEditItemsClicked() }
-        recycler.adapter = BaseGroupAdapter(diagramSection, trackSection)
+        editButton.throttleClick { controller.onEditItemsClicked() }
+        recycler.adapter = BaseGroupAdapter(stopWatcherSection, diagramSection, trackSection)
         binding.recyclerContainer.addDispatchTouchListener { _, event ->
             horizontalMoveGestureDetector.onTouchEvent(event)
         }
@@ -79,23 +81,55 @@ class MainFragment : BaseContentFragment<MainState, MainViewModel, MainControlle
 
     override fun render(state: MainState) {
         binding.addButton.setLoading(state.isLoading)
-        renderStopWatcher(state.stopWatcherTime)
+        renderStopWatcher(state.stopWatcherData, state.stopWatcherTime)
         renderTrack(state.trackState)
     }
 
-    private fun renderStopWatcher(time: Time?) {
-        val state = if (time == null) FeatureButton.State.IMAGE else FeatureButton.State.TEXT
-        binding.stopWatcherButton.setState(state)
-        val text = time?.run { getString(R.string.global_full_time_text, hoursString, minutesString, secondsString) }
-        binding.stopWatcherButton.setText(text)
+    private fun renderStopWatcher(data: StopWatcherData, time: Time?) {
+        val item = StopWatcherItem(
+                data = data,
+                time = time,
+                onClick = controller::onStopWatcherClicked,
+                onStopWatcherToggleClick = controller::onStopWatcherToggleClicked,
+        )
+        stopWatcherSection.update(listOf(item))
     }
 
     private fun renderTrack(trackState: TrackState) = trackState.render(RENDER_TRACK) {
-        val items = trackState.notEmptyTrackRootList
+        val trackItems = trackState.notEmptyTrackRootList
                 .map { TrackItem(trackRootUi = it, onClick = controller::onTrackClicked) }
                 .ifEmpty { listOf(TrackStubItem()) }
 
-        trackSection.update(items)
+        trackSection.update(trackItems)
+
+        val totalMinutes = trackState.notEmptyTrackRootList.sumOf { it.time.totalMinutes }
+
+        val progressDataList = trackState.notEmptyTrackRootList.map {
+            ProgressData(color = it.color, value = it.time.totalMinutes)
+        }.toMutableList()
+
+        if (totalMinutes < MINUTES_IN_DAY) {
+            val other = ProgressData(
+                    color = requireContext().getColor(R.color.disableBackground),
+                    value = MINUTES_IN_DAY - totalMinutes
+            )
+
+            progressDataList.add(other)
+        }
+
+        val diagramItem = DiagramItem(
+                data = DiagramItem.Data(
+                        hours = totalMinutes / 60F,
+                        nextDateEnable = nextDateEnable,
+                        currentDate = currentDate,
+                        progressDataList = progressDataList,
+                        onNextDateClick = controller::onNextDateSelected,
+                        onPreviousDateClick = controller::onPreviousDateSelected,
+                ),
+                onClick = controller::onDiagramClicked
+        )
+
+        diagramSection.update(listOf(diagramItem))
     }
 
 }

@@ -5,6 +5,7 @@ import com.anadolstudio.chronos.di.modules.AppModule
 import com.anadolstudio.chronos.di.modules.ViewModelModule
 import dagger.BindsInstance
 import dagger.Component
+import javax.inject.Singleton
 
 @Component(
     modules = [
@@ -12,6 +13,7 @@ import dagger.Component
         ViewModelModule::class
     ]
 )
+@Singleton
 interface AppComponent : SharedComponent {
 
     @Component.Builder

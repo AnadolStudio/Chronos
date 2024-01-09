@@ -17,6 +17,7 @@ import com.ironz.binaryprefs.BinaryPreferencesBuilder
 import com.ironz.binaryprefs.Preferences
 import dagger.Module
 import dagger.Provides
+import javax.inject.Singleton
 
 @Module(
         includes = [
@@ -35,6 +36,7 @@ class RepositoryModule {
     fun providePreferencesStorage(preferences: Preferences): PreferencesStorage = PreferencesStorage(preferences)
 
     @Provides
+    @Singleton
     fun provideStopWatcherRepository(preferences: PreferencesStorage): StopWatcherRepository =
             StopWatcherRepositoryImpl(preferences)
 

@@ -6,7 +6,7 @@ import com.anadolstudio.core.viewmodel.BaseController
 interface MainController : BaseController {
     fun onCalendarClicked()
     fun onAddClicked()
-    fun onChartClicked()
+    fun onDiagramClicked()
     fun onStopWatcherClicked()
     fun onEditItemsClicked()
     fun onTimeTracked()
@@ -14,4 +14,5 @@ interface MainController : BaseController {
     fun onDateSelected(year: Int, month: Int, dayOfMonth: Int)
     fun onPreviousDateSelected()
     fun onNextDateSelected()
+    fun onStopWatcherToggleClicked()
 }

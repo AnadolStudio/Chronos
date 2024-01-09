@@ -3,6 +3,7 @@ package com.anadolstudio.chronos.presentation.stopwatcher
 import androidx.core.os.bundleOf
 import com.anadolstudio.chronos.R
 import com.anadolstudio.chronos.base.viewmodel.BaseContentViewModel
+import com.anadolstudio.chronos.presentation.delegates.StopWatcherDelegate
 import com.anadolstudio.chronos.presentation.track.TrackNavigationArgs
 import com.anadolstudio.core.R.string
 import com.anadolstudio.core.util.rx.smartSubscribe
@@ -23,6 +24,12 @@ class StopWatcherViewModel @Inject constructor(
         )
 ), StopWatcherController {
 
+    private val stopWatcherDelegate: StopWatcherDelegate = StopWatcherDelegate(
+            provideData = { state.stopWatcherData },
+            onDataChange = { updateState { copy(stopWatcherData = it) } },
+            stopWatcherRepository = stopWatcherRepository,
+    )
+
     init {
         loadCategories()
     }
@@ -38,26 +45,9 @@ class StopWatcherViewModel @Inject constructor(
             )
             .disposeOnCleared()
 
-    override fun onStopWatcherToggleClicked() = when (state.stopWatcherData.state) {
-        StopWatcherData.State.DEFAULT -> startStopWatcher()
-        StopWatcherData.State.IN_PROGRESS -> stopStopWatcher()
-        StopWatcherData.State.RESULT -> resumeStopWatcher()
-    }
+    override fun onTimeTracked() = stopWatcherDelegate.clearStopWatcher()
 
-    override fun onTimeTracked() = clearStopWatcher()
-
-    private fun startStopWatcher() = updateStopWatcher {
-        StopWatcherData(startTime = System.currentTimeMillis(), endTime = null)
-    }
-
-    private fun resumeStopWatcher() = updateStopWatcher {
-        val delta = (state.stopWatcherData.endTime ?: 0) - (state.stopWatcherData.startTime ?: 0)
-        StopWatcherData(startTime = System.currentTimeMillis() - delta, endTime = null)
-    }
-
-    private fun stopStopWatcher() = updateStopWatcher {
-        state.stopWatcherData.copy(endTime = System.currentTimeMillis())
-    }
+    override fun onStopWatcherToggleClicked() = stopWatcherDelegate.onStopWatcherToggleClicked()
 
     override fun onAddButtonClicked() = navigateTo(
             id = R.id.action_stopWatcherFragment_to_trackBottom,
@@ -72,13 +62,6 @@ class StopWatcherViewModel @Inject constructor(
             )
     )
 
-    override fun onRemoveButtonClicked() = clearStopWatcher()
+    override fun onRemoveButtonClicked() = stopWatcherDelegate.clearStopWatcher()
 
-    private fun clearStopWatcher() = updateStopWatcher { StopWatcherData() }
-
-    private fun updateStopWatcher(provideData: () -> StopWatcherData) {
-        val stopWatcherData = provideData.invoke()
-        updateState { copy(stopWatcherData = stopWatcherData) }
-        stopWatcherRepository.stopWatcherData = stopWatcherData
-    }
 }

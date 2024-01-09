@@ -11,7 +11,7 @@ typealias DateListener = (year: Int, month: Int, dayOfMonth: Int) -> Unit
 
 object CalendarDialog {
 
-    private val TOMORROW_DATE: DateTime = DateTime.now().plusDays(1)
+    private val TOMORROW_DATE: DateTime = DateTime.now().plusDay()
 
     fun show(
             context: Context,
