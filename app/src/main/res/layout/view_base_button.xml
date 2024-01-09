@@ -21,8 +21,10 @@
             android:id="@+id/progressContainer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:visibility="gone">
+            android:layout_marginStart="@dimen/padding_main"
+            android:layout_gravity="start|center_vertical"
+            android:visibility="gone"
+            tools:visibility="visible">
 
             <ProgressBar
                 android:id="@+id/progressView"

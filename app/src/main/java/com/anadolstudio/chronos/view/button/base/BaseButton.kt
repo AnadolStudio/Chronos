@@ -69,7 +69,6 @@ open class BaseButton @JvmOverloads constructor(
     fun setLoading(isLoading: Boolean) {
         super.setEnabled(!isLoading)
         binding.progressContainer.isVisible = isLoading
-        binding.title.isVisible = !isLoading
     }
 
     private fun setTextColorRes(@ColorRes colorRes: Int) = setTextColor(context.getColor(colorRes))
