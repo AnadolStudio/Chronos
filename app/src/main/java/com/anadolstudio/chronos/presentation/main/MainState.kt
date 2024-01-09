@@ -7,13 +7,15 @@ import com.anadolstudio.domain.repository.stop_watcher.StopWatcherData
 import org.joda.time.DateTime
 
 data class MainState(
+        val currentDate: DateTime,
         val stopWatcherData: StopWatcherData,
         val stopWatcherTime: Time? = null,
         val categoryState: MainCategoryState = MainCategoryState(),
         val trackState: TrackState = TrackState(),
-        val currentDate: DateTime = DateTime.now(),
         val isLoading: Boolean = true,
-)
+) {
+    val isToday: Boolean = currentDate.isEqual(DateTime.now().withTimeAtStartOfDay())
+}
 
 data class MainCategoryState(
         val mainCategoryList: List<MainCategoryDomain> = emptyList(),

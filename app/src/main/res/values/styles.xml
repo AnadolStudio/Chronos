@@ -17,13 +17,13 @@
         <item name="android:lines">1</item>
     </style>
 
-    <style name="Category.Tree" >
+    <style name="Category.Tree">
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">14dp</item>
         <item name="android:minHeight">36dp</item>
     </style>
 
-    <style name="Category.Tree.Header" >
+    <style name="Category.Tree.Header">
         <item name="android:textSize">16dp</item>
         <item name="android:minHeight">36dp</item>
         <item name="android:paddingTop">@dimen/padding_medium</item>
@@ -42,5 +42,25 @@
         <item name="editTextColor">@color/colorAccent</item>
         <item name="validatorMode">afterTextChanged</item>
     </style>
+
+    <style name="DatePickerDialogTheme" parent="Theme.MaterialComponents.DayNight.Dialog.Alert.Bridge">
+        <item name="colorControlNormal">@color/colorAccent</item>
+        <item name="colorControlActivated">@color/colorAccent</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColorPrimary">@color/colorAccent</item>
+        <item name="android:buttonBarNegativeButtonStyle">@style/DatePickerButton</item>
+        <item name="android:buttonBarPositiveButtonStyle">@style/DatePickerButton</item>
+        <item name="android:windowBackground">@color/colorPrimary</item>
+        <item name="android:colorBackground">@color/colorPrimary</item>
+        <item name="android:colorBackgroundCacheHint">@color/colorPrimary</item>
+        <item name="android:windowMinWidthMajor">0%</item>
+        <item name="android:windowMinWidthMinor">0%</item>
+    </style>
+
+    <style name="DatePickerButton" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="rippleColor">@color/colorRipple</item>
+    </style>
+
 
 </resources>

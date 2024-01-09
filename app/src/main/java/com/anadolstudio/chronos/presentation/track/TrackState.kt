@@ -4,9 +4,11 @@ import com.anadolstudio.chronos.presentation.categories.model.CategoryUi
 import com.anadolstudio.chronos.presentation.categories.model.toCategoryUi
 import com.anadolstudio.core.util.data_time.Time
 import com.anadolstudio.domain.repository.chronos.main_category.MainCategoryDomain
+import org.joda.time.DateTime
 import java.util.UUID
 
 data class TrackState(
+        val selectedDateTime: DateTime,
         val categoryState: CategoryState,
         val fromStopWatcher: Boolean,
         val selectedCategoryUi: CategoryUi? = null,

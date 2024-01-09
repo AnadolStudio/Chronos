@@ -10,6 +10,7 @@ import com.anadolstudio.domain.repository.chronos.ChronosRepository
 import com.anadolstudio.domain.repository.common.ResourceRepository
 import com.anadolstudio.domain.repository.stop_watcher.StopWatcherData
 import com.anadolstudio.domain.repository.stop_watcher.StopWatcherRepository
+import org.joda.time.DateTime
 import javax.inject.Inject
 
 class StopWatcherViewModel @Inject constructor(
@@ -69,7 +70,8 @@ class StopWatcherViewModel @Inject constructor(
                             mainCategories = state.mainCategoryList,
                             hours = state.stopWatcherData.deltaTime?.hours ?: 0,
                             minutes = state.stopWatcherData.deltaTime?.minutes ?: 0,
-                            fromStopWatcher = true
+                            fromStopWatcher = true,
+                            selectedDateTime = DateTime.now().withTimeAtStartOfDay()
                     )
             )
     )

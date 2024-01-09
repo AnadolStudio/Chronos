@@ -11,4 +11,7 @@ interface MainController : BaseController {
     fun onEditItemsClicked()
     fun onTimeTracked()
     fun onTrackClicked(trackRootUi: TrackRootUi)
+    fun onDateSelected(year: Int, month: Int, dayOfMonth: Int)
+    fun onPreviousDateSelected()
+    fun onNextDateSelected()
 }

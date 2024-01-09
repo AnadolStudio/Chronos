@@ -5,7 +5,6 @@ import com.anadolstudio.chronos.R
 import com.anadolstudio.chronos.base.viewmodel.BaseContentViewModel
 import com.anadolstudio.chronos.presentation.categories.CategoryNavigationArgs
 import com.anadolstudio.chronos.presentation.categories.model.CategoryUi
-import com.anadolstudio.chronos.presentation.categories.model.toCategoryUi
 import com.anadolstudio.chronos.presentation.create.CreateNavigationArgs
 import com.anadolstudio.core.R.string
 import com.anadolstudio.core.util.rx.smartSubscribe
@@ -27,7 +26,8 @@ class TrackViewModel @AssistedInject constructor(
                 categoryState = CategoryState(args.mainCategories),
                 hours = args.hours,
                 minutes = args.minutes,
-                fromStopWatcher = args.fromStopWatcher
+                fromStopWatcher = args.fromStopWatcher,
+                selectedDateTime = args.selectedDateTime
         )
 ), TrackController {
 
@@ -104,7 +104,7 @@ class TrackViewModel @AssistedInject constructor(
         val currentCategory = state.selectedCategoryUi
 
         if (currentCategory != null) {
-            loadTrackByToday(currentCategory)
+            loadTrackByDay(currentCategory, state.selectedDateTime)
         } else {
             navigateTo(
                     id = R.id.action_trackBottom_to_createBottom,
@@ -118,10 +118,10 @@ class TrackViewModel @AssistedInject constructor(
         }
     }
 
-    private fun loadTrackByToday(currentCategory: CategoryUi) = chronosRepository.getTrackListByDate(DateTime.now())
+    private fun loadTrackByDay(currentCategory: CategoryUi, dateTime: DateTime) = chronosRepository.getTrackListByDate(dateTime)
             .map { trackList ->
                 val previousTrack = trackList.firstOrNull { it.subcategoryId == currentCategory.id }
-                        ?: return@map createNewTrack(currentCategory)
+                        ?: return@map createNewTrack(currentCategory, dateTime)
 
                 previousTrack.copy(
                         minutes = previousTrack.minutes + state.time.totalMinutes,
@@ -151,10 +151,11 @@ class TrackViewModel @AssistedInject constructor(
         false -> chronosRepository.updateTrack(currentCategory)
     }
 
-    private fun createNewTrack(currentCategory: CategoryUi): TrackDomain = TrackDomain(
+    private fun createNewTrack(currentCategory: CategoryUi, dateTime: DateTime): TrackDomain = TrackDomain(
             subcategoryId = currentCategory.id,
             minutes = state.time.totalMinutes,
-            fromStopWatcher = state.fromStopWatcher
+            fromStopWatcher = state.fromStopWatcher,
+            date = dateTime
     )
 
     @AssistedFactory
