@@ -9,20 +9,24 @@ import com.anadolstudio.chronos.presentation.track.TrackNavigationArgs
 import com.anadolstudio.core.util.rx.smartSubscribe
 import com.anadolstudio.domain.repository.chronos.ChronosRepository
 import com.anadolstudio.domain.repository.chronos.main_category.MainCategoryDomain
+import com.anadolstudio.domain.repository.common.PreferenceRepository
 import com.anadolstudio.domain.repository.common.ResourceRepository
 import com.anadolstudio.domain.repository.stop_watcher.StopWatcherRepository
 import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.Single
+import org.joda.time.DateTime
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class MainViewModel @Inject constructor(
         private val chronosRepository: ChronosRepository,
         private val resources: ResourceRepository,
+        private val preferenceRepository: PreferenceRepository,
         private val stopWatcherRepository: StopWatcherRepository,
 ) : BaseContentViewModel<MainState>(
         initState = MainState(
+                currentDate = preferenceRepository.lastSelectedDate,
                 stopWatcherData = stopWatcherRepository.stopWatcherData
         )
 ), MainController {
@@ -113,13 +117,16 @@ class MainViewModel @Inject constructor(
     private fun addMainCategory(name: String, color: Int): Completable = chronosRepository
             .insertMainCategory(MainCategoryDomain(name = name, color = color))
 
-    override fun onCalendarClicked() = showTodo()
+    override fun onCalendarClicked() = showEvent(
+            MainEvents.ShowCalendar(currentDateTime = state.currentDate)
+    )
 
     override fun onAddClicked() = navigateTo(
             id = R.id.action_mainFragment_to_trackBottom,
             args = bundleOf(
                     resources.getString(com.anadolstudio.core.R.string.data) to TrackNavigationArgs(
-                            state.categoryState.mainCategoryList
+                            mainCategories = state.categoryState.mainCategoryList,
+                            selectedDateTime = state.currentDate
                     )
             )
     )
@@ -131,4 +138,20 @@ class MainViewModel @Inject constructor(
     override fun onEditItemsClicked() = showTodo()
 
     override fun onTrackClicked(trackRootUi: TrackRootUi) = showTodo()
+
+    override fun onDateSelected(year: Int, month: Int, dayOfMonth: Int) {
+        changeCurrentDate(DateTime(year, month, dayOfMonth, 0, 0))
+    }
+
+    override fun onPreviousDateSelected() = changeCurrentDate(state.currentDate.minusDays(1))
+
+    override fun onNextDateSelected() = changeCurrentDate(state.currentDate.plusDays(1))
+
+    private fun changeCurrentDate(currentDate: DateTime) {
+        if (currentDate.isAfter(DateTime.now().withTimeAtStartOfDay())) return showTodo("Нужна заглушка")
+
+        preferenceRepository.lastSelectedDate = currentDate
+        updateState { copy(currentDate = currentDate) }
+        loadAllData()
+    }
 }

@@ -1,18 +1,22 @@
 package com.anadolstudio.chronos.presentation.main
 
 import android.os.Bundle
+import android.view.GestureDetector
 import androidx.fragment.app.viewModels
 import com.anadolstudio.chronos.R
 import com.anadolstudio.chronos.base.fragment.BaseContentFragment
 import com.anadolstudio.chronos.databinding.FragmentMainBinding
 import com.anadolstudio.chronos.presentation.track.TrackBottom
+import com.anadolstudio.chronos.util.CalendarDialog
 import com.anadolstudio.chronos.view.button.feature.FeatureButton
 import com.anadolstudio.core.groupie.BaseGroupAdapter
 import com.anadolstudio.core.presentation.fragment.state_util.ViewStateDelegate
 import com.anadolstudio.core.util.common.throttleClick
 import com.anadolstudio.core.util.data_time.Time
 import com.anadolstudio.core.view.animation.AnimateUtil.scaleAnimationOnClick
+import com.anadolstudio.core.view.gesture.HorizontalMoveGesture
 import com.anadolstudio.core.viewbinding.viewBinding
+import com.anadolstudio.core.viewmodel.livedata.SingleEvent
 import com.xwray.groupie.Section
 
 class MainFragment : BaseContentFragment<MainState, MainViewModel, MainController>(R.layout.fragment_main) {
@@ -29,6 +33,17 @@ class MainFragment : BaseContentFragment<MainState, MainViewModel, MainControlle
 
     override fun createViewModelLazy() = viewModels<MainViewModel> { viewModelFactory }
 
+    private val horizontalMoveGestureDetector: GestureDetector by lazy {
+        GestureDetector(
+                context,
+                HorizontalMoveGesture(
+                        width = binding.recycler.width,
+                        onSwipeLeft = controller::onNextDateSelected,
+                        onSwipeRight = controller::onPreviousDateSelected
+                )
+        )
+    }
+
     override fun initView() = with(binding) {
         initFragmentResultListeners(TrackBottom.TAG)
         calendarButton.throttleClick { controller.onCalendarClicked() }
@@ -37,11 +52,29 @@ class MainFragment : BaseContentFragment<MainState, MainViewModel, MainControlle
         stopWatcherButton.scaleAnimationOnClick { controller.onStopWatcherClicked() }
         editItemsButton.scaleAnimationOnClick { controller.onEditItemsClicked() }
         recycler.adapter = BaseGroupAdapter(diagramSection, trackSection)
+        binding.recyclerContainer.addDispatchTouchListener { _, event ->
+            horizontalMoveGestureDetector.onTouchEvent(event)
+        }
     }
 
     override fun handleFragmentResult(requestKey: String, data: Bundle) = when (requestKey) {
         TrackBottom.TAG -> controller.onTimeTracked()
         else -> super.handleFragmentResult(requestKey, data)
+    }
+
+    override fun handleEvent(event: SingleEvent) = when (event) {
+        is MainEvents.ShowCalendar -> showCalendarPicker(event)
+        else -> super.handleEvent(event)
+    }
+
+    private fun showCalendarPicker(event: MainEvents.ShowCalendar) {
+        CalendarDialog.show(
+                context = requireContext(),
+                currentDateTime = event.currentDateTime,
+                maxDate = event.maxDateTime,
+                showFromYear = false,
+                dateListener = controller::onDateSelected
+        )
     }
 
     override fun render(state: MainState) {
@@ -58,9 +91,10 @@ class MainFragment : BaseContentFragment<MainState, MainViewModel, MainControlle
     }
 
     private fun renderTrack(trackState: TrackState) = trackState.render(RENDER_TRACK) {
-        val items = trackState.notEmptyTrackRootList.map {
-            TrackItem(trackRootUi = it, onClick = controller::onTrackClicked)
-        }
+        val items = trackState.notEmptyTrackRootList
+                .map { TrackItem(trackRootUi = it, onClick = controller::onTrackClicked) }
+                .ifEmpty { listOf(TrackStubItem()) }
+
         trackSection.update(items)
     }
 
