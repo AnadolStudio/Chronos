@@ -10,7 +10,7 @@ import com.anadolstudio.chronos.R
 import com.anadolstudio.chronos.databinding.ViewLineDiagramBinding
 import com.anadolstudio.chronos.util.minusDay
 import com.anadolstudio.chronos.util.plusDay
-import com.anadolstudio.chronos.util.toSimpleDate
+import com.anadolstudio.chronos.util.toSimpleDateFormat
 import org.joda.time.DateTime
 
 class LineDiagramView @JvmOverloads constructor(
@@ -34,9 +34,9 @@ class LineDiagramView @JvmOverloads constructor(
             onPreviousDateClick: () -> Unit,
             nextDateEnable: Boolean
     ) {
-        binding.dateText.text = currentDate.toSimpleDate()
-        binding.previousDateText.text = currentDate.minusDay().toSimpleDate()
-        binding.nextDateText.text = currentDate.plusDay().toSimpleDate()
+        binding.dateText.text = currentDate.toSimpleDateFormat()
+        binding.previousDateText.text = currentDate.minusDay().toSimpleDateFormat()
+        binding.nextDateText.text = currentDate.plusDay().toSimpleDateFormat()
         binding.previousDateContainer.setOnClickListener { onPreviousDateClick.invoke() }
         binding.nextDateContainer.setOnClickListener { onNextDateClick.invoke() }
         binding.nextDateContainer.isVisible = nextDateEnable

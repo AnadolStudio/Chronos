@@ -22,7 +22,6 @@ object CalendarDialog {
             currentDateTime: DateTime,
             showFromYear: Boolean = true
     ): DatePickerDialog {
-        AlertDialog.THEME_HOLO_DARK
         val dataPickerDialog = DatePickerDialog(
                 context,
                 R.style.DatePickerDialogTheme,
