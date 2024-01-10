@@ -15,6 +15,10 @@ android {
         }
 
         release {
+            storeFile file(String.valueOf(System.getenv("keystore")))
+            storePassword System.getenv("keystore_password")
+            keyAlias System.getenv("key_alias")
+            keyPassword System.getenv("key_password")
         }
     }
 
@@ -48,7 +52,7 @@ android {
         release {
             signingConfig signingConfigs.release
             debuggable false
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
