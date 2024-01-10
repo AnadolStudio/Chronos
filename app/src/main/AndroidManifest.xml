@@ -14,7 +14,7 @@
         <activity
             android:name=".presentation.activity.SplashActivity"
             android:exported="true"
-            android:theme="@style/Theme.Chronos" >
+            android:theme="@style/SplashActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
