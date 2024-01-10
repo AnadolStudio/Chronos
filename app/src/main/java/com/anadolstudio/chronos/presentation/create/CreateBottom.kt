@@ -38,7 +38,7 @@ open class CreateBottom : BaseContentBottom<CreateState, CreateViewModel, Create
     }
 
     override fun initView() = with(binding) {
-        initFragmentResultListeners(CategoriesBottom.TAG)
+        initFragmentResultListeners(CreateViewModel.CATEGORIES_REQUEST_KEY)
         settingsContainer.categoryNameText.setDrawableEnd(null)
         settingsContainer.categoryNameText.addValidateListener(controller::onNameChanged)
         settingsContainer.parentNameText.setOnIconClickListener(controller::onSearchButtonClicked)
@@ -47,7 +47,7 @@ open class CreateBottom : BaseContentBottom<CreateState, CreateViewModel, Create
     }
 
     override fun handleFragmentResult(requestKey: String, data: Bundle) = when (requestKey) {
-        CategoriesBottom.TAG -> controller.onCategoriesSelected(getParcelable(data))
+        CreateViewModel.CATEGORIES_REQUEST_KEY -> controller.onCategoriesSelected(getParcelable(data))
         else -> super.handleFragmentResult(requestKey, data)
     }
 

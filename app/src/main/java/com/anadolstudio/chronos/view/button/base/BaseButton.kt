@@ -13,6 +13,7 @@ import androidx.core.content.withStyledAttributes
 import androidx.core.view.isVisible
 import com.anadolstudio.chronos.R
 import com.anadolstudio.chronos.databinding.ViewBaseButtonBinding
+import com.anadolstudio.core.util.common_extention.setDimensMargins
 
 open class BaseButton @JvmOverloads constructor(
         context: Context,
@@ -23,10 +24,24 @@ open class BaseButton @JvmOverloads constructor(
 
     private val binding = ViewBaseButtonBinding.inflate(LayoutInflater.from(context), this)
     private var state: State = State.ENABLE
+    private var enableColor: Int = context.getColor(R.color.colorPrimary)
+    private var enableTextColor: Int = context.getColor(R.color.colorAccent)
 
     init {
         context.withStyledAttributes(attrs, R.styleable.BaseButton, defStyleAttr, defStyleRes) {
             initButtonText(this)
+            enableColor = getColor(R.styleable.BaseButton_backgroundColor, context.getColor(R.color.colorPrimary))
+
+            val paddingTop = getDimension(
+                    R.styleable.BaseButton_paddingTop,
+                    context.resources.getDimension(com.anadolstudio.core.R.dimen.padding_main)
+            )
+            val paddingBottom = getDimension(
+                    R.styleable.BaseButton_paddingBottom,
+                    context.resources.getDimension(com.anadolstudio.core.R.dimen.padding_main)
+            )
+
+            binding.cardView.setDimensMargins(top = paddingTop.toInt(), bottom = paddingBottom.toInt())
             changeState(isEnabled)
         }
     }
@@ -47,8 +62,8 @@ open class BaseButton @JvmOverloads constructor(
 
         when (state) {
             State.ENABLE -> {
-                binding.title.setTextColor(context.getColor(R.color.colorAccent))
-                binding.cardView.setCardBackgroundColor(context.getColor(R.color.colorPrimary))
+                binding.title.setTextColor(enableTextColor)
+                binding.cardView.setCardBackgroundColor(enableColor)
                 binding.cardView.cardElevation = context.resources.getDimension(com.anadolstudio.core.R.dimen.elevation_normal)
             }
 
@@ -74,6 +89,7 @@ open class BaseButton @JvmOverloads constructor(
     private fun setTextColorRes(@ColorRes colorRes: Int) = setTextColor(context.getColor(colorRes))
 
     private fun setTextColor(@ColorInt color: Int) {
+        enableTextColor = color
         binding.title.setTextColor(color)
         binding.progressView.indeterminateTintList = ColorStateList.valueOf(color)
     }

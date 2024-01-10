@@ -5,6 +5,7 @@ import com.anadolstudio.chronos.R
 import com.anadolstudio.chronos.base.viewmodel.BaseContentViewModel
 import com.anadolstudio.chronos.presentation.categories.CategoryNavigationArgs
 import com.anadolstudio.chronos.presentation.categories.model.CategoryUi
+import com.anadolstudio.chronos.presentation.common.CategoryState
 import com.anadolstudio.chronos.presentation.create.CreateNavigationArgs
 import com.anadolstudio.core.R.string
 import com.anadolstudio.core.util.rx.smartSubscribe
@@ -31,8 +32,9 @@ class TrackViewModel @AssistedInject constructor(
         )
 ), TrackController {
 
-    private companion object {
-        const val LAST_TRACKS_LIMIT = 10
+    companion object {
+        private const val LAST_TRACKS_LIMIT = 10
+        const val CATEGORIES_REQUEST_KEY = "1_000_002"
     }
 
     init {
@@ -66,7 +68,10 @@ class TrackViewModel @AssistedInject constructor(
     override fun onSearchButtonClicked() = navigateTo(
             id = R.id.action_trackBottom_to_categoriesBottom,
             args = bundleOf(
-                    resources.getString(string.data) to CategoryNavigationArgs(state.categoryState.childCategoryList)
+                    resources.getString(string.data) to CategoryNavigationArgs(
+                            requestKey = CATEGORIES_REQUEST_KEY,
+                            categoryList = state.categoryState.childCategoryList
+                    )
             )
     )
 
@@ -138,8 +143,8 @@ class TrackViewModel @AssistedInject constructor(
     private fun trackCategory(it: TrackDomain) = createTrackCompletable(it)
             .smartSubscribe(
                     onComplete = {
-                        showEvent(TrackBottomEvents.Result)
                         navigateUp()
+                        showEvent(TrackBottomEvents.Result)
                     },
                     onError = this::showError,
                     onFinally = { updateState { copy(isLoading = false) } }

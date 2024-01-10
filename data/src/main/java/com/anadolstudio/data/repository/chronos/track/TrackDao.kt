@@ -1,7 +1,6 @@
 package com.anadolstudio.data.repository.chronos.track
 
 import androidx.room.Dao
-import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -35,7 +34,7 @@ interface TrackDao {
     @Query("SELECT * FROM $TRACK_TABLE GROUP BY subcategory_id LIMIT :limit")
     fun getTrackList(limit: Int): Single<List<TrackEntity>>
 
-    @Delete
-    fun deleteTrack(trackEntity: TrackEntity): Completable
+    @Query("DELETE FROM $TRACK_TABLE WHERE subcategory_id = :id")
+    fun deleteTrackByCategoryId(id: UUID): Completable
 
 }

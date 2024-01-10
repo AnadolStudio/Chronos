@@ -21,5 +21,5 @@ interface TrackRepository {
 
     fun getLastTrackList(limit: Int): Single<List<TrackDomain>>
 
-    fun deleteTrack(trackDomain: TrackDomain): Completable
+    fun deleteTrackByCategoryId(id: UUID): Completable
 }

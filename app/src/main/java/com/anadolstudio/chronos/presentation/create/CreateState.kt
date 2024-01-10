@@ -13,6 +13,6 @@ data class CreateState(
         val isLoading: Boolean = false,
 ) {
 
-    val createEnable:Boolean = parentCategoryUi != null && name.isNotBlank() && nameCategoryMap[name] == null
+    val createEnable: Boolean = parentCategoryUi != null && name.isNotBlank() && nameCategoryMap[name] == null
 
 }

@@ -25,6 +25,10 @@ class CreateViewModel @AssistedInject constructor(
         )
 ), CreateController {
 
+    companion object {
+        const val CATEGORIES_REQUEST_KEY = "1_000_003"
+    }
+
     init {
         onNameChanged(args.name)
     }
@@ -36,7 +40,10 @@ class CreateViewModel @AssistedInject constructor(
     override fun onSearchButtonClicked() = navigateTo(
             id = R.id.action_createBottom_to_categoriesBottom,
             args = bundleOf(
-                    resources.getString(string.data) to CategoryNavigationArgs(state.categoryList)
+                    resources.getString(string.data) to CategoryNavigationArgs(
+                            requestKey = CATEGORIES_REQUEST_KEY,
+                            categoryList = state.categoryList
+                    )
             )
     )
 
@@ -58,10 +65,11 @@ class CreateViewModel @AssistedInject constructor(
                             val category = subcategory
                                     .toCategoryUi(parent.name, parent.color)
                                     .first()
+
+                            navigateUp()
                             // TODO при создании собирамой категории затреканное время
                             //  переносить в новую дочернуюю категорию Unknown
                             showEvent(CreateBottomEvents.Result(category))
-                            navigateUp()
                         },
                         onError = this::showError,
                         onFinally = { updateState { copy(isLoading = false) } }

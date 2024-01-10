@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <attr name="color" format="color|reference"/>
+    <attr name="color" format="color|reference" />
+    <attr name="backgroundColor" format="color|reference" />
     <attr name="title" format="string|reference" />
     <attr name="text" format="string|reference" />
 
@@ -14,22 +15,15 @@
     <declare-styleable name="BaseButton">
         <attr name="text" />
         <attr name="color" />
-    </declare-styleable>
-
-    <declare-styleable name="FeatureButton">
-        <attr name="src" />
-        <attr name="innerPadding" format="dimension" />
-        <attr name="text" />
-        <attr name="state" format="enum" >
-            <enum name="image" value="0"/>
-            <enum name="text" value="1"/>
-        </attr>
+        <attr name="backgroundColor" />
+        <attr name="paddingTop" format="dimension" />
+        <attr name="paddingBottom" format="dimension" />
     </declare-styleable>
 
     <declare-styleable name="InputView">
         <attr name="hint" />
         <attr name="src" />
-        <attr name="imeOptions"/>
+        <attr name="imeOptions" />
         <attr name="inputType" />
         <attr name="digits" />
         <attr name="maxLength" />

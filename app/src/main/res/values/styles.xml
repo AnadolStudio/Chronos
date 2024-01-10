@@ -29,6 +29,7 @@
         <item name="editTextAppearance">@style/Caption14</item>
         <item name="errorTextAppearance">@style/Caption12</item>
         <item name="errorTextColor">@color/colorError</item>
+        <item name="informationHintTextColor">@color/colorAccentLight</item>
         <item name="editTextBackgroundTint">@color/divider</item>
         <item name="hintTextAppearance">@style/Caption12</item>
         <item name="hintTextColor">@color/colorHint</item>

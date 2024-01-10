@@ -17,8 +17,8 @@ class CategoriesViewModel @AssistedInject constructor(
 ), CategoriesController {
 
     override fun onCategoryClicked(categoryUi: CategoryUi) {
-        showEvent(CategoriesBottomEvents.Result(categoryUi))
         navigateUp()
+        showEvent(CategoriesBottomEvents.Result(categoryUi))
     }
 
     @AssistedFactory

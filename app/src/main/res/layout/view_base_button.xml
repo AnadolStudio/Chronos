@@ -39,6 +39,7 @@
             android:layout_height="match_parent"
             android:textColor="@color/colorAccent"
             android:gravity="center"
+            android:textStyle="bold"
             android:layout_marginHorizontal="@dimen/padding_main"
             android:lines="1"
             tools:text="@string/global_add" />

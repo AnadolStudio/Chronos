@@ -1,11 +1,9 @@
 package com.anadolstudio.chronos.presentation.track
 
 import com.anadolstudio.chronos.presentation.categories.model.CategoryUi
-import com.anadolstudio.chronos.presentation.categories.model.toCategoryUi
+import com.anadolstudio.chronos.presentation.common.CategoryState
 import com.anadolstudio.core.util.data_time.Time
-import com.anadolstudio.domain.repository.chronos.main_category.MainCategoryDomain
 import org.joda.time.DateTime
-import java.util.UUID
 
 data class TrackState(
         val selectedDateTime: DateTime,
@@ -24,7 +22,8 @@ data class TrackState(
     val applyButtonState: ApplyButtonState = ApplyButtonState(
             time = time,
             selectedCategoryUi = selectedCategoryUi,
-            name = name
+            name = name,
+            isNewName = categoryState.nameCategoryMap[name] == null
     )
 }
 
@@ -40,21 +39,9 @@ data class ApplyButtonState(
             selectedCategoryUi: CategoryUi?,
             name: String,
             time: Time,
+            isNewName: Boolean,
     ) : this(
-            isEnable = time.totalMinutes >= MIN_TRACK_MINUTES && name.isNotBlank(),
+            isEnable = name.isNotBlank() && (time.totalMinutes >= MIN_TRACK_MINUTES || isNewName),
             hasSelectedCategory = selectedCategoryUi != null,
     )
-}
-
-data class CategoryState(val categoryList: List<CategoryUi>) {
-
-    companion object {
-        @JvmName("fromMainCategoryList")
-        operator fun invoke(mainCategoryList: List<MainCategoryDomain>) = CategoryState(mainCategoryList.toCategoryUi())
-    }
-
-    val nameCategoryMap: Map<String, CategoryUi> = categoryList.associateBy { it.name }
-    val idCategoryMap: Map<UUID, CategoryUi> = categoryList.associateBy { it.id }
-    val childCategoryList: List<CategoryUi> = categoryList.filter { !it.hasChild }
-    val childNameCategoryMap: Map<String, CategoryUi> = nameCategoryMap.filter { (_, category) -> !category.hasChild }
 }
