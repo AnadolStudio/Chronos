@@ -1,6 +1,5 @@
 package com.anadolstudio.data.repository.stop_watcher
 
-import android.util.Log
 import com.anadolstudio.core.util.data_time.Time
 import com.anadolstudio.data.repository.common.PreferencesStorage
 import com.anadolstudio.domain.repository.stop_watcher.StopWatcherData
@@ -9,10 +8,6 @@ import io.reactivex.Observable
 import io.reactivex.processors.BehaviorProcessor
 
 class StopWatcherRepositoryImpl(private val preferencesStorage: PreferencesStorage) : StopWatcherRepository {
-
-    init {
-        Log.d("D_TAG", "StopWatcherRepositoryImpl")
-    }
 
     private val stopWatcherChanges: BehaviorProcessor<StopWatcherData> = BehaviorProcessor.createDefault(stopWatcherData)
 

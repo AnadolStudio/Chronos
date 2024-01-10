@@ -9,7 +9,6 @@ import com.anadolstudio.core.R.string
 import com.anadolstudio.core.util.rx.smartSubscribe
 import com.anadolstudio.domain.repository.chronos.ChronosRepository
 import com.anadolstudio.domain.repository.common.ResourceRepository
-import com.anadolstudio.domain.repository.stop_watcher.StopWatcherData
 import com.anadolstudio.domain.repository.stop_watcher.StopWatcherRepository
 import org.joda.time.DateTime
 import javax.inject.Inject
@@ -35,10 +34,8 @@ class StopWatcherViewModel @Inject constructor(
     }
 
     private fun loadCategories() = chronosRepository.getAllMainCategories()
-            .doOnSubscribe {
-                updateState { copy(isLoading = true) }
-            }
             .smartSubscribe(
+                    onSubscribe = { updateState { copy(isLoading = true) } },
                     onSuccess = { mainCategoryList -> updateState { copy(mainCategoryList = mainCategoryList) } },
                     onError = ::showError,
                     onFinally = { updateState { copy(isLoading = false) } }

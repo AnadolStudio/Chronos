@@ -9,12 +9,14 @@ import org.joda.time.DateTime
 data class MainState(
         val stopWatcherData: StopWatcherData,
         val trackState: TrackState,
+        val isNightMode: Boolean,
         val stopWatcherTime: Time? = null,
         val categoryState: MainCategoryState = MainCategoryState(),
         val isLoading: Boolean = true,
 ) {
     constructor(
             stopWatcherData: StopWatcherData,
+            isNightMode: Boolean,
             stopWatcherTime: Time? = null,
             categoryState: MainCategoryState = MainCategoryState(),
             currentDate: DateTime,
@@ -25,6 +27,7 @@ data class MainState(
             categoryState = categoryState,
             trackState = TrackState(currentDate = currentDate),
             isLoading = isLoading,
+            isNightMode = isNightMode
     )
 }
 

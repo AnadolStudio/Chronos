@@ -15,4 +15,5 @@ interface MainController : BaseController {
     fun onPreviousDateSelected()
     fun onNextDateSelected()
     fun onStopWatcherToggleClicked()
+    fun onChangeNightModeClicked()
 }

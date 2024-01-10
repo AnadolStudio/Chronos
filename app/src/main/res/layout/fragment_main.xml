@@ -53,6 +53,12 @@
             app:title="@string/app_name">
 
             <com.anadolstudio.core.view.toolbar.ToolbarIconButton
+                android:id="@+id/night_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:src="@drawable/ic_mode_dark" />
+
+            <com.anadolstudio.core.view.toolbar.ToolbarIconButton
                 android:id="@+id/edit_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

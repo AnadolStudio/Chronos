@@ -12,5 +12,6 @@
     <color name="colorAccentInverse">#FF1B1B1B</color>
     <color name="disableBackground">#4F4F4F</color>
     <color name="disableForeground">#A1A1A1</color>
+    <color name="divider">#1B1B1B</color>
 
 </resources>

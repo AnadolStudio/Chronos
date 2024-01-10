@@ -7,12 +7,17 @@ import com.anadolstudio.chronos.base.fragment.BaseContentFragment
 import com.anadolstudio.chronos.databinding.FragmentStopWatcherBinding
 import com.anadolstudio.chronos.presentation.track.TrackBottom
 import com.anadolstudio.core.presentation.fragment.state_util.ViewStateDelegate
+import com.anadolstudio.core.util.common_extention.setFragmentResult
 import com.anadolstudio.core.view.animation.AnimateUtil.scaleAnimationOnClick
 import com.anadolstudio.core.viewbinding.viewBinding
 import com.anadolstudio.domain.repository.stop_watcher.StopWatcherData
 
 class StopWatcherFragment :
-    BaseContentFragment<StopWatcherState, StopWatcherViewModel, StopWatcherController>(R.layout.fragment_stop_watcher) {
+        BaseContentFragment<StopWatcherState, StopWatcherViewModel, StopWatcherController>(R.layout.fragment_stop_watcher) {
+
+    companion object {
+        const val TAG = "StopWatcherFragment"
+    }
 
     override val viewStateDelegate: ViewStateDelegate = ViewStateDelegate()
 
@@ -23,15 +28,18 @@ class StopWatcherFragment :
     override fun initView() = with(binding) {
         binding.toolbar.setBackClickListener(controller::onBackClicked)
         stopWatcher.addListeners(
-            onAddButtonAction = { controller.onAddButtonClicked() },
-            onRemoveButtonAction = { controller.onRemoveButtonClicked() }
+                onAddButtonAction = { controller.onAddButtonClicked() },
+                onRemoveButtonAction = { controller.onRemoveButtonClicked() }
         )
         stopWatcherToggle.scaleAnimationOnClick { controller.onStopWatcherToggleClicked() }
         initFragmentResultListeners(TrackBottom.TAG)
     }
 
     override fun handleFragmentResult(requestKey: String, data: Bundle) = when (requestKey) {
-        TrackBottom.TAG -> controller.onTimeTracked()
+        TrackBottom.TAG -> {
+            controller.onTimeTracked()
+            setFragmentResult(TAG)
+        }
         else -> super.handleFragmentResult(requestKey, data)
     }
 
