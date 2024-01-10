@@ -4,6 +4,7 @@ import androidx.room.*
 import com.anadolstudio.data.repository.chronos.subcategory.SubcategoryEntity.Companion.SUBCATEGORY_TABLE
 import io.reactivex.Completable
 import io.reactivex.Single
+import java.util.UUID
 
 @Dao
 interface SubcategoryDao {
@@ -17,7 +18,10 @@ interface SubcategoryDao {
     @Update(entity = SubcategoryEntity::class, onConflict = OnConflictStrategy.ABORT)
     fun updateSubcategory(subcategory: SubcategoryEntity): Completable
 
-    @Delete
-    fun deleteSubcategory(subcategory: SubcategoryEntity): Completable
+    @Query("DELETE FROM $SUBCATEGORY_TABLE WHERE uuid = :id")
+    fun deleteSubcategoryById(id: UUID): Completable
+
+    @Query("SELECT * FROM $SUBCATEGORY_TABLE WHERE uuid = :id")
+    fun getSubcategoryById(id: UUID): Single<SubcategoryEntity>
 
 }

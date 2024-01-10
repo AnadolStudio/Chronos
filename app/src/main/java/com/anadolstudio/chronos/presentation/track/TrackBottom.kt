@@ -45,7 +45,7 @@ open class TrackBottom : BaseContentBottom<TrackState, TrackViewModel, TrackCont
     }
 
     override fun initView() = with(binding) {
-        initFragmentResultListeners(CategoriesBottom.TAG, CreateBottom.TAG)
+        initFragmentResultListeners(TrackViewModel.CATEGORIES_REQUEST_KEY, CreateBottom.TAG)
         nameText.setOnIconClickListener(controller::onSearchButtonClicked)
         nameText.addValidateListener(controller::onNameChanged)
         hoursText.addValidateListener(controller::onHoursChanged)
@@ -55,7 +55,7 @@ open class TrackBottom : BaseContentBottom<TrackState, TrackViewModel, TrackCont
     }
 
     override fun handleFragmentResult(requestKey: String, data: Bundle) = when (requestKey) {
-        CategoriesBottom.TAG -> controller.onCategoriesSelected(requireParcelable(data))
+        TrackViewModel.CATEGORIES_REQUEST_KEY -> controller.onCategoriesSelected(requireParcelable(data))
         CreateBottom.TAG -> controller.onCategoryCreated(requireParcelable(data))
         else -> super.handleFragmentResult(requestKey, data)
     }

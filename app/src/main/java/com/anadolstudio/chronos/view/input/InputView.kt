@@ -1,4 +1,4 @@
-package com.anadolstudio.chronos.view.edit
+package com.anadolstudio.chronos.view.input
 
 import android.content.Context
 import android.content.res.ColorStateList
@@ -13,6 +13,7 @@ import com.anadolstudio.chronos.R
 import com.anadolstudio.chronos.databinding.ViewEditTextBinding
 import com.anadolstudio.chronos.util.TempValidator
 import com.anadolstudio.core.util.common_extention.nullIfNotExist
+import com.anadolstudio.core.view.basetextinput.delegates.support_hint.ShowSupportHintMode
 
 class InputView @JvmOverloads constructor(
         context: Context,
@@ -71,5 +72,11 @@ class InputView @JvmOverloads constructor(
     }
 
     fun setDrawableEnd(drawable: Drawable?) = binding.editText.setDrawableEnd(drawable)
+
+    fun setSupportHint(text: String) {
+        binding.editText.setSupportHintMode(ShowSupportHintMode.PERMANENT)
+        binding.editText.showInformationHint(text)
+        binding.editText.showSupportHint()
+    }
 
 }

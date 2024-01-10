@@ -14,17 +14,11 @@ import com.xwray.groupie.Section
 
 class CategoriesBottom : BaseContentBottom<CategoriesState, CategoriesViewModel, CategoriesController>(R.layout.bottom_categories) {
 
-    companion object {
-        const val TAG = "CategoriesBottom"
-    }
-
     override val viewStateDelegate: ViewStateDelegate = ViewStateDelegate()
 
     private val binding by viewBinding { BottomCategoriesBinding.bind(it) }
     private val section: Section = Section()
     private val args: CategoriesBottomArgs by navArgs()
-
-    override fun getDialogTag(): String = TAG
 
     override fun createViewModelLazy() = assistedViewModel {
         getSharedComponent()
@@ -37,7 +31,7 @@ class CategoriesBottom : BaseContentBottom<CategoriesState, CategoriesViewModel,
     }
 
     override fun handleEvent(event: SingleEvent) = when (event) {
-        is CategoriesBottomEvents.Result -> setFragmentResult(getDialogTag(), event.categoryUi)
+        is CategoriesBottomEvents.Result -> setFragmentResult(args.data.requestKey, event.categoryUi)
         else -> super.handleEvent(event)
     }
 

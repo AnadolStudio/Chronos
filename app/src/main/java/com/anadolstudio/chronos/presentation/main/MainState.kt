@@ -1,5 +1,7 @@
 package com.anadolstudio.chronos.presentation.main
 
+import com.anadolstudio.chronos.presentation.categories.model.CategoryUi
+import com.anadolstudio.chronos.presentation.categories.model.toCategoryUi
 import com.anadolstudio.chronos.presentation.main.model.TrackRootUi
 import com.anadolstudio.core.util.data_time.Time
 import com.anadolstudio.domain.repository.chronos.main_category.MainCategoryDomain
@@ -33,7 +35,9 @@ data class MainState(
 
 data class MainCategoryState(
         val mainCategoryList: List<MainCategoryDomain> = emptyList(),
-)
+){
+    val categoryList: List<CategoryUi> = mainCategoryList.toCategoryUi()
+}
 
 data class TrackState(
         val currentDate: DateTime,

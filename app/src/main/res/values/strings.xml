@@ -1,10 +1,11 @@
 <resources>
     <string name="app_name">Chronos</string>
 
-    <string name="global_remove_title">Удалить</string>
     <string name="global_text_item_list"> • %s</string>
     <string name="global_change">Изменить</string>
     <string name="global_create">Создать</string>
+    <string name="global_remove">Удалить</string>
+    <string name="global_remove_category">Удалить категорию \"%1$s\"?</string>
     <string name="global_add">Добавить</string>
     <string name="global_start">Старт</string>
     <string name="global_stop">Стоп</string>
@@ -28,4 +29,7 @@
     <string name="parent_category">Родительская категория</string>
     <string name="empty_data">Данных нет</string>
     <string name="stop_watcher">Секундомер</string>
+
+    <string name="prev_parent_category">Предыдущая: %1$s</string>
+    <string name="prev_name">Предыдущее название: %1$s</string>
 </resources>

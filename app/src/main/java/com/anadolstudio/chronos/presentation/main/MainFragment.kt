@@ -6,6 +6,8 @@ import androidx.fragment.app.viewModels
 import com.anadolstudio.chronos.R
 import com.anadolstudio.chronos.base.fragment.BaseContentFragment
 import com.anadolstudio.chronos.databinding.FragmentMainBinding
+import com.anadolstudio.chronos.presentation.main.MainViewModel.Companion.CATEGORIES_REQUEST_KEY
+import com.anadolstudio.chronos.presentation.main.MainViewModel.Companion.EDIT_REQUEST_KEY
 import com.anadolstudio.chronos.presentation.stopwatcher.StopWatcherFragment
 import com.anadolstudio.chronos.presentation.track.TrackBottom
 import com.anadolstudio.chronos.util.CalendarDialog
@@ -14,6 +16,7 @@ import com.anadolstudio.core.groupie.BaseGroupAdapter
 import com.anadolstudio.core.presentation.fragment.state_util.ViewStateDelegate
 import com.anadolstudio.core.util.common.throttleClick
 import com.anadolstudio.core.util.common_extention.getDrawable
+import com.anadolstudio.core.util.common_extention.requireParcelable
 import com.anadolstudio.core.util.data_time.Time
 import com.anadolstudio.core.view.animation.AnimateUtil.scaleAnimationOnClick
 import com.anadolstudio.core.view.gesture.HorizontalMoveGesture
@@ -51,7 +54,9 @@ class MainFragment : BaseContentFragment<MainState, MainViewModel, MainControlle
     }
 
     override fun initView() = with(binding) {
-        initFragmentResultListeners(TrackBottom.TAG, StopWatcherFragment.TAG)
+        initFragmentResultListeners(
+                TrackBottom.TAG, StopWatcherFragment.TAG, CATEGORIES_REQUEST_KEY, EDIT_REQUEST_KEY
+        )
         calendarButton.throttleClick { controller.onCalendarClicked() }
         addButton.scaleAnimationOnClick { controller.onAddClicked() }
         editButton.throttleClick { controller.onEditItemsClicked() }
@@ -63,7 +68,8 @@ class MainFragment : BaseContentFragment<MainState, MainViewModel, MainControlle
     }
 
     override fun handleFragmentResult(requestKey: String, data: Bundle) = when (requestKey) {
-        TrackBottom.TAG, StopWatcherFragment.TAG -> controller.onTimeTracked()
+        CATEGORIES_REQUEST_KEY -> controller.onCategoriesSelected(requireParcelable(data))
+        TrackBottom.TAG, StopWatcherFragment.TAG, EDIT_REQUEST_KEY -> controller.onTimeTrackChanged()
         else -> super.handleFragmentResult(requestKey, data)
     }
 

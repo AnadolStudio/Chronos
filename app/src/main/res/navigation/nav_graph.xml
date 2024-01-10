@@ -26,12 +26,12 @@
             android:id="@+id/action_trackBottom_to_categoriesBottom"
             app:destination="@id/categoriesBottom" />
 
-        <argument
-            android:name="data"
-            app:argType="com.anadolstudio.chronos.presentation.track.TrackNavigationArgs" />
         <action
             android:id="@+id/action_trackBottom_to_createBottom"
             app:destination="@id/createBottom" />
+        <argument
+            android:name="data"
+            app:argType="com.anadolstudio.chronos.presentation.track.TrackNavigationArgs" />
 
     </dialog>
 
@@ -40,12 +40,26 @@
         android:name="com.anadolstudio.chronos.presentation.create.CreateBottom"
         tools:layout="@layout/bottom_create_category">
 
+        <action
+            android:id="@+id/action_createBottom_to_categoriesBottom"
+            app:destination="@id/categoriesBottom" />
+
         <argument
             android:name="data"
             app:argType="com.anadolstudio.chronos.presentation.create.CreateNavigationArgs" />
 
+    </dialog>
+
+    <dialog
+        android:id="@+id/editBottom"
+        android:name="com.anadolstudio.chronos.presentation.edit.category.EditCategoryBottom"
+        tools:layout="@layout/bottom_edit_category">
+
+        <argument
+            android:name="data"
+            app:argType="com.anadolstudio.chronos.presentation.edit.category.EditCategoryNavigationArgs" />
         <action
-            android:id="@+id/action_createBottom_to_categoriesBottom"
+            android:id="@+id/action_editBottom_to_categoriesBottom"
             app:destination="@id/categoriesBottom" />
 
     </dialog>
@@ -62,6 +76,12 @@
         <action
             android:id="@+id/action_mainFragment_to_trackBottom"
             app:destination="@id/trackBottom" />
+        <action
+            android:id="@+id/action_mainFragment_to_categoriesBottom"
+            app:destination="@id/categoriesBottom" />
+        <action
+            android:id="@+id/action_mainFragment_to_editBottom"
+            app:destination="@id/editBottom" />
 
     </fragment>
 

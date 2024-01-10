@@ -47,6 +47,11 @@ class ChronosRepositoryImpl(
             .deleteMainCategory(category.toEntity())
             .schedulersIoToMain()
 
+    override fun getMainCategoryById(id: UUID): Single<MainCategoryDomain> = mainCategoryDao
+            .getMainCategoryById(id)
+            .map { it.toDomain(emptyList()) }
+            .schedulersIoToMain()
+
     // TODO Need Test
     override fun getAllSubcategories(): Single<List<SubcategoryDomain>> = subcategoryDao
             .getAllSubcategories()
@@ -81,8 +86,8 @@ class ChronosRepositoryImpl(
             .updateSubcategory(subcategory.toEntity())
             .schedulersIoToMain()
 
-    override fun deleteSubcategory(subcategory: SubcategoryDomain): Completable = subcategoryDao
-            .deleteSubcategory(subcategory.toEntity())
+    override fun deleteSubcategoryById(id: UUID): Completable = subcategoryDao
+            .deleteSubcategoryById(id)
             .schedulersIoToMain()
 
     override fun getAllTracks(): Single<List<TrackDomain>> = trackDao
@@ -93,6 +98,11 @@ class ChronosRepositoryImpl(
     override fun getAllTracksFromStopWatcher(): Single<List<TrackDomain>> = trackDao
             .getAllTracksFromStopWatcher()
             .map { it.toDomain() }
+            .schedulersIoToMain()
+
+    override fun getSubcategoryById(id: UUID): Single<SubcategoryDomain> = subcategoryDao
+            .getSubcategoryById(id)
+            .map { it.toDomain(emptyList()) }
             .schedulersIoToMain()
 
     override fun insertTrack(trackDomain: TrackDomain): Completable = trackDao
@@ -120,7 +130,7 @@ class ChronosRepositoryImpl(
             .map { it.toDomain() }
             .schedulersIoToMain()
 
-    override fun deleteTrack(trackDomain: TrackDomain): Completable = trackDao
-            .deleteTrack(trackDomain.toEntity())
+    override fun deleteTrackByCategoryId(id: UUID): Completable = trackDao
+            .deleteTrackByCategoryId(id)
             .schedulersIoToMain()
 }

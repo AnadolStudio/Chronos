@@ -4,7 +4,10 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.bundleOf
 import com.anadolstudio.chronos.R
 import com.anadolstudio.chronos.base.viewmodel.BaseContentViewModel
+import com.anadolstudio.chronos.presentation.categories.CategoryNavigationArgs
+import com.anadolstudio.chronos.presentation.categories.model.CategoryUi
 import com.anadolstudio.chronos.presentation.delegates.StopWatcherDelegate
+import com.anadolstudio.chronos.presentation.edit.category.EditCategoryNavigationArgs
 import com.anadolstudio.chronos.presentation.main.model.TrackRootUi
 import com.anadolstudio.chronos.presentation.main.model.toTrackRootUi
 import com.anadolstudio.chronos.presentation.track.TrackNavigationArgs
@@ -39,8 +42,10 @@ class MainViewModel @Inject constructor(
         )
 ), MainController {
 
-    private companion object {
-        const val STOP_WATCHER_INTERVAL = 1L
+    companion object {
+        private const val STOP_WATCHER_INTERVAL = 1L
+        const val CATEGORIES_REQUEST_KEY = "1_000_001"
+        const val EDIT_REQUEST_KEY = "1_000_011"
     }
 
     private val stopWatcherDelegate: StopWatcherDelegate = StopWatcherDelegate(
@@ -89,7 +94,7 @@ class MainViewModel @Inject constructor(
         initMainCategories()
     }
 
-    override fun onTimeTracked() = loadAllData()
+    override fun onTimeTrackChanged() = loadAllData()
 
     private fun initMainCategories() = with(resources) {
         Completable.concatArray(
@@ -151,7 +156,15 @@ class MainViewModel @Inject constructor(
 
     override fun onStopWatcherClicked() = navigateTo(R.id.action_mainFragment_to_stopWatcherFragment)
 
-    override fun onEditItemsClicked() = showTodo()
+    override fun onEditItemsClicked() = navigateTo(
+            id = R.id.action_mainFragment_to_categoriesBottom,
+            args = bundleOf(
+                    resources.getString(com.anadolstudio.core.R.string.data) to CategoryNavigationArgs(
+                            requestKey = CATEGORIES_REQUEST_KEY,
+                            categoryList = state.categoryState.categoryList
+                    )
+            )
+    )
 
     override fun onTrackClicked(trackRootUi: TrackRootUi) = showTodo()
 
@@ -174,4 +187,16 @@ class MainViewModel @Inject constructor(
     override fun onStopWatcherToggleClicked() = stopWatcherDelegate.onStopWatcherToggleClicked()
 
     override fun onChangeNightModeClicked() = nightModeRepository.toggleNightMode()
+
+    override fun onCategoriesSelected(categoryUi: CategoryUi) = navigateTo(
+            id = R.id.action_mainFragment_to_editBottom,
+            args = bundleOf(
+                    resources.getString(com.anadolstudio.core.R.string.data) to EditCategoryNavigationArgs(
+                            requestKey = EDIT_REQUEST_KEY,
+                            categoryList = state.categoryState.categoryList,
+                            selectedCategory = categoryUi
+                    )
+            )
+    )
+
 }
