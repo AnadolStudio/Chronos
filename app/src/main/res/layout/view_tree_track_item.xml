@@ -35,7 +35,8 @@
         app:layout_constraintBottom_toBottomOf="@id/childContainer"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/childContainer"
-        android:background="@color/divider"
+        android:background="@color/colorAccent"
+        android:alpha="0.5"
         android:layout_marginVertical="@dimen/padding_medium"/>
 
     <LinearLayout

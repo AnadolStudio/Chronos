@@ -12,7 +12,7 @@
         android:theme="@style/Theme.Chronos">
 
         <activity
-            android:name=".SplashActivity"
+            android:name=".presentation.activity.SplashActivity"
             android:exported="true"
             android:theme="@style/Theme.Chronos" >
             <intent-filter>
@@ -23,7 +23,7 @@
         </activity>
 
         <activity
-            android:name=".SingleActivity"
+            android:name=".presentation.activity.single.SingleActivity"
             android:exported="true"
             android:theme="@style/Theme.Chronos"
             android:windowSoftInputMode="adjustPan">

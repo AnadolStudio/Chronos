@@ -2,6 +2,7 @@ package com.anadolstudio.chronos.base.bottom
 
 import androidx.annotation.LayoutRes
 import androidx.navigation.fragment.findNavController
+import com.anadolstudio.chronos.base.viewmodel.BaseContentViewModel
 import com.anadolstudio.chronos.di.SharedComponent
 import com.anadolstudio.chronos.di.getSharedModule
 import com.anadolstudio.chronos.navigation.NavigatableDelegate
@@ -11,13 +12,12 @@ import com.anadolstudio.core.presentation.Navigatable
 import com.anadolstudio.core.presentation.Renderable
 import com.anadolstudio.core.presentation.dialogs.bottom_sheet.CoreContentBottom
 import com.anadolstudio.core.viewmodel.BaseController
-import com.anadolstudio.core.viewmodel.CoreContentViewModel
 
 abstract class BaseContentBottom<
         ViewState : Any,
-        ViewModel : CoreContentViewModel<ViewState, NavigateData>,
+        ViewModel : BaseContentViewModel<ViewState>,
         Controller : BaseController>(
-    @LayoutRes layoutId: Int
+        @LayoutRes layoutId: Int
 ) : CoreContentBottom<ViewState, NavigateData, ViewModel, Controller>(layoutId), Renderable {
 
     override val eventableDelegate: Eventable get() = Eventable.Delegate(uiEntity = this)

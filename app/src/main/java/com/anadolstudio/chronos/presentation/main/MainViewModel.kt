@@ -1,5 +1,6 @@
 package com.anadolstudio.chronos.presentation.main
 
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.bundleOf
 import com.anadolstudio.chronos.R
 import com.anadolstudio.chronos.base.viewmodel.BaseContentViewModel
@@ -12,6 +13,7 @@ import com.anadolstudio.chronos.util.plusDay
 import com.anadolstudio.core.util.rx.smartSubscribe
 import com.anadolstudio.domain.repository.chronos.ChronosRepository
 import com.anadolstudio.domain.repository.chronos.main_category.MainCategoryDomain
+import com.anadolstudio.domain.repository.common.NightModeRepository
 import com.anadolstudio.domain.repository.common.PreferenceRepository
 import com.anadolstudio.domain.repository.common.ResourceRepository
 import com.anadolstudio.domain.repository.stop_watcher.StopWatcherRepository
@@ -26,11 +28,14 @@ class MainViewModel @Inject constructor(
         private val chronosRepository: ChronosRepository,
         private val resources: ResourceRepository,
         private val preferenceRepository: PreferenceRepository,
+        private val nightModeRepository: NightModeRepository,
         private val stopWatcherRepository: StopWatcherRepository,
 ) : BaseContentViewModel<MainState>(
         initState = MainState(
+                isNightMode = nightModeRepository.nightMode == AppCompatDelegate.MODE_NIGHT_YES,
                 currentDate = preferenceRepository.lastSelectedDate,
-                stopWatcherData = stopWatcherRepository.stopWatcherData
+                stopWatcherData = stopWatcherRepository.stopWatcherData,
+                stopWatcherTime = stopWatcherRepository.currentDelta
         )
 ), MainController {
 
@@ -47,6 +52,18 @@ class MainViewModel @Inject constructor(
     init {
         loadAllData()
         observeStopWatcher()
+        observeNightMode()
+    }
+
+    private fun observeNightMode() {
+        nightModeRepository.observeNightModeChanges()
+                .filter { it == AppCompatDelegate.MODE_NIGHT_YES || it == AppCompatDelegate.MODE_NIGHT_NO }
+                .map { it == AppCompatDelegate.MODE_NIGHT_YES }
+                .smartSubscribe(
+                        onSuccess = { isNightMode -> updateState { copy(isNightMode = isNightMode) } },
+                        onError = this::showError
+                )
+                .disposeOnCleared()
     }
 
     private fun observeStopWatcher() {
@@ -60,17 +77,9 @@ class MainViewModel @Inject constructor(
         Observable.interval(STOP_WATCHER_INTERVAL, TimeUnit.SECONDS)
                 .smartSubscribe(
                         onSuccess = {
-                            val currentDelta = stopWatcherRepository.currentDelta
-
-                            if (currentDelta == null && state.stopWatcherTime != null) {
-                                updateState { copy(stopWatcherTime = null) }
-
-                                return@smartSubscribe
-                            }
-
-                            updateState { copy(stopWatcherTime = currentDelta) }
+                            updateState { copy(stopWatcherTime = stopWatcherRepository.currentDelta) }
                         },
-                        onError = ::showError
+                        onError = this::showError
                 )
                 .disposeOnCleared()
     }
@@ -164,4 +173,5 @@ class MainViewModel @Inject constructor(
 
     override fun onStopWatcherToggleClicked() = stopWatcherDelegate.onStopWatcherToggleClicked()
 
+    override fun onChangeNightModeClicked() = nightModeRepository.toggleNightMode()
 }

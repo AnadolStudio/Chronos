@@ -6,12 +6,14 @@ import androidx.fragment.app.viewModels
 import com.anadolstudio.chronos.R
 import com.anadolstudio.chronos.base.fragment.BaseContentFragment
 import com.anadolstudio.chronos.databinding.FragmentMainBinding
+import com.anadolstudio.chronos.presentation.stopwatcher.StopWatcherFragment
 import com.anadolstudio.chronos.presentation.track.TrackBottom
 import com.anadolstudio.chronos.util.CalendarDialog
 import com.anadolstudio.chronos.view.diagram.LineProgressView.ProgressData
 import com.anadolstudio.core.groupie.BaseGroupAdapter
 import com.anadolstudio.core.presentation.fragment.state_util.ViewStateDelegate
 import com.anadolstudio.core.util.common.throttleClick
+import com.anadolstudio.core.util.common_extention.getDrawable
 import com.anadolstudio.core.util.data_time.Time
 import com.anadolstudio.core.view.animation.AnimateUtil.scaleAnimationOnClick
 import com.anadolstudio.core.view.gesture.HorizontalMoveGesture
@@ -49,10 +51,11 @@ class MainFragment : BaseContentFragment<MainState, MainViewModel, MainControlle
     }
 
     override fun initView() = with(binding) {
-        initFragmentResultListeners(TrackBottom.TAG)
+        initFragmentResultListeners(TrackBottom.TAG, StopWatcherFragment.TAG)
         calendarButton.throttleClick { controller.onCalendarClicked() }
         addButton.scaleAnimationOnClick { controller.onAddClicked() }
         editButton.throttleClick { controller.onEditItemsClicked() }
+        nightButton.throttleClick { controller.onChangeNightModeClicked() }
         recycler.adapter = BaseGroupAdapter(stopWatcherSection, diagramSection, trackSection)
         binding.recyclerContainer.addDispatchTouchListener { _, event ->
             horizontalMoveGestureDetector.onTouchEvent(event)
@@ -60,7 +63,7 @@ class MainFragment : BaseContentFragment<MainState, MainViewModel, MainControlle
     }
 
     override fun handleFragmentResult(requestKey: String, data: Bundle) = when (requestKey) {
-        TrackBottom.TAG -> controller.onTimeTracked()
+        TrackBottom.TAG, StopWatcherFragment.TAG -> controller.onTimeTracked()
         else -> super.handleFragmentResult(requestKey, data)
     }
 
@@ -80,9 +83,19 @@ class MainFragment : BaseContentFragment<MainState, MainViewModel, MainControlle
     }
 
     override fun render(state: MainState) {
+        renderNightModeButton(state)
         binding.addButton.setLoading(state.isLoading)
         renderStopWatcher(state.stopWatcherData, state.stopWatcherTime)
         renderTrack(state.trackState)
+    }
+
+    private fun renderNightModeButton(state: MainState) {
+        val drawableRes = when (state.isNightMode) {
+            true -> R.drawable.ic_mode_light
+            false -> R.drawable.ic_mode_dark
+        }
+
+        binding.nightButton.setDrawable(getDrawable(drawableRes))
     }
 
     private fun renderStopWatcher(data: StopWatcherData, time: Time?) {

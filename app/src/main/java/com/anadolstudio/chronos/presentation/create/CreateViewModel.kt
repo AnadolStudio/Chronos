@@ -52,8 +52,8 @@ class CreateViewModel @AssistedInject constructor(
 
         chronosRepository
                 .insertSubcategory(subcategory)
-                .doOnSubscribe { updateState { copy(isLoading = true) } }
                 .smartSubscribe(
+                        onSubscribe = { updateState { copy(isLoading = true) } },
                         onComplete = {
                             val category = subcategory
                                     .toCategoryUi(parent.name, parent.color)

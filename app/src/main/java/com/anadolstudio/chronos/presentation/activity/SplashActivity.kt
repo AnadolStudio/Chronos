@@ -1,8 +1,8 @@
-package com.anadolstudio.chronos
+package com.anadolstudio.chronos.presentation.activity
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import com.anadolstudio.chronos.presentation.activity.single.SingleActivity
 import com.anadolstudio.core.presentation.activity.CoreActivity
 
 @SuppressLint("CustomSplashScreen")
