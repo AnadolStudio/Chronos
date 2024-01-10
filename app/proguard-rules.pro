@@ -19,3 +19,19 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+-dontwarn org.joda.convert.**
+-dontwarn org.joda.time.**
+-keep class org.joda.time.** { *; }
+-keep interface org.joda.time.** { *; }
+-keep class net.danlew.** { *; }
+
+## joda-time-android 2.8.0
+# This is only necessary if you are not including the optional joda-convert dependency
+
+-dontwarn org.joda.convert.FromString
+-dontwarn org.joda.convert.ToString
+
+-keepnames class com.anadolstudio.chronos.presentation.categories.CategoryNavigationArgs
+-keepnames class com.anadolstudio.chronos.presentation.create.CreateNavigationArgs
+-keepnames class com.anadolstudio.chronos.presentation.track.TrackNavigationArgs
