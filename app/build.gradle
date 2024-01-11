@@ -1,65 +1,140 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'kotlin-parcelize'
+    id 'com.google.firebase.crashlytics'
+    id 'com.google.gms.google-services'
+    id 'androidx.navigation.safeargs.kotlin'
 }
 
 android {
-    compileSdk 32
+
+    signingConfigs {
+        debug {
+        }
+
+        release {
+            storeFile file(String.valueOf(System.getenv("keystore")))
+            storePassword System.getenv("keystore_password")
+            keyAlias System.getenv("key_alias")
+            keyPassword System.getenv("key_password")
+        }
+    }
 
     defaultConfig {
         applicationId "com.anadolstudio.chronos"
         minSdk 23
-        targetSdk 32
-        versionCode 1
-        versionName "1.0"
+        targetSdk 34
+        compileSdk 34
+        versionCode 2
+        versionName "1.0.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        project.archivesBaseName = "Chronos" + "_" + defaultConfig.versionName + "_(" + defaultConfig.versionCode + ")"
+
+        renderscriptTargetApi 21
+        renderscriptSupportModeEnabled true
+
+        ndk {
+            abiFilters "armeabi-v7a", "x86", "arm64-v8a", "x86_64"
+        }
     }
 
     buildTypes {
-        release {
+        debug {
+            signingConfig signingConfigs.debug
+            applicationIdSuffix ".debug"
+            debuggable true
+
             minifyEnabled false
+        }
+        release {
+            signingConfig signingConfigs.release
+            debuggable false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
-    }
-    kotlinOptions {
-        jvmTarget = '11'
-    }
+
     buildFeatures {
         viewBinding true
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = '17'
+    }
+    lintOptions {
+        abortOnError false
+    }
+    namespace 'com.anadolstudio.chronos'
 }
 
 dependencies {
-
-    implementation 'androidx.core:core-ktx:1.8.0'
-    implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.7.0'
-    implementation "androidx.work:work-runtime-ktx:2.7.1"
-
-    implementation 'com.google.android.material:material:1.6.1'
-    implementation 'androidx.appcompat:appcompat:1.4.2'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    implementation 'androidx.fragment:fragment-ktx:1.4.1'
-    implementation 'androidx.activity:activity-ktx:1.4.0'
-    implementation project(path: ':core')
-    implementation project(path: ':domain')
+    implementation project(path: ':core:android-base')
     implementation project(path: ':data')
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.4.2'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.4.2'
+    implementation project(path: ':domain')
 
-    def lifecycle_version = "2.4.1"
+    implementation 'androidx.core:core-ktx:1.10.1'
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.8.10'
+
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.fragment:fragment-ktx:1.6.1'
+    implementation 'androidx.activity:activity-ktx:1.7.2'
+
+    implementation 'com.google.android.material:material:1.9.0'
+
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+
+    def lifecycle_version = '2.6.1'
     implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
     annotationProcessor "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
 
+    // Firebase
+    implementation 'com.google.firebase:firebase-inappmessaging:20.3.3'
+    implementation platform('com.google.firebase:firebase-bom:30.4.1')
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation 'com.google.firebase:firebase-crashlytics'
+
+    implementation 'com.github.bumptech.glide:glide:4.13.2'
+
+    //Ad
+    implementation 'com.google.android.gms:play-services-ads:22.3.0'
+
+    // Dagger (kapt don't work on 2.28)
+    def dagger = "2.43.2"
+    implementation "com.google.dagger:dagger:$dagger"
+    kapt("com.google.dagger:dagger-compiler:$dagger")
+
+    // Rx
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+
+    // Groupie
+    def groupie = "2.10.1"
+    implementation "com.github.lisawray.groupie:groupie:$groupie"
+    implementation "com.github.lisawray.groupie:groupie-kotlin-android-extensions:$groupie"
+    implementation "com.github.lisawray.groupie:groupie-viewbinding:$groupie"
+
+    // Room
+    def room_version = "2.5.2"
+    implementation "androidx.room:room-runtime:$room_version"
+    implementation "androidx.room:room-rxjava2:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+
+    // Confetti
+    implementation 'com.github.jinatonic.confetti:confetti:1.1.2'
+
     testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-contrib:3.0.2'
 }

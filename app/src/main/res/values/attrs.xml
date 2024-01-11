@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <attr name="color" format="color|reference" />
+    <attr name="backgroundColor" format="color|reference" />
+    <attr name="title" format="string|reference" />
+    <attr name="text" format="string|reference" />
+
+    <declare-styleable name="DayTaskItemView">
+        <attr name="title" />
+        <attr name="time" format="string" />
+        <attr name="color" />
+    </declare-styleable>
+
+    <declare-styleable name="BaseButton">
+        <attr name="text" />
+        <attr name="color" />
+        <attr name="backgroundColor" />
+        <attr name="paddingTop" format="dimension" />
+        <attr name="paddingBottom" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="InputView">
+        <attr name="hint" />
+        <attr name="src" />
+        <attr name="imeOptions" />
+        <attr name="inputType" />
+        <attr name="digits" />
+        <attr name="maxLength" />
+    </declare-styleable>
+
+</resources>

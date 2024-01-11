@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "271517289998",
+    "project_id": "chronos-777777",
+    "storage_bucket": "chronos-777777.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:271517289998:android:5a2fdf7d0ae1458b02f65f",
+        "android_client_info": {
+          "package_name": "com.anadolstudio.chronos"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDdBTbb0LPQ9ITg0ahb1_ewEW4Su6PwSus"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:271517289998:android:2018d29156404e4202f65f",
+        "android_client_info": {
+          "package_name": "com.anadolstudio.chronos.debug"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDdBTbb0LPQ9ITg0ahb1_ewEW4Su6PwSus"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

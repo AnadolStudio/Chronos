@@ -1,28 +1,130 @@
 <?xml version="1.0" encoding="utf-8"?>
-<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/mainFragment">
 
-    <fragment
-        android:id="@+id/FirstFragment"
-        android:name="com.anadolstudio.chronos.ui.FirstFragment"
-        android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
+    <dialog
+        android:id="@+id/categoriesBottom"
+        android:name="com.anadolstudio.chronos.presentation.categories.CategoriesBottom"
+        tools:layout="@layout/bottom_categories">
+
+        <argument
+            android:name="data"
+            app:argType="com.anadolstudio.chronos.presentation.categories.CategoryNavigationArgs" />
+
+    </dialog>
+
+    <dialog
+        android:id="@+id/trackBottom"
+        android:name="com.anadolstudio.chronos.presentation.track.TrackBottom"
+        tools:layout="@layout/bottom_track">
 
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/SecondFragment"
-        android:name="com.anadolstudio.chronos.ui.SecondFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
+            android:id="@+id/action_trackBottom_to_categoriesBottom"
+            app:destination="@id/categoriesBottom" />
 
         <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+            android:id="@+id/action_trackBottom_to_createBottom"
+            app:destination="@id/createBottom" />
+        <argument
+            android:name="data"
+            app:argType="com.anadolstudio.chronos.presentation.track.TrackNavigationArgs" />
+
+    </dialog>
+
+    <dialog
+        android:id="@+id/editTrackBottom"
+        android:name="com.anadolstudio.chronos.presentation.edit.track.EditTrackBottom"
+        tools:layout="@layout/bottom_track">
+
+        <action
+            android:id="@+id/action_trackBottom_to_categoriesBottom"
+            app:destination="@id/categoriesBottom" />
+
+        <argument
+            android:name="data"
+            app:argType="com.anadolstudio.chronos.presentation.edit.track.EditTrackNavigationArgs" />
+
+    </dialog>
+
+    <dialog
+        android:id="@+id/createBottom"
+        android:name="com.anadolstudio.chronos.presentation.create.CreateBottom"
+        tools:layout="@layout/bottom_create_category">
+
+        <action
+            android:id="@+id/action_createBottom_to_categoriesBottom"
+            app:destination="@id/categoriesBottom" />
+
+        <argument
+            android:name="data"
+            app:argType="com.anadolstudio.chronos.presentation.create.CreateNavigationArgs" />
+
+    </dialog>
+
+    <dialog
+        android:id="@+id/editBottom"
+        android:name="com.anadolstudio.chronos.presentation.edit.category.EditCategoryBottom"
+        tools:layout="@layout/bottom_edit_category">
+
+        <argument
+            android:name="data"
+            app:argType="com.anadolstudio.chronos.presentation.edit.category.EditCategoryNavigationArgs" />
+        <action
+            android:id="@+id/action_editBottom_to_categoriesBottom"
+            app:destination="@id/categoriesBottom" />
+
+    </dialog>
+
+    <dialog
+        android:id="@+id/trackDetailBottom"
+        android:name="com.anadolstudio.chronos.presentation.detail.track.TrackDetailBottom"
+        tools:layout="@layout/bottom_track_detail">
+
+        <argument
+            android:name="data"
+            app:argType="com.anadolstudio.chronos.presentation.detail.track.TrackDetailNavigationArgs" />
+        <action
+            android:id="@+id/action_trackDetailBottom_to_editTrackBottom"
+            app:destination="@id/editTrackBottom" />
+
+    </dialog>
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.anadolstudio.chronos.presentation.main.MainFragment"
+        tools:layout="@layout/fragment_main">
+
+        <action
+            android:id="@+id/action_mainFragment_to_stopWatcherFragment"
+            app:destination="@id/stopWatcherFragment" />
+
+        <action
+            android:id="@+id/action_mainFragment_to_trackBottom"
+            app:destination="@id/trackBottom" />
+        <action
+            android:id="@+id/action_mainFragment_to_categoriesBottom"
+            app:destination="@id/categoriesBottom" />
+        <action
+            android:id="@+id/action_mainFragment_to_editBottom"
+            app:destination="@id/editBottom" />
+        <action
+            android:id="@+id/action_mainFragment_to_trackDetailBottom"
+            app:destination="@id/trackDetailBottom" />
+
     </fragment>
+
+    <fragment
+        android:id="@+id/stopWatcherFragment"
+        android:name="com.anadolstudio.chronos.presentation.stopwatcher.StopWatcherFragment"
+        tools:layout="@layout/fragment_stop_watcher">
+
+        <action
+            android:id="@+id/action_stopWatcherFragment_to_trackBottom"
+            app:destination="@id/trackBottom" />
+    </fragment>
+
 </navigation>

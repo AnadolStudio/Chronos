@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="96dp"
+    android:layout_height="96dp"
+    tools:parentTag="android.widget.FrameLayout">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/padding_medium"
+        android:stateListAnimator="@animator/item_card_large"
+        app:cardCornerRadius="@dimen/radius_medium"
+        app:cardElevation="@dimen/elevation_small">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:animateLayoutChanges="true">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="@dimen/padding_main"
+                android:src="@drawable/ic_timer"
+                app:tint="@color/colorAccent" />
+
+            <TextView
+                android:id="@+id/textView"
+                style="@style/Caption14"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textColor="@color/colorAccent"
+                android:textStyle="bold"
+                android:visibility="gone"
+                tools:text="100:00:58"
+                tools:visibility="visible" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</merge>

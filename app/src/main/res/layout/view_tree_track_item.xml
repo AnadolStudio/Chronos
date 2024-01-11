@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
+
+    <LinearLayout
+        android:id="@+id/textContainer"
+        android:layout_width="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/padding_small"
+        android:background="@drawable/item_ripple_rectangle_8">
+
+        <TextView
+            android:id="@+id/nameText"
+            style="@style/Category.Tree"
+            android:layout_width="0dp"
+            android:layout_marginEnd="@dimen/padding_large"
+            android:gravity="center_vertical"
+            android:layout_weight="1"
+            tools:text="Длинное название" />
+
+        <TextView
+            android:id="@+id/timeText"
+            style="@style/Category.Tree"
+            android:gravity="center"
+            tools:text="6ч 15"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+    </LinearLayout>
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="@dimen/padding_xsmall"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/padding_small"
+        app:layout_constraintBottom_toBottomOf="@id/childContainer"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/childContainer"
+        android:background="@color/colorAccent"
+        android:alpha="0.5"
+        android:layout_marginVertical="@dimen/padding_medium"/>
+
+    <LinearLayout
+        android:id="@+id/childContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/padding_medium"
+        android:orientation="vertical"
+        app:layout_constraintStart_toEndOf="@id/divider"
+        app:layout_constraintTop_toBottomOf="@id/textContainer"
+        tools:layout_height="50dp"/>
+
+</merge>

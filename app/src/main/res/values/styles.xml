@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Category" parent="Caption12">
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_marginStart">@dimen/padding_small</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLength">25</item>
+        <item name="android:lines">1</item>
+    </style>
+
+    <style name="Category.Tree">
+        <item name="android:layout_marginStart">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">14dp</item>
+        <item name="android:minHeight">36dp</item>
+    </style>
+
+    <style name="Category.Tree.Header">
+        <item name="android:textSize">16dp</item>
+        <item name="android:minHeight">36dp</item>
+        <item name="android:paddingTop">@dimen/padding_medium</item>
+        <item name="android:paddingBottom">@dimen/padding_medium</item>
+    </style>
+
+    <style name="EditText">
+        <item name="android:layout_marginTop">12dp</item>
+        <item name="editTextAppearance">@style/Caption14</item>
+        <item name="errorTextAppearance">@style/Caption12</item>
+        <item name="errorTextColor">@color/colorError</item>
+        <item name="informationHintTextColor">@color/colorAccentLight</item>
+        <item name="editTextBackgroundTint">@color/divider</item>
+        <item name="hintTextAppearance">@style/Caption12</item>
+        <item name="hintTextColor">@color/colorHint</item>
+        <item name="errorEnabled">false</item>
+        <item name="editTextColor">@color/colorAccent</item>
+        <item name="validatorMode">afterTextChanged</item>
+    </style>
+
+    <style name="DatePickerDialogTheme" parent="Theme.MaterialComponents.DayNight.Dialog.Alert.Bridge">
+        <item name="colorControlNormal">@color/colorAccent</item>
+        <item name="colorControlActivated">@color/colorAccent</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColorPrimary">@color/colorAccent</item>
+        <item name="android:buttonBarNegativeButtonStyle">@style/DatePickerButton</item>
+        <item name="android:buttonBarPositiveButtonStyle">@style/DatePickerButton</item>
+        <item name="android:windowBackground">@color/colorPrimary</item>
+        <item name="android:colorBackground">@color/colorPrimary</item>
+        <item name="android:colorBackgroundCacheHint">@color/colorPrimary</item>
+        <item name="android:windowMinWidthMajor">0%</item>
+        <item name="android:windowMinWidthMinor">0%</item>
+    </style>
+
+    <style name="DatePickerButton" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="rippleColor">@color/colorRipple</item>
+    </style>
+
+
+</resources>
