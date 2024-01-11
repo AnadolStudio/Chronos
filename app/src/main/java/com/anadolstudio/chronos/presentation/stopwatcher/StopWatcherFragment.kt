@@ -19,8 +19,6 @@ class StopWatcherFragment :
         const val TAG = "StopWatcherFragment"
     }
 
-    override val viewStateDelegate: ViewStateDelegate = ViewStateDelegate()
-
     private val binding by viewBinding { FragmentStopWatcherBinding.bind(it) }
 
     override fun createViewModelLazy() = viewModels<StopWatcherViewModel> { viewModelFactory }

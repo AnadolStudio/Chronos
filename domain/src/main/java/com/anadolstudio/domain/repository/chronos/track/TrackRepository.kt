@@ -15,6 +15,8 @@ interface TrackRepository {
 
     fun updateTrack(trackDomain: TrackDomain): Completable
 
+    fun updateTrackById(id: UUID, totalMinutes: Int): Completable
+
     fun getTrackById(trackId: UUID): Single<TrackDomain>
 
     fun getTrackListByDate(date: DateTime): Single<List<TrackDomain>>
@@ -22,4 +24,6 @@ interface TrackRepository {
     fun getLastTrackList(limit: Int): Single<List<TrackDomain>>
 
     fun deleteTrackByCategoryId(id: UUID): Completable
+
+    fun deleteTrackById(id: UUID): Completable
 }

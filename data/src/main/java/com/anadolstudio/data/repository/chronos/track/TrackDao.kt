@@ -37,4 +37,7 @@ interface TrackDao {
     @Query("DELETE FROM $TRACK_TABLE WHERE subcategory_id = :id")
     fun deleteTrackByCategoryId(id: UUID): Completable
 
+    @Query("DELETE FROM $TRACK_TABLE WHERE uuid = :id")
+    fun deleteTrackById(id: UUID): Completable
+
 }

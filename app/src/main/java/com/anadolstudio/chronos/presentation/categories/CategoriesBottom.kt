@@ -14,8 +14,6 @@ import com.xwray.groupie.Section
 
 class CategoriesBottom : BaseContentBottom<CategoriesState, CategoriesViewModel, CategoriesController>(R.layout.bottom_categories) {
 
-    override val viewStateDelegate: ViewStateDelegate = ViewStateDelegate()
-
     private val binding by viewBinding { BottomCategoriesBinding.bind(it) }
     private val section: Section = Section()
     private val args: CategoriesBottomArgs by navArgs()

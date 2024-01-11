@@ -1,11 +1,9 @@
 package com.anadolstudio.chronos.presentation.stopwatcher
 
-import androidx.core.os.bundleOf
 import com.anadolstudio.chronos.R
 import com.anadolstudio.chronos.base.viewmodel.BaseContentViewModel
 import com.anadolstudio.chronos.presentation.delegates.StopWatcherDelegate
 import com.anadolstudio.chronos.presentation.track.TrackNavigationArgs
-import com.anadolstudio.core.R.string
 import com.anadolstudio.core.util.rx.smartSubscribe
 import com.anadolstudio.domain.repository.chronos.ChronosRepository
 import com.anadolstudio.domain.repository.common.ResourceRepository
@@ -48,8 +46,8 @@ class StopWatcherViewModel @Inject constructor(
 
     override fun onAddButtonClicked() = navigateTo(
             id = R.id.action_stopWatcherFragment_to_trackBottom,
-            args = bundleOf(
-                    resources.getString(string.data) to TrackNavigationArgs(
+            args = resources.navigateArg(
+                    TrackNavigationArgs(
                             mainCategories = state.mainCategoryList,
                             hours = state.stopWatcherData.deltaTime?.hours ?: 0,
                             minutes = state.stopWatcherData.deltaTime?.minutes ?: 0,

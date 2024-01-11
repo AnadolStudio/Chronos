@@ -11,6 +11,7 @@ import com.anadolstudio.core.presentation.Eventable
 import com.anadolstudio.core.presentation.Navigatable
 import com.anadolstudio.core.presentation.Renderable
 import com.anadolstudio.core.presentation.dialogs.bottom_sheet.CoreContentBottom
+import com.anadolstudio.core.presentation.fragment.state_util.ViewStateDelegate
 import com.anadolstudio.core.viewmodel.BaseController
 
 abstract class BaseContentBottom<
@@ -19,6 +20,8 @@ abstract class BaseContentBottom<
         Controller : BaseController>(
         @LayoutRes layoutId: Int
 ) : CoreContentBottom<ViewState, NavigateData, ViewModel, Controller>(layoutId), Renderable {
+
+    override val viewStateDelegate: ViewStateDelegate = ViewStateDelegate()
 
     override val eventableDelegate: Eventable get() = Eventable.Delegate(uiEntity = this)
     override val navigatableDelegate: Navigatable<NavigateData> get() = NavigatableDelegate(findNavController())

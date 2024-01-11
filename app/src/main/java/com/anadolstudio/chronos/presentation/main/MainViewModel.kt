@@ -1,7 +1,6 @@
 package com.anadolstudio.chronos.presentation.main
 
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.os.bundleOf
 import com.anadolstudio.chronos.R
 import com.anadolstudio.chronos.base.viewmodel.BaseContentViewModel
 import com.anadolstudio.chronos.presentation.categories.CategoryNavigationArgs
@@ -147,8 +146,8 @@ class MainViewModel @Inject constructor(
 
     override fun onAddClicked() = navigateTo(
             id = R.id.action_mainFragment_to_trackBottom,
-            args = bundleOf(
-                    resources.getString(com.anadolstudio.core.R.string.data) to TrackNavigationArgs(
+            args = resources.navigateArg(
+                    TrackNavigationArgs(
                             mainCategories = state.categoryState.mainCategoryList,
                             selectedDateTime = state.trackState.currentDate
                     )
@@ -161,8 +160,8 @@ class MainViewModel @Inject constructor(
 
     override fun onEditItemsClicked() = navigateTo(
             id = R.id.action_mainFragment_to_categoriesBottom,
-            args = bundleOf(
-                    resources.getString(com.anadolstudio.core.R.string.data) to CategoryNavigationArgs(
+            args = resources.navigateArg(
+                    CategoryNavigationArgs(
                             requestKey = CATEGORIES_REQUEST_KEY,
                             categoryList = state.categoryState.categoryList
                     )
@@ -171,11 +170,12 @@ class MainViewModel @Inject constructor(
 
     override fun onTrackClicked(trackRootUi: TrackRootUi) = navigateTo(
             id = R.id.action_mainFragment_to_trackDetailBottom,
-            args = bundleOf(
-                    resources.getString(com.anadolstudio.core.R.string.data) to TrackDetailNavigationArgs(
+            args = resources.navigateArg(
+                    TrackDetailNavigationArgs(
                             requestKey = TRACK_CHANGED_REQUEST_KEY,
                             trackRootUi = trackRootUi,
-                            currentDate = state.trackState.currentDate
+                            currentDate = state.trackState.currentDate,
+                            mainCategories = state.categoryState.mainCategoryList
                     )
             )
     )
@@ -202,8 +202,8 @@ class MainViewModel @Inject constructor(
 
     override fun onCategoriesSelected(categoryUi: CategoryUi) = navigateTo(
             id = R.id.action_mainFragment_to_editBottom,
-            args = bundleOf(
-                    resources.getString(com.anadolstudio.core.R.string.data) to EditCategoryNavigationArgs(
+            args = resources.navigateArg(
+                    EditCategoryNavigationArgs(
                             requestKey = EDIT_REQUEST_KEY,
                             categoryList = state.categoryState.categoryList,
                             selectedCategory = categoryUi

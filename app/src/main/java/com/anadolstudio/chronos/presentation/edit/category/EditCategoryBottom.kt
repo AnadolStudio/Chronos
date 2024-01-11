@@ -8,7 +8,6 @@ import com.anadolstudio.chronos.base.bottom.BaseContentBottom
 import com.anadolstudio.chronos.databinding.BottomEditCategoryBinding
 import com.anadolstudio.chronos.presentation.categories.model.CategoryUi
 import com.anadolstudio.core.presentation.dialogs.alert.AlertDialogBuilder
-import com.anadolstudio.core.presentation.fragment.state_util.ViewStateDelegate
 import com.anadolstudio.core.util.common_extention.getParcelable
 import com.anadolstudio.core.util.common_extention.setFragmentResult
 import com.anadolstudio.core.view.animation.AnimateUtil.scaleAnimationOnClick
@@ -25,8 +24,6 @@ open class EditCategoryBottom : BaseContentBottom<EditCategoryState, EditCategor
         private const val RENDER_PARENT_HINT = "RENDER_PARENT_HINT"
         private const val RENDER_CHILD_HINT = "RENDER_CHILD_HINT"
     }
-
-    override val viewStateDelegate: ViewStateDelegate = ViewStateDelegate()
 
     protected val binding by viewBinding { BottomEditCategoryBinding.bind(it) }
     protected val args: EditCategoryBottomArgs by navArgs()
@@ -103,12 +100,10 @@ open class EditCategoryBottom : BaseContentBottom<EditCategoryState, EditCategor
             RENDER_CHILD_HINT,
             RENDER_PARENT_HINT to parentHint
     ) {
-        binding.settingsContainer.categoryNameText.setSupportHint(
-                getString(R.string.prev_name, childHint)
-        )
-        binding.settingsContainer.parentNameText.setSupportHint(
-                getString(R.string.prev_parent_category, parentHint)
-        )
+        binding.settingsContainer.apply {
+            categoryNameText.setSupportHint(getString(R.string.prev_name, childHint))
+            parentNameText.setSupportHint(getString(R.string.prev_parent_category, parentHint))
+        }
     }
 
 }

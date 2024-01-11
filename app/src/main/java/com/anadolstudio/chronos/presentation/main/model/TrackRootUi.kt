@@ -12,7 +12,8 @@ import java.util.concurrent.TimeUnit
 
 @Parcelize
 data class TrackRootUi(
-        val id: UUID,
+        val id: UUID?,
+        val mainCategoryId: UUID?,
         val name: String,
         val color: Int,
         val children: List<TrackChildUi>,
@@ -24,7 +25,8 @@ data class TrackRootUi(
 }
 
 fun MainCategoryDomain.toTrackRootUi(trackMap: Map<UUID, TrackDomain>): TrackRootUi = TrackRootUi(
-        id = uuid,
+        id = trackMap[uuid]?.uuid,
+        mainCategoryId = uuid,
         name = name,
         color = color,
         children = subcategoryList.map { it.toTrackChildUi(trackMap) },
@@ -33,7 +35,8 @@ fun MainCategoryDomain.toTrackRootUi(trackMap: Map<UUID, TrackDomain>): TrackRoo
 fun SubcategoryDomain.toTrackChildUi(trackMap: Map<UUID, TrackDomain>): TrackChildUi {
     val child = subcategoryList.map { childCategory ->
         TrackChildUi(
-                id = childCategory.uuid,
+                id = trackMap[childCategory.uuid]?.uuid,
+                subcategoryId = childCategory.uuid,
                 name = childCategory.name,
                 children = childCategory.subcategoryList.map { it.toTrackChildUi(trackMap) },
                 minutes = trackMap[childCategory.uuid]?.minutes
@@ -41,7 +44,8 @@ fun SubcategoryDomain.toTrackChildUi(trackMap: Map<UUID, TrackDomain>): TrackChi
     }
 
     return TrackChildUi(
-            id = uuid,
+            id = trackMap[uuid]?.uuid,
+            subcategoryId = uuid,
             name = name,
             children = child,
             minutes = trackMap[uuid]?.minutes

@@ -24,8 +24,6 @@ open class CreateBottom : BaseContentBottom<CreateState, CreateViewModel, Create
         private const val RENDER_LOADING = "RENDER_LOADING"
     }
 
-    override val viewStateDelegate: ViewStateDelegate = ViewStateDelegate()
-
     protected val binding by viewBinding { BottomCreateCategoryBinding.bind(it) }
     protected val args: CreateBottomArgs by navArgs()
 
