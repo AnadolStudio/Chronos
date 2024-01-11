@@ -126,7 +126,7 @@ class ChronosRepositoryImpl(
             .schedulersIoToMain()
 
     override fun getLastTrackList(limit: Int): Single<List<TrackDomain>> = trackDao
-            .getTrackList(limit)
+            .getLastTrackList(limit)
             .map { it.toDomain() }
             .schedulersIoToMain()
 
