@@ -66,10 +66,9 @@ class CreateViewModel @AssistedInject constructor(
                                     .toCategoryUi(parent.name, parent.color)
                                     .first()
 
-                            navigateUp()
                             // TODO при создании собирамой категории затреканное время
                             //  переносить в новую дочернуюю категорию Unknown
-                            showEvent(CreateBottomEvents.Result(category))
+                            navigateUpWithResult(CreateBottomEvents.Result(category))
                         },
                         onError = this::showError,
                         onFinally = { updateState { copy(isLoading = false) } }

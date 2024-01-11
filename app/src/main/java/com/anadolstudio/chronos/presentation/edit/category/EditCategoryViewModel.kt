@@ -76,10 +76,7 @@ class EditCategoryViewModel @AssistedInject constructor(
 
         completable.smartSubscribe(
                 onSubscribe = { updateState { copy(isLoading = true) } },
-                onComplete = {
-                    navigateUp()
-                    showEvent(EditCategoryBottomEvents.Result)
-                },
+                onComplete = { navigateUpWithResult(EditCategoryBottomEvents.Result) },
                 onError = this::showError,
                 onFinally = { updateState { copy(isLoading = false) } },
         ).disposeOnCleared()
@@ -98,10 +95,7 @@ class EditCategoryViewModel @AssistedInject constructor(
         )
                 .smartSubscribe(
                         onSubscribe = { updateState { copy(isLoading = true) } },
-                        onComplete = {
-                            navigateUp()
-                            showEvent(EditCategoryBottomEvents.Result)
-                        },
+                        onComplete = { navigateUpWithResult(EditCategoryBottomEvents.Result) },
                         onError = this::showError,
                         onFinally = { updateState { copy(isLoading = false) } },
                 )

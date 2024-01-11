@@ -7,6 +7,7 @@ import com.anadolstudio.chronos.base.viewmodel.BaseContentViewModel
 import com.anadolstudio.chronos.presentation.categories.CategoryNavigationArgs
 import com.anadolstudio.chronos.presentation.categories.model.CategoryUi
 import com.anadolstudio.chronos.presentation.delegates.StopWatcherDelegate
+import com.anadolstudio.chronos.presentation.detail.track.TrackDetailNavigationArgs
 import com.anadolstudio.chronos.presentation.edit.category.EditCategoryNavigationArgs
 import com.anadolstudio.chronos.presentation.main.model.TrackRootUi
 import com.anadolstudio.chronos.presentation.main.model.toTrackRootUi
@@ -45,6 +46,7 @@ class MainViewModel @Inject constructor(
     companion object {
         private const val STOP_WATCHER_INTERVAL = 1L
         const val CATEGORIES_REQUEST_KEY = "1_000_001"
+        const val TRACK_CHANGED_REQUEST_KEY = "1_000_121"
         const val EDIT_REQUEST_KEY = "1_000_011"
     }
 
@@ -111,6 +113,7 @@ class MainViewModel @Inject constructor(
     }
 
     private fun loadAllData() {
+        // TODO в UseCase
         Single.zip(
                 chronosRepository.getAllMainCategories(),
                 chronosRepository.getTrackListByDate(state.trackState.currentDate)
@@ -166,7 +169,16 @@ class MainViewModel @Inject constructor(
             )
     )
 
-    override fun onTrackClicked(trackRootUi: TrackRootUi) = showTodo()
+    override fun onTrackClicked(trackRootUi: TrackRootUi) = navigateTo(
+            id = R.id.action_mainFragment_to_trackDetailBottom,
+            args = bundleOf(
+                    resources.getString(com.anadolstudio.core.R.string.data) to TrackDetailNavigationArgs(
+                            requestKey = TRACK_CHANGED_REQUEST_KEY,
+                            trackRootUi = trackRootUi,
+                            currentDate = state.trackState.currentDate
+                    )
+            )
+    )
 
     override fun onDateSelected(year: Int, month: Int, dayOfMonth: Int) {
         changeCurrentDate(DateTime(year, month, dayOfMonth, 0, 0))

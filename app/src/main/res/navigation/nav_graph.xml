@@ -64,6 +64,17 @@
 
     </dialog>
 
+    <dialog
+        android:id="@+id/trackDetailBottom"
+        android:name="com.anadolstudio.chronos.presentation.detail.track.TrackDetailBottom"
+        tools:layout="@layout/bottom_track_detail">
+
+        <argument
+            android:name="data"
+            app:argType="com.anadolstudio.chronos.presentation.detail.track.TrackDetailNavigationArgs" />
+
+    </dialog>
+
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.anadolstudio.chronos.presentation.main.MainFragment"
@@ -82,6 +93,9 @@
         <action
             android:id="@+id/action_mainFragment_to_editBottom"
             app:destination="@id/editBottom" />
+        <action
+            android:id="@+id/action_mainFragment_to_trackDetailBottom"
+            app:destination="@id/trackDetailBottom" />
 
     </fragment>
 

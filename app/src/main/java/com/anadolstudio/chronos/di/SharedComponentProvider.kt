@@ -3,6 +3,7 @@ package com.anadolstudio.chronos.di
 import com.anadolstudio.chronos.di.viewmodel.ViewModelFactory
 import com.anadolstudio.chronos.presentation.categories.CategoriesViewModel
 import com.anadolstudio.chronos.presentation.create.CreateViewModel
+import com.anadolstudio.chronos.presentation.detail.track.TrackDetailViewModel
 import com.anadolstudio.chronos.presentation.edit.category.EditCategoryViewModel
 import com.anadolstudio.chronos.presentation.track.TrackViewModel
 import dagger.Module
@@ -13,6 +14,7 @@ interface SharedComponent {
     fun trackViewModelFactory(): TrackViewModel.Factory
     fun createViewModelFactory(): CreateViewModel.Factory
     fun editViewModelFactory(): EditCategoryViewModel.Factory
+    fun trackDetailViewModelFactory(): TrackDetailViewModel.Factory
 }
 
 @Module

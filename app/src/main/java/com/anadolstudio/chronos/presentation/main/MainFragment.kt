@@ -8,6 +8,7 @@ import com.anadolstudio.chronos.base.fragment.BaseContentFragment
 import com.anadolstudio.chronos.databinding.FragmentMainBinding
 import com.anadolstudio.chronos.presentation.main.MainViewModel.Companion.CATEGORIES_REQUEST_KEY
 import com.anadolstudio.chronos.presentation.main.MainViewModel.Companion.EDIT_REQUEST_KEY
+import com.anadolstudio.chronos.presentation.main.MainViewModel.Companion.TRACK_CHANGED_REQUEST_KEY
 import com.anadolstudio.chronos.presentation.stopwatcher.StopWatcherFragment
 import com.anadolstudio.chronos.presentation.track.TrackBottom
 import com.anadolstudio.chronos.util.CalendarDialog
@@ -55,7 +56,11 @@ class MainFragment : BaseContentFragment<MainState, MainViewModel, MainControlle
 
     override fun initView() = with(binding) {
         initFragmentResultListeners(
-                TrackBottom.TAG, StopWatcherFragment.TAG, CATEGORIES_REQUEST_KEY, EDIT_REQUEST_KEY
+                TrackBottom.TAG,
+                StopWatcherFragment.TAG,
+                CATEGORIES_REQUEST_KEY,
+                EDIT_REQUEST_KEY,
+                TRACK_CHANGED_REQUEST_KEY
         )
         calendarButton.throttleClick { controller.onCalendarClicked() }
         addButton.scaleAnimationOnClick { controller.onAddClicked() }
@@ -69,7 +74,11 @@ class MainFragment : BaseContentFragment<MainState, MainViewModel, MainControlle
 
     override fun handleFragmentResult(requestKey: String, data: Bundle) = when (requestKey) {
         CATEGORIES_REQUEST_KEY -> controller.onCategoriesSelected(requireParcelable(data))
-        TrackBottom.TAG, StopWatcherFragment.TAG, EDIT_REQUEST_KEY -> controller.onTimeTrackChanged()
+        TrackBottom.TAG,
+        StopWatcherFragment.TAG,
+        EDIT_REQUEST_KEY,
+        TRACK_CHANGED_REQUEST_KEY -> controller.onTimeTrackChanged()
+
         else -> super.handleFragmentResult(requestKey, data)
     }
 

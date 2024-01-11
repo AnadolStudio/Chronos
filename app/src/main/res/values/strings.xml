@@ -16,6 +16,7 @@
     <string name="global_chronometer_text">%1$s : %2$s</string>
     <string name="global_full_time_text">%1$s:%2$s:%3$s</string>
     <string name="global_track_time_format">%1$sч %2$s</string>
+    <string name="global_track_time_hours_format">%1$sч</string>
     <string name="global_diagram_time_format">%1$s / 24</string>
 
     <string name="global_body">Тело</string>
