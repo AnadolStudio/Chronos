@@ -34,8 +34,6 @@ class MainFragment : BaseContentFragment<MainState, MainViewModel, MainControlle
         const val RENDER_TRACK = "RENDER_TRACK"
     }
 
-    override val viewStateDelegate: ViewStateDelegate = ViewStateDelegate()
-
     private val binding by viewBinding { FragmentMainBinding.bind(it) }
     private val stopWatcherSection: Section = Section()
     private val trackSection: Section = Section()

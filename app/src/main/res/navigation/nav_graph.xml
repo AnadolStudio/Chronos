@@ -36,6 +36,21 @@
     </dialog>
 
     <dialog
+        android:id="@+id/editTrackBottom"
+        android:name="com.anadolstudio.chronos.presentation.edit.track.EditTrackBottom"
+        tools:layout="@layout/bottom_track">
+
+        <action
+            android:id="@+id/action_trackBottom_to_categoriesBottom"
+            app:destination="@id/categoriesBottom" />
+
+        <argument
+            android:name="data"
+            app:argType="com.anadolstudio.chronos.presentation.edit.track.EditTrackNavigationArgs" />
+
+    </dialog>
+
+    <dialog
         android:id="@+id/createBottom"
         android:name="com.anadolstudio.chronos.presentation.create.CreateBottom"
         tools:layout="@layout/bottom_create_category">
@@ -72,6 +87,9 @@
         <argument
             android:name="data"
             app:argType="com.anadolstudio.chronos.presentation.detail.track.TrackDetailNavigationArgs" />
+        <action
+            android:id="@+id/action_trackDetailBottom_to_editTrackBottom"
+            app:destination="@id/editTrackBottom" />
 
     </dialog>
 

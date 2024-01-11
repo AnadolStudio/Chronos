@@ -9,19 +9,22 @@ import java.util.concurrent.TimeUnit
 
 @Parcelize
 data class TrackChildUi(
-        val id: UUID,
+        val id: UUID?,
+        val subcategoryId: UUID,
         val name: String,
         val children: List<TrackChildUi>,
         val time: Time = Time(children.sumOf { TimeUnit.MINUTES.toMillis(it.time.totalMinutes.toLong()) })
 ) : Parcelable {
 
     constructor(
-            id: UUID,
+            id: UUID?,
+            subcategoryId: UUID,
             name: String,
             children: List<TrackChildUi>,
             minutes: Int?
     ) : this(
             id = id,
+            subcategoryId = subcategoryId,
             name = name,
             children = children,
             time = minutes

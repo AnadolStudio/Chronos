@@ -1,57 +1,33 @@
 package com.anadolstudio.chronos.presentation.track
 
-import androidx.core.os.bundleOf
 import com.anadolstudio.chronos.R
-import com.anadolstudio.chronos.base.viewmodel.BaseContentViewModel
-import com.anadolstudio.chronos.presentation.categories.CategoryNavigationArgs
 import com.anadolstudio.chronos.presentation.categories.model.CategoryUi
 import com.anadolstudio.chronos.presentation.common.CategoryState
 import com.anadolstudio.chronos.presentation.create.CreateNavigationArgs
-import com.anadolstudio.core.R.string
+import com.anadolstudio.chronos.presentation.track.base.BaseTrackViewModel
 import com.anadolstudio.core.util.rx.smartSubscribe
 import com.anadolstudio.domain.repository.chronos.ChronosRepository
-import com.anadolstudio.domain.repository.chronos.track.TrackDomain
 import com.anadolstudio.domain.repository.common.ResourceRepository
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
-import io.reactivex.Completable
 import org.joda.time.DateTime
 
-class TrackViewModel @AssistedInject constructor(
+open class TrackViewModel @AssistedInject constructor(
         @Assisted args: TrackNavigationArgs,
-        private val resources: ResourceRepository,
-        private val chronosRepository: ChronosRepository,
-) : BaseContentViewModel<TrackState>(
+        resources: ResourceRepository,
+        chronosRepository: ChronosRepository,
+) : BaseTrackViewModel<TrackState>(
         initState = TrackState(
                 categoryState = CategoryState(args.mainCategories),
                 hours = args.hours,
                 minutes = args.minutes,
                 fromStopWatcher = args.fromStopWatcher,
-                selectedDateTime = args.selectedDateTime
-        )
+                selectedDateTime = args.selectedDateTime,
+        ),
+        resources = resources,
+        chronosRepository = chronosRepository,
 ), TrackController {
-
-    companion object {
-        private const val LAST_TRACKS_LIMIT = 10
-        const val CATEGORIES_REQUEST_KEY = "1_000_002"
-    }
-
-    init {
-        loadLastTracks()
-    }
-
-    private fun loadLastTracks() = chronosRepository.getLastTrackList(LAST_TRACKS_LIMIT)
-            .smartSubscribe(
-                    onSuccess = { trackList ->
-                        val categories = trackList.mapNotNull {
-                            state.categoryState.idCategoryMap[it.subcategoryId]
-                        }
-                        updateState { copy(lastTrackList = categories) }
-                    },
-                    onError = this::showError
-            )
-            .disposeOnCleared()
 
     override fun onMinutesChanged(minutes: String) = updateState {
         copy(minutes = minutes.toIntOrNull() ?: 0)
@@ -65,21 +41,8 @@ class TrackViewModel @AssistedInject constructor(
         copy(name = name, selectedCategoryUi = state.categoryState.childNameCategoryMap[name])
     }
 
-    override fun onSearchButtonClicked() = navigateTo(
-            id = R.id.action_trackBottom_to_categoriesBottom,
-            args = bundleOf(
-                    resources.getString(string.data) to CategoryNavigationArgs(
-                            requestKey = CATEGORIES_REQUEST_KEY,
-                            categoryList = state.categoryState.childCategoryList
-                    )
-            )
-    )
-
     override fun onCategoriesSelected(categoryUi: CategoryUi) = updateState {
-        copy(
-                selectedCategoryUi = categoryUi,
-                name = categoryUi.name
-        )
+        copy(selectedCategoryUi = categoryUi, name = categoryUi.name)
     }
 
     override fun onCategoryCreated(categoryUi: CategoryUi) {
@@ -113,8 +76,8 @@ class TrackViewModel @AssistedInject constructor(
         } else {
             navigateTo(
                     id = R.id.action_trackBottom_to_createBottom,
-                    args = bundleOf(
-                            resources.getString(string.data) to CreateNavigationArgs(
+                    args = resources.navigateArg(
+                            CreateNavigationArgs(
                                     categoryList = state.categoryState.categoryList,
                                     name = state.name
                             )
@@ -135,32 +98,17 @@ class TrackViewModel @AssistedInject constructor(
 
             }
             .smartSubscribe(
+                    onSubscribe = { updateLoading(true) },
                     onSuccess = this::trackCategory,
                     onError = this::showError
             )
             .disposeOnCleared()
 
-    private fun trackCategory(it: TrackDomain) = createTrackCompletable(it)
-            .smartSubscribe(
-                    onComplete = {
-                        navigateUpWithResult(TrackBottomEvents.Result)
-                    },
-                    onError = this::showError,
-                    onFinally = { updateState { copy(isLoading = false) } }
-            )
-            .disposeOnCleared()
+    override fun onSuccessTrack() = navigateUpWithResult(TrackBottomEvents.Result)
 
-    private fun createTrackCompletable(currentCategory: TrackDomain): Completable = when (currentCategory.isNew) {
-        true -> chronosRepository.insertTrack(currentCategory)
-        false -> chronosRepository.updateTrack(currentCategory)
-    }
+    override fun onLoadLastTracks(categories: List<CategoryUi>) = updateState { copy(lastTrackList = categories) }
 
-    private fun createNewTrack(currentCategory: CategoryUi, dateTime: DateTime): TrackDomain = TrackDomain(
-            subcategoryId = currentCategory.id,
-            minutes = state.time.totalMinutes,
-            fromStopWatcher = state.fromStopWatcher,
-            date = dateTime
-    )
+    override fun updateLoading(isLoading: Boolean) = updateState { copy(isLoading = isLoading) }
 
     @AssistedFactory
     interface Factory {

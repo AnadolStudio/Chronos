@@ -14,8 +14,6 @@ import com.anadolstudio.core.viewmodel.livedata.SingleEvent
 
 open class TrackDetailBottom : BaseContentBottom<TrackDetailState, TrackDetailViewModel, TrackDetailController>(R.layout.bottom_track_detail) {
 
-    override val viewStateDelegate: ViewStateDelegate = ViewStateDelegate()
-
     protected val binding by viewBinding { BottomTrackDetailBinding.bind(it) }
     protected val args: TrackDetailBottomArgs by navArgs()
 

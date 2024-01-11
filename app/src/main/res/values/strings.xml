@@ -3,6 +3,7 @@
 
     <string name="global_text_item_list"> • %s</string>
     <string name="global_change">Изменить</string>
+    <string name="global_transfer">Перенести</string>
     <string name="global_create">Создать</string>
     <string name="global_remove">Удалить</string>
     <string name="global_remove_category">Удалить категорию \"%1$s\"?</string>

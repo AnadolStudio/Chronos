@@ -75,6 +75,8 @@ open class BaseButton @JvmOverloads constructor(
         }
     }
 
+    private fun invalidateState() = changeState(isEnabled)
+
     fun setText(text: CharSequence?) {
         binding.title.text = text
     }
@@ -92,6 +94,11 @@ open class BaseButton @JvmOverloads constructor(
         enableTextColor = color
         binding.title.setTextColor(color)
         binding.progressView.indeterminateTintList = ColorStateList.valueOf(color)
+    }
+
+    fun setEnableColor(color: Int) {
+        enableColor = color
+        invalidateState()
     }
 
     enum class State {

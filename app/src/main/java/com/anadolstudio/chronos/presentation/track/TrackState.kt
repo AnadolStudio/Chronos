@@ -2,22 +2,21 @@ package com.anadolstudio.chronos.presentation.track
 
 import com.anadolstudio.chronos.presentation.categories.model.CategoryUi
 import com.anadolstudio.chronos.presentation.common.CategoryState
+import com.anadolstudio.chronos.presentation.track.base.BaseTrackState
 import com.anadolstudio.core.util.data_time.Time
 import org.joda.time.DateTime
 
 data class TrackState(
-        val selectedDateTime: DateTime,
-        val categoryState: CategoryState,
-        val fromStopWatcher: Boolean,
-        val selectedCategoryUi: CategoryUi? = null,
-        val name: String = "",
-        val hours: Int = 0,
-        val minutes: Int = 0,
-        val isLoading: Boolean = false,
-        val lastTrackList: List<CategoryUi> = emptyList()
-) {
-
-    val time: Time get() = Time(hours = hours, minutes = minutes, seconds = 0)
+        override val selectedDateTime: DateTime,
+        override val categoryState: CategoryState,
+        override val fromStopWatcher: Boolean,
+        override val selectedCategoryUi: CategoryUi? = null,
+        override val name: String = "",
+        override val hours: Int = 0,
+        override val minutes: Int = 0,
+        override val isLoading: Boolean = false,
+        override val lastTrackList: List<CategoryUi> = emptyList()
+) : BaseTrackState {
 
     val applyButtonState: ApplyButtonState = ApplyButtonState(
             time = time,
@@ -25,6 +24,7 @@ data class TrackState(
             name = name,
             isNewName = categoryState.nameCategoryMap[name] == null
     )
+
 }
 
 data class ApplyButtonState(

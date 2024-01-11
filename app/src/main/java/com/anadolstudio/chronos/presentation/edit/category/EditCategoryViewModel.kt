@@ -1,12 +1,10 @@
 package com.anadolstudio.chronos.presentation.edit.category
 
-import androidx.core.os.bundleOf
 import com.anadolstudio.chronos.R
 import com.anadolstudio.chronos.base.viewmodel.BaseContentViewModel
 import com.anadolstudio.chronos.presentation.categories.CategoryNavigationArgs
 import com.anadolstudio.chronos.presentation.categories.model.CategoryUi
 import com.anadolstudio.chronos.presentation.common.CategoryState
-import com.anadolstudio.core.R.string
 import com.anadolstudio.core.util.rx.smartSubscribe
 import com.anadolstudio.domain.repository.chronos.ChronosRepository
 import com.anadolstudio.domain.repository.common.ResourceRepository
@@ -39,8 +37,8 @@ class EditCategoryViewModel @AssistedInject constructor(
 
     override fun onSearchButtonClicked() = navigateTo(
             id = R.id.action_editBottom_to_categoriesBottom,
-            args = bundleOf(
-                    resources.getString(string.data) to CategoryNavigationArgs(
+            args = resources.navigateArg(
+                    CategoryNavigationArgs(
                             requestKey = CATEGORIES_REQUEST_KEY,
                             categoryList = state.categoryState.categoryList.filter {
                                 it.id != state.categoryUi.id && it.id != state.categoryUi.parentCategoryId
