@@ -7,25 +7,34 @@
     android:layout_height="wrap_content"
     tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
 
-    <TextView
-        android:id="@+id/nameText"
-        style="@style/Category.Tree"
+    <LinearLayout
+        android:id="@+id/textContainer"
         android:layout_width="0dp"
-        android:layout_marginEnd="@dimen/padding_large"
-        android:gravity="center_vertical"
-        app:layout_constraintEnd_toStartOf="@id/timeText"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="Длинное название" />
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/padding_small"
+        android:background="@drawable/item_ripple_rectangle_8">
 
-    <TextView
-        android:id="@+id/timeText"
-        style="@style/Category.Tree"
-        android:gravity="center"
-        tools:text="6ч 15"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        <TextView
+            android:id="@+id/nameText"
+            style="@style/Category.Tree"
+            android:layout_width="0dp"
+            android:layout_marginEnd="@dimen/padding_large"
+            android:gravity="center_vertical"
+            android:layout_weight="1"
+            tools:text="Длинное название" />
+
+        <TextView
+            android:id="@+id/timeText"
+            style="@style/Category.Tree"
+            android:gravity="center"
+            tools:text="6ч 15"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+    </LinearLayout>
 
     <View
         android:id="@+id/divider"
@@ -46,7 +55,7 @@
         android:layout_marginStart="@dimen/padding_medium"
         android:orientation="vertical"
         app:layout_constraintStart_toEndOf="@id/divider"
-        app:layout_constraintTop_toBottomOf="@id/nameText"
+        app:layout_constraintTop_toBottomOf="@id/textContainer"
         tools:layout_height="50dp"/>
 
 </merge>

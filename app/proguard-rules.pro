@@ -37,3 +37,4 @@
 -keepnames class com.anadolstudio.chronos.presentation.track.TrackNavigationArgs
 -keepnames class com.anadolstudio.chronos.presentation.edit.category.EditCategoryNavigationArgs
 -keepnames class com.anadolstudio.chronos.presentation.common.BaseNavigationArgs
+-keepnames class com.anadolstudio.chronos.presentation.detail.track.TrackDetailNavigationArgs

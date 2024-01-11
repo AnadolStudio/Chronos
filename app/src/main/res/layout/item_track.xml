@@ -5,10 +5,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:stateListAnimator="@animator/item_card_normal"
+    android:stateListAnimator="@animator/item_card_large"
     app:cardCornerRadius="@dimen/radius_medium"
     android:layout_marginHorizontal="@dimen/padding_main"
     app:cardBackgroundColor="@color/colorPrimary"
+    android:foreground="@drawable/item_ripple_rectangle_8"
     android:layout_marginTop="@dimen/padding_xsmall"
     android:layout_marginBottom="14dp">
 

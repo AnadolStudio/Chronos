@@ -143,8 +143,7 @@ class TrackViewModel @AssistedInject constructor(
     private fun trackCategory(it: TrackDomain) = createTrackCompletable(it)
             .smartSubscribe(
                     onComplete = {
-                        navigateUp()
-                        showEvent(TrackBottomEvents.Result)
+                        navigateUpWithResult(TrackBottomEvents.Result)
                     },
                     onError = this::showError,
                     onFinally = { updateState { copy(isLoading = false) } }

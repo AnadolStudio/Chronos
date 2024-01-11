@@ -1,9 +1,8 @@
 package com.anadolstudio.chronos.presentation.categories
 
 import com.anadolstudio.chronos.base.viewmodel.BaseContentViewModel
+import com.anadolstudio.chronos.presentation.categories.CategoriesBottomEvents.Result
 import com.anadolstudio.chronos.presentation.categories.model.CategoryUi
-import com.anadolstudio.chronos.presentation.categories.model.toCategoryUi
-import com.anadolstudio.domain.repository.chronos.main_category.MainCategoryDomain
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
@@ -16,10 +15,7 @@ class CategoriesViewModel @AssistedInject constructor(
         )
 ), CategoriesController {
 
-    override fun onCategoryClicked(categoryUi: CategoryUi) {
-        navigateUp()
-        showEvent(CategoriesBottomEvents.Result(categoryUi))
-    }
+    override fun onCategoryClicked(categoryUi: CategoryUi) = navigateUpWithResult(Result(categoryUi))
 
     @AssistedFactory
     interface Factory {

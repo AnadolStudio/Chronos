@@ -7,6 +7,7 @@ import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.anadolstudio.chronos.databinding.ViewTreeTrackBinding
+import com.anadolstudio.chronos.presentation.main.model.TrackChildUi
 import com.anadolstudio.chronos.presentation.main.model.TrackRootUi
 import com.anadolstudio.chronos.util.toTrackTime
 
@@ -19,7 +20,7 @@ class TrackTreeView @JvmOverloads constructor(
 
     private val binding = ViewTreeTrackBinding.inflate(LayoutInflater.from(context), this)
 
-    fun setup(trackRootUi: TrackRootUi) = with(binding) {
+    fun setup(trackRootUi: TrackRootUi, onChildClick: ((TrackChildUi) -> Unit)? = null) = with(binding) {
         nameText.text = trackRootUi.name
         timeText.text = trackRootUi.time.toTrackTime(context)
         headerBackground.setBackgroundColor(trackRootUi.color)
@@ -28,7 +29,7 @@ class TrackTreeView @JvmOverloads constructor(
         trackRootUi.notEmptyChildren.forEach {
             val child = TrackTreeItemView(context)
             child.layoutParams = LayoutParams(MATCH_PARENT, WRAP_CONTENT)
-            child.setup(it)
+            child.setup(it, onChildClick)
 
             childContainer.addView(child)
         }
