@@ -66,6 +66,7 @@ open class TrackViewModel @AssistedInject constructor(
                 )
                 .disposeOnCleared()
 
+        showEvent(TrackBottomEvents.Result)
     }
 
     override fun onTrackClicked() {
