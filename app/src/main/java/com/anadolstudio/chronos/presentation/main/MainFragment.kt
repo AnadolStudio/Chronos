@@ -12,9 +12,8 @@ import com.anadolstudio.chronos.presentation.main.MainViewModel.Companion.TRACK_
 import com.anadolstudio.chronos.presentation.stopwatcher.StopWatcherFragment
 import com.anadolstudio.chronos.presentation.track.TrackBottom
 import com.anadolstudio.chronos.util.CalendarDialog
-import com.anadolstudio.chronos.view.diagram.LineProgressView.ProgressData
+import com.anadolstudio.chronos.view.diagram.ProgressData
 import com.anadolstudio.core.groupie.BaseGroupAdapter
-import com.anadolstudio.core.presentation.fragment.state_util.ViewStateDelegate
 import com.anadolstudio.core.util.common.throttleClick
 import com.anadolstudio.core.util.common_extention.getDrawable
 import com.anadolstudio.core.util.common_extention.requireParcelable
