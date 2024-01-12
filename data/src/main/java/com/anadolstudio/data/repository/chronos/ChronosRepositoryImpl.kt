@@ -109,16 +109,21 @@ class ChronosRepositoryImpl(
             .insertTrack(trackDomain.toEntity())
             .schedulersIoToMain()
 
-    override fun updateTrack(trackDomain: TrackDomain): Completable = updateTrackById(
-            trackDomain.uuid, trackDomain.minutes
-    )
+    override fun updateTrack(trackDomain: TrackDomain): Completable  = trackDao
+            .updateTrack(trackDomain.toEntity())
+            .schedulersIoToMain()
 
-    override fun updateTrackById(id: UUID, totalMinutes: Int): Completable = trackDao
-            .updateTrack(id, totalMinutes)
+    override fun updateTrackTimeById(id: UUID, totalMinutes: Int): Completable = trackDao
+            .updateTrackTimeById(id, totalMinutes)
             .schedulersIoToMain()
 
     override fun getTrackById(trackId: UUID): Single<TrackDomain> = trackDao
             .getTrackById(trackId)
+            .map { it.toDomain() }
+            .schedulersIoToMain()
+
+    override fun getTrackByCategoryId(trackId: UUID): Single<List<TrackDomain>> = trackDao
+            .getTrackByCategoryId(trackId)
             .map { it.toDomain() }
             .schedulersIoToMain()
 
