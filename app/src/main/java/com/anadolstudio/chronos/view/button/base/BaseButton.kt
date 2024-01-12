@@ -1,5 +1,6 @@
 package com.anadolstudio.chronos.view.button.base
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.ColorStateList
 import android.content.res.TypedArray
@@ -79,6 +80,11 @@ open class BaseButton @JvmOverloads constructor(
 
     fun setText(text: CharSequence?) {
         binding.title.text = text
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    override fun setOnTouchListener(l: OnTouchListener?) {
+        binding.cardView.setOnTouchListener(l)
     }
 
     fun setText(@StringRes textRes: Int) = setText(context.getString(textRes))
