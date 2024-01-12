@@ -58,9 +58,10 @@ class InputView @JvmOverloads constructor(
     fun setOnIconClickListener(listener: (() -> Unit)?) = binding.editText.setOnIconClickListener(listener)
 
     fun setText(text: String, withValidate: Boolean = true) {
+        val selectionEnd = binding.editText.getSelectionEnd()
+
         binding.editText.setText(text, withValidate)
-        // TODO temp - setSelectorToEnd
-        setSelectorToEnd()
+        binding.editText.setSelectionStart(minOf(selectionEnd, text.length))
     }
 
     fun setSelectorToEnd() = binding.editText.setSelectorToEnd()

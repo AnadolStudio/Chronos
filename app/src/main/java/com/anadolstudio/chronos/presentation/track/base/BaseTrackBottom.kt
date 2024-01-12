@@ -54,7 +54,9 @@ abstract class BaseTrackBottom<
 
     override fun render(state: State) = with(state) {
         binding.hoursText.setText(state.hours.toString(), withValidate = false)
+        if (hours == 0) binding.hoursText.setSelectorToEnd()
         binding.minutesText.setText(state.minutes.toString(), withValidate = false)
+        if (minutes == 0) binding.minutesText.setSelectorToEnd()
         binding.nameText.setText(state.name, withValidate = false)
         renderLastTracks(state.lastTrackList)
         renderSelectedCategory(selectedCategoryUi)
