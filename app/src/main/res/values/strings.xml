@@ -19,6 +19,7 @@
     <string name="global_track_time_format">%1$sч %2$s</string>
     <string name="global_track_time_hours_format">%1$sч</string>
     <string name="global_diagram_time_format">%1$s / 24</string>
+    <string name="global_diagram_time_free_format">%1$s / %2$s</string>
 
     <string name="global_body">Тело</string>
     <string name="global_mind">Разум</string>
@@ -34,4 +35,6 @@
 
     <string name="prev_parent_category">Предыдущая: %1$s</string>
     <string name="prev_name">Предыдущее название: %1$s</string>
+    <string name="from_date">с %1$s</string>
+    <string name="to_date">по %1$s</string>
 </resources>

@@ -3,7 +3,7 @@ package com.anadolstudio.chronos.presentation.main
 import android.view.View
 import com.anadolstudio.chronos.R
 import com.anadolstudio.chronos.databinding.ItemLineDiagramBinding
-import com.anadolstudio.chronos.view.diagram.LineProgressView
+import com.anadolstudio.chronos.view.diagram.ProgressData
 import com.anadolstudio.core.groupie.BaseGroupItem
 import com.anadolstudio.core.view.animation.AnimateUtil.scaleAnimationOnClick
 import org.joda.time.DateTime
@@ -50,7 +50,7 @@ class DiagramItem(
     data class Data(
             val hours: Float,
             val currentDate: DateTime,
-            val progressDataList: List<LineProgressView.ProgressData>,
+            val progressDataList: List<ProgressData>,
             val onNextDateClick: () -> Unit,
             val onPreviousDateClick: () -> Unit,
             val nextDateEnable: Boolean

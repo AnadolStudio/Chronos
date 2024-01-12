@@ -4,13 +4,14 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
+import android.graphics.RectF
 import android.graphics.drawable.ColorDrawable
 import android.util.AttributeSet
 import android.widget.FrameLayout
 import com.anadolstudio.chronos.R
 import com.anadolstudio.core.util.common.dpToPx
 
-class LineProgressView @JvmOverloads constructor(
+class CircleProgressView @JvmOverloads constructor(
         context: Context,
         attrs: AttributeSet?,
         defStyleAttr: Int = 0,
@@ -18,16 +19,17 @@ class LineProgressView @JvmOverloads constructor(
 ) : FrameLayout(context, attrs, defStyleAttr, defStyleRes) {
 
     private companion object {
-        val STROKE_WIDTH = 8F.dpToPx()
+        const val CIRCLE = 360F
+        val MIN_SIZE = 175.dpToPx()
     }
 
     init {
-        minimumHeight = STROKE_WIDTH.toInt()
+        minimumHeight = MIN_SIZE
+        minimumWidth = MIN_SIZE
         background = ColorDrawable(Color.TRANSPARENT)
     }
 
     private val defaultPaint: Paint = ProgressPaint(context.getColor(R.color.disableBackground))
-
     private var progressDataList: List<ProgressData> = emptyList()
     private val totalValue get() = progressDataList.sumOf { it.value }
 
@@ -39,33 +41,28 @@ class LineProgressView @JvmOverloads constructor(
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
 
-        var previousEndX = 0F
-        progressDataList.forEachIndexed { index, progressData ->
-            val isStart = index == 0
-            val isEnd = index == progressDataList.lastIndex
+        var previousAngle = 0F
+        progressDataList.forEach { progressData ->
             val ratio = progressData.value / totalValue.toFloat()
-            val endX = previousEndX + width * ratio
+            val sweepAngle = CIRCLE * ratio
 
-            canvas.drawRoundLine(previousEndX, endX, height / 2F, progressData.paint, isStart, isEnd)
+            canvas.drawRoundLine(previousAngle, sweepAngle, progressData.paint)
 
-            previousEndX = endX
+            previousAngle += sweepAngle
         }
 
         progressDataList.ifEmpty {
-            canvas.drawRoundLine(previousEndX, width.toFloat(), height / 2F, defaultPaint, true, true)
+            canvas.drawRoundLine(previousAngle, CIRCLE, defaultPaint)
         }
     }
 
-    private fun Canvas.drawRoundLine(startX: Float, endX: Float, y: Float, paint: Paint, isStart: Boolean, isEnd: Boolean) {
-        val correctStartX = if (isStart) startX + STROKE_WIDTH else startX
-        val correctEndX = if (isEnd) endX - STROKE_WIDTH else endX
+    private fun Canvas.drawRoundLine(startAngle: Float, sweepAngle: Float, paint: Paint) {
+        val minSide = minOf(width - paint.strokeWidth, height - paint.strokeWidth)
+        val offsetX = (width - minSide) / 2
+        val offsetY = (height - minSide) / 2
+        val rect = RectF(offsetX, offsetY, minSide + offsetX, minSide + offsetY)
 
-        paint.strokeCap = Paint.Cap.ROUND
-        if (isStart) drawLine(correctStartX, y, correctStartX, y, paint)
-        if (isEnd) drawLine(correctEndX, y, correctEndX, y, paint)
-
-        paint.strokeCap = Paint.Cap.BUTT
-        drawLine(correctStartX, y, correctEndX, y, paint)
+        drawArc(rect, startAngle, sweepAngle, false, paint)
     }
 
 }

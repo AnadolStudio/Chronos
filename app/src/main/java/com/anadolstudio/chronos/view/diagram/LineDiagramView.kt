@@ -29,7 +29,7 @@ class LineDiagramView @JvmOverloads constructor(
     fun setup(
             hours: Float,
             currentDate: DateTime,
-            progressDataList: List<LineProgressView.ProgressData>,
+            progressDataList: List<ProgressData>,
             onNextDateClick: () -> Unit,
             onPreviousDateClick: () -> Unit,
             nextDateEnable: Boolean
