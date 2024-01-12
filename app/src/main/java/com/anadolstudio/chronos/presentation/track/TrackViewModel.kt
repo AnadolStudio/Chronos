@@ -29,11 +29,11 @@ open class TrackViewModel @AssistedInject constructor(
         chronosRepository = chronosRepository,
 ), TrackController {
 
-    override fun onMinutesChanged(minutes: String) = updateState {
+    override fun onMinutesChanged(minutes: String) = updateState(forceUpdate = (minutes.toIntOrNull() ?: 0) == 0) {
         copy(minutes = minutes.toIntOrNull() ?: 0)
     }
 
-    override fun onHoursChanged(hours: String) = updateState {
+    override fun onHoursChanged(hours: String) = updateState(forceUpdate = (hours.toIntOrNull() ?: 0) == 0) {
         copy(hours = hours.toIntOrNull() ?: 0)
     }
 
