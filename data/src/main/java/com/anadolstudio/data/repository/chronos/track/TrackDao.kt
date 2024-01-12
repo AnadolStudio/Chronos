@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Update
 import com.anadolstudio.data.repository.chronos.track.TrackEntity.Companion.TRACK_TABLE
 import io.reactivex.Completable
 import io.reactivex.Single
@@ -23,10 +24,16 @@ interface TrackDao {
     fun insertTrack(trackDomain: TrackEntity): Completable
 
     @Query("UPDATE $TRACK_TABLE SET minutes = :totalMinutes WHERE uuid = :trackId ")
-    fun updateTrack(trackId: UUID, totalMinutes: Int): Completable
+    fun updateTrackTimeById(trackId: UUID, totalMinutes: Int): Completable
+
+    @Update(onConflict = OnConflictStrategy.ABORT)
+    fun updateTrack(track: TrackEntity): Completable
 
     @Query("SELECT * FROM $TRACK_TABLE WHERE uuid = :trackId")
     fun getTrackById(trackId: UUID): Single<TrackEntity>
+
+    @Query("SELECT * FROM $TRACK_TABLE WHERE subcategory_id = :id")
+    fun getTrackByCategoryId(id: UUID): Single<List<TrackEntity>>
 
     @Query("SELECT * FROM $TRACK_TABLE WHERE date = :dateTime")
     fun getTrackListByDate(dateTime: DateTime): Single<List<TrackEntity>>

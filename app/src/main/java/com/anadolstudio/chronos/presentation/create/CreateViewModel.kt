@@ -12,6 +12,7 @@ import com.anadolstudio.domain.repository.common.ResourceRepository
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
+import io.reactivex.Completable
 
 class CreateViewModel @AssistedInject constructor(
         @Assisted args: CreateNavigationArgs,
@@ -55,23 +56,42 @@ class CreateViewModel @AssistedInject constructor(
                 parentCategoryId = parent.id,
         )
 
-        chronosRepository
-                .insertSubcategory(subcategory)
-                .smartSubscribe(
-                        onSubscribe = { updateState { copy(isLoading = true) } },
-                        onComplete = {
-                            val category = subcategory
-                                    .toCategoryUi(parent.name, parent.color)
-                                    .first()
+        val unknownSubcategory = SubcategoryDomain(
+                name = resources.getString(R.string.unknown_category),
+                mainCategoryId = parent.mainCategoryId,
+                parentCategoryId = parent.id,
+        )
 
-                            // TODO при создании собирамой категории затреканное время
-                            //  переносить в новую дочернуюю категорию Unknown
-                            navigateUpWithResult(CreateBottomEvents.Result(category))
-                        },
-                        onError = this::showError,
-                        onFinally = { updateState { copy(isLoading = false) } }
-                )
-                .disposeOnCleared()
+        val transferTrackCompletable = chronosRepository.getTrackByCategoryId(parent.id)
+                .flatMapCompletable { trackList ->
+                    if (parent.hasChild || trackList.isEmpty()) {
+                        Completable.complete()
+                    } else {
+                        val updateTrackCompletableList = trackList.map {
+                            chronosRepository.updateTrack(it.copy(subcategoryId = unknownSubcategory.uuid))
+                        }
+                        val updateOldTracks = Completable.concatArray(*updateTrackCompletableList.toTypedArray())
+                        Completable.concatArray(chronosRepository.insertSubcategory(unknownSubcategory), updateOldTracks)
+                    }
+                }
+
+        Completable.concatArray(
+                chronosRepository.insertSubcategory(subcategory),
+                transferTrackCompletable,
+        ).smartSubscribe(
+                onSubscribe = { updateState { copy(isLoading = true) } },
+                onComplete = {
+                    val category = subcategory
+                            .toCategoryUi(parent.name, parent.color)
+                            .first()
+
+                    // TODO при создании собирамой категории затреканное время
+                    //  переносить в новую дочернуюю категорию Unknown
+                    navigateUpWithResult(CreateBottomEvents.Result(category))
+                },
+                onError = this::showError,
+                onFinally = { updateState { copy(isLoading = false) } }
+        ).disposeOnCleared()
     }
 
     @AssistedFactory

@@ -67,7 +67,7 @@ class EditTrackViewModel @AssistedInject constructor(
                             val newTime = state.trackChildUi.time.totalMinutes - state.time.totalMinutes
 
                             val completable = if (newTime > 0) {
-                                chronosRepository.updateTrackById(id, newTime)
+                                chronosRepository.updateTrackTimeById(id, newTime)
                             } else {
                                 chronosRepository.deleteTrackById(id)
                             }

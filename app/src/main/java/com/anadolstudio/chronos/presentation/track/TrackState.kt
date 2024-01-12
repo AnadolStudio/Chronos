@@ -41,7 +41,8 @@ data class ApplyButtonState(
             time: Time,
             isNewName: Boolean,
     ) : this(
-            isEnable = name.isNotBlank() && (time.totalMinutes >= MIN_TRACK_MINUTES || isNewName),
+            isEnable = name.isNotBlank()
+                    && (isNewName || (selectedCategoryUi?.isMainCategory == false && time.totalMinutes >= MIN_TRACK_MINUTES)),
             hasSelectedCategory = selectedCategoryUi != null,
     )
 }
