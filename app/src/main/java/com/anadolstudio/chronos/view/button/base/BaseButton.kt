@@ -94,9 +94,9 @@ open class BaseButton @JvmOverloads constructor(
         binding.progressContainer.isVisible = isLoading
     }
 
-    private fun setTextColorRes(@ColorRes colorRes: Int) = setTextColor(context.getColor(colorRes))
+    fun setTextColorRes(@ColorRes colorRes: Int) = setTextColor(context.getColor(colorRes))
 
-    private fun setTextColor(@ColorInt color: Int) {
+    fun setTextColor(@ColorInt color: Int) {
         enableTextColor = color
         binding.title.setTextColor(color)
         binding.progressView.indeterminateTintList = ColorStateList.valueOf(color)
