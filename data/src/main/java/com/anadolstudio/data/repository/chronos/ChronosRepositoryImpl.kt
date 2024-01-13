@@ -139,8 +139,10 @@ class ChronosRepositoryImpl(
 
     override fun getLastTrackList(limit: Int): Single<List<TrackDomain>> = trackDao
             .getLastTrackList(limit)
-            .map {
-                it.toSet().toList().toDomain()
+            .map { list ->
+                list.associateBy { it.subcategoryId }
+                        .values.toList()
+                        .toDomain()
             }
             .schedulersIoToMain()
 
