@@ -8,10 +8,10 @@ import java.util.UUID
 object DatabaseConverters {
 
     @TypeConverter
-    fun toDateTime(input: String): DateTime = input.safeParseDateTime() ?: DateTime.now()
+    fun toDateTime(input: Long): DateTime = DateTime(input)
 
     @TypeConverter
-    fun fromDateTime(input: DateTime): String = input.withTimeAtStartOfDay().toString()
+    fun fromDateTime(input: DateTime): Long = input.withTimeAtStartOfDay().millis
 
     @TypeConverter
     fun toUUID(input: String): UUID = UUID.fromString(input)

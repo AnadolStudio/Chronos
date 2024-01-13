@@ -4,7 +4,6 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.view.isVisible
 import androidx.core.view.setPadding
 import com.anadolstudio.chronos.R
 import com.anadolstudio.chronos.databinding.ViewCircleDiagramBinding
@@ -27,14 +26,14 @@ class CircleDiagramView @JvmOverloads constructor(
 
     fun setup(
             hours: Float,
+            totalMinutes: Long,
             startDate: DateTime,
             endDate: DateTime,
             progressDataList: List<ProgressData>,
             onFromDateClick: () -> Unit,
             onToDateClick: () -> Unit,
     ) {
-        val totalMillis = endDate.withTimeAtStartOfDay().millis - startDate.withTimeAtStartOfDay().millis
-        val totalHours = TimeUnit.MILLISECONDS.toHours(totalMillis)
+        val totalHours = TimeUnit.MINUTES.toHours(totalMinutes)
 
         binding.fromDateText.text = context.getString(R.string.from_date, startDate.toSimpleDateFormat())
         binding.toDateText.text = context.getString(R.string.to_date, endDate.toSimpleDateFormat())

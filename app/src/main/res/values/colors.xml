@@ -35,5 +35,6 @@
     <color name="divider">#d3d3d3</color>
     <color name="colorRemove">#FFB5B5</color>
     <color name="colorRipple">#bdbdbd</color>
+    <color name="colorAccentCurrentDate">#BF494949</color>
 
 </resources>
