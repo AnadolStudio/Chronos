@@ -41,7 +41,7 @@ interface TrackDao {
     @Query("SELECT * FROM $TRACK_TABLE WHERE date >= :from AND date <= :to")
     fun getTrackListByPeriod(from: DateTime, to: DateTime): Single<List<TrackEntity>>
 
-    @Query("SELECT * FROM $TRACK_TABLE GROUP BY subcategory_id ORDER BY id DESC LIMIT :limit")
+    @Query("SELECT * FROM $TRACK_TABLE ORDER BY id DESC LIMIT :limit")
     fun getLastTrackList(limit: Int): Single<List<TrackEntity>>
 
     @Query("DELETE FROM $TRACK_TABLE WHERE subcategory_id = :id")
