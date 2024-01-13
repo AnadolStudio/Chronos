@@ -23,6 +23,8 @@ interface TrackRepository {
 
     fun getTrackListByDate(date: DateTime): Single<List<TrackDomain>>
 
+    fun getTrackListByPeriod(from: DateTime, to: DateTime): Single<List<TrackDomain>>
+
     fun getLastTrackList(limit: Int): Single<List<TrackDomain>>
 
     fun deleteTrackByCategoryId(id: UUID): Completable

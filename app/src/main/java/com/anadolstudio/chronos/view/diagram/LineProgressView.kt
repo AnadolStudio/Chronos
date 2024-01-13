@@ -26,7 +26,8 @@ class LineProgressView @JvmOverloads constructor(
         background = ColorDrawable(Color.TRANSPARENT)
     }
 
-    private val defaultPaint: Paint = ProgressPaint(context.getColor(R.color.disableBackground))
+    private val defaultColor = context.getColor(R.color.disableBackground)
+    private val defaultPaint: Paint = ProgressPaint(defaultColor)
 
     private var progressDataList: List<ProgressData> = emptyList()
     private val totalValue get() = progressDataList.sumOf { it.value }
@@ -46,12 +47,14 @@ class LineProgressView @JvmOverloads constructor(
             val ratio = progressData.value / totalValue.toFloat()
             val endX = previousEndX + width * ratio
 
-            canvas.drawRoundLine(previousEndX, endX, height / 2F, progressData.paint, isStart, isEnd)
+            defaultPaint.color = progressData.color
+            canvas.drawRoundLine(previousEndX, endX, height / 2F, defaultPaint, isStart, isEnd)
 
             previousEndX = endX
         }
 
         progressDataList.ifEmpty {
+            defaultPaint.color = defaultColor
             canvas.drawRoundLine(previousEndX, width.toFloat(), height / 2F, defaultPaint, true, true)
         }
     }

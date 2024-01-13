@@ -109,7 +109,7 @@ class ChronosRepositoryImpl(
             .insertTrack(trackDomain.toEntity())
             .schedulersIoToMain()
 
-    override fun updateTrack(trackDomain: TrackDomain): Completable  = trackDao
+    override fun updateTrack(trackDomain: TrackDomain): Completable = trackDao
             .updateTrack(trackDomain.toEntity())
             .schedulersIoToMain()
 
@@ -129,6 +129,11 @@ class ChronosRepositoryImpl(
 
     override fun getTrackListByDate(date: DateTime): Single<List<TrackDomain>> = trackDao
             .getTrackListByDate(date)
+            .map { it.toDomain() }
+            .schedulersIoToMain()
+
+    override fun getTrackListByPeriod(from: DateTime, to: DateTime): Single<List<TrackDomain>> = trackDao
+            .getTrackListByPeriod(from, to)
             .map { it.toDomain() }
             .schedulersIoToMain()
 

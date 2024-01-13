@@ -21,6 +21,7 @@ class CircleProgressView @JvmOverloads constructor(
     private companion object {
         const val CIRCLE = 360F
         val MIN_SIZE = 175.dpToPx()
+        val STROKE_WIDTH = 16F.dpToPx()
     }
 
     init {
@@ -29,7 +30,8 @@ class CircleProgressView @JvmOverloads constructor(
         background = ColorDrawable(Color.TRANSPARENT)
     }
 
-    private val defaultPaint: Paint = ProgressPaint(context.getColor(R.color.disableBackground))
+    private val defaultColor = context.getColor(R.color.disableBackground)
+    private val defaultPaint: Paint = ProgressPaint(defaultColor, STROKE_WIDTH)
     private var progressDataList: List<ProgressData> = emptyList()
     private val totalValue get() = progressDataList.sumOf { it.value }
 
@@ -46,12 +48,14 @@ class CircleProgressView @JvmOverloads constructor(
             val ratio = progressData.value / totalValue.toFloat()
             val sweepAngle = CIRCLE * ratio
 
-            canvas.drawRoundLine(previousAngle, sweepAngle, progressData.paint)
+            defaultPaint.color = progressData.color
+            canvas.drawRoundLine(previousAngle, sweepAngle, defaultPaint)
 
             previousAngle += sweepAngle
         }
 
         progressDataList.ifEmpty {
+            defaultPaint.color = defaultColor
             canvas.drawRoundLine(previousAngle, CIRCLE, defaultPaint)
         }
     }

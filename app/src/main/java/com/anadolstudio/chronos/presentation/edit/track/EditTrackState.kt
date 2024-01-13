@@ -24,7 +24,8 @@ data class EditTrackState(
     }
 
     val buttonEnable: Boolean = (time.totalMinutes >= MIN_TRACK_MINUTES || time.totalMinutes == 0)
-            && (trackChildUi.time.totalMinutes != time.totalMinutes || name != trackChildUi.name)
+            && (trackChildUi.time.totalMinutes != time.totalMinutes
+            || (name != trackChildUi.name && categoryState.nameCategoryMap[name] != null))
 
     val buttonState: ButtonState
         get() = when {

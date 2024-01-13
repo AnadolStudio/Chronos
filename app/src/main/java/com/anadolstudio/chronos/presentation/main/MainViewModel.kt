@@ -154,7 +154,7 @@ class MainViewModel @Inject constructor(
             )
     )
 
-    override fun onDiagramClicked() = showTodo()
+    override fun onDiagramClicked() = navigateTo(R.id.action_mainFragment_to_statisticFragment)
 
     override fun onStopWatcherClicked() = navigateTo(R.id.action_mainFragment_to_stopWatcherFragment)
 
