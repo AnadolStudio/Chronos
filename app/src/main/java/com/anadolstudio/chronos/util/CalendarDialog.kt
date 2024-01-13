@@ -30,8 +30,8 @@ object CalendarDialog {
                 currentDateTime.monthOfYear - 1,
                 currentDateTime.dayOfMonth
         ).apply {
-            setButton(DatePickerDialog.BUTTON_POSITIVE, context.getString(android.R.string.ok))
-            setButton(DatePickerDialog.BUTTON_NEGATIVE, context.getString(android.R.string.cancel))
+            setButton(DatePickerDialog.BUTTON_POSITIVE, context.getString(R.string.global_choice))
+            setButton(DatePickerDialog.BUTTON_NEGATIVE, context.getString(R.string.global_cancel))
             setOnDismissListener(dismissListener)
             datePicker.minDate = minDate?.millis ?: 0
             datePicker.maxDate = maxDate.millis

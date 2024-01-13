@@ -58,6 +58,7 @@ open class EditCategoryBottom : BaseContentBottom<EditCategoryState, EditCategor
     private fun showConfirmRemoveAlert(name: String) {
         AlertDialogBuilder.buildChoiceDialog(
                 context = requireContext(),
+                theme = R.style.ChronosDialogAlertTheme,
                 title = requireContext().getString(R.string.global_remove),
                 message = requireContext().getString(R.string.global_remove_category, name),
                 cancelable = true,

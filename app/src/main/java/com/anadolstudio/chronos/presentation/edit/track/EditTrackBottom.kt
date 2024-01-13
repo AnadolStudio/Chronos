@@ -42,16 +42,19 @@ class EditTrackBottom : BaseTrackBottom<EditTrackState, EditTrackViewModel, Base
         when (buttonState) {
             ButtonState.REMOVE -> {
                 binding.applyButton.setText(R.string.global_remove)
+                binding.applyButton.setTextColor(requireContext().getColor(R.color.colorText))
                 binding.applyButton.setEnableColor(requireContext().getColor(R.color.colorRemove))
             }
 
             ButtonState.TRANSFER -> {
                 binding.applyButton.setText(R.string.global_transfer)
+                binding.applyButton.setTextColor(requireContext().getColor(R.color.colorAccent))
                 binding.applyButton.setEnableColor(requireContext().getColor(R.color.colorPrimary))
             }
 
             ButtonState.UPDATE -> {
                 binding.applyButton.setText(R.string.global_change)
+                binding.applyButton.setTextColor(requireContext().getColor(R.color.colorAccent))
                 binding.applyButton.setEnableColor(requireContext().getColor(R.color.colorPrimary))
             }
         }
