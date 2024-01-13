@@ -19,16 +19,14 @@ data class MainState(
     constructor(
             stopWatcherData: StopWatcherData,
             isNightMode: Boolean,
-            stopWatcherTime: Time? = null,
-            categoryState: MainCategoryState = MainCategoryState(),
+            stopWatcherTime: Time?,
             currentDate: DateTime,
-            isLoading: Boolean = true,
     ) : this(
             stopWatcherData = stopWatcherData,
             stopWatcherTime = stopWatcherTime,
-            categoryState = categoryState,
+            categoryState = MainCategoryState(),
             trackState = TrackState(currentDate = currentDate),
-            isLoading = isLoading,
+            isLoading = true,
             isNightMode = isNightMode
     )
 }

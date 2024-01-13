@@ -70,12 +70,12 @@
         android:name="com.anadolstudio.chronos.presentation.edit.category.EditCategoryBottom"
         tools:layout="@layout/bottom_edit_category">
 
-        <argument
-            android:name="data"
-            app:argType="com.anadolstudio.chronos.presentation.edit.category.EditCategoryNavigationArgs" />
         <action
             android:id="@+id/action_editBottom_to_categoriesBottom"
             app:destination="@id/categoriesBottom" />
+        <argument
+            android:name="data"
+            app:argType="com.anadolstudio.chronos.presentation.edit.category.EditCategoryNavigationArgs" />
 
     </dialog>
 
@@ -84,12 +84,12 @@
         android:name="com.anadolstudio.chronos.presentation.detail.track.TrackDetailBottom"
         tools:layout="@layout/bottom_track_detail">
 
-        <argument
-            android:name="data"
-            app:argType="com.anadolstudio.chronos.presentation.detail.track.TrackDetailNavigationArgs" />
         <action
             android:id="@+id/action_trackDetailBottom_to_editTrackBottom"
             app:destination="@id/editTrackBottom" />
+        <argument
+            android:name="data"
+            app:argType="com.anadolstudio.chronos.presentation.detail.track.TrackDetailNavigationArgs" />
 
     </dialog>
 
@@ -114,6 +114,9 @@
         <action
             android:id="@+id/action_mainFragment_to_trackDetailBottom"
             app:destination="@id/trackDetailBottom" />
+        <action
+            android:id="@+id/action_mainFragment_to_statisticFragment"
+            app:destination="@id/statisticFragment" />
 
     </fragment>
 
@@ -125,6 +128,13 @@
         <action
             android:id="@+id/action_stopWatcherFragment_to_trackBottom"
             app:destination="@id/trackBottom" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/statisticFragment"
+        android:name="com.anadolstudio.chronos.presentation.statistic.StatisticFragment"
+        tools:layout="@layout/fragment_statistic">
+
     </fragment>
 
 </navigation>

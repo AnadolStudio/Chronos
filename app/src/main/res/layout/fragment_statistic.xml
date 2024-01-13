@@ -34,7 +34,8 @@
             app:layout_constraintTop_toTopOf="parent"
             app:needDivider="true"
             app:tint="@color/colorAccent"
-            app:title="@string/app_name">
+            app:title="@string/app_name"
+            app:back_icon="@drawable/ic_arrow_back" >
 
         </com.anadolstudio.core.view.toolbar.BaseToolbar>
 
