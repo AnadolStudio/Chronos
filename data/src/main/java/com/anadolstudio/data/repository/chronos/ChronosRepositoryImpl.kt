@@ -139,7 +139,9 @@ class ChronosRepositoryImpl(
 
     override fun getLastTrackList(limit: Int): Single<List<TrackDomain>> = trackDao
             .getLastTrackList(limit)
-            .map { it.toDomain() }
+            .map {
+                it.toSet().toList().toDomain()
+            }
             .schedulersIoToMain()
 
     override fun deleteTrackByCategoryId(id: UUID): Completable = trackDao
