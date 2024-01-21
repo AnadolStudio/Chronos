@@ -11,7 +11,6 @@ import com.anadolstudio.chronos.databinding.ViewLineDiagramBinding
 import com.anadolstudio.chronos.util.minusDay
 import com.anadolstudio.chronos.util.plusDay
 import com.anadolstudio.chronos.util.toSimpleDateFormat
-import com.anadolstudio.chronos.util.toWeekDayDateFormat
 import org.joda.time.DateTime
 
 class LineDiagramView @JvmOverloads constructor(
@@ -35,7 +34,7 @@ class LineDiagramView @JvmOverloads constructor(
             onPreviousDateClick: () -> Unit,
             nextDateEnable: Boolean
     ) {
-        binding.dateText.text = currentDate.toWeekDayDateFormat()
+        binding.dateText.text = currentDate.toSimpleDateFormat()
         binding.previousDateText.text = currentDate.minusDay().toSimpleDateFormat()
         binding.nextDateText.text = currentDate.plusDay().toSimpleDateFormat()
         binding.previousDateContainer.setOnClickListener { onPreviousDateClick.invoke() }
