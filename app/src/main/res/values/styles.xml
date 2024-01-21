@@ -51,8 +51,8 @@
         <item name="android:colorBackgroundCacheHint">@color/colorPrimary</item>
         <item name="android:windowMinWidthMajor">0%</item>
         <item name="android:windowMinWidthMinor">0%</item>
-        <item name="android:fontFamily">@font/fonts</item>
-        <item name="fontFamily">@font/fonts</item>
+        <item name="android:fontFamily">@string/common_font</item>
+        <item name="fontFamily">@string/common_font</item>
     </style>
 
     <style name="DatePickerButton" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
@@ -61,8 +61,8 @@
     </style>
 
     <style name="ChronosDialogAlertTheme" parent="DialogAlertTheme">
-        <item name="android:fontFamily">@font/fonts</item>
-        <item name="fontFamily">@font/fonts</item>
+        <item name="android:fontFamily">@string/common_font</item>
+        <item name="fontFamily">@string/common_font</item>
     </style>
 
 </resources>

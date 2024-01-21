@@ -7,12 +7,12 @@
         <item name="colorSecondary">@color/colorSecondary</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowBackground">@color/colorSecondary</item>
-        <item name="android:textViewStyle">@style/CommonTextViewStyle</item>
+        <item name="android:textViewStyle">@style/SerifTextViewStyle</item>
     </style>
 
-    <style name="CommonTextViewStyle" parent="android:Widget.TextView">
-        <item name="android:fontFamily">@font/fonts</item>
-        <item name="fontFamily">@font/fonts</item>
+    <style name="SerifTextViewStyle" parent="android:Widget.TextView">
+        <item name="android:fontFamily">serif</item>
+        <item name="fontFamily">serif</item>
     </style>
 
     <style name="ImageViewRound">
