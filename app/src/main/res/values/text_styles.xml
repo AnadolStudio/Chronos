@@ -1,19 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="CommonFront">
-        <item name="android:fontFamily">@string/common_font</item>
-    </style>
-
-    <style name="Header40" parent="CommonFront">
+    <style name="Header40" parent="CommonTextViewStyle">
         <item name="android:textSize">40sp</item>
     </style>
 
-    <style name="Header34" parent="CommonFront">
+    <style name="Header34" parent="CommonTextViewStyle">
         <item name="android:textSize">34sp</item>
     </style>
 
-    <style name="Header32" parent="CommonFront">
+    <style name="Header32" parent="CommonTextViewStyle">
         <item name="android:textSize">32sp</item>
     </style>
 
@@ -21,19 +17,19 @@
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="Header26" parent="CommonFront">
+    <style name="Header26" parent="CommonTextViewStyle">
         <item name="android:textSize">26sp</item>
     </style>
 
-    <style name="Body20" parent="CommonFront">
+    <style name="Body20" parent="CommonTextViewStyle">
         <item name="android:textSize">20sp</item>
     </style>
 
-    <style name="Body18" parent="CommonFront">
+    <style name="Body18" parent="CommonTextViewStyle">
         <item name="android:textSize">18sp</item>
     </style>
 
-    <style name="Caption16" parent="CommonFront">
+    <style name="Caption16" parent="CommonTextViewStyle">
         <item name="android:textSize">16sp</item>
     </style>
 
@@ -41,15 +37,15 @@
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="Caption14" parent="CommonFront">
+    <style name="Caption14" parent="CommonTextViewStyle">
         <item name="android:textSize">14sp</item>
     </style>
 
-    <style name="Caption12" parent="CommonFront">
+    <style name="Caption12" parent="CommonTextViewStyle">
         <item name="android:textSize">12sp</item>
     </style>
 
-    <style name="Caption10" parent="CommonFront">
+    <style name="Caption10" parent="CommonTextViewStyle">
         <item name="android:textSize">10sp</item>
     </style>
 

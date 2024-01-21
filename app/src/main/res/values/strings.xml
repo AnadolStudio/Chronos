@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Chronos</string>
-    <string name="common_font">serif</string>
 
     <string name="global_text_item_list"> • %s</string>
     <string name="global_change">Изменить</string>
