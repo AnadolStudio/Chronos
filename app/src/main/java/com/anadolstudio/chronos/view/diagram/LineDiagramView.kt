@@ -10,6 +10,7 @@ import com.anadolstudio.chronos.R
 import com.anadolstudio.chronos.databinding.ViewLineDiagramBinding
 import com.anadolstudio.chronos.util.minusDay
 import com.anadolstudio.chronos.util.plusDay
+import com.anadolstudio.chronos.util.shortFormat
 import com.anadolstudio.chronos.util.toSimpleDateFormat
 import com.anadolstudio.chronos.util.toWeekDayDateFormat
 import org.joda.time.DateTime
@@ -42,8 +43,7 @@ class LineDiagramView @JvmOverloads constructor(
         binding.nextDateContainer.setOnClickListener { onNextDateClick.invoke() }
         binding.nextDateContainer.isVisible = nextDateEnable
         binding.progress.setup(progressDataList)
-        val hoursFormat = String.format("%.1f", hours)
-        binding.timeText.text = context.getString(R.string.global_diagram_time_format, hoursFormat)
+        binding.timeText.text = context.getString(R.string.global_diagram_time_format, hours.shortFormat())
     }
 
 }
