@@ -18,7 +18,7 @@ abstract class BaseTrackViewModel<State : BaseTrackState>(
 ) : BaseContentViewModel<State>(initState), BaseTrackController {
 
     companion object {
-        private const val LAST_TRACKS_LIMIT = 30
+        private const val LAST_TRACKS_LIMIT = 10
         const val CATEGORIES_REQUEST_KEY = "1_000_002"
     }
 
