@@ -1,6 +1,7 @@
 package com.anadolstudio.chronos.view.track
 
 import android.content.Context
+import android.graphics.Typeface
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
@@ -23,8 +24,9 @@ class TrackTreeItemView @JvmOverloads constructor(
     private val binding = ViewTreeTrackItemBinding.inflate(LayoutInflater.from(context), this)
 
     fun setup(trackChildUi: TrackChildUi, onChildClick: ((TrackChildUi) -> Unit)?) = with(binding) {
+        val isChild = trackChildUi.notEmptyChildren.isEmpty()
         val needClick = onChildClick != null
-                && trackChildUi.notEmptyChildren.isEmpty()
+                && isChild
                 && trackChildUi.time.totalMinutes > 0
 
         if (needClick) {
@@ -45,6 +47,9 @@ class TrackTreeItemView @JvmOverloads constructor(
         nameText.text = trackChildUi.name
         timeText.text = trackChildUi.time.toTrackTime(context)
 
+        val typeFace = if (isChild) Typeface.DEFAULT_BOLD else Typeface.DEFAULT
+        nameText.typeface = typeFace
+        timeText.typeface = typeFace
         inflateChildren(trackChildUi, onChildClick)
     }
 
