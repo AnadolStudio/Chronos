@@ -9,9 +9,4 @@
         <item name="android:textViewStyle">@style/CommonTextViewStyle</item>
     </style>
 
-    <style name="SplashActivity" parent="Theme.Chronos">
-        <item name="android:windowBackground">@drawable/splash</item>
-        <item name="android:windowLightStatusBar">false</item>
-    </style>
-
 </resources>
