@@ -18,3 +18,5 @@ fun getMinutesInPeriod(startDate: DateTime, endDate: DateTime, includeLastDay: B
 }
 
 fun DateTime.toSimpleDateFormat(): String = this.toString("dd.MM.YYYY")
+
+fun DateTime.toWeekDayDateFormat(): String = this.toString("EE, dd.MM.YYYY").replaceFirstChar { it.uppercase() }
