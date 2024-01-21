@@ -21,25 +21,27 @@
     <TextView
         android:id="@+id/nameText"
         style="@style/Category.Tree.Header"
-        android:gravity="center_vertical"
         android:layout_width="0dp"
         android:layout_marginEnd="@dimen/padding_large"
         android:layout_marginStart="@dimen/padding_main"
-        tools:text="Длинное название"
+        android:gravity="center_vertical"
         android:textColor="@color/colorText"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@id/timeText"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Длинное название" />
 
     <TextView
         android:id="@+id/timeText"
         style="@style/Category.Tree.Header"
-        android:gravity="center"
-        tools:text="5ч 15"
-        android:textColor="@color/colorText"
         android:layout_marginEnd="@dimen/padding_main"
+        android:gravity="center"
+        android:textColor="@color/colorText"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="5ч 15" />
 
     <LinearLayout
         android:id="@+id/childContainer"

@@ -6,7 +6,12 @@
         <item name="colorSecondary">@color/colorSecondary</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowBackground">@color/colorSecondary</item>
-        <item name="android:textViewStyle">@style/SerifTextViewStyle</item>
+        <item name="android:textViewStyle">@style/CommonTextViewStyle</item>
+    </style>
+
+    <style name="SplashActivity" parent="Theme.Chronos">
+        <item name="android:windowBackground">@drawable/splash</item>
+        <item name="android:windowLightStatusBar">false</item>
     </style>
 
 </resources>
