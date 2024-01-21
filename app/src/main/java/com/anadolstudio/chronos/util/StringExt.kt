@@ -9,3 +9,5 @@ fun Time.toTrackTime(context: Context): String = when {
     hours > 0 -> context.getString(R.string.global_track_time_hours_format, hours.toString())
     else -> minutes.toString()
 }
+
+fun Float.shortFormat(): String = String.format("%.1f", this).replace("[.,]0".toRegex(), "")
