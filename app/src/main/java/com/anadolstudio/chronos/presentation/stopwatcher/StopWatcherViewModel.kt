@@ -4,11 +4,11 @@ import com.anadolstudio.chronos.R
 import com.anadolstudio.chronos.base.viewmodel.BaseContentViewModel
 import com.anadolstudio.chronos.presentation.delegates.StopWatcherDelegate
 import com.anadolstudio.chronos.presentation.track.TrackNavigationArgs
+import com.anadolstudio.chronos.util.TODAY
 import com.anadolstudio.core.util.rx.smartSubscribe
 import com.anadolstudio.domain.repository.chronos.ChronosRepository
 import com.anadolstudio.domain.repository.common.ResourceRepository
 import com.anadolstudio.domain.repository.stop_watcher.StopWatcherRepository
-import org.joda.time.DateTime
 import javax.inject.Inject
 
 class StopWatcherViewModel @Inject constructor(
@@ -52,7 +52,7 @@ class StopWatcherViewModel @Inject constructor(
                             hours = state.stopWatcherData.deltaTime?.hours ?: 0,
                             minutes = state.stopWatcherData.deltaTime?.minutes ?: 0,
                             fromStopWatcher = true,
-                            selectedDateTime = DateTime.now().withTimeAtStartOfDay()
+                            selectedDateTime = TODAY
                     )
             )
     )

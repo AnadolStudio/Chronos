@@ -7,4 +7,6 @@ interface StatisticController : BaseController {
     fun onToDateSelected(year: Int, month: Int, dayOfMonth: Int)
     fun onToDateClicked()
     fun onFromDateClicked()
+    fun onPreviousSwiped()
+    fun onNextSwiped()
 }

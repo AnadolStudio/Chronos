@@ -13,6 +13,7 @@ import com.anadolstudio.chronos.presentation.main.model.toTrackRootUi
 import com.anadolstudio.chronos.presentation.track.TrackNavigationArgs
 import com.anadolstudio.chronos.util.minusDay
 import com.anadolstudio.chronos.util.plusDay
+import com.anadolstudio.chronos.util.TODAY
 import com.anadolstudio.core.util.rx.smartSubscribe
 import com.anadolstudio.domain.repository.chronos.ChronosRepository
 import com.anadolstudio.domain.repository.chronos.main_category.MainCategoryDomain
@@ -189,7 +190,7 @@ class MainViewModel @Inject constructor(
     override fun onNextDateSelected() = changeCurrentDate(state.trackState.currentDate.plusDay())
 
     private fun changeCurrentDate(currentDate: DateTime) {
-        if (currentDate.isAfter(DateTime.now().withTimeAtStartOfDay())) return
+        if (currentDate.isAfter(TODAY)) return
 
         preferenceRepository.lastSelectedDate = currentDate
         updateState { copy(trackState = trackState.copy(currentDate = currentDate)) }

@@ -3,6 +3,7 @@ package com.anadolstudio.chronos.presentation.main
 import com.anadolstudio.chronos.presentation.categories.model.CategoryUi
 import com.anadolstudio.chronos.presentation.categories.model.toCategoryUi
 import com.anadolstudio.chronos.presentation.main.model.TrackRootUi
+import com.anadolstudio.chronos.util.TODAY
 import com.anadolstudio.core.util.data_time.Time
 import com.anadolstudio.domain.repository.chronos.main_category.MainCategoryDomain
 import com.anadolstudio.domain.repository.stop_watcher.StopWatcherData
@@ -41,6 +42,6 @@ data class TrackState(
         val currentDate: DateTime,
         val trackRootList: List<TrackRootUi> = emptyList()
 ) {
-    val nextDateEnable = currentDate.isBefore(DateTime.now().withTimeAtStartOfDay())
+    val nextDateEnable = currentDate.isBefore(TODAY)
     val notEmptyTrackRootList: List<TrackRootUi> = trackRootList.filter { it.notEmptyChildren.isNotEmpty() }
 }
