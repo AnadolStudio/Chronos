@@ -10,6 +10,7 @@ import com.anadolstudio.domain.repository.chronos.track.TrackDomain
 import com.anadolstudio.domain.repository.common.ResourceRepository
 import io.reactivex.Completable
 import org.joda.time.DateTime
+import kotlin.math.max
 
 abstract class BaseTrackViewModel<State : BaseTrackState>(
         protected val resources: ResourceRepository,
@@ -79,4 +80,20 @@ abstract class BaseTrackViewModel<State : BaseTrackState>(
             date = dateTime
     )
 
+    override fun onHourPlusClicked() = updateTime(hours = state.hours + 1, minutes = state.minutes)
+
+    override fun onHourMinusClicked() = updateTime(hours = max(state.hours - 1, 0), minutes = state.minutes)
+
+    override fun onMinutesPlusClicked() = updateTime(hours = state.hours, minutes = state.minutes + 10)
+
+    override fun onMinutesMinusClicked() = updateTime(hours = state.hours, minutes = max(state.minutes - 10, 0))
+
+    override fun onRoundClicked() {
+        val tens = (state.minutes / 10) * 10
+        val minutes = if (state.minutes % 10 < 5) 0 else 10
+
+        updateTime(hours = state.hours, minutes = tens + minutes)
+    }
+
+    abstract fun updateTime(hours: Int, minutes: Int)
 }

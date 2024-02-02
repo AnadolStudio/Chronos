@@ -20,6 +20,12 @@
         <attr name="paddingBottom" format="dimension" />
     </declare-styleable>
 
+    <declare-styleable name="ChipView">
+        <attr name="text" />
+        <attr name="color" />
+        <attr name="backgroundColor" />
+    </declare-styleable>
+
     <declare-styleable name="InputView">
         <attr name="hint" />
         <attr name="src" />

@@ -39,6 +39,11 @@ abstract class BaseTrackBottom<
         hoursText.addValidateListener(controller::onHoursChanged)
         minutesText.addValidateListener(controller::onMinutesChanged)
         applyButton.scaleAnimationOnClick(action = controller::onTrackClicked)
+        hourPlus.scaleAnimationOnClick { controller.onHourPlusClicked() }
+        hourMinus.scaleAnimationOnClick { controller.onHourMinusClicked() }
+        minutes10Plus.scaleAnimationOnClick { controller.onMinutesPlusClicked() }
+        minutes10Minus.scaleAnimationOnClick { controller.onMinutesMinusClicked() }
+        roundButton.scaleAnimationOnClick { controller.onRoundClicked() }
         recycler.adapter = BaseGroupAdapter(section)
     }
 

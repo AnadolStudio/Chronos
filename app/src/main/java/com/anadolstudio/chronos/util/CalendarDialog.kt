@@ -1,6 +1,5 @@
 package com.anadolstudio.chronos.util
 
-import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.content.Context
 import android.content.DialogInterface
