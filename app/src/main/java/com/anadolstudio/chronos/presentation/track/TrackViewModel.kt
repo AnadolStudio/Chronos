@@ -111,6 +111,8 @@ open class TrackViewModel @AssistedInject constructor(
 
     override fun updateLoading(isLoading: Boolean) = updateState { copy(isLoading = isLoading) }
 
+    override fun updateTime(hours: Int, minutes: Int) = updateState { copy(hours = hours, minutes = minutes) }
+
     @AssistedFactory
     interface Factory {
         fun create(args: TrackNavigationArgs): TrackViewModel

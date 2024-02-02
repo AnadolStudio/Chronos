@@ -10,4 +10,9 @@ interface BaseTrackController : BaseController {
     fun onSearchButtonClicked()
     fun onCategoriesSelected(categoryUi: CategoryUi)
     fun onTrackClicked()
+    fun onHourPlusClicked()
+    fun onHourMinusClicked()
+    fun onMinutesPlusClicked()
+    fun onMinutesMinusClicked()
+    fun onRoundClicked()
 }
