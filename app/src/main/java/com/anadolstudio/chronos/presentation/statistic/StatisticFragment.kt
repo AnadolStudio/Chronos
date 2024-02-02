@@ -1,5 +1,6 @@
 package com.anadolstudio.chronos.presentation.statistic
 
+import android.view.GestureDetector
 import androidx.fragment.app.viewModels
 import com.anadolstudio.chronos.R
 import com.anadolstudio.chronos.base.fragment.BaseContentFragment
@@ -10,6 +11,7 @@ import com.anadolstudio.chronos.util.CalendarDialog
 import com.anadolstudio.chronos.util.DateListener
 import com.anadolstudio.chronos.view.diagram.ProgressData
 import com.anadolstudio.core.groupie.BaseGroupAdapter
+import com.anadolstudio.core.view.gesture.HorizontalMoveGesture
 import com.anadolstudio.core.viewbinding.viewBinding
 import com.anadolstudio.core.viewmodel.livedata.SingleEvent
 import com.xwray.groupie.Section
@@ -24,12 +26,25 @@ class StatisticFragment : BaseContentFragment<StatisticState, StatisticViewModel
     private val binding by viewBinding { FragmentStatisticBinding.bind(it) }
     private val trackSection: Section = Section()
     private val diagramSection: Section = Section()
+    private val horizontalMoveGestureDetector: GestureDetector by lazy {
+        GestureDetector(
+                context,
+                HorizontalMoveGesture(
+                        width = binding.recycler.width,
+                        onSwipeLeft = controller::onNextSwiped,
+                        onSwipeRight = controller::onPreviousSwiped
+                )
+        )
+    }
 
     override fun createViewModelLazy() = viewModels<StatisticViewModel> { viewModelFactory }
 
     override fun initView() = with(binding) {
         binding.toolbar.setBackClickListener { controller.onBackClicked() }
         recycler.adapter = BaseGroupAdapter(diagramSection, trackSection)
+        binding.recyclerContainer.addDispatchTouchListener { _, event ->
+            horizontalMoveGestureDetector.onTouchEvent(event)
+        }
     }
 
     override fun handleEvent(event: SingleEvent) = when (event) {
