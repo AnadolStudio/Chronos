@@ -40,4 +40,9 @@
     <string name="from_date">с %1$s</string>
     <string name="to_date">по %1$s</string>
     <string name="unknown_category">Unknown</string>
+
+    <string name="hour_plus">+1ч</string>
+    <string name="hour_minus">-1ч</string>
+    <string name="minutes_10_plus">+10</string>
+    <string name="minutes_10_minus">-10</string>
 </resources>
