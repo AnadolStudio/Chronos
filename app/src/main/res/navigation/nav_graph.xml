@@ -18,6 +18,17 @@
     </dialog>
 
     <dialog
+        android:id="@+id/calendarBottom"
+        android:name="com.anadolstudio.chronos.presentation.calendar.CalendarBottom"
+        tools:layout="@layout/bottom_calendar">
+
+        <argument
+            android:name="data"
+            app:argType="com.anadolstudio.chronos.presentation.calendar.CalendarNavigationArgs" />
+
+    </dialog>
+
+    <dialog
         android:id="@+id/trackBottom"
         android:name="com.anadolstudio.chronos.presentation.track.TrackBottom"
         tools:layout="@layout/bottom_track">
@@ -117,6 +128,9 @@
         <action
             android:id="@+id/action_mainFragment_to_statisticFragment"
             app:destination="@id/statisticFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_calendarBottom"
+            app:destination="@id/calendarBottom" />
 
     </fragment>
 
@@ -135,6 +149,9 @@
         android:name="com.anadolstudio.chronos.presentation.statistic.StatisticFragment"
         tools:layout="@layout/fragment_statistic">
 
+        <action
+            android:id="@+id/action_statisticFragment_to_calendarBottom"
+            app:destination="@id/calendarBottom" />
     </fragment>
 
 </navigation>

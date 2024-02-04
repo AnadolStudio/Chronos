@@ -7,6 +7,7 @@ import android.widget.LinearLayout
 import androidx.core.content.withStyledAttributes
 import com.anadolstudio.chronos.R
 import com.anadolstudio.chronos.databinding.ViewChipBinding
+import com.anadolstudio.chronos.util.ellipsize
 import com.anadolstudio.chronos.view.function.Textable
 
 class ChipView @JvmOverloads constructor(
@@ -14,6 +15,10 @@ class ChipView @JvmOverloads constructor(
         attrs: AttributeSet? = null,
         defStyleAttr: Int = 0
 ) : LinearLayout(context, attrs, defStyleAttr), Textable {
+
+    private companion object {
+        const val MAX_LENGTH = 20
+    }
 
     private val binding = ViewChipBinding.inflate(LayoutInflater.from(context), this)
 
@@ -34,8 +39,8 @@ class ChipView @JvmOverloads constructor(
 
     override fun setBackgroundColor(color: Int) = binding.cardView.setCardBackgroundColor(color)
 
-    override fun setText(text: String?) = binding.text.setText(text)
+    override fun setText(text: String?) = binding.text.setText(text?.ellipsize(MAX_LENGTH))
 
-    override fun setText(textRes: Int) = binding.text.setText(textRes)
+    override fun setText(textRes: Int) = setText(context.getString(textRes))
 
 }

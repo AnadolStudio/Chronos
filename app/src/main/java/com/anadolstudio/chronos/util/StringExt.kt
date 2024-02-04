@@ -11,3 +11,11 @@ fun Time.toTrackTime(context: Context): String = when {
 }
 
 fun Float.shortFormat(): String = String.format("%.1f", this).replace("[.,]0".toRegex(), "")
+
+private const val ELLIPSIS = "…"
+
+fun String.ellipsize(maxLength: Int): String = if (length > maxLength) {
+    take(maxLength - 1).trim().plus(ELLIPSIS)
+} else {
+    this
+}

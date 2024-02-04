@@ -27,11 +27,11 @@ android {
         minSdk 23
         targetSdk 34
         compileSdk 34
-        versionCode 3
-        versionName "1.0.0"
+        versionCode 4
+        versionName "1.0.4"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        project.archivesBaseName = "Chronos" + "_" + defaultConfig.versionName + "_(" + defaultConfig.versionCode + ")"
+        project.archivesBaseName = "Chronos" + "_" + defaultConfig.versionName + "_" + defaultConfig.versionCode
 
         renderscriptTargetApi 21
         renderscriptSupportModeEnabled true
@@ -132,6 +132,9 @@ dependencies {
 
     // Confetti
     implementation 'com.github.jinatonic.confetti:confetti:1.1.2'
+
+    // Calendar
+    implementation 'ru.cleverpumpkin:crunchycalendar:2.6.0'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'

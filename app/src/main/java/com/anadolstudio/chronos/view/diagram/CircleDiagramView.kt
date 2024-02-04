@@ -31,15 +31,13 @@ class CircleDiagramView @JvmOverloads constructor(
             startDate: DateTime,
             endDate: DateTime,
             progressDataList: List<ProgressData>,
-            onFromDateClick: () -> Unit,
-            onToDateClick: () -> Unit,
+            onPeriodClick: () -> Unit,
     ) {
         val totalHours = TimeUnit.MINUTES.toHours(totalMinutes)
 
         binding.fromDateText.text = context.getString(R.string.from_date, startDate.toWeekDayDateFormat())
         binding.toDateText.text = context.getString(R.string.to_date, endDate.toWeekDayDateFormat())
-        binding.fromDateContainer.setOnClickListener { onFromDateClick.invoke() }
-        binding.toDateContainer.setOnClickListener { onToDateClick.invoke() }
+        binding.periodContainer.setOnClickListener { onPeriodClick.invoke() }
         binding.progress.setup(progressDataList)
         binding.timeText.text = context.getString(
                 R.string.global_diagram_time_free_format,

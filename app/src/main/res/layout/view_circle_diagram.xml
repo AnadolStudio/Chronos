@@ -22,44 +22,34 @@
         tools:text="56,4 / 72" />
 
     <LinearLayout
-        android:id="@+id/toDateContainer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:gravity="center"
-        android:background="@drawable/item_ripple_rectangle_8">
-
-        <TextView
-            android:id="@+id/toDateText"
-            style="@style/Caption14"
-            android:layout_width="wrap_content"
-            android:layout_height="36dp"
-            android:gravity="center"
-            android:textColor="@color/colorAccent"
-            android:layout_marginHorizontal="@dimen/padding_main"
-            tools:text="по 02.01.2023" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/fromDateContainer"
-        android:layout_width="wrap_content"
+        android:id="@+id/periodContainer"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:gravity="center"
+        android:paddingHorizontal="@dimen/padding_main"
         android:background="@drawable/item_ripple_rectangle_8">
 
         <TextView
             android:id="@+id/fromDateText"
             style="@style/Caption14"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="36dp"
-            android:gravity="center"
+            android:layout_weight="1"
+            android:gravity="center|start"
             android:textColor="@color/colorAccent"
-            android:layout_marginHorizontal="@dimen/padding_main"
             tools:text="с 31.12.2022" />
+
+        <TextView
+            android:id="@+id/toDateText"
+            style="@style/Caption14"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_weight="1"
+            android:gravity="center|end"
+            android:textColor="@color/colorAccent"
+            tools:text="по 02.01.2023" />
 
     </LinearLayout>
 
@@ -67,6 +57,7 @@
         android:id="@+id/progress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/fromDateContainer" />
+        android:layout_marginTop="@dimen/padding_medium"
+        app:layout_constraintTop_toBottomOf="@+id/periodContainer" />
 
 </merge>

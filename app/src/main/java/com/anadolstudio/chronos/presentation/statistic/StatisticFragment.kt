@@ -1,5 +1,6 @@
 package com.anadolstudio.chronos.presentation.statistic
 
+import android.os.Bundle
 import android.view.GestureDetector
 import androidx.fragment.app.viewModels
 import com.anadolstudio.chronos.R
@@ -7,15 +8,13 @@ import com.anadolstudio.chronos.base.fragment.BaseContentFragment
 import com.anadolstudio.chronos.databinding.FragmentStatisticBinding
 import com.anadolstudio.chronos.presentation.main.TrackItem
 import com.anadolstudio.chronos.presentation.main.TrackStubItem
-import com.anadolstudio.chronos.util.CalendarDialog
-import com.anadolstudio.chronos.util.DateListener
+import com.anadolstudio.chronos.presentation.statistic.StatisticViewModel.Companion.CALENDAR_REQUEST_KEY
 import com.anadolstudio.chronos.view.diagram.ProgressData
 import com.anadolstudio.core.groupie.BaseGroupAdapter
+import com.anadolstudio.core.util.common_extention.requireLongList
 import com.anadolstudio.core.view.gesture.HorizontalMoveGesture
 import com.anadolstudio.core.viewbinding.viewBinding
-import com.anadolstudio.core.viewmodel.livedata.SingleEvent
 import com.xwray.groupie.Section
-import org.joda.time.DateTime
 
 class StatisticFragment : BaseContentFragment<StatisticState, StatisticViewModel, StatisticController>(R.layout.fragment_statistic) {
 
@@ -40,6 +39,7 @@ class StatisticFragment : BaseContentFragment<StatisticState, StatisticViewModel
     override fun createViewModelLazy() = viewModels<StatisticViewModel> { viewModelFactory }
 
     override fun initView() = with(binding) {
+        initFragmentResultListeners(CALENDAR_REQUEST_KEY)
         binding.toolbar.setBackClickListener { controller.onBackClicked() }
         recycler.adapter = BaseGroupAdapter(diagramSection, trackSection)
         binding.recyclerContainer.addDispatchTouchListener { _, event ->
@@ -47,29 +47,9 @@ class StatisticFragment : BaseContentFragment<StatisticState, StatisticViewModel
         }
     }
 
-    override fun handleEvent(event: SingleEvent) = when (event) {
-        is StatisticEvents.ShowToDateCalendar -> showToCalendarPicker(event)
-        is StatisticEvents.ShowFromDateCalendar -> showFromCalendarPicker(event)
-        else -> super.handleEvent(event)
-    }
-
-    private fun showFromCalendarPicker(event: StatisticEvents.ShowFromDateCalendar) = with(event) {
-        showCalendarPicker(currentDateTime, maxDateTime, null, controller::onFromDateSelected)
-    }
-
-    private fun showToCalendarPicker(event: StatisticEvents.ShowToDateCalendar) = with(event) {
-        showCalendarPicker(currentDateTime, DateTime.now(), minDateTime, controller::onToDateSelected)
-    }
-
-    private fun showCalendarPicker(currentDate: DateTime, maxDate: DateTime, minDate: DateTime?, listener: DateListener) {
-        CalendarDialog.show(
-                context = requireContext(),
-                currentDateTime = currentDate,
-                minDate = minDate,
-                maxDate = maxDate,
-                showFromYear = false,
-                dateListener = listener
-        )
+    override fun handleFragmentResult(requestKey: String, data: Bundle) = when (requestKey) {
+        CALENDAR_REQUEST_KEY -> controller.onPeriodSelected(requireLongList(data))
+        else -> super.handleFragmentResult(requestKey, data)
     }
 
     override fun render(state: StatisticState) = state.render(RENDER_TRACK) {
@@ -101,8 +81,7 @@ class StatisticFragment : BaseContentFragment<StatisticState, StatisticViewModel
                         fromDate = fromDate,
                         toDate = toDate,
                         progressDataList = progressDataList,
-                        onFromDateClick = controller::onFromDateClicked,
-                        onToDateClick = controller::onToDateClicked,
+                        onPeriodClick = controller::onPeriodClicked,
                 ),
         )
 
