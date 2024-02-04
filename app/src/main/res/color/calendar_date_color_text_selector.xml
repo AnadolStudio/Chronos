@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:color="@color/disableForeground" app:calendar_state_disabled="true" />
+
+    <item android:color="@color/colorPrimary" app:calendar_state_selected_single="true" />
+    <item android:color="@color/colorPrimary" app:calendar_state_selected_start="true" />
+    <item android:color="@color/colorPrimary" app:calendar_state_selected_end="true" />
+
+    <item android:color="@color/colorPrimary" app:calendar_state_selected="true" />
+    <item android:color="@color/colorPrimary" app:calendar_state_selected_first_in_line="true" />
+    <item android:color="@color/colorPrimary" app:calendar_state_selected_last_in_line="true" />
+    <item android:color="@color/colorPrimary" app:calendar_state_selected_start_without_middle="true" />
+    <item android:color="@color/colorPrimary" app:calendar_state_selected_end_without_middle="true" />
+    <item android:color="@color/colorPrimary" app:calendar_state_today="true" />
+    <item android:color="@color/colorAccent" />
+</selector>

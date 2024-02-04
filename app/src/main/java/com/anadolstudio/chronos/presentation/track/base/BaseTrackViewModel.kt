@@ -90,7 +90,11 @@ abstract class BaseTrackViewModel<State : BaseTrackState>(
 
     override fun onRoundClicked() {
         val tens = (state.minutes / 10) * 10
-        val minutes = if (state.minutes % 10 < 5) 0 else 10
+        val minutes = when (state.minutes % 10) {
+            in 0 until 3 -> 0
+            in 3 until 8 -> 5
+            else -> 10
+        }
 
         updateTime(hours = state.hours, minutes = tens + minutes)
     }

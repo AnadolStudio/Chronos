@@ -3,6 +3,7 @@ package com.anadolstudio.chronos.presentation.main
 import androidx.appcompat.app.AppCompatDelegate
 import com.anadolstudio.chronos.R
 import com.anadolstudio.chronos.base.viewmodel.BaseContentViewModel
+import com.anadolstudio.chronos.presentation.calendar.CalendarNavigationArgs
 import com.anadolstudio.chronos.presentation.categories.CategoryNavigationArgs
 import com.anadolstudio.chronos.presentation.categories.model.CategoryUi
 import com.anadolstudio.chronos.presentation.delegates.StopWatcherDelegate
@@ -11,9 +12,9 @@ import com.anadolstudio.chronos.presentation.edit.category.EditCategoryNavigatio
 import com.anadolstudio.chronos.presentation.main.model.TrackRootUi
 import com.anadolstudio.chronos.presentation.main.model.toTrackRootUi
 import com.anadolstudio.chronos.presentation.track.TrackNavigationArgs
+import com.anadolstudio.chronos.util.TODAY
 import com.anadolstudio.chronos.util.minusDay
 import com.anadolstudio.chronos.util.plusDay
-import com.anadolstudio.chronos.util.TODAY
 import com.anadolstudio.core.util.rx.smartSubscribe
 import com.anadolstudio.domain.repository.chronos.ChronosRepository
 import com.anadolstudio.domain.repository.chronos.main_category.MainCategoryDomain
@@ -25,6 +26,7 @@ import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.Single
 import org.joda.time.DateTime
+import ru.cleverpumpkin.calendar.CalendarView
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
@@ -46,6 +48,7 @@ class MainViewModel @Inject constructor(
     companion object {
         private const val STOP_WATCHER_INTERVAL = 1L
         const val CATEGORIES_REQUEST_KEY = "1_000_001"
+        const val CALENDAR_REQUEST_KEY = "1_000_111"
         const val TRACK_CHANGED_REQUEST_KEY = "1_000_121"
         const val EDIT_REQUEST_KEY = "1_000_011"
     }
@@ -141,8 +144,15 @@ class MainViewModel @Inject constructor(
     private fun addMainCategory(name: String, color: Int): Completable = chronosRepository
             .insertMainCategory(MainCategoryDomain(name = name, color = color))
 
-    override fun onCalendarClicked() = showEvent(
-            MainEvents.ShowCalendar(currentDateTime = state.trackState.currentDate)
+    override fun onCalendarClicked() = navigateTo(
+            id = R.id.action_mainFragment_to_calendarBottom,
+            args = resources.navigateArg(
+                    CalendarNavigationArgs(
+                            requestKey = CALENDAR_REQUEST_KEY,
+                            fromDate = state.trackState.currentDate,
+                            mode = CalendarView.SelectionMode.SINGLE
+                    )
+            )
     )
 
     override fun onAddClicked() = navigateTo(
@@ -181,9 +191,7 @@ class MainViewModel @Inject constructor(
             )
     )
 
-    override fun onDateSelected(year: Int, month: Int, dayOfMonth: Int) {
-        changeCurrentDate(DateTime(year, month, dayOfMonth, 0, 0))
-    }
+    override fun onDateSelected(dateTime: Long) = changeCurrentDate(DateTime(dateTime).withTimeAtStartOfDay())
 
     override fun onPreviousDateSelected() = changeCurrentDate(state.trackState.currentDate.minusDay())
 

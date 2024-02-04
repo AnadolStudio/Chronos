@@ -24,8 +24,7 @@ class DiagramItem(
                 hours = item.data.hours,
                 startDate = item.data.fromDate,
                 endDate = item.data.toDate,
-                onFromDateClick = item.data.onFromDateClick,
-                onToDateClick = item.data.onToDateClick,
+                onPeriodClick = item.data.onPeriodClick,
                 totalMinutes = item.data.totalMinutes,
                 progressDataList = item.data.progressDataList,
         )
@@ -50,8 +49,7 @@ class DiagramItem(
             val fromDate: DateTime,
             val toDate: DateTime,
             val progressDataList: List<ProgressData>,
-            val onFromDateClick: () -> Unit,
-            val onToDateClick: () -> Unit,
+            val onPeriodClick: () -> Unit,
     ) {
         override fun equals(other: Any?): Boolean {
             if (this === other) return true

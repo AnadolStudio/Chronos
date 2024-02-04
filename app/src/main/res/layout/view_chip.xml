@@ -23,6 +23,7 @@
             android:textColor="@color/colorText"
             android:layout_gravity="center"
             android:paddingHorizontal="12dp"
+            android:maxLength="20"
             android:paddingVertical="@dimen/padding_medium"
             tools:text="Chip"/>
 
