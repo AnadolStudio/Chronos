@@ -1,13 +1,16 @@
 <resources>
-    <!-- Base application theme. -->
-    <style name="Theme.Chronos" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <!-- Primary brand color. -->
+
+    <style name="Theme.Base" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:textViewStyle">@style/CommonTextViewStyle</item>
+        <item name="calendarViewStyle">@style/CalendarViewCustomStyle</item>
+    </style>
+
+    <style name="Theme.Chronos" parent="Theme.Base" >
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@android:color/transparent</item>
         <item name="colorSecondary">@color/colorSecondary</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowBackground">@color/colorSecondary</item>
-        <item name="android:textViewStyle">@style/CommonTextViewStyle</item>
     </style>
 
     <style name="CommonTextViewStyle" parent="android:Widget.TextView">

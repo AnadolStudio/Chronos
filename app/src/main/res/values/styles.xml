@@ -7,7 +7,6 @@
         <item name="android:layout_height">match_parent</item>
         <item name="android:layout_marginStart">@dimen/padding_small</item>
         <item name="android:ellipsize">end</item>
-        <item name="android:maxLength">25</item>
         <item name="android:lines">1</item>
         <item name="android:gravity">center_vertical</item>
     </style>
@@ -64,6 +63,21 @@
     <style name="ChronosDialogAlertTheme" parent="DialogAlertTheme">
         <item name="android:fontFamily">@font/fonts</item>
         <item name="fontFamily">@font/fonts</item>
+    </style>
+
+    <style name="CalendarViewCustomStyle">
+        <item name="android:background">@color/colorSecondary</item>
+        <item name="calendar_date_background">@drawable/bg_calendar_date_selector</item>
+        <item name="calendar_date_text_color">@color/calendar_date_color_text_selector</item>
+        <item name="calendar_day_bar_background">@color/colorSecondary</item>
+        <item name="calendar_day_bar_text_color">@color/colorAccent</item>
+        <item name="calendar_day_bar_weekend_text_color">@color/colorAccent</item>
+        <item name="calendar_grid_on_selected_dates">false</item>
+        <item name="calendar_month_text_color">@color/colorAccent</item>
+        <item name="calendar_year_selection_arrows_color">@color/colorAccent</item>
+        <item name="calendar_year_selection_background">@color/colorSecondary</item>
+        <item name="calendar_year_selection_text_color">@color/colorAccent</item>
+        <item name="calendar_month_text_style">bold</item>
     </style>
 
 </resources>

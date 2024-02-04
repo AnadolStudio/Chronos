@@ -6,6 +6,7 @@ import androidx.fragment.app.viewModels
 import com.anadolstudio.chronos.R
 import com.anadolstudio.chronos.base.fragment.BaseContentFragment
 import com.anadolstudio.chronos.databinding.FragmentMainBinding
+import com.anadolstudio.chronos.presentation.main.MainViewModel.Companion.CALENDAR_REQUEST_KEY
 import com.anadolstudio.chronos.presentation.main.MainViewModel.Companion.CATEGORIES_REQUEST_KEY
 import com.anadolstudio.chronos.presentation.main.MainViewModel.Companion.EDIT_REQUEST_KEY
 import com.anadolstudio.chronos.presentation.main.MainViewModel.Companion.TRACK_CHANGED_REQUEST_KEY
@@ -16,6 +17,7 @@ import com.anadolstudio.chronos.view.diagram.ProgressData
 import com.anadolstudio.core.groupie.BaseGroupAdapter
 import com.anadolstudio.core.util.common.throttleClick
 import com.anadolstudio.core.util.common_extention.getDrawable
+import com.anadolstudio.core.util.common_extention.requireLong
 import com.anadolstudio.core.util.common_extention.requireParcelable
 import com.anadolstudio.core.util.data_time.Time
 import com.anadolstudio.core.view.animation.AnimateUtil.scaleAnimationOnClick
@@ -57,7 +59,8 @@ class MainFragment : BaseContentFragment<MainState, MainViewModel, MainControlle
                 StopWatcherFragment.TAG,
                 CATEGORIES_REQUEST_KEY,
                 EDIT_REQUEST_KEY,
-                TRACK_CHANGED_REQUEST_KEY
+                TRACK_CHANGED_REQUEST_KEY,
+                CALENDAR_REQUEST_KEY
         )
         calendarButton.throttleClick { controller.onCalendarClicked() }
         addButton.scaleAnimationOnClick { controller.onAddClicked() }
@@ -75,23 +78,8 @@ class MainFragment : BaseContentFragment<MainState, MainViewModel, MainControlle
         StopWatcherFragment.TAG,
         EDIT_REQUEST_KEY,
         TRACK_CHANGED_REQUEST_KEY -> controller.onTimeTrackChanged()
-
+        CALENDAR_REQUEST_KEY -> controller.onDateSelected(requireLong(data))
         else -> super.handleFragmentResult(requestKey, data)
-    }
-
-    override fun handleEvent(event: SingleEvent) = when (event) {
-        is MainEvents.ShowCalendar -> showCalendarPicker(event)
-        else -> super.handleEvent(event)
-    }
-
-    private fun showCalendarPicker(event: MainEvents.ShowCalendar) {
-        CalendarDialog.show(
-                context = requireContext(),
-                currentDateTime = event.currentDateTime,
-                maxDate = event.maxDateTime,
-                showFromYear = false,
-                dateListener = controller::onDateSelected
-        )
     }
 
     override fun render(state: MainState) {
