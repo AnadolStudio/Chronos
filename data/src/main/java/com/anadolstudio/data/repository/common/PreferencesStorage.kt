@@ -1,9 +1,9 @@
 package com.anadolstudio.data.repository.common
 
 import androidx.appcompat.app.AppCompatDelegate
-import com.anadolstudio.core.util.common_extention.nullIfNotExist
-import com.anadolstudio.core.util.preferences.modify
 import com.anadolstudio.domain.repository.stop_watcher.StopWatcherData
+import com.anadolstudio.utils.util.extentions.nullIfNotExist
+import com.anadolstudio.utils.util.preferences.modify
 import com.ironz.binaryprefs.Preferences
 import org.joda.time.DateTime
 

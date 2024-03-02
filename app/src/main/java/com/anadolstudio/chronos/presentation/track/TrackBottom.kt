@@ -5,10 +5,10 @@ import androidx.navigation.fragment.navArgs
 import com.anadolstudio.chronos.R
 import com.anadolstudio.chronos.presentation.create.CreateBottom
 import com.anadolstudio.chronos.presentation.track.base.BaseTrackBottom
-import com.anadolstudio.core.util.common_extention.requireParcelable
-import com.anadolstudio.core.util.common_extention.setFragmentResult
-import com.anadolstudio.core.viewmodel.assistedViewModel
-import com.anadolstudio.core.viewmodel.livedata.SingleEvent
+import com.anadolstudio.utils.util.extentions.requireParcelable
+import com.anadolstudio.utils.util.extentions.setFragmentResult
+import com.anadolstudio.ui.viewmodel.assistedViewModel
+import com.anadolstudio.ui.viewmodel.livedata.SingleEvent
 
 open class TrackBottom : BaseTrackBottom<TrackState, TrackViewModel, TrackController>() {
 

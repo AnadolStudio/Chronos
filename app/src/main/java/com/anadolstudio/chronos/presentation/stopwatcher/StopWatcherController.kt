@@ -1,6 +1,6 @@
 package com.anadolstudio.chronos.presentation.stopwatcher
 
-import com.anadolstudio.core.viewmodel.BaseController
+import com.anadolstudio.ui.viewmodel.BaseController
 
 interface StopWatcherController : BaseController {
     fun onStopWatcherToggleClicked()

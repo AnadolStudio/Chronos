@@ -8,7 +8,7 @@ import android.graphics.drawable.ColorDrawable
 import android.util.AttributeSet
 import android.widget.FrameLayout
 import com.anadolstudio.chronos.R
-import com.anadolstudio.core.util.common.dpToPx
+import com.anadolstudio.utils.util.common.dpToPx
 
 class LineProgressView @JvmOverloads constructor(
         context: Context,

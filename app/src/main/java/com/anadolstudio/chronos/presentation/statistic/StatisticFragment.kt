@@ -10,10 +10,10 @@ import com.anadolstudio.chronos.presentation.main.TrackItem
 import com.anadolstudio.chronos.presentation.main.TrackStubItem
 import com.anadolstudio.chronos.presentation.statistic.StatisticViewModel.Companion.CALENDAR_REQUEST_KEY
 import com.anadolstudio.chronos.view.diagram.ProgressData
-import com.anadolstudio.core.groupie.BaseGroupAdapter
-import com.anadolstudio.core.util.common_extention.requireLongList
-import com.anadolstudio.core.view.gesture.HorizontalMoveGesture
-import com.anadolstudio.core.viewbinding.viewBinding
+import com.anadolstudio.ui.adapters.groupie.BaseGroupAdapter
+import com.anadolstudio.ui.viewbinding.viewBinding
+import com.anadolstudio.utils.util.extentions.requireLongList
+import com.anadolstudio.view.gesture.HorizontalMoveGesture
 import com.xwray.groupie.Section
 
 class StatisticFragment : BaseContentFragment<StatisticState, StatisticViewModel, StatisticController>(R.layout.fragment_statistic) {

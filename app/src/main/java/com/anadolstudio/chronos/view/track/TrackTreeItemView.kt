@@ -11,8 +11,8 @@ import com.anadolstudio.chronos.R
 import com.anadolstudio.chronos.databinding.ViewTreeTrackItemBinding
 import com.anadolstudio.chronos.presentation.main.model.TrackChildUi
 import com.anadolstudio.chronos.util.toTrackTime
-import com.anadolstudio.core.util.common.throttleClick
-import com.anadolstudio.core.util.common_extention.getCompatDrawable
+import com.anadolstudio.utils.util.common.throttleClick
+import com.anadolstudio.utils.util.extentions.getCompatDrawable
 
 class TrackTreeItemView @JvmOverloads constructor(
         context: Context,
@@ -42,7 +42,7 @@ class TrackTreeItemView @JvmOverloads constructor(
         }
 
         textContainer.background = onChildClick?.let {
-            context.getCompatDrawable(com.anadolstudio.core.R.drawable.item_ripple_rectangle_8)
+            context.getCompatDrawable(com.anadolstudio.view.R.drawable.item_ripple_rectangle_8)
         }
         nameText.text = trackChildUi.name
         timeText.text = trackChildUi.time.toTrackTime(context)

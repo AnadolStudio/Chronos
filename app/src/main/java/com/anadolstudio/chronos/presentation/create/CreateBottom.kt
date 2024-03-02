@@ -8,13 +8,13 @@ import com.anadolstudio.chronos.base.bottom.BaseContentBottom
 import com.anadolstudio.chronos.databinding.BottomCreateCategoryBinding
 import com.anadolstudio.chronos.presentation.categories.CategoriesBottom
 import com.anadolstudio.chronos.presentation.categories.model.CategoryUi
-import com.anadolstudio.core.presentation.fragment.state_util.ViewStateDelegate
-import com.anadolstudio.core.util.common_extention.getParcelable
-import com.anadolstudio.core.util.common_extention.setFragmentResult
-import com.anadolstudio.core.view.animation.AnimateUtil.scaleAnimationOnClick
-import com.anadolstudio.core.viewbinding.viewBinding
-import com.anadolstudio.core.viewmodel.assistedViewModel
-import com.anadolstudio.core.viewmodel.livedata.SingleEvent
+import com.anadolstudio.ui.fragment.state_util.ViewStateDelegate
+import com.anadolstudio.ui.viewbinding.viewBinding
+import com.anadolstudio.utils.animation.AnimateUtil.scaleAnimationOnClick
+import com.anadolstudio.ui.viewmodel.assistedViewModel
+import com.anadolstudio.ui.viewmodel.livedata.SingleEvent
+import com.anadolstudio.utils.util.extentions.getParcelable
+import com.anadolstudio.utils.util.extentions.setFragmentResult
 
 open class CreateBottom : BaseContentBottom<CreateState, CreateViewModel, CreateController>(R.layout.bottom_create_category) {
 

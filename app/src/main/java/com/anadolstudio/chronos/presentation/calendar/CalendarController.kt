@@ -1,6 +1,6 @@
 package com.anadolstudio.chronos.presentation.calendar
 
-import com.anadolstudio.core.viewmodel.BaseController
+import com.anadolstudio.ui.viewmodel.BaseController
 import ru.cleverpumpkin.calendar.CalendarDate
 
 interface CalendarController : BaseController {

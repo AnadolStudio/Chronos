@@ -17,7 +17,7 @@
         app:cardCornerRadius="@dimen/radius_large"
         app:cardElevation="@dimen/elevation_normal" >
 
-        <com.anadolstudio.core.view.basetextinput.BaseTextInputView
+        <com.anadolstudio.view.basetextinput.BaseTextInputView
             android:id="@+id/edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -1,7 +1,7 @@
 package com.anadolstudio.chronos.presentation.track.base
 
 import com.anadolstudio.chronos.presentation.categories.model.CategoryUi
-import com.anadolstudio.core.viewmodel.BaseController
+import com.anadolstudio.ui.viewmodel.BaseController
 
 interface BaseTrackController : BaseController {
     fun onMinutesChanged(minutes: String)

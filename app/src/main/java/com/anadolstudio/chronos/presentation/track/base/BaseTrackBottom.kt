@@ -9,12 +9,12 @@ import com.anadolstudio.chronos.presentation.categories.model.CategoryUi
 import com.anadolstudio.chronos.presentation.create.CreateBottom
 import com.anadolstudio.chronos.presentation.track.LastTrackItem
 import com.anadolstudio.chronos.presentation.track.TrackBottomEvents
-import com.anadolstudio.core.groupie.BaseGroupAdapter
-import com.anadolstudio.core.util.common_extention.requireParcelable
-import com.anadolstudio.core.util.common_extention.setFragmentResult
-import com.anadolstudio.core.view.animation.AnimateUtil.scaleAnimationOnClick
-import com.anadolstudio.core.viewbinding.viewBinding
-import com.anadolstudio.core.viewmodel.livedata.SingleEvent
+import com.anadolstudio.ui.adapters.groupie.BaseGroupAdapter
+import com.anadolstudio.ui.viewbinding.viewBinding
+import com.anadolstudio.utils.util.extentions.setFragmentResult
+import com.anadolstudio.utils.animation.AnimateUtil.scaleAnimationOnClick
+import com.anadolstudio.ui.viewmodel.livedata.SingleEvent
+import com.anadolstudio.utils.util.extentions.requireParcelable
 import com.xwray.groupie.Section
 
 abstract class BaseTrackBottom<

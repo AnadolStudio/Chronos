@@ -2,8 +2,8 @@ package com.anadolstudio.data.repository.common
 
 import android.content.res.Resources
 import androidx.appcompat.app.AppCompatDelegate
-import com.anadolstudio.core.util.night_mode.getCurrentNightMode
 import com.anadolstudio.domain.repository.common.NightModeRepository
+import com.anadolstudio.utils.util.night_mode.getCurrentNightMode
 import io.reactivex.Observable
 import io.reactivex.processors.BehaviorProcessor
 

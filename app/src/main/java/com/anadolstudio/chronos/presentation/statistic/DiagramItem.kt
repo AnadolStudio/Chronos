@@ -4,7 +4,7 @@ import android.view.View
 import com.anadolstudio.chronos.R
 import com.anadolstudio.chronos.databinding.ItemCircleDiagramBinding
 import com.anadolstudio.chronos.view.diagram.ProgressData
-import com.anadolstudio.core.groupie.BaseGroupItem
+import com.anadolstudio.ui.adapters.groupie.BaseGroupItem
 import org.joda.time.DateTime
 
 class DiagramItem(

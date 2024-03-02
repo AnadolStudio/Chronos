@@ -1,7 +1,7 @@
 package com.anadolstudio.domain.repository.stop_watcher
 
 import android.os.Parcelable
-import com.anadolstudio.core.util.data_time.Time
+import com.anadolstudio.utils.util.data_time.Time
 import kotlinx.parcelize.IgnoredOnParcel
 import kotlinx.parcelize.Parcelize
 

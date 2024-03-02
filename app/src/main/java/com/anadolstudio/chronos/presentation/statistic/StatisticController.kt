@@ -1,6 +1,6 @@
 package com.anadolstudio.chronos.presentation.statistic
 
-import com.anadolstudio.core.viewmodel.BaseController
+import com.anadolstudio.ui.viewmodel.BaseController
 
 interface StatisticController : BaseController {
     fun onPeriodClicked()

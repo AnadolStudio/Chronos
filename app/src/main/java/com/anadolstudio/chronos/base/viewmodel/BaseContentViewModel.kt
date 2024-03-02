@@ -3,9 +3,9 @@ package com.anadolstudio.chronos.base.viewmodel
 import android.os.Bundle
 import androidx.core.os.bundleOf
 import com.anadolstudio.chronos.navigation.NavigateData
-import com.anadolstudio.core.viewmodel.BaseController
-import com.anadolstudio.core.viewmodel.CoreContentViewModel
-import com.anadolstudio.core.viewmodel.livedata.SingleCustomEvent
+import com.anadolstudio.ui.viewmodel.BaseController
+import com.anadolstudio.ui.viewmodel.CoreContentViewModel
+import com.anadolstudio.ui.viewmodel.livedata.SingleCustomEvent
 
 abstract class BaseContentViewModel<State : Any>(
         initState: State

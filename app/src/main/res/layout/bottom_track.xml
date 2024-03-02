@@ -120,7 +120,7 @@
         app:layout_constraintEnd_toStartOf="@id/minutes_chip_container"
         app:layout_constraintBottom_toBottomOf="@id/minutes_chip_container">
 
-        <com.anadolstudio.core.view.toolbar.ToolbarIconButton
+        <com.anadolstudio.view.toolbar.ToolbarIconButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:src="@drawable/ic_round"/>
@@ -170,7 +170,7 @@
         app:layout_constraintTop_toTopOf="@id/hoursText"
         app:maxLength="2" />
 
-    <com.anadolstudio.core.view.bottom.BottomTopLine
+    <com.anadolstudio.view.bottom.BottomTopLine
         android:id="@+id/top_line"
         style="@style/BottomTopLine"
         app:layout_constraintEnd_toEndOf="parent"

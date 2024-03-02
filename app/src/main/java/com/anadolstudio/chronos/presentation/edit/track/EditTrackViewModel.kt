@@ -3,7 +3,7 @@ package com.anadolstudio.chronos.presentation.edit.track
 import com.anadolstudio.chronos.presentation.categories.model.CategoryUi
 import com.anadolstudio.chronos.presentation.common.CategoryState
 import com.anadolstudio.chronos.presentation.track.base.BaseTrackViewModel
-import com.anadolstudio.core.util.rx.smartSubscribe
+import com.anadolstudio.utils.util.rx.smartSubscribe
 import com.anadolstudio.domain.repository.chronos.ChronosRepository
 import com.anadolstudio.domain.repository.chronos.track.TrackDomain
 import com.anadolstudio.domain.repository.common.ResourceRepository

@@ -7,9 +7,9 @@ import com.anadolstudio.chronos.di.SharedComponent
 import com.anadolstudio.chronos.di.getSharedModule
 import com.anadolstudio.chronos.navigation.NavigatableDelegate
 import com.anadolstudio.chronos.navigation.NavigateData
-import com.anadolstudio.core.presentation.Navigatable
-import com.anadolstudio.core.presentation.activity.CoreActionActivity
-import com.anadolstudio.core.viewmodel.BaseController
+import com.anadolstudio.ui.Navigatable
+import com.anadolstudio.ui.activity.CoreActionActivity
+import com.anadolstudio.ui.viewmodel.BaseController
 
 abstract class BaseActionActivity<
         ViewModel : BaseActionViewModel,

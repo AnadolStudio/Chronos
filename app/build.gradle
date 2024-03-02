@@ -74,7 +74,10 @@ android {
 }
 
 dependencies {
-    implementation project(path: ':core:android-base')
+    implementation project(path: ':core:ui')
+    implementation project(path: ':core:view')
+    implementation project(path: ':core:paginator')
+    implementation project(path: ':core:utils')
     implementation project(path: ':data')
     implementation project(path: ':domain')
 
