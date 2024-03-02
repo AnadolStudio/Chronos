@@ -41,7 +41,7 @@ open class CreateBottom : BaseContentBottom<CreateState, CreateViewModel, Create
         settingsContainer.categoryNameText.addValidateListener(controller::onNameChanged)
         settingsContainer.parentNameText.setOnIconClickListener(controller::onSearchButtonClicked)
         settingsContainer.parentNameText.addValidateListener(controller::onParentNameChanged)
-        applyButton.scaleAnimationOnClick(action = controller::onCreateClicked)
+        applyButton.setOnClickListener { controller.onCreateClicked() }
     }
 
     override fun handleFragmentResult(requestKey: String, data: Bundle) = when (requestKey) {

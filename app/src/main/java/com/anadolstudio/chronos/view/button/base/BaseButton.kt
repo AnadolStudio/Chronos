@@ -15,6 +15,7 @@ import androidx.core.view.isVisible
 import com.anadolstudio.chronos.R
 import com.anadolstudio.chronos.databinding.ViewBaseButtonBinding
 import com.anadolstudio.utils.R.*
+import com.anadolstudio.utils.animation.AnimateUtil.scaleAnimationOnClick
 import com.anadolstudio.utils.util.extentions.setDimensMargins
 
 open class BaseButton @JvmOverloads constructor(
@@ -57,6 +58,7 @@ open class BaseButton @JvmOverloads constructor(
         changeState(enabled)
         super.setEnabled(enabled)
         binding.title.isEnabled = enabled
+        binding.cardView.isEnabled = enabled
     }
 
     private fun changeState(enabled: Boolean) {
@@ -78,6 +80,10 @@ open class BaseButton @JvmOverloads constructor(
     }
 
     private fun invalidateState() = changeState(isEnabled)
+
+    override fun setOnClickListener(l: OnClickListener?) {
+        binding.cardView.scaleAnimationOnClick { l?.onClick(binding.cardView) }
+    }
 
     fun setText(text: CharSequence?) {
         binding.title.text = text
