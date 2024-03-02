@@ -40,8 +40,8 @@ open class EditCategoryBottom : BaseContentBottom<EditCategoryState, EditCategor
         settingsContainer.categoryNameText.addValidateListener(controller::onNameChanged)
         settingsContainer.parentNameText.setOnIconClickListener(controller::onSearchButtonClicked)
         settingsContainer.parentNameText.addValidateListener(controller::onParentNameChanged)
-        editButton.scaleAnimationOnClick(action = controller::onEditClicked)
-        removeButton.scaleAnimationOnClick(action = controller::onRemoveClicked)
+        editButton.setOnClickListener { controller.onEditClicked() }
+        removeButton.setOnClickListener { controller.onRemoveClicked() }
     }
 
     override fun handleFragmentResult(requestKey: String, data: Bundle) = when (requestKey) {
