@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <com.anadolstudio.core.view.bottom.BottomTopLine
+    <com.anadolstudio.view.bottom.BottomTopLine
         android:id="@+id/top_line"
         style="@style/BottomTopLine"
         app:layout_constraintEnd_toEndOf="parent"

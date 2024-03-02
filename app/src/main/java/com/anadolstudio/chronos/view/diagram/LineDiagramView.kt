@@ -13,6 +13,7 @@ import com.anadolstudio.chronos.util.plusDay
 import com.anadolstudio.chronos.util.shortFormat
 import com.anadolstudio.chronos.util.toSimpleDateFormat
 import com.anadolstudio.chronos.util.toWeekDayDateFormat
+import com.anadolstudio.utils.R.*
 import org.joda.time.DateTime
 
 class LineDiagramView @JvmOverloads constructor(
@@ -25,7 +26,7 @@ class LineDiagramView @JvmOverloads constructor(
     private val binding = ViewLineDiagramBinding.inflate(LayoutInflater.from(context), this)
 
     init {
-        binding.root.setPadding(context.resources.getDimension(com.anadolstudio.core.R.dimen.padding_medium).toInt())
+        binding.root.setPadding(context.resources.getDimension(dimen.padding_medium).toInt())
     }
 
     fun setup(

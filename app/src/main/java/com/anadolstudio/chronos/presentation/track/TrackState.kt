@@ -3,7 +3,7 @@ package com.anadolstudio.chronos.presentation.track
 import com.anadolstudio.chronos.presentation.categories.model.CategoryUi
 import com.anadolstudio.chronos.presentation.common.CategoryState
 import com.anadolstudio.chronos.presentation.track.base.BaseTrackState
-import com.anadolstudio.core.util.data_time.Time
+import com.anadolstudio.utils.util.data_time.Time
 import org.joda.time.DateTime
 
 data class TrackState(

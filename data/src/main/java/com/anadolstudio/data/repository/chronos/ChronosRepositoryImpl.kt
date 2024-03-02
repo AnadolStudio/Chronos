@@ -1,6 +1,5 @@
 package com.anadolstudio.data.repository.chronos
 
-import com.anadolstudio.core.util.rx.schedulersIoToMain
 import com.anadolstudio.data.repository.chronos.main_category.MainCategoryDao
 import com.anadolstudio.data.repository.chronos.main_category.toDomain
 import com.anadolstudio.data.repository.chronos.main_category.toEntity
@@ -15,6 +14,7 @@ import com.anadolstudio.domain.repository.chronos.ChronosRepository
 import com.anadolstudio.domain.repository.chronos.main_category.MainCategoryDomain
 import com.anadolstudio.domain.repository.chronos.subcategory.SubcategoryDomain
 import com.anadolstudio.domain.repository.chronos.track.TrackDomain
+import com.anadolstudio.utils.util.rx.schedulersIoToMain
 import io.reactivex.Completable
 import io.reactivex.Single
 import org.joda.time.DateTime

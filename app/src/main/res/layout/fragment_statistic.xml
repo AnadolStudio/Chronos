@@ -13,7 +13,7 @@
         android:layout_height="match_parent"
         android:background="@color/colorSecondary">
 
-        <com.anadolstudio.core.view.TouchFrameLayout
+        <com.anadolstudio.view.TouchFrameLayout
             android:id="@+id/recycler_container"
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -31,9 +31,9 @@
                 tools:itemCount="4"
                 tools:listitem="@layout/item_track" />
 
-        </com.anadolstudio.core.view.TouchFrameLayout>
+        </com.anadolstudio.view.TouchFrameLayout>
 
-        <com.anadolstudio.core.view.toolbar.BaseToolbar
+        <com.anadolstudio.view.toolbar.BaseToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -44,7 +44,7 @@
             app:title="@string/app_name"
             app:back_icon="@drawable/ic_arrow_back" >
 
-        </com.anadolstudio.core.view.toolbar.BaseToolbar>
+        </com.anadolstudio.view.toolbar.BaseToolbar>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

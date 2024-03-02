@@ -6,11 +6,10 @@ import com.anadolstudio.chronos.R
 import com.anadolstudio.chronos.base.fragment.BaseContentFragment
 import com.anadolstudio.chronos.databinding.FragmentStopWatcherBinding
 import com.anadolstudio.chronos.presentation.track.TrackBottom
-import com.anadolstudio.core.presentation.fragment.state_util.ViewStateDelegate
-import com.anadolstudio.core.util.common_extention.setFragmentResult
-import com.anadolstudio.core.view.animation.AnimateUtil.scaleAnimationOnClick
-import com.anadolstudio.core.viewbinding.viewBinding
+import com.anadolstudio.utils.util.extentions.setFragmentResult
+import com.anadolstudio.utils.animation.AnimateUtil.scaleAnimationOnClick
 import com.anadolstudio.domain.repository.stop_watcher.StopWatcherData
+import com.anadolstudio.ui.viewbinding.viewBinding
 
 class StopWatcherFragment :
         BaseContentFragment<StopWatcherState, StopWatcherViewModel, StopWatcherController>(R.layout.fragment_stop_watcher) {

@@ -1,7 +1,7 @@
 package com.anadolstudio.chronos.view.diagram
 
 import android.graphics.Paint
-import com.anadolstudio.core.util.common.dpToPx
+import com.anadolstudio.utils.util.common.dpToPx
 
 class ProgressPaint(color: Int, strokeWidth: Float = STROKE_WIDTH) : Paint(ANTI_ALIAS_FLAG) {
 

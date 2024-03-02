@@ -1,7 +1,7 @@
 package com.anadolstudio.chronos.presentation.activity.single
 
 import com.anadolstudio.chronos.base.viewmodel.BaseActionViewModel
-import com.anadolstudio.core.util.rx.smartSubscribe
+import com.anadolstudio.utils.util.rx.smartSubscribe
 import com.anadolstudio.domain.repository.common.NightModeRepository
 import javax.inject.Inject
 

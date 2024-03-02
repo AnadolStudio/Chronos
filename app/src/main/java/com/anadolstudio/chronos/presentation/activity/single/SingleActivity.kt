@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import com.anadolstudio.chronos.R
 import com.anadolstudio.chronos.base.BaseActionActivity
 import com.anadolstudio.chronos.databinding.ActivityMainBinding
-import com.anadolstudio.core.viewmodel.livedata.SingleEvent
+import com.anadolstudio.ui.viewmodel.livedata.SingleEvent
 
 class SingleActivity : BaseActionActivity<SingleViewModel, SingleController>(R.id.nav_host_fragment_content_main) {
 

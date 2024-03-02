@@ -3,12 +3,12 @@ package com.anadolstudio.chronos.presentation.main
 import android.view.View
 import com.anadolstudio.chronos.R
 import com.anadolstudio.chronos.databinding.ItemStopWatcherBinding
-import com.anadolstudio.core.groupie.BaseGroupItem
-import com.anadolstudio.core.util.common.throttleClick
-import com.anadolstudio.core.util.common_extention.getCompatDrawable
-import com.anadolstudio.core.util.data_time.Time
-import com.anadolstudio.core.view.animation.AnimateUtil.scaleAnimationOnClick
+import com.anadolstudio.ui.adapters.groupie.BaseGroupItem
+import com.anadolstudio.utils.util.common.throttleClick
+import com.anadolstudio.utils.util.data_time.Time
+import com.anadolstudio.utils.animation.AnimateUtil.scaleAnimationOnClick
 import com.anadolstudio.domain.repository.stop_watcher.StopWatcherData
+import com.anadolstudio.utils.util.extentions.getCompatDrawable
 
 class StopWatcherItem(
         private val data: StopWatcherData,

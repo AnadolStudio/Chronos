@@ -17,7 +17,7 @@
         app:layout_constraintTop_toBottomOf="@id/settingsContainer"
         app:text="@string/global_create" />
 
-    <com.anadolstudio.core.view.bottom.BottomTopLine
+    <com.anadolstudio.view.bottom.BottomTopLine
         android:id="@+id/top_line"
         style="@style/BottomTopLine"
         app:layout_constraintEnd_toEndOf="parent"

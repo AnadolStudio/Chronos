@@ -9,6 +9,7 @@ import com.anadolstudio.chronos.R
 import com.anadolstudio.chronos.databinding.ViewCircleDiagramBinding
 import com.anadolstudio.chronos.util.shortFormat
 import com.anadolstudio.chronos.util.toWeekDayDateFormat
+import com.anadolstudio.utils.R.*
 import org.joda.time.DateTime
 import java.util.concurrent.TimeUnit
 
@@ -22,7 +23,7 @@ class CircleDiagramView @JvmOverloads constructor(
     private val binding = ViewCircleDiagramBinding.inflate(LayoutInflater.from(context), this)
 
     init {
-        binding.root.setPadding(context.resources.getDimension(com.anadolstudio.core.R.dimen.padding_medium).toInt())
+        binding.root.setPadding(context.resources.getDimension(dimen.padding_medium).toInt())
     }
 
     fun setup(

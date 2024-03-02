@@ -13,7 +13,7 @@
         android:layout_height="match_parent"
         android:background="@color/colorSecondary">
 
-        <com.anadolstudio.core.view.TouchFrameLayout
+        <com.anadolstudio.view.TouchFrameLayout
             android:id="@+id/recycler_container"
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -31,7 +31,7 @@
                 tools:listitem="@layout/item_track"
                 tools:itemCount="4"/>
 
-        </com.anadolstudio.core.view.TouchFrameLayout>
+        </com.anadolstudio.view.TouchFrameLayout>
 
         <com.anadolstudio.chronos.view.button.base.BaseButton
             android:id="@+id/addButton"
@@ -42,7 +42,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:text="@string/global_add" />
 
-        <com.anadolstudio.core.view.toolbar.BaseToolbar
+        <com.anadolstudio.view.toolbar.BaseToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -52,25 +52,25 @@
             app:needDivider="true"
             app:title="@string/app_name">
 
-            <com.anadolstudio.core.view.toolbar.ToolbarIconButton
+            <com.anadolstudio.view.toolbar.ToolbarIconButton
                 android:id="@+id/night_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:src="@drawable/ic_mode_dark" />
 
-            <com.anadolstudio.core.view.toolbar.ToolbarIconButton
+            <com.anadolstudio.view.toolbar.ToolbarIconButton
                 android:id="@+id/edit_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:src="@drawable/ic_edit" />
 
-            <com.anadolstudio.core.view.toolbar.ToolbarIconButton
+            <com.anadolstudio.view.toolbar.ToolbarIconButton
                 android:id="@+id/calendar_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:src="@drawable/ic_calendar" />
 
-        </com.anadolstudio.core.view.toolbar.BaseToolbar>
+        </com.anadolstudio.view.toolbar.BaseToolbar>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

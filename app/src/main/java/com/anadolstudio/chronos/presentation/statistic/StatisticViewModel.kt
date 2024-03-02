@@ -14,7 +14,7 @@ import com.anadolstudio.chronos.util.plusMonth
 import com.anadolstudio.chronos.util.plusWeek
 import com.anadolstudio.chronos.util.startMonth
 import com.anadolstudio.chronos.util.startWeek
-import com.anadolstudio.core.util.rx.smartSubscribe
+import com.anadolstudio.utils.util.rx.smartSubscribe
 import com.anadolstudio.domain.repository.chronos.ChronosRepository
 import com.anadolstudio.domain.repository.common.ResourceRepository
 import io.reactivex.Single

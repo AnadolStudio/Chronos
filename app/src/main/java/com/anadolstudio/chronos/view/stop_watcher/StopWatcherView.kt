@@ -7,8 +7,8 @@ import android.widget.LinearLayout
 import androidx.core.view.isVisible
 import com.anadolstudio.chronos.R
 import com.anadolstudio.chronos.databinding.ViewStopWatcherBinding
-import com.anadolstudio.core.util.data_time.Time
-import com.anadolstudio.core.view.animation.AnimateUtil.scaleAnimationOnClick
+import com.anadolstudio.utils.util.data_time.Time
+import com.anadolstudio.utils.animation.AnimateUtil.scaleAnimationOnClick
 import com.anadolstudio.domain.repository.stop_watcher.StopWatcherData
 import com.anadolstudio.domain.repository.stop_watcher.StopWatcherData.State
 

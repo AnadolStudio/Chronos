@@ -1,7 +1,7 @@
 package com.anadolstudio.chronos.presentation.main.model
 
 import android.os.Parcelable
-import com.anadolstudio.core.util.data_time.Time
+import com.anadolstudio.utils.util.data_time.Time
 import com.anadolstudio.domain.repository.chronos.main_category.MainCategoryDomain
 import com.anadolstudio.domain.repository.chronos.subcategory.SubcategoryDomain
 import com.anadolstudio.domain.repository.chronos.track.TrackDomain

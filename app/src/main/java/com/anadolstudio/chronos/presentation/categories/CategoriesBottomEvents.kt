@@ -1,7 +1,7 @@
 package com.anadolstudio.chronos.presentation.categories
 
 import com.anadolstudio.chronos.presentation.categories.model.CategoryUi
-import com.anadolstudio.core.viewmodel.livedata.SingleCustomEvent
+import com.anadolstudio.ui.viewmodel.livedata.SingleCustomEvent
 
 sealed class CategoriesBottomEvents : SingleCustomEvent() {
 
