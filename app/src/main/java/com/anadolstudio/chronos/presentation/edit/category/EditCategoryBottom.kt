@@ -7,13 +7,13 @@ import com.anadolstudio.chronos.R
 import com.anadolstudio.chronos.base.bottom.BaseContentBottom
 import com.anadolstudio.chronos.databinding.BottomEditCategoryBinding
 import com.anadolstudio.chronos.presentation.categories.model.CategoryUi
-import com.anadolstudio.core.presentation.dialogs.alert.AlertDialogBuilder
-import com.anadolstudio.core.util.common_extention.getParcelable
-import com.anadolstudio.core.util.common_extention.setFragmentResult
-import com.anadolstudio.core.view.animation.AnimateUtil.scaleAnimationOnClick
-import com.anadolstudio.core.viewbinding.viewBinding
-import com.anadolstudio.core.viewmodel.assistedViewModel
-import com.anadolstudio.core.viewmodel.livedata.SingleEvent
+import com.anadolstudio.ui.dialogs.alert.AlertDialogBuilder
+import com.anadolstudio.ui.viewbinding.viewBinding
+import com.anadolstudio.ui.viewmodel.assistedViewModel
+import com.anadolstudio.ui.viewmodel.livedata.SingleEvent
+import com.anadolstudio.utils.animation.AnimateUtil.scaleAnimationOnClick
+import com.anadolstudio.utils.util.extentions.getParcelable
+import com.anadolstudio.utils.util.extentions.setFragmentResult
 
 open class EditCategoryBottom : BaseContentBottom<EditCategoryState, EditCategoryViewModel, EditCategoryController>(R.layout.bottom_edit_category) {
 

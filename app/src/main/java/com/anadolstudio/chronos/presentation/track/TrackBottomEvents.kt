@@ -1,6 +1,6 @@
 package com.anadolstudio.chronos.presentation.track
 
-import com.anadolstudio.core.viewmodel.livedata.SingleCustomEvent
+import com.anadolstudio.ui.viewmodel.livedata.SingleCustomEvent
 
 sealed class TrackBottomEvents : SingleCustomEvent() {
 

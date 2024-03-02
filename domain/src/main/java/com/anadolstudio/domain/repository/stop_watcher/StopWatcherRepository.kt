@@ -1,6 +1,6 @@
 package com.anadolstudio.domain.repository.stop_watcher
 
-import com.anadolstudio.core.util.data_time.Time
+import com.anadolstudio.utils.util.data_time.Time
 import io.reactivex.Observable
 
 interface StopWatcherRepository {

@@ -4,8 +4,8 @@ import android.view.View
 import com.anadolstudio.chronos.R
 import com.anadolstudio.chronos.databinding.ItemCategoryBinding
 import com.anadolstudio.chronos.presentation.categories.model.CategoryUi
-import com.anadolstudio.core.groupie.BaseGroupItem
-import com.anadolstudio.core.view.animation.AnimateUtil.scaleAnimationOnClick
+import com.anadolstudio.ui.adapters.groupie.BaseGroupItem
+import com.anadolstudio.utils.animation.AnimateUtil.scaleAnimationOnClick
 
 class CategoryItem(
         private val categoryUi: CategoryUi,

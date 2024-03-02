@@ -4,7 +4,7 @@ import com.anadolstudio.chronos.presentation.categories.model.CategoryUi
 import com.anadolstudio.chronos.presentation.categories.model.toCategoryUi
 import com.anadolstudio.chronos.presentation.main.model.TrackRootUi
 import com.anadolstudio.chronos.util.TODAY
-import com.anadolstudio.core.util.data_time.Time
+import com.anadolstudio.utils.util.data_time.Time
 import com.anadolstudio.domain.repository.chronos.main_category.MainCategoryDomain
 import com.anadolstudio.domain.repository.stop_watcher.StopWatcherData
 import org.joda.time.DateTime

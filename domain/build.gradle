@@ -33,7 +33,7 @@ android {
 }
 
 dependencies {
-    implementation project(path: ':core:android-base')
+    implementation project(path: ':core:utils')
 
 
     // Dagger (kapt don't work on 2.28)

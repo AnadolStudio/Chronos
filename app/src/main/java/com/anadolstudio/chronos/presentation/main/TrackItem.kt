@@ -5,9 +5,9 @@ import com.anadolstudio.chronos.R
 import com.anadolstudio.chronos.databinding.ItemTrackBinding
 import com.anadolstudio.chronos.presentation.main.model.TrackChildUi
 import com.anadolstudio.chronos.presentation.main.model.TrackRootUi
-import com.anadolstudio.core.groupie.BaseGroupItem
-import com.anadolstudio.core.util.common_extention.getCompatDrawable
-import com.anadolstudio.core.util.common_extention.vibrationLongClickListener
+import com.anadolstudio.ui.adapters.groupie.BaseGroupItem
+import com.anadolstudio.utils.util.extentions.getCompatDrawable
+import com.anadolstudio.utils.util.extentions.vibrationLongClickListener
 
 class TrackItem(
         private val trackRootUi: TrackRootUi,
@@ -26,7 +26,7 @@ class TrackItem(
             binding.cardView.foreground = null
             binding.cardView.setOnLongClickListener(null)
         } else {
-            binding.cardView.foreground = context.getCompatDrawable(com.anadolstudio.core.R.drawable.item_ripple_rectangle_8)
+            binding.cardView.foreground = context.getCompatDrawable(com.anadolstudio.view.R.drawable.item_ripple_rectangle_8)
             binding.cardView.vibrationLongClickListener { onClick.invoke(item.trackRootUi) }
         }
 

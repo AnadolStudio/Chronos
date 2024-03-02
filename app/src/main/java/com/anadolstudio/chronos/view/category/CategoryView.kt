@@ -8,7 +8,7 @@ import android.widget.LinearLayout
 import androidx.core.view.isVisible
 import com.anadolstudio.chronos.databinding.ViewCategoryBinding
 import com.anadolstudio.chronos.presentation.categories.model.CategoryUi
-import com.anadolstudio.core.util.common_extention.setLimitText
+import com.anadolstudio.utils.util.extentions.setLimitText
 
 class CategoryView @JvmOverloads constructor(
         context: Context,

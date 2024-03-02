@@ -5,7 +5,7 @@ import com.anadolstudio.chronos.base.viewmodel.BaseContentViewModel
 import com.anadolstudio.chronos.presentation.edit.track.EditTrackNavigationArgs
 import com.anadolstudio.chronos.presentation.main.model.TrackChildUi
 import com.anadolstudio.chronos.presentation.main.model.toTrackRootUi
-import com.anadolstudio.core.util.rx.smartSubscribe
+import com.anadolstudio.utils.util.rx.smartSubscribe
 import com.anadolstudio.domain.repository.chronos.ChronosRepository
 import com.anadolstudio.domain.repository.common.ResourceRepository
 import dagger.assisted.Assisted

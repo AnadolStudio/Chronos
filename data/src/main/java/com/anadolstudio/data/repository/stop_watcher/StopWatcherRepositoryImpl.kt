@@ -1,6 +1,6 @@
 package com.anadolstudio.data.repository.stop_watcher
 
-import com.anadolstudio.core.util.data_time.Time
+import com.anadolstudio.utils.util.data_time.Time
 import com.anadolstudio.data.repository.common.PreferencesStorage
 import com.anadolstudio.domain.repository.stop_watcher.StopWatcherData
 import com.anadolstudio.domain.repository.stop_watcher.StopWatcherRepository

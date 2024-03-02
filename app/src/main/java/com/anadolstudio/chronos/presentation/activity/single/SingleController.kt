@@ -1,5 +1,5 @@
 package com.anadolstudio.chronos.presentation.activity.single
 
-import com.anadolstudio.core.viewmodel.BaseController
+import com.anadolstudio.ui.viewmodel.BaseController
 
 interface SingleController : BaseController

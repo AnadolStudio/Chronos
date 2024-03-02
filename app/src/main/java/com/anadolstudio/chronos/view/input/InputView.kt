@@ -12,8 +12,8 @@ import androidx.core.content.withStyledAttributes
 import com.anadolstudio.chronos.R
 import com.anadolstudio.chronos.databinding.ViewEditTextBinding
 import com.anadolstudio.chronos.util.TempValidator
-import com.anadolstudio.core.util.common_extention.nullIfNotExist
-import com.anadolstudio.core.view.basetextinput.delegates.support_hint.ShowSupportHintMode
+import com.anadolstudio.utils.util.extentions.nullIfNotExist
+import com.anadolstudio.view.basetextinput.delegates.support_hint.ShowSupportHintMode
 
 class InputView @JvmOverloads constructor(
         context: Context,

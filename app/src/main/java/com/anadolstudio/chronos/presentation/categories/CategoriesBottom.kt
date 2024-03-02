@@ -4,12 +4,11 @@ import androidx.navigation.fragment.navArgs
 import com.anadolstudio.chronos.R
 import com.anadolstudio.chronos.base.bottom.BaseContentBottom
 import com.anadolstudio.chronos.databinding.BottomCategoriesBinding
-import com.anadolstudio.core.groupie.BaseGroupAdapter
-import com.anadolstudio.core.presentation.fragment.state_util.ViewStateDelegate
-import com.anadolstudio.core.util.common_extention.setFragmentResult
-import com.anadolstudio.core.viewbinding.viewBinding
-import com.anadolstudio.core.viewmodel.assistedViewModel
-import com.anadolstudio.core.viewmodel.livedata.SingleEvent
+import com.anadolstudio.ui.adapters.groupie.BaseGroupAdapter
+import com.anadolstudio.ui.viewbinding.viewBinding
+import com.anadolstudio.ui.viewmodel.assistedViewModel
+import com.anadolstudio.ui.viewmodel.livedata.SingleEvent
+import com.anadolstudio.utils.util.extentions.setFragmentResult
 import com.xwray.groupie.Section
 
 class CategoriesBottom : BaseContentBottom<CategoriesState, CategoriesViewModel, CategoriesController>(R.layout.bottom_categories) {

@@ -1,6 +1,6 @@
 package com.anadolstudio.chronos.presentation.activity.single
 
-import com.anadolstudio.core.viewmodel.livedata.SingleCustomEvent
+import com.anadolstudio.ui.viewmodel.livedata.SingleCustomEvent
 
 sealed class SingleEvents : SingleCustomEvent() {
 

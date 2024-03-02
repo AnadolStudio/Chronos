@@ -14,7 +14,8 @@ import androidx.core.content.withStyledAttributes
 import androidx.core.view.isVisible
 import com.anadolstudio.chronos.R
 import com.anadolstudio.chronos.databinding.ViewBaseButtonBinding
-import com.anadolstudio.core.util.common_extention.setDimensMargins
+import com.anadolstudio.utils.R.*
+import com.anadolstudio.utils.util.extentions.setDimensMargins
 
 open class BaseButton @JvmOverloads constructor(
         context: Context,
@@ -35,11 +36,11 @@ open class BaseButton @JvmOverloads constructor(
 
             val paddingTop = getDimension(
                     R.styleable.BaseButton_paddingTop,
-                    context.resources.getDimension(com.anadolstudio.core.R.dimen.padding_main)
+                    context.resources.getDimension(dimen.padding_main)
             )
             val paddingBottom = getDimension(
                     R.styleable.BaseButton_paddingBottom,
-                    context.resources.getDimension(com.anadolstudio.core.R.dimen.padding_main)
+                    context.resources.getDimension(dimen.padding_main)
             )
 
             binding.cardView.setDimensMargins(top = paddingTop.toInt(), bottom = paddingBottom.toInt())
@@ -65,7 +66,7 @@ open class BaseButton @JvmOverloads constructor(
             State.ENABLE -> {
                 binding.title.setTextColor(enableTextColor)
                 binding.cardView.setCardBackgroundColor(enableColor)
-                binding.cardView.cardElevation = context.resources.getDimension(com.anadolstudio.core.R.dimen.elevation_normal)
+                binding.cardView.cardElevation = context.resources.getDimension(dimen.elevation_normal)
             }
 
             State.DISABLE -> {

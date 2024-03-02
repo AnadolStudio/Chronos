@@ -3,8 +3,8 @@ package com.anadolstudio.chronos.base.viewmodel
 import android.os.Bundle
 import androidx.core.os.bundleOf
 import com.anadolstudio.chronos.navigation.NavigateData
-import com.anadolstudio.core.viewmodel.BaseController
-import com.anadolstudio.core.viewmodel.CoreActionViewModel
+import com.anadolstudio.ui.viewmodel.BaseController
+import com.anadolstudio.ui.viewmodel.CoreActionViewModel
 
 abstract class BaseActionViewModel : CoreActionViewModel<NavigateData>(), BaseViewModelDelegate, BaseController {
 

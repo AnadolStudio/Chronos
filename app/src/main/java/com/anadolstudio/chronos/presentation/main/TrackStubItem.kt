@@ -3,7 +3,7 @@ package com.anadolstudio.chronos.presentation.main
 import android.view.View
 import com.anadolstudio.chronos.R
 import com.anadolstudio.chronos.databinding.ItemTrackStubBinding
-import com.anadolstudio.core.groupie.BaseGroupItem
+import com.anadolstudio.ui.adapters.groupie.BaseGroupItem
 
 class TrackStubItem : BaseGroupItem<ItemTrackStubBinding>(ID.toLong(), R.layout.item_track_stub) {
 
