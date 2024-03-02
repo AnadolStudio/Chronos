@@ -1,5 +1,6 @@
 package com.anadolstudio.chronos.presentation.edit.category
 
+import androidx.exifinterface.media.ExifInterface.IfdType
 import com.anadolstudio.chronos.R
 import com.anadolstudio.chronos.base.viewmodel.BaseContentViewModel
 import com.anadolstudio.chronos.presentation.categories.CategoryNavigationArgs
@@ -12,6 +13,7 @@ import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import io.reactivex.Completable
+import java.util.UUID
 
 class EditCategoryViewModel @AssistedInject constructor(
         @Assisted args: EditCategoryNavigationArgs,
@@ -40,12 +42,26 @@ class EditCategoryViewModel @AssistedInject constructor(
             args = resources.navigateArg(
                     CategoryNavigationArgs(
                             requestKey = CATEGORIES_REQUEST_KEY,
-                            categoryList = state.categoryState.categoryList.filter {
-                                it.id != state.categoryUi.id && it.id != state.categoryUi.parentCategoryId
-                            }
+                            categoryList = getValidCategories()
                     )
             )
     )
+
+    private fun getValidCategories() :List<CategoryUi> {
+        val childSet = mutableSetOf<UUID>()
+
+        return state.categoryState.categoryList.filter {
+            val isNotParent = it.id != state.categoryUi.parentCategoryId
+            val isNotChild = it.parentCategoryId != state.categoryUi.id
+
+            if (!isNotChild) {
+                childSet.add(it.id)
+            }
+            val isNotChildOfChild = !childSet.contains(it.parentCategoryId)
+
+            it.id != state.categoryUi.id && isNotParent && isNotChild && isNotChildOfChild
+        }
+    }
 
     override fun onCategoriesSelected(categoryUi: CategoryUi?) = updateState { copy(parentCategoryUi = categoryUi) }
 
