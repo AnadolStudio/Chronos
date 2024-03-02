@@ -38,7 +38,7 @@ abstract class BaseTrackBottom<
         nameText.addValidateListener(controller::onNameChanged)
         hoursText.addValidateListener(controller::onHoursChanged)
         minutesText.addValidateListener(controller::onMinutesChanged)
-        applyButton.scaleAnimationOnClick(action = controller::onTrackClicked)
+        applyButton.setOnClickListener { controller.onTrackClicked() }
         hourPlus.scaleAnimationOnClick { controller.onHourPlusClicked() }
         hourMinus.scaleAnimationOnClick { controller.onHourMinusClicked() }
         minutes10Plus.scaleAnimationOnClick { controller.onMinutesPlusClicked() }

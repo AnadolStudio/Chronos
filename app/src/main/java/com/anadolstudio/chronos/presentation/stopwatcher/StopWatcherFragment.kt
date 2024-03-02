@@ -28,7 +28,7 @@ class StopWatcherFragment :
                 onAddButtonAction = { controller.onAddButtonClicked() },
                 onRemoveButtonAction = { controller.onRemoveButtonClicked() }
         )
-        stopWatcherToggle.scaleAnimationOnClick { controller.onStopWatcherToggleClicked() }
+        stopWatcherToggle.setOnClickListener { controller.onStopWatcherToggleClicked() }
         initFragmentResultListeners(TrackBottom.TAG)
     }
 

@@ -61,7 +61,7 @@ class MainFragment : BaseContentFragment<MainState, MainViewModel, MainControlle
                 CALENDAR_REQUEST_KEY
         )
         calendarButton.throttleClick { controller.onCalendarClicked() }
-        addButton.scaleAnimationOnClick { controller.onAddClicked() }
+        addButton.setOnClickListener { controller.onAddClicked() }
         editButton.throttleClick { controller.onEditItemsClicked() }
         nightButton.throttleClick { controller.onChangeNightModeClicked() }
         recycler.adapter = BaseGroupAdapter(stopWatcherSection, diagramSection, trackSection)

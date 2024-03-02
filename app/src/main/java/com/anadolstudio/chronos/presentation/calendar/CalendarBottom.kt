@@ -41,7 +41,7 @@ class CalendarBottom : BaseContentBottom<CalendarState, CalendarViewModel, Calen
         binding.calendar.onDateClickListener = {
             controller.onDatesSelected(binding.calendar.selectedDates)
         }
-        binding.applyButton.scaleAnimationOnClick { controller.onApplyClicked() }
+        binding.applyButton.setOnClickListener { controller.onApplyClicked() }
     }
 
     override fun render(state: CalendarState) {
