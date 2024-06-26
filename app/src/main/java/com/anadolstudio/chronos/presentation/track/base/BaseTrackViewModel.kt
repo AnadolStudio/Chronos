@@ -4,10 +4,10 @@ import com.anadolstudio.chronos.R
 import com.anadolstudio.chronos.base.viewmodel.BaseContentViewModel
 import com.anadolstudio.chronos.presentation.categories.CategoryNavigationArgs
 import com.anadolstudio.chronos.presentation.categories.model.CategoryUi
-import com.anadolstudio.utils.util.rx.smartSubscribe
 import com.anadolstudio.domain.repository.chronos.ChronosRepository
 import com.anadolstudio.domain.repository.chronos.track.TrackDomain
 import com.anadolstudio.domain.repository.common.ResourceRepository
+import com.anadolstudio.utils.util.rx.smartSubscribe
 import io.reactivex.Completable
 import org.joda.time.DateTime
 import kotlin.math.max
@@ -80,13 +80,13 @@ abstract class BaseTrackViewModel<State : BaseTrackState>(
             date = dateTime
     )
 
-    override fun onHourPlusClicked() = updateTime(hours = state.hours + 1, minutes = state.minutes)
+    override fun onHourPlusClicked() = refactorTime(hours = state.hours + 1)
 
-    override fun onHourMinusClicked() = updateTime(hours = max(state.hours - 1, 0), minutes = state.minutes)
+    override fun onHourMinusClicked() = refactorTime(hours = state.hours - 1)
 
-    override fun onMinutesPlusClicked() = updateTime(hours = state.hours, minutes = state.minutes + 10)
+    override fun onMinutesPlusClicked() = refactorTime(minutes = state.minutes + 10)
 
-    override fun onMinutesMinusClicked() = updateTime(hours = state.hours, minutes = max(state.minutes - 10, 0))
+    override fun onMinutesMinusClicked() = refactorTime(minutes = state.minutes - 10)
 
     override fun onRoundClicked() {
         val tens = (state.minutes / 10) * 10
@@ -97,6 +97,15 @@ abstract class BaseTrackViewModel<State : BaseTrackState>(
         }
 
         updateTime(hours = state.hours, minutes = tens + minutes)
+    }
+
+    protected fun refactorTime(hours: Int = state.hours, minutes: Int = state.minutes) {
+        val totalMinutes = max(hours * 60 + minutes, 0)
+
+        val newHours = totalMinutes / 60
+        val newMinutes = totalMinutes % 60
+
+        updateTime(newHours, newMinutes)
     }
 
     abstract fun updateTime(hours: Int, minutes: Int)
