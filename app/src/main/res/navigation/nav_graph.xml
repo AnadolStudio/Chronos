@@ -149,6 +149,10 @@
         android:name="com.anadolstudio.chronos.presentation.statistic.StatisticFragment"
         tools:layout="@layout/fragment_statistic">
 
+        <argument
+            android:name="data"
+            app:argType="com.anadolstudio.chronos.presentation.statistic.StatisticNavigationArgs" />
+
         <action
             android:id="@+id/action_statisticFragment_to_calendarBottom"
             app:destination="@id/calendarBottom" />
