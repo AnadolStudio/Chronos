@@ -6,11 +6,11 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.LinearLayout
 import androidx.core.view.isVisible
-import com.anadolstudio.chronos.databinding.ViewCategoryBinding
+import com.anadolstudio.chronos.databinding.ViewInlineCategoryBinding
 import com.anadolstudio.chronos.presentation.categories.model.CategoryUi
 import com.anadolstudio.utils.util.extentions.setLimitText
 
-class CategoryView @JvmOverloads constructor(
+class CategoryInlineView @JvmOverloads constructor(
         context: Context,
         attrs: AttributeSet?,
         defStyleAttr: Int = 0,
@@ -21,7 +21,7 @@ class CategoryView @JvmOverloads constructor(
         const val LIMIT = 25
     }
 
-    private val binding = ViewCategoryBinding.inflate(LayoutInflater.from(context), this)
+    private val binding = ViewInlineCategoryBinding.inflate(LayoutInflater.from(context), this)
 
     fun setup(categoryUi: CategoryUi) {
         binding.colorView.background = ColorDrawable(categoryUi.color)

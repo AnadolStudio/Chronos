@@ -12,7 +12,7 @@
     android:layout_marginTop="@dimen/padding_xsmall"
     android:layout_marginBottom="@dimen/padding_medium">
 
-    <com.anadolstudio.chronos.view.category.CategoryView
+    <com.anadolstudio.chronos.view.category.CategoryInlineView
         android:id="@+id/category_vew"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
