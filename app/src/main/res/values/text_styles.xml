@@ -41,6 +41,10 @@
         <item name="android:textSize">14sp</item>
     </style>
 
+    <style name="Caption14.Bold" parent="CommonTextViewStyle">
+        <item name="android:textStyle">bold</item>
+    </style>
+
     <style name="Caption12" parent="CommonTextViewStyle">
         <item name="android:textSize">12sp</item>
     </style>
