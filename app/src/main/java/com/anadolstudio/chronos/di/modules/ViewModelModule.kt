@@ -6,7 +6,6 @@ import com.anadolstudio.chronos.di.viewmodel.ViewModelFactory
 import com.anadolstudio.chronos.di.viewmodel.ViewModelKey
 import com.anadolstudio.chronos.presentation.activity.single.SingleViewModel
 import com.anadolstudio.chronos.presentation.main.MainViewModel
-import com.anadolstudio.chronos.presentation.statistic.StatisticViewModel
 import com.anadolstudio.chronos.presentation.stopwatcher.StopWatcherViewModel
 import dagger.Binds
 import dagger.Module
@@ -33,8 +32,4 @@ interface ViewModelModule {
     @ViewModelKey(StopWatcherViewModel::class)
     fun bindStopWatcherViewModel(viewModel: StopWatcherViewModel): ViewModel
 
-    @Binds
-    @IntoMap
-    @ViewModelKey(StatisticViewModel::class)
-    fun bindStatisticViewModel(viewModel: StatisticViewModel): ViewModel
 }

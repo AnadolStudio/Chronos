@@ -14,25 +14,31 @@ import com.anadolstudio.chronos.util.plusMonth
 import com.anadolstudio.chronos.util.plusWeek
 import com.anadolstudio.chronos.util.startMonth
 import com.anadolstudio.chronos.util.startWeek
-import com.anadolstudio.utils.util.rx.smartSubscribe
 import com.anadolstudio.domain.repository.chronos.ChronosRepository
 import com.anadolstudio.domain.repository.common.ResourceRepository
+import com.anadolstudio.utils.util.rx.smartSubscribe
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 import io.reactivex.Single
 import org.joda.time.DateTime
 import ru.cleverpumpkin.calendar.CalendarView
 import java.util.concurrent.TimeUnit
-import javax.inject.Inject
 
-class StatisticViewModel @Inject constructor(
+class StatisticViewModel @AssistedInject constructor(
         private val chronosRepository: ChronosRepository,
         val resources: ResourceRepository,
+        @Assisted args: StatisticNavigationArgs
 ) : BaseContentViewModel<StatisticState>(
-        initState = StatisticState()
+        initState = when (args.currentDate != null) {
+            true -> StatisticState(args.currentDate)
+            false -> StatisticState()
+        }
 ), StatisticController {
 
     companion object {
         private val DAYS_OF_WEEK_MINUTES = TimeUnit.DAYS.toMinutes(7L)
-        const val CALENDAR_REQUEST_KEY = "1_000_777"
+        const val CALENDAR_REQUEST_KEY = "CALENDAR_REQUEST_KEY"
     }
 
     init {
@@ -138,4 +144,9 @@ class StatisticViewModel @Inject constructor(
     }
 
     private enum class Period { WEEK, MONTH }
+
+    @AssistedFactory
+    interface Factory {
+        fun create(args: StatisticNavigationArgs): StatisticViewModel
+    }
 }
