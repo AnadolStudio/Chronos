@@ -11,18 +11,17 @@ import com.anadolstudio.chronos.presentation.main.MainViewModel.Companion.CATEGO
 import com.anadolstudio.chronos.presentation.main.MainViewModel.Companion.EDIT_REQUEST_KEY
 import com.anadolstudio.chronos.presentation.main.MainViewModel.Companion.TRACK_CHANGED_REQUEST_KEY
 import com.anadolstudio.chronos.presentation.stopwatcher.StopWatcherFragment
-import com.anadolstudio.chronos.presentation.track.TrackBottom
+import com.anadolstudio.chronos.presentation.track.AddTrackBottom
 import com.anadolstudio.chronos.view.diagram.ProgressData
-import com.anadolstudio.utils.util.common.throttleClick
-import com.anadolstudio.utils.util.data_time.Time
-import com.anadolstudio.utils.animation.AnimateUtil.scaleAnimationOnClick
-import com.anadolstudio.view.gesture.HorizontalMoveGesture
 import com.anadolstudio.domain.repository.stop_watcher.StopWatcherData
 import com.anadolstudio.ui.adapters.groupie.BaseGroupAdapter
 import com.anadolstudio.ui.viewbinding.viewBinding
+import com.anadolstudio.utils.util.common.throttleClick
+import com.anadolstudio.utils.util.data_time.Time
 import com.anadolstudio.utils.util.extentions.getDrawable
 import com.anadolstudio.utils.util.extentions.requireLong
 import com.anadolstudio.utils.util.extentions.requireParcelable
+import com.anadolstudio.view.gesture.HorizontalMoveGesture
 import com.xwray.groupie.Section
 import java.util.concurrent.TimeUnit
 
@@ -53,7 +52,7 @@ class MainFragment : BaseContentFragment<MainState, MainViewModel, MainControlle
 
     override fun initView() = with(binding) {
         initFragmentResultListeners(
-                TrackBottom.TAG,
+                AddTrackBottom.TAG,
                 StopWatcherFragment.TAG,
                 CATEGORIES_REQUEST_KEY,
                 EDIT_REQUEST_KEY,
@@ -72,7 +71,7 @@ class MainFragment : BaseContentFragment<MainState, MainViewModel, MainControlle
 
     override fun handleFragmentResult(requestKey: String, data: Bundle) = when (requestKey) {
         CATEGORIES_REQUEST_KEY -> controller.onCategoriesSelected(requireParcelable(data))
-        TrackBottom.TAG,
+        AddTrackBottom.TAG,
         StopWatcherFragment.TAG,
         EDIT_REQUEST_KEY,
         TRACK_CHANGED_REQUEST_KEY -> controller.onTimeTrackChanged()
