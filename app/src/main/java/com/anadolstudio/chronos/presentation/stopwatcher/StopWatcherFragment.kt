@@ -7,7 +7,6 @@ import com.anadolstudio.chronos.base.fragment.BaseContentFragment
 import com.anadolstudio.chronos.databinding.FragmentStopWatcherBinding
 import com.anadolstudio.chronos.presentation.track.TrackBottom
 import com.anadolstudio.utils.util.extentions.setFragmentResult
-import com.anadolstudio.utils.animation.AnimateUtil.scaleAnimationOnClick
 import com.anadolstudio.domain.repository.stop_watcher.StopWatcherData
 import com.anadolstudio.ui.viewbinding.viewBinding
 
