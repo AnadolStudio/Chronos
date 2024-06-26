@@ -11,10 +11,12 @@ import com.anadolstudio.chronos.presentation.detail.track.TrackDetailNavigationA
 import com.anadolstudio.chronos.presentation.edit.category.EditCategoryNavigationArgs
 import com.anadolstudio.chronos.presentation.main.model.TrackRootUi
 import com.anadolstudio.chronos.presentation.main.model.toTrackRootUi
+import com.anadolstudio.chronos.presentation.statistic.StatisticNavigationArgs
 import com.anadolstudio.chronos.presentation.track.TrackNavigationArgs
 import com.anadolstudio.chronos.util.TODAY
 import com.anadolstudio.chronos.util.minusDay
 import com.anadolstudio.chronos.util.plusDay
+import com.anadolstudio.chronos.util.startWeek
 import com.anadolstudio.domain.repository.chronos.ChronosRepository
 import com.anadolstudio.domain.repository.chronos.main_category.MainCategoryDomain
 import com.anadolstudio.domain.repository.common.NightModeRepository
@@ -47,10 +49,10 @@ class MainViewModel @Inject constructor(
 
     companion object {
         private const val STOP_WATCHER_INTERVAL = 1L
-        const val CATEGORIES_REQUEST_KEY = "1_000_001"
-        const val CALENDAR_REQUEST_KEY = "1_000_111"
-        const val TRACK_CHANGED_REQUEST_KEY = "1_000_121"
-        const val EDIT_REQUEST_KEY = "1_000_011"
+        const val CATEGORIES_REQUEST_KEY = "CATEGORIES_REQUEST_KEY"
+        const val CALENDAR_REQUEST_KEY = "CALENDAR_REQUEST_KEY"
+        const val TRACK_CHANGED_REQUEST_KEY = "TRACK_CHANGED_REQUEST_KEY"
+        const val EDIT_REQUEST_KEY = "EDIT_REQUEST_KEY"
     }
 
     private val stopWatcherDelegate: StopWatcherDelegate = StopWatcherDelegate(
@@ -165,7 +167,18 @@ class MainViewModel @Inject constructor(
             )
     )
 
-    override fun onDiagramClicked() = navigateTo(R.id.action_mainFragment_to_statisticFragment)
+    override fun onDiagramClicked() = navigateTo(
+            id = R.id.action_mainFragment_to_statisticFragment,
+            args = resources.navigateArg(
+                    StatisticNavigationArgs(
+                            requestKey = CATEGORIES_REQUEST_KEY,
+                            currentDate = when (state.trackState.currentDate.isBefore(TODAY.startWeek) ) {
+                                true -> state.trackState.currentDate
+                                false -> null
+                            }
+                    )
+            )
+    )
 
     override fun onStopWatcherClicked() = navigateTo(R.id.action_mainFragment_to_stopWatcherFragment)
 

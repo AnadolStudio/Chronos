@@ -40,3 +40,4 @@
 -keepnames class com.anadolstudio.chronos.presentation.common.BaseNavigationArgs
 -keepnames class com.anadolstudio.chronos.presentation.detail.track.TrackDetailNavigationArgs
 -keepnames class com.anadolstudio.chronos.presentation.calendar.CalendarNavigationArgs
+-keepnames class com.anadolstudio.chronos.presentation.statistic.StatisticNavigationArgs

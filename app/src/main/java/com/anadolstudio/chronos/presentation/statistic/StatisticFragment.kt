@@ -2,7 +2,7 @@ package com.anadolstudio.chronos.presentation.statistic
 
 import android.os.Bundle
 import android.view.GestureDetector
-import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.navArgs
 import com.anadolstudio.chronos.R
 import com.anadolstudio.chronos.base.fragment.BaseContentFragment
 import com.anadolstudio.chronos.databinding.FragmentStatisticBinding
@@ -12,6 +12,7 @@ import com.anadolstudio.chronos.presentation.statistic.StatisticViewModel.Compan
 import com.anadolstudio.chronos.view.diagram.ProgressData
 import com.anadolstudio.ui.adapters.groupie.BaseGroupAdapter
 import com.anadolstudio.ui.viewbinding.viewBinding
+import com.anadolstudio.ui.viewmodel.assistedViewModel
 import com.anadolstudio.utils.util.extentions.requireLongList
 import com.anadolstudio.view.gesture.HorizontalMoveGesture
 import com.xwray.groupie.Section
@@ -23,6 +24,8 @@ class StatisticFragment : BaseContentFragment<StatisticState, StatisticViewModel
     }
 
     private val binding by viewBinding { FragmentStatisticBinding.bind(it) }
+    private val args: StatisticFragmentArgs by navArgs()
+
     private val trackSection: Section = Section()
     private val diagramSection: Section = Section()
     private val horizontalMoveGestureDetector: GestureDetector by lazy {
@@ -36,7 +39,11 @@ class StatisticFragment : BaseContentFragment<StatisticState, StatisticViewModel
         )
     }
 
-    override fun createViewModelLazy() = viewModels<StatisticViewModel> { viewModelFactory }
+    override fun createViewModelLazy() = assistedViewModel {
+        getSharedComponent()
+            .statisticViewModelFactory()
+            .create(args.data)
+    }
 
     override fun initView() = with(binding) {
         initFragmentResultListeners(CALENDAR_REQUEST_KEY)
