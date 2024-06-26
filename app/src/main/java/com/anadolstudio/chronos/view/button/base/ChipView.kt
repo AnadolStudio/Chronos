@@ -18,6 +18,7 @@ class ChipView @JvmOverloads constructor(
 
     private companion object {
         const val MAX_LENGTH = 20
+        const val DISABLE_ALPHA = 0.65F
     }
 
     private val binding = ViewChipBinding.inflate(LayoutInflater.from(context), this)
@@ -43,4 +44,8 @@ class ChipView @JvmOverloads constructor(
 
     override fun setText(textRes: Int) = setText(context.getString(textRes))
 
+    override fun setEnabled(enabled: Boolean) {
+        super.setEnabled(enabled)
+        alpha = if (enabled) 1F else DISABLE_ALPHA
+    }
 }

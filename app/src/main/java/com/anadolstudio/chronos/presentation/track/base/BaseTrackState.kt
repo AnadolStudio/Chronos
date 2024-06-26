@@ -17,5 +17,6 @@ interface BaseTrackState {
     val lastTrackList: List<CategoryUi>
 
     val time: Time get() = Time(hours = hours, minutes = minutes, seconds = 0)
-
+    val hoursMinutesEnabled get() = hours > 0
+    val minusMinutesEnabled get() = minutes > 0 || hours > 0
 }
