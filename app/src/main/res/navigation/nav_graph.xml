@@ -30,7 +30,7 @@
 
     <dialog
         android:id="@+id/trackBottom"
-        android:name="com.anadolstudio.chronos.presentation.track.TrackBottom"
+        android:name="com.anadolstudio.chronos.presentation.track.AddTrackBottom"
         tools:layout="@layout/bottom_track">
 
         <action

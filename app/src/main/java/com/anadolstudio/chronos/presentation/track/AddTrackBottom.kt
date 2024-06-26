@@ -5,12 +5,12 @@ import androidx.navigation.fragment.navArgs
 import com.anadolstudio.chronos.R
 import com.anadolstudio.chronos.presentation.create.CreateBottom
 import com.anadolstudio.chronos.presentation.track.base.BaseTrackBottom
-import com.anadolstudio.utils.util.extentions.requireParcelable
-import com.anadolstudio.utils.util.extentions.setFragmentResult
 import com.anadolstudio.ui.viewmodel.assistedViewModel
 import com.anadolstudio.ui.viewmodel.livedata.SingleEvent
+import com.anadolstudio.utils.util.extentions.requireParcelable
+import com.anadolstudio.utils.util.extentions.setFragmentResult
 
-open class TrackBottom : BaseTrackBottom<TrackState, TrackViewModel, TrackController>() {
+open class AddTrackBottom : BaseTrackBottom<TrackState, TrackViewModel, TrackController>() {
 
     companion object {
         const val TAG = "TrackBottom"
@@ -18,7 +18,7 @@ open class TrackBottom : BaseTrackBottom<TrackState, TrackViewModel, TrackContro
         private const val RENDER_BUTTON_NAME = "RENDER_BUTTON_NAME"
     }
 
-    private val args: TrackBottomArgs by navArgs()
+    private val args: AddTrackBottomArgs by navArgs()
 
     override fun getDialogTag(): String = TAG
 
