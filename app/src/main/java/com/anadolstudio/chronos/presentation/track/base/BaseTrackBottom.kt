@@ -11,10 +11,10 @@ import com.anadolstudio.chronos.presentation.track.LastTrackItem
 import com.anadolstudio.chronos.presentation.track.TrackBottomEvents
 import com.anadolstudio.ui.adapters.groupie.BaseGroupAdapter
 import com.anadolstudio.ui.viewbinding.viewBinding
-import com.anadolstudio.utils.util.extentions.setFragmentResult
-import com.anadolstudio.utils.animation.AnimateUtil.scaleAnimationOnClick
 import com.anadolstudio.ui.viewmodel.livedata.SingleEvent
+import com.anadolstudio.utils.animation.AnimateUtil.scaleAnimationOnClick
 import com.anadolstudio.utils.util.extentions.requireParcelable
+import com.anadolstudio.utils.util.extentions.setFragmentResult
 import com.xwray.groupie.Section
 
 abstract class BaseTrackBottom<
@@ -63,6 +63,10 @@ abstract class BaseTrackBottom<
         binding.minutesText.setText(state.minutes.toString(), withValidate = false)
         if (minutes == 0) binding.minutesText.setSelectorToEnd()
         binding.nameText.setText(state.name, withValidate = false)
+
+        binding.hourMinus.isEnabled = hoursMinutesEnabled
+        binding.minutes10Minus.isEnabled = minusMinutesEnabled
+
         renderLastTracks(state.lastTrackList)
         renderSelectedCategory(selectedCategoryUi)
         renderLoading(isLoading)
