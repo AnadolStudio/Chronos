@@ -11,7 +11,9 @@ class CategoriesViewModel @AssistedInject constructor(
         @Assisted categoryList: List<CategoryUi>
 ) : BaseContentViewModel<CategoriesState>(
         initState = CategoriesState(
-                categoryList = categoryList
+                categoryMap = categoryList
+                        .groupBy { it.parentName ?: it.name }
+                        .mapValues { it.value.reversed() }
         )
 ), CategoriesController {
 
