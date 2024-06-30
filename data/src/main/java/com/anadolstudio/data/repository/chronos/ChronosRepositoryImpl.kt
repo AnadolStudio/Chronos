@@ -10,6 +10,7 @@ import com.anadolstudio.data.repository.chronos.subcategory.toEntity
 import com.anadolstudio.data.repository.chronos.track.TrackDao
 import com.anadolstudio.data.repository.chronos.track.toDomain
 import com.anadolstudio.data.repository.chronos.track.toEntity
+import com.anadolstudio.data.repository.common.PreferencesStorage
 import com.anadolstudio.domain.repository.chronos.ChronosRepository
 import com.anadolstudio.domain.repository.chronos.main_category.MainCategoryDomain
 import com.anadolstudio.domain.repository.chronos.subcategory.SubcategoryDomain
@@ -18,12 +19,14 @@ import com.anadolstudio.utils.util.rx.schedulersIoToMain
 import io.reactivex.Completable
 import io.reactivex.Single
 import org.joda.time.DateTime
+import org.joda.time.DateTimeZone
 import java.util.UUID
 
 class ChronosRepositoryImpl(
         private val mainCategoryDao: MainCategoryDao,
         private val subcategoryDao: SubcategoryDao,
-        private val trackDao: TrackDao
+        private val trackDao: TrackDao,
+        private val preferencesStorage: PreferencesStorage,
 ) : ChronosRepository {
 
     // TODO Need Test
@@ -128,12 +131,12 @@ class ChronosRepositoryImpl(
             .schedulersIoToMain()
 
     override fun getTrackListByDate(date: DateTime): Single<List<TrackDomain>> = trackDao
-            .getTrackListByDate(date)
+            .getTrackListByDate(date.correctTimeZone())
             .map { it.toDomain() }
             .schedulersIoToMain()
 
     override fun getTrackListByPeriod(from: DateTime, to: DateTime): Single<List<TrackDomain>> = trackDao
-            .getTrackListByPeriod(from, to)
+            .getTrackListByPeriod(from.correctTimeZone(), to.correctTimeZone())
             .map { it.toDomain() }
             .schedulersIoToMain()
 
@@ -153,4 +156,8 @@ class ChronosRepositoryImpl(
     override fun deleteTrackById(id: UUID): Completable = trackDao
             .deleteTrackById(id)
             .schedulersIoToMain()
+
+    private fun DateTime.correctTimeZone(): DateTime = withZone(
+            DateTimeZone.forID(preferencesStorage.timeZoneId)
+    )
 }

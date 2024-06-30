@@ -55,11 +55,13 @@ class RepositoryModule {
     fun provideChronosRepository(
             mainCategoryDao: MainCategoryDao,
             subcategoryDao: SubcategoryDao,
-            trackDao: TrackDao
+            trackDao: TrackDao,
+            preferencesStorage: PreferencesStorage,
     ): ChronosRepository = ChronosRepositoryImpl(
             mainCategoryDao,
             subcategoryDao,
             trackDao,
+            preferencesStorage
     )
 
     @Provides

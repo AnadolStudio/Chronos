@@ -3,7 +3,6 @@ package com.anadolstudio.chronos.di.modules
 import android.content.Context
 import androidx.room.Room
 import com.anadolstudio.data.repository.chronos.ChronosDatabase
-import com.anadolstudio.data.repository.chronos.ChronosRepositoryImpl
 import com.anadolstudio.data.repository.chronos.main_category.MainCategoryDao
 import com.anadolstudio.data.repository.chronos.subcategory.SubcategoryDao
 import com.anadolstudio.data.repository.chronos.track.TrackDao
@@ -26,16 +25,5 @@ class DatabaseModule {
 
     @Provides
     fun provideTaskDao(database: ChronosDatabase): TrackDao = database.trackDao
-
-    @Provides
-    fun provideDataSource(
-            mainCategoryDao: MainCategoryDao,
-            subcategoryDao: SubcategoryDao,
-            trackDao: TrackDao
-    ): ChronosRepositoryImpl = ChronosRepositoryImpl(
-            mainCategoryDao,
-            subcategoryDao,
-            trackDao
-    )
 
 }
