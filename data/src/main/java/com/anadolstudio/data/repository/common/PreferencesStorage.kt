@@ -6,6 +6,7 @@ import com.anadolstudio.utils.util.extentions.nullIfNotExist
 import com.anadolstudio.utils.util.preferences.modify
 import com.ironz.binaryprefs.Preferences
 import org.joda.time.DateTime
+import org.joda.time.DateTimeZone
 
 @Suppress("TooManyFunctions")
 class PreferencesStorage(private val preferences: Preferences) {
@@ -15,6 +16,7 @@ class PreferencesStorage(private val preferences: Preferences) {
         const val STOP_WATCHER_DATA_END_KEY = "STOP_WATCHER_DATA_END_KEY"
         const val LAST_SELECTED_DATE = "LAST_SELECTED_DATE"
         const val NIGHT_MODE = "NIGHT_MODE"
+        const val TIME_ZONE = "TIME_ZONE"
     }
 
     var stopWatcherData: StopWatcherData
@@ -36,6 +38,13 @@ class PreferencesStorage(private val preferences: Preferences) {
                 ?: DateTime.now().withTimeAtStartOfDay()
 
     var nightMode: Int
-        set(value) = preferences.modify {putInt(NIGHT_MODE, value)}
+        set(value) = preferences.modify { putInt(NIGHT_MODE, value) }
         get() = preferences.getInt(NIGHT_MODE, AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+
+    var timeZoneId: String
+        set(value) = preferences.modify { putString(TIME_ZONE, value) }
+        get() = preferences.getString(TIME_ZONE, null)
+                ?: let {
+                    DateTimeZone.getDefault().id.also { timeZoneId = it }
+                }
 }
