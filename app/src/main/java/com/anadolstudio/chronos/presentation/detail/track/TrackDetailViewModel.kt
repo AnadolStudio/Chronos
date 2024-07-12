@@ -5,9 +5,9 @@ import com.anadolstudio.chronos.base.viewmodel.BaseContentViewModel
 import com.anadolstudio.chronos.presentation.edit.track.EditTrackNavigationArgs
 import com.anadolstudio.chronos.presentation.main.model.TrackChildUi
 import com.anadolstudio.chronos.presentation.main.model.toTrackRootUi
-import com.anadolstudio.utils.util.rx.smartSubscribe
 import com.anadolstudio.domain.repository.chronos.ChronosRepository
 import com.anadolstudio.domain.repository.common.ResourceRepository
+import com.anadolstudio.utils.util.rx.smartSubscribe
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
@@ -26,7 +26,7 @@ class TrackDetailViewModel @AssistedInject constructor(
 ), TrackDetailController {
 
     companion object {
-        const val EDIT_TRACK_REQUEST_KEY = "1_000_014"
+        const val EDIT_TRACK_REQUEST_KEY = "EDIT_TRACK_REQUEST_KEY"
     }
 
     override fun onTrackChanged() {

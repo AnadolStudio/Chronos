@@ -104,6 +104,21 @@
 
     </dialog>
 
+    <dialog
+        android:id="@+id/stopWatcherFragment"
+        android:name="com.anadolstudio.chronos.presentation.stopwatcher.StopWatcherBottom"
+        tools:layout="@layout/fragment_stop_watcher">
+
+        <action
+            android:id="@+id/action_stopWatcherFragment_to_trackBottom"
+            app:destination="@id/trackBottom" />
+
+        <argument
+            android:name="data"
+            app:argType="com.anadolstudio.chronos.presentation.stopwatcher.StopWatcherArgs" />
+
+    </dialog>
+
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.anadolstudio.chronos.presentation.main.MainFragment"
@@ -132,16 +147,6 @@
             android:id="@+id/action_mainFragment_to_calendarBottom"
             app:destination="@id/calendarBottom" />
 
-    </fragment>
-
-    <fragment
-        android:id="@+id/stopWatcherFragment"
-        android:name="com.anadolstudio.chronos.presentation.stopwatcher.StopWatcherFragment"
-        tools:layout="@layout/fragment_stop_watcher">
-
-        <action
-            android:id="@+id/action_stopWatcherFragment_to_trackBottom"
-            app:destination="@id/trackBottom" />
     </fragment>
 
     <fragment

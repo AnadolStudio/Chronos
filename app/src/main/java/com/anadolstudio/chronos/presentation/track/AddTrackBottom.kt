@@ -12,10 +12,10 @@ import com.anadolstudio.utils.util.extentions.setFragmentResult
 
 open class AddTrackBottom : BaseTrackBottom<TrackState, TrackViewModel, TrackController>() {
 
-    companion object {
+    private companion object {
         const val TAG = "TrackBottom"
-        private const val RENDER_BUTTON_ENABLE = "RENDER_BUTTON_ENABLE"
-        private const val RENDER_BUTTON_NAME = "RENDER_BUTTON_NAME"
+        const val RENDER_BUTTON_ENABLE = "RENDER_BUTTON_ENABLE"
+        const val RENDER_BUTTON_NAME = "RENDER_BUTTON_NAME"
     }
 
     private val args: AddTrackBottomArgs by navArgs()
@@ -34,7 +34,7 @@ open class AddTrackBottom : BaseTrackBottom<TrackState, TrackViewModel, TrackCon
     }
 
     override fun handleEvent(event: SingleEvent) = when (event) {
-        is TrackBottomEvents.Result -> setFragmentResult(getDialogTag())
+        is TrackBottomEvents.Result -> setFragmentResult(args.data.requestKey)
         else -> super.handleEvent(event)
     }
 

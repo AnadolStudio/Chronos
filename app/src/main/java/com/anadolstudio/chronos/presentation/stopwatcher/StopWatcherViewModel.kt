@@ -5,10 +5,10 @@ import com.anadolstudio.chronos.base.viewmodel.BaseContentViewModel
 import com.anadolstudio.chronos.presentation.delegates.StopWatcherDelegate
 import com.anadolstudio.chronos.presentation.track.TrackNavigationArgs
 import com.anadolstudio.chronos.util.TODAY
-import com.anadolstudio.utils.util.rx.smartSubscribe
 import com.anadolstudio.domain.repository.chronos.ChronosRepository
 import com.anadolstudio.domain.repository.common.ResourceRepository
 import com.anadolstudio.domain.repository.stop_watcher.StopWatcherRepository
+import com.anadolstudio.utils.util.rx.smartSubscribe
 import javax.inject.Inject
 
 class StopWatcherViewModel @Inject constructor(
@@ -20,6 +20,10 @@ class StopWatcherViewModel @Inject constructor(
                 stopWatcherData = stopWatcherRepository.stopWatcherData
         )
 ), StopWatcherController {
+
+    companion object {
+        const val STOP_WATCHER_ADD_TRACK_KEY = "STOP_WATCHER_ADD_TRACK_KEY"
+    }
 
     private val stopWatcherDelegate: StopWatcherDelegate = StopWatcherDelegate(
             provideData = { state.stopWatcherData },
@@ -52,7 +56,8 @@ class StopWatcherViewModel @Inject constructor(
                             hours = state.stopWatcherData.deltaTime?.hours ?: 0,
                             minutes = state.stopWatcherData.deltaTime?.minutes ?: 0,
                             fromStopWatcher = true,
-                            selectedDateTime = TODAY
+                            selectedDateTime = TODAY,
+                            requestKey = STOP_WATCHER_ADD_TRACK_KEY,
                     )
             )
     )

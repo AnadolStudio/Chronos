@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="170dp"
+    android:layout_height="170dp"
+    tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
+
+    <Chronometer
+        android:id="@+id/chronometer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:animateLayoutChanges="false"
+        android:textAppearance="@style/Header32.Bold"
+        android:textColor="@color/colorAccent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:format="00 : 00" />
+
+    <TextView
+        android:id="@+id/seconds_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:animateLayoutChanges="false"
+        android:background="@drawable/item_ripple_rectangle_8"
+        android:textAllCaps="true"
+        android:textAppearance="@style/Caption16.Bold"
+        android:textColor="@color/colorAccent"
+        app:layout_constraintBottom_toTopOf="@id/chronometer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="00" />
+
+</merge>

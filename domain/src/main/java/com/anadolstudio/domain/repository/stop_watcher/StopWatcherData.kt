@@ -28,7 +28,9 @@ data class StopWatcherData(
     enum class State {
         DEFAULT,
         IN_PROGRESS,
-        RESULT
+        RESULT;
+
+        fun inProgress(): Boolean = this == IN_PROGRESS
     }
 
 }
