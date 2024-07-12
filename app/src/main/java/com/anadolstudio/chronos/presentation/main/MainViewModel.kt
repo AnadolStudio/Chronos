@@ -12,6 +12,7 @@ import com.anadolstudio.chronos.presentation.edit.category.EditCategoryNavigatio
 import com.anadolstudio.chronos.presentation.main.model.TrackRootUi
 import com.anadolstudio.chronos.presentation.main.model.toTrackRootUi
 import com.anadolstudio.chronos.presentation.statistic.StatisticNavigationArgs
+import com.anadolstudio.chronos.presentation.stopwatcher.StopWatcherArgs
 import com.anadolstudio.chronos.presentation.track.TrackNavigationArgs
 import com.anadolstudio.chronos.util.TODAY
 import com.anadolstudio.chronos.util.minusDay
@@ -51,10 +52,12 @@ class MainViewModel @Inject constructor(
 
     companion object {
         private const val STOP_WATCHER_INTERVAL = 1L
-        const val CATEGORIES_REQUEST_KEY = "CATEGORIES_REQUEST_KEY"
-        const val CALENDAR_REQUEST_KEY = "CALENDAR_REQUEST_KEY"
-        const val TRACK_CHANGED_REQUEST_KEY = "TRACK_CHANGED_REQUEST_KEY"
-        const val EDIT_REQUEST_KEY = "EDIT_REQUEST_KEY"
+        const val MAIN_CATEGORIES_REQUEST_KEY = "MAIN_CATEGORIES_REQUEST_KEY"
+        const val MAIN_CALENDAR_REQUEST_KEY = "MAIN_CALENDAR_REQUEST_KEY"
+        const val MAIN_TRACK_CHANGED_REQUEST_KEY = "MAIN_TRACK_CHANGED_REQUEST_KEY"
+        const val MAIN_EDIT_REQUEST_KEY = "MAIN_EDIT_REQUEST_KEY"
+        const val MAIN_STOP_WATCHER_KEY = "MAIN_STOP_WATCHER_KEY"
+        const val MAIN_ADD_TRACK_KEY = "MAIN_ADD_TRACK_KEY"
     }
 
     private var stopWatcherDisposable: Disposable? = null
@@ -161,7 +164,7 @@ class MainViewModel @Inject constructor(
             id = R.id.action_mainFragment_to_calendarBottom,
             args = resources.navigateArg(
                     CalendarNavigationArgs(
-                            requestKey = CALENDAR_REQUEST_KEY,
+                            requestKey = MAIN_CALENDAR_REQUEST_KEY,
                             fromDate = state.trackState.currentDate,
                             mode = CalendarView.SelectionMode.SINGLE
                     )
@@ -173,7 +176,8 @@ class MainViewModel @Inject constructor(
             args = resources.navigateArg(
                     TrackNavigationArgs(
                             mainCategories = state.categoryState.mainCategoryList,
-                            selectedDateTime = state.trackState.currentDate
+                            selectedDateTime = state.trackState.currentDate,
+                            requestKey = MAIN_ADD_TRACK_KEY
                     )
             )
     )
@@ -182,7 +186,7 @@ class MainViewModel @Inject constructor(
             id = R.id.action_mainFragment_to_statisticFragment,
             args = resources.navigateArg(
                     StatisticNavigationArgs(
-                            requestKey = CATEGORIES_REQUEST_KEY,
+                            requestKey = MAIN_CATEGORIES_REQUEST_KEY,
                             currentDate = when (state.trackState.currentDate.isBefore(TODAY.startWeek)) {
                                 true -> state.trackState.currentDate
                                 false -> null
@@ -191,13 +195,16 @@ class MainViewModel @Inject constructor(
             )
     )
 
-    override fun onStopWatcherClicked() = navigateTo(R.id.action_mainFragment_to_stopWatcherFragment)
+    override fun onStopWatcherClicked() = navigateTo(
+            id = R.id.action_mainFragment_to_stopWatcherFragment,
+            args = resources.navigateArg(StopWatcherArgs(requestKey = MAIN_STOP_WATCHER_KEY))
+    )
 
     override fun onEditItemsClicked() = navigateTo(
             id = R.id.action_mainFragment_to_categoriesBottom,
             args = resources.navigateArg(
                     CategoryNavigationArgs(
-                            requestKey = CATEGORIES_REQUEST_KEY,
+                            requestKey = MAIN_CATEGORIES_REQUEST_KEY,
                             categoryList = state.categoryState.categoryList
                     )
             )
@@ -207,7 +214,7 @@ class MainViewModel @Inject constructor(
             id = R.id.action_mainFragment_to_trackDetailBottom,
             args = resources.navigateArg(
                     TrackDetailNavigationArgs(
-                            requestKey = TRACK_CHANGED_REQUEST_KEY,
+                            requestKey = MAIN_TRACK_CHANGED_REQUEST_KEY,
                             trackRootUi = trackRootUi,
                             currentDate = state.trackState.currentDate,
                             mainCategories = state.categoryState.mainCategoryList
@@ -237,7 +244,7 @@ class MainViewModel @Inject constructor(
             id = R.id.action_mainFragment_to_editBottom,
             args = resources.navigateArg(
                     EditCategoryNavigationArgs(
-                            requestKey = EDIT_REQUEST_KEY,
+                            requestKey = MAIN_EDIT_REQUEST_KEY,
                             categoryList = state.categoryState.categoryList,
                             selectedCategory = categoryUi
                     )

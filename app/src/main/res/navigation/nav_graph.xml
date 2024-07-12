@@ -106,12 +106,17 @@
 
     <dialog
         android:id="@+id/stopWatcherFragment"
-        android:name="com.anadolstudio.chronos.presentation.stopwatcher.StopWatcherFragment"
+        android:name="com.anadolstudio.chronos.presentation.stopwatcher.StopWatcherBottom"
         tools:layout="@layout/fragment_stop_watcher">
 
         <action
             android:id="@+id/action_stopWatcherFragment_to_trackBottom"
             app:destination="@id/trackBottom" />
+
+        <argument
+            android:name="data"
+            app:argType="com.anadolstudio.chronos.presentation.stopwatcher.StopWatcherArgs" />
+
     </dialog>
 
     <fragment

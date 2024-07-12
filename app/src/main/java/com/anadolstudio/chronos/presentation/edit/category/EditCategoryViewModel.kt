@@ -1,14 +1,13 @@
 package com.anadolstudio.chronos.presentation.edit.category
 
-import androidx.exifinterface.media.ExifInterface.IfdType
 import com.anadolstudio.chronos.R
 import com.anadolstudio.chronos.base.viewmodel.BaseContentViewModel
 import com.anadolstudio.chronos.presentation.categories.CategoryNavigationArgs
 import com.anadolstudio.chronos.presentation.categories.model.CategoryUi
 import com.anadolstudio.chronos.presentation.common.CategoryState
-import com.anadolstudio.utils.util.rx.smartSubscribe
 import com.anadolstudio.domain.repository.chronos.ChronosRepository
 import com.anadolstudio.domain.repository.common.ResourceRepository
+import com.anadolstudio.utils.util.rx.smartSubscribe
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
@@ -28,7 +27,7 @@ class EditCategoryViewModel @AssistedInject constructor(
 ), EditCategoryController {
 
     companion object {
-        const val CATEGORIES_REQUEST_KEY = "1_000_004"
+        const val CATEGORIES_REQUEST_KEY = "CATEGORIES_REQUEST_KEY"
     }
 
     override fun onNameChanged(name: String) = updateState { copy(name = name) }

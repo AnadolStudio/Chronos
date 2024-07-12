@@ -2,22 +2,21 @@ package com.anadolstudio.chronos.presentation.stopwatcher
 
 import android.os.Bundle
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.navArgs
 import com.anadolstudio.chronos.R
 import com.anadolstudio.chronos.base.bottom.BaseContentBottom
 import com.anadolstudio.chronos.databinding.FragmentStopWatcherBinding
-import com.anadolstudio.chronos.presentation.track.AddTrackBottom
+import com.anadolstudio.chronos.presentation.stopwatcher.StopWatcherViewModel.Companion.STOP_WATCHER_ADD_TRACK_KEY
 import com.anadolstudio.domain.repository.stop_watcher.StopWatcherData
 import com.anadolstudio.ui.viewbinding.viewBinding
 import com.anadolstudio.utils.util.extentions.setFragmentResult
 
-class StopWatcherFragment :
+class StopWatcherBottom :
         BaseContentBottom<StopWatcherState, StopWatcherViewModel, StopWatcherController>(R.layout.fragment_stop_watcher) {
 
-    companion object {
-        const val TAG = "StopWatcherFragment"
-    }
-
     private val binding by viewBinding { FragmentStopWatcherBinding.bind(it) }
+
+    private val args: StopWatcherBottomArgs by navArgs()
 
     override fun createViewModelLazy() = viewModels<StopWatcherViewModel> { viewModelFactory }
 
@@ -27,14 +26,16 @@ class StopWatcherFragment :
                 onRemoveButtonAction = { controller.onRemoveButtonClicked() }
         )
         stopWatcherToggle.setOnClickListener { controller.onStopWatcherToggleClicked() }
-        initFragmentResultListeners(AddTrackBottom.TAG)
+        initFragmentResultListeners(STOP_WATCHER_ADD_TRACK_KEY)
     }
 
     override fun handleFragmentResult(requestKey: String, data: Bundle) = when (requestKey) {
-        AddTrackBottom.TAG -> {
+        STOP_WATCHER_ADD_TRACK_KEY -> {
             controller.onTimeTracked()
-            setFragmentResult(TAG)
+            setFragmentResult(args.data.requestKey)
+            dismiss()
         }
+
         else -> super.handleFragmentResult(requestKey, data)
     }
 

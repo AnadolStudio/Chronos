@@ -6,12 +6,12 @@ import androidx.fragment.app.viewModels
 import com.anadolstudio.chronos.R
 import com.anadolstudio.chronos.base.fragment.BaseContentFragment
 import com.anadolstudio.chronos.databinding.FragmentMainBinding
-import com.anadolstudio.chronos.presentation.main.MainViewModel.Companion.CALENDAR_REQUEST_KEY
-import com.anadolstudio.chronos.presentation.main.MainViewModel.Companion.CATEGORIES_REQUEST_KEY
-import com.anadolstudio.chronos.presentation.main.MainViewModel.Companion.EDIT_REQUEST_KEY
-import com.anadolstudio.chronos.presentation.main.MainViewModel.Companion.TRACK_CHANGED_REQUEST_KEY
-import com.anadolstudio.chronos.presentation.stopwatcher.StopWatcherFragment
-import com.anadolstudio.chronos.presentation.track.AddTrackBottom
+import com.anadolstudio.chronos.presentation.main.MainViewModel.Companion.MAIN_ADD_TRACK_KEY
+import com.anadolstudio.chronos.presentation.main.MainViewModel.Companion.MAIN_CALENDAR_REQUEST_KEY
+import com.anadolstudio.chronos.presentation.main.MainViewModel.Companion.MAIN_CATEGORIES_REQUEST_KEY
+import com.anadolstudio.chronos.presentation.main.MainViewModel.Companion.MAIN_EDIT_REQUEST_KEY
+import com.anadolstudio.chronos.presentation.main.MainViewModel.Companion.MAIN_STOP_WATCHER_KEY
+import com.anadolstudio.chronos.presentation.main.MainViewModel.Companion.MAIN_TRACK_CHANGED_REQUEST_KEY
 import com.anadolstudio.chronos.view.diagram.ProgressData
 import com.anadolstudio.domain.repository.stop_watcher.StopWatcherData
 import com.anadolstudio.ui.adapters.groupie.BaseGroupAdapter
@@ -52,12 +52,12 @@ class MainFragment : BaseContentFragment<MainState, MainViewModel, MainControlle
 
     override fun initView() = with(binding) {
         initFragmentResultListeners(
-                AddTrackBottom.TAG,
-                StopWatcherFragment.TAG,
-                CATEGORIES_REQUEST_KEY,
-                EDIT_REQUEST_KEY,
-                TRACK_CHANGED_REQUEST_KEY,
-                CALENDAR_REQUEST_KEY
+                MAIN_ADD_TRACK_KEY,
+                MAIN_STOP_WATCHER_KEY,
+                MAIN_CATEGORIES_REQUEST_KEY,
+                MAIN_EDIT_REQUEST_KEY,
+                MAIN_TRACK_CHANGED_REQUEST_KEY,
+                MAIN_CALENDAR_REQUEST_KEY
         )
         calendarButton.throttleClick { controller.onCalendarClicked() }
         addButton.setOnClickListener { controller.onAddClicked() }
@@ -70,12 +70,12 @@ class MainFragment : BaseContentFragment<MainState, MainViewModel, MainControlle
     }
 
     override fun handleFragmentResult(requestKey: String, data: Bundle) = when (requestKey) {
-        CATEGORIES_REQUEST_KEY -> controller.onCategoriesSelected(requireParcelable(data))
-        AddTrackBottom.TAG,
-        StopWatcherFragment.TAG,
-        EDIT_REQUEST_KEY,
-        TRACK_CHANGED_REQUEST_KEY -> controller.onTimeTrackChanged()
-        CALENDAR_REQUEST_KEY -> controller.onDateSelected(requireLong(data))
+        MAIN_CATEGORIES_REQUEST_KEY -> controller.onCategoriesSelected(requireParcelable(data))
+        MAIN_ADD_TRACK_KEY,
+        MAIN_STOP_WATCHER_KEY,
+        MAIN_EDIT_REQUEST_KEY,
+        MAIN_TRACK_CHANGED_REQUEST_KEY -> controller.onTimeTrackChanged()
+        MAIN_CALENDAR_REQUEST_KEY -> controller.onDateSelected(requireLong(data))
         else -> super.handleFragmentResult(requestKey, data)
     }
 
