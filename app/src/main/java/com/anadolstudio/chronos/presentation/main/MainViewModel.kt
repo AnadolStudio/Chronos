@@ -22,11 +22,13 @@ import com.anadolstudio.domain.repository.chronos.main_category.MainCategoryDoma
 import com.anadolstudio.domain.repository.common.NightModeRepository
 import com.anadolstudio.domain.repository.common.PreferenceRepository
 import com.anadolstudio.domain.repository.common.ResourceRepository
+import com.anadolstudio.domain.repository.stop_watcher.StopWatcherData
 import com.anadolstudio.domain.repository.stop_watcher.StopWatcherRepository
 import com.anadolstudio.utils.util.rx.smartSubscribe
 import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.Single
+import io.reactivex.disposables.Disposable
 import org.joda.time.DateTime
 import ru.cleverpumpkin.calendar.CalendarView
 import java.util.concurrent.TimeUnit
@@ -55,9 +57,10 @@ class MainViewModel @Inject constructor(
         const val EDIT_REQUEST_KEY = "EDIT_REQUEST_KEY"
     }
 
+    private var stopWatcherDisposable: Disposable? = null
     private val stopWatcherDelegate: StopWatcherDelegate = StopWatcherDelegate(
             provideData = { state.stopWatcherData },
-            onDataChange = { updateState { copy(stopWatcherData = it) } },
+            onDataChange = { updateStopWatcher(it) },
             stopWatcherRepository = stopWatcherRepository,
     )
 
@@ -81,20 +84,28 @@ class MainViewModel @Inject constructor(
     private fun observeStopWatcher() {
         stopWatcherRepository.observeStopWatcherChanges()
                 .smartSubscribe(
-                        onSuccess = { updateState { copy(stopWatcherData = it) } },
+                        onSuccess = { updateStopWatcher(it) },
                         onError = ::showError
                 )
                 .disposeOnCleared()
+    }
 
-        Observable.interval(STOP_WATCHER_INTERVAL, TimeUnit.SECONDS)
+    private fun setupTimer(isEnable: Boolean) = if (isEnable) {
+        stopWatcherDisposable = Observable.interval(STOP_WATCHER_INTERVAL, TimeUnit.SECONDS)
                 .smartSubscribe(
-                        onSuccess = {
-                            updateState { copy(stopWatcherTime = stopWatcherRepository.currentDelta) }
-                        },
+                        onSuccess = { updateState { copy(stopWatcherTime = stopWatcherRepository.currentDelta) } },
                         onError = this::showError
                 )
                 .disposeOnCleared()
+    } else {
+        stopWatcherDisposable?.dispose()
     }
+
+    private fun updateStopWatcher(data: StopWatcherData) {
+        setupTimer(isEnable = data.state.inProgress())
+        updateState { copy(stopWatcherData = data) }
+    }
+
 
     private fun initMainCategoriesIfNeed(mainCategoryList: List<MainCategoryDomain>) {
         if (mainCategoryList.isNotEmpty()) return
@@ -172,7 +183,7 @@ class MainViewModel @Inject constructor(
             args = resources.navigateArg(
                     StatisticNavigationArgs(
                             requestKey = CATEGORIES_REQUEST_KEY,
-                            currentDate = when (state.trackState.currentDate.isBefore(TODAY.startWeek) ) {
+                            currentDate = when (state.trackState.currentDate.isBefore(TODAY.startWeek)) {
                                 true -> state.trackState.currentDate
                                 false -> null
                             }

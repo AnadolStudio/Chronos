@@ -4,13 +4,12 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.LinearLayout
-import androidx.core.view.isVisible
-import com.anadolstudio.chronos.R
+import androidx.core.view.isInvisible
+import androidx.transition.TransitionManager
 import com.anadolstudio.chronos.databinding.ViewStopWatcherBinding
-import com.anadolstudio.utils.util.data_time.Time
-import com.anadolstudio.utils.animation.AnimateUtil.scaleAnimationOnClick
 import com.anadolstudio.domain.repository.stop_watcher.StopWatcherData
 import com.anadolstudio.domain.repository.stop_watcher.StopWatcherData.State
+import com.anadolstudio.utils.animation.AnimateUtil.scaleAnimationOnClick
 
 class StopWatcherView @JvmOverloads constructor(
         context: Context,
@@ -18,52 +17,21 @@ class StopWatcherView @JvmOverloads constructor(
         defStyleAttr: Int = 0
 ) : LinearLayout(context, attrs, defStyleAttr) {
 
-    private companion object {
-        const val ZERO_TIME = "00"
-    }
-
     private val binding = ViewStopWatcherBinding.inflate(LayoutInflater.from(context), this)
-
-    init {
-        binding.secondsText.text = ZERO_TIME
-        binding.chronometer.text = context.getString(R.string.global_chronometer_text, ZERO_TIME, ZERO_TIME)
-    }
-
-    private fun updateTimeTitle(startTime: Long, endTime: Long) {
-        val time = Time(endTime - startTime)
-
-        binding.chronometer.text =
-                context.getString(R.string.global_chronometer_text, time.hoursString, time.minutesString)
-        binding.secondsText.text = time.secondsString
-    }
 
     fun setup(data: StopWatcherData) {
         binding.apply {
-            val startTime = data.startTime ?: System.currentTimeMillis()
-            val endTime = data.endTime ?: System.currentTimeMillis()
 
-            binding.chronometer.base = startTime
-            updateTimeTitle(startTime, endTime)
+            binding.clockFace.setup(data)
 
-            when (data.state) {
-                State.IN_PROGRESS -> {
-                    binding.chronometer.setOnChronometerTickListener { chronometer ->
-                        updateTimeTitle(chronometer.base, System.currentTimeMillis())
-                    }
-
-                    binding.chronometer.start()
-                }
-
-                State.RESULT, State.DEFAULT -> {
-                    binding.chronometer.setOnChronometerTickListener(null)
-                    binding.chronometer.stop()
-                }
-            }
-
-            binding.addButton.isVisible = data.state == State.RESULT
             val delta = data.deltaTime?.minutes ?: 0
-            binding.addButton.isEnabled = data.state == State.RESULT && delta > 0
-            binding.removeButton.isVisible = data.state == State.RESULT
+            addButton.isEnabled = data.state == State.RESULT && delta > 0
+
+            TransitionManager.beginDelayedTransition(binding.removeButton)
+            TransitionManager.beginDelayedTransition(binding.addButton)
+
+            addButton.isInvisible = data.state != State.RESULT
+            removeButton.isInvisible = data.state != State.RESULT
         }
     }
 

@@ -3,7 +3,7 @@ package com.anadolstudio.chronos.presentation.stopwatcher
 import android.os.Bundle
 import androidx.fragment.app.viewModels
 import com.anadolstudio.chronos.R
-import com.anadolstudio.chronos.base.fragment.BaseContentFragment
+import com.anadolstudio.chronos.base.bottom.BaseContentBottom
 import com.anadolstudio.chronos.databinding.FragmentStopWatcherBinding
 import com.anadolstudio.chronos.presentation.track.AddTrackBottom
 import com.anadolstudio.domain.repository.stop_watcher.StopWatcherData
@@ -11,7 +11,7 @@ import com.anadolstudio.ui.viewbinding.viewBinding
 import com.anadolstudio.utils.util.extentions.setFragmentResult
 
 class StopWatcherFragment :
-        BaseContentFragment<StopWatcherState, StopWatcherViewModel, StopWatcherController>(R.layout.fragment_stop_watcher) {
+        BaseContentBottom<StopWatcherState, StopWatcherViewModel, StopWatcherController>(R.layout.fragment_stop_watcher) {
 
     companion object {
         const val TAG = "StopWatcherFragment"
@@ -22,7 +22,6 @@ class StopWatcherFragment :
     override fun createViewModelLazy() = viewModels<StopWatcherViewModel> { viewModelFactory }
 
     override fun initView() = with(binding) {
-        binding.toolbar.setBackClickListener(controller::onBackClicked)
         stopWatcher.addListeners(
                 onAddButtonAction = { controller.onAddButtonClicked() },
                 onRemoveButtonAction = { controller.onRemoveButtonClicked() }

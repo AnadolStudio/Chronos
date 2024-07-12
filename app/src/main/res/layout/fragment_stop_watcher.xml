@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
-    android:fitsSystemWindows="true">
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/colorSecondary">
+        android:layout_height="wrap_content">
+
+        <com.anadolstudio.view.bottom.BottomTopLine
+            android:id="@+id/top_line"
+            style="@style/BottomTopLine"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.anadolstudio.chronos.view.button.base.BaseButton
             android:id="@+id/stop_watcher_toggle"
@@ -18,26 +22,17 @@
             android:layout_height="wrap_content"
             android:background="@drawable/gradient_base_button"
             android:paddingBottom="24dp"
+            android:layout_marginTop="@dimen/padding_large"
+            app:layout_constraintTop_toBottomOf="@+id/stopWatcher"
             app:layout_constraintBottom_toBottomOf="parent"
             app:text="@string/global_start" />
 
         <com.anadolstudio.chronos.view.stop_watcher.StopWatcherView
             android:id="@+id/stopWatcher"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintTop_toBottomOf="@id/toolbar"
-            app:layout_constraintBottom_toTopOf="@id/stop_watcher_toggle"/>
-
-        <com.anadolstudio.view.toolbar.BaseToolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
-            app:layout_constraintTop_toTopOf="parent"
-            app:needDivider="true"
-            app:tint="@color/colorAccent"
-            app:title="@string/app_name"
-            app:back_icon="@drawable/ic_arrow_back"/>
+            android:layout_marginTop="@dimen/padding_main"
+            app:layout_constraintTop_toBottomOf="@+id/top_line" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
