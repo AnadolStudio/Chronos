@@ -44,6 +44,6 @@ class TrackItem(
         return true
     }
 
-    override fun hashCode(): Int = trackRootUi.hashCode()
+    override fun hashCode(): Int = trackRootUi.id.hashCode()
 
 }

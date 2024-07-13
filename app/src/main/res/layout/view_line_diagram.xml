@@ -8,17 +8,6 @@
     android:padding="@dimen/padding_medium"
     tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
 
-    <TextView
-        android:id="@+id/timeText"
-        style="@style/Caption14"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/colorAccent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/previousDateContainer"
-        tools:text="16,4 / 24" />
-
     <LinearLayout
         android:id="@+id/nextDateContainer"
         android:layout_width="wrap_content"
@@ -74,17 +63,6 @@
             tools:text="31.12.2022" />
 
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/dateText"
-        style="@style/Caption14.Bold"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/colorAccent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="01.01.2023" />
 
     <com.anadolstudio.chronos.view.diagram.LineProgressView
         android:id="@+id/progress"

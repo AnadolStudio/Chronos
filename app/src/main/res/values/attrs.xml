@@ -35,4 +35,10 @@
         <attr name="maxLength" />
     </declare-styleable>
 
+    <declare-styleable name="MainButton">
+        <attr name="src" />
+        <attr name="text" />
+        <attr name="color" />
+    </declare-styleable>
+
 </resources>

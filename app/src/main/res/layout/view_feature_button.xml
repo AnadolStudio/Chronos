@@ -27,7 +27,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="@dimen/padding_main"
-                android:src="@drawable/ic_timer"
+                android:src="@drawable/ic_stop_watcher"
                 app:tint="@color/colorAccent" />
 
             <TextView

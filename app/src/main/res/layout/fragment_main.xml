@@ -1,77 +1,170 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinator"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/colorPrimary"
-    android:fitsSystemWindows="true">
+    android:background="@color/colorSecondary"
+    android:fitsSystemWindows="true"
+    android:saveEnabled="true">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+<com.anadolstudio.view.TouchFrameLayout
+        android:id="@+id/recycler_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorSecondary">
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
-        <com.anadolstudio.view.TouchFrameLayout
-            android:id="@+id/recycler_container"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/toolbar">
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingBottom="@dimen/padding_main"
+            android:paddingTop="@dimen/padding_main"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_track"
+            tools:itemCount="4"/>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler"
+    </com.anadolstudio.view.TouchFrameLayout>
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_bottom_radius"
+        android:backgroundTint="@color/colorSecondary"
+        app:elevation="0dp"
+        app:layout_behavior="com.anadolstudio.chronos.presentation.main.behavior.MainAppBarBehavior"
+        android:fitsSystemWindows="true"
+        android:paddingBottom="@dimen/padding_main">
+
+        <Space
+            android:id="@+id/space_to_top_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="96dp"
+            app:layout_scrollFlags="scroll"/>
+
+        <TextView
+            android:id="@+id/todayText"
+            style="@style/Header26"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/colorAccent"
+            app:layout_scrollFlags="scroll"
+            tools:text="Чт, 6 сентября" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            app:layout_scrollFlags="scroll"/>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="@dimen/radius_large"
+            android:layout_margin="@dimen/padding_main"
+            app:layout_scrollFlags="scroll">
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:clipToPadding="false"
-                android:paddingBottom="104dp"
-                android:paddingTop="@dimen/padding_medium"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/item_track"
-                tools:itemCount="4"/>
+                android:layout_height="80dp">
 
-        </com.anadolstudio.view.TouchFrameLayout>
+                <com.anadolstudio.chronos.view.button.base.MainButton
+                    android:id="@+id/stop_watcher_button"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    app:src="@drawable/ic_stop_watcher"
+                    app:text="@string/stop_watcher"
+                    app:color="@color/colorAccent"/>
 
-        <com.anadolstudio.chronos.view.button.base.BaseButton
-            android:id="@+id/addButton"
+                <com.anadolstudio.chronos.view.button.base.MainButton
+                    android:id="@+id/edit_button"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    app:src="@drawable/ic_edit"
+                    app:text="@string/global_change"
+                    app:color="@color/colorAccent"/>
+
+                <com.anadolstudio.chronos.view.button.base.MainButton
+                    android:id="@+id/calendar_button"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    app:src="@drawable/ic_calendar"
+                    app:text="@string/global_calendar"
+                    app:color="@color/colorAccent"/>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <Space
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/gradient_base_button"
-            android:paddingBottom="24dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:text="@string/global_add" />
+            android:layout_height="?android:actionBarSize"
+            app:layout_scrollFlags="noScroll"/>
 
-        <com.anadolstudio.view.toolbar.BaseToolbar
-            android:id="@+id/toolbar"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
-            app:layout_constraintTop_toTopOf="parent"
-            app:tint="@color/colorAccent"
-            app:needDivider="true"
-            app:title="@string/app_name">
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
 
-            <com.anadolstudio.view.toolbar.ToolbarIconButton
-                android:id="@+id/night_button"
-                android:layout_width="wrap_content"
+            <com.anadolstudio.chronos.view.diagram.LineDiagramView
+                android:id="@+id/diagram"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:src="@drawable/ic_mode_dark" />
+                android:layout_weight="2"
+                android:background="@drawable/item_ripple_rectangle_8"/>
 
-            <com.anadolstudio.view.toolbar.ToolbarIconButton
-                android:id="@+id/edit_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:src="@drawable/ic_edit" />
+        </LinearLayout>
 
-            <com.anadolstudio.view.toolbar.ToolbarIconButton
-                android:id="@+id/calendar_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:src="@drawable/ic_calendar" />
+    </com.google.android.material.appbar.AppBarLayout>
 
-        </com.anadolstudio.view.toolbar.BaseToolbar>
+    <com.anadolstudio.view.toolbar.BaseToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorSecondary"
+        app:needDivider="false"
+        app:tint="@color/colorAccent"
+        android:fitsSystemWindows="true">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <com.anadolstudio.view.toolbar.ToolbarIconButton
+            android:id="@+id/night_button"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            app:src="@drawable/ic_mode_dark" />
 
-</FrameLayout>
+    </com.anadolstudio.view.toolbar.BaseToolbar>
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/appBarAddButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/colorAccent"
+        app:icon="@drawable/ic_add"
+        app:iconTint="@color/colorPrimary"
+        app:layout_anchor="@id/appBar"
+        android:stateListAnimator="@null"
+        app:layout_anchorGravity="bottom|center_horizontal"/>
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/bottomAddButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/colorAccent"
+        android:layout_gravity="bottom|end"
+        android:text="@string/global_add"
+        android:layout_margin="@dimen/padding_main"
+        android:textColor="@color/colorPrimary"
+        app:elevation="@dimen/elevation_large"
+        android:stateListAnimator="@null"
+        app:icon="@drawable/ic_add"
+        app:iconTint="@color/colorPrimary" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

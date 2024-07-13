@@ -2,11 +2,12 @@ package com.anadolstudio.chronos.presentation.main
 
 import com.anadolstudio.chronos.presentation.categories.model.CategoryUi
 import com.anadolstudio.chronos.presentation.categories.model.toCategoryUi
+import com.anadolstudio.chronos.presentation.main.behavior.ScrollState
 import com.anadolstudio.chronos.presentation.main.model.TrackRootUi
 import com.anadolstudio.chronos.util.TODAY
-import com.anadolstudio.utils.util.data_time.Time
 import com.anadolstudio.domain.repository.chronos.main_category.MainCategoryDomain
 import com.anadolstudio.domain.repository.stop_watcher.StopWatcherData
+import com.anadolstudio.utils.util.data_time.Time
 import org.joda.time.DateTime
 
 data class MainState(
@@ -16,6 +17,7 @@ data class MainState(
         val stopWatcherTime: Time? = null,
         val categoryState: MainCategoryState = MainCategoryState(),
         val isLoading: Boolean = true,
+        val appBarScrollState: ScrollState = ScrollState.IDLE
 ) {
     constructor(
             stopWatcherData: StopWatcherData,
@@ -34,7 +36,7 @@ data class MainState(
 
 data class MainCategoryState(
         val mainCategoryList: List<MainCategoryDomain> = emptyList(),
-){
+) {
     val categoryList: List<CategoryUi> = mainCategoryList.toCategoryUi()
 }
 
