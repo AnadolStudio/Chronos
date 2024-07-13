@@ -3,6 +3,7 @@ package com.anadolstudio.chronos.presentation.main
 import android.os.Bundle
 import android.view.GestureDetector
 import androidx.fragment.app.viewModels
+import androidx.transition.TransitionManager
 import com.anadolstudio.chronos.R
 import com.anadolstudio.chronos.base.fragment.BaseContentFragment
 import com.anadolstudio.chronos.databinding.FragmentMainBinding
@@ -12,8 +13,10 @@ import com.anadolstudio.chronos.presentation.main.MainViewModel.Companion.MAIN_C
 import com.anadolstudio.chronos.presentation.main.MainViewModel.Companion.MAIN_EDIT_REQUEST_KEY
 import com.anadolstudio.chronos.presentation.main.MainViewModel.Companion.MAIN_STOP_WATCHER_KEY
 import com.anadolstudio.chronos.presentation.main.MainViewModel.Companion.MAIN_TRACK_CHANGED_REQUEST_KEY
+import com.anadolstudio.chronos.util.SimpleScrollListener
 import com.anadolstudio.chronos.view.diagram.ProgressData
 import com.anadolstudio.domain.repository.stop_watcher.StopWatcherData
+import com.anadolstudio.ui.SingleMessageSnack
 import com.anadolstudio.ui.adapters.groupie.BaseGroupAdapter
 import com.anadolstudio.ui.viewbinding.viewBinding
 import com.anadolstudio.utils.util.common.throttleClick
@@ -30,6 +33,7 @@ class MainFragment : BaseContentFragment<MainState, MainViewModel, MainControlle
     private companion object {
         val MINUTES_IN_DAY = TimeUnit.DAYS.toMinutes(1).toInt()
         const val RENDER_TRACK = "RENDER_TRACK"
+        const val RENDER_FAB = "RENDER_FAB"
     }
 
     private val binding by viewBinding { FragmentMainBinding.bind(it) }
@@ -61,12 +65,20 @@ class MainFragment : BaseContentFragment<MainState, MainViewModel, MainControlle
         )
         calendarButton.throttleClick { controller.onCalendarClicked() }
         addButton.setOnClickListener { controller.onAddClicked() }
+        calendar.setOnClickListener { showMessageSnackbar(SingleMessageSnack.Short("test")) }
         editButton.throttleClick { controller.onEditItemsClicked() }
         nightButton.throttleClick { controller.onChangeNightModeClicked() }
-        recycler.adapter = BaseGroupAdapter(stopWatcherSection, diagramSection, trackSection)
+        recycler.adapter = BaseGroupAdapter(diagramSection, stopWatcherSection, trackSection)
         binding.recyclerContainer.addDispatchTouchListener { _, event ->
             horizontalMoveGestureDetector.onTouchEvent(event)
         }
+
+        binding.recycler.addOnScrollListener(
+                SimpleScrollListener(
+                        onScrollStateChanged = { recycler, _ -> controller.onRecyclerScrollStateChanged(recycler) },
+                        onScrolled = { recycler, _, _ , _ -> controller.onRecyclerScrollStateChanged(recycler) }
+                )
+        )
     }
 
     override fun handleFragmentResult(requestKey: String, data: Bundle) = when (requestKey) {
@@ -75,15 +87,22 @@ class MainFragment : BaseContentFragment<MainState, MainViewModel, MainControlle
         MAIN_STOP_WATCHER_KEY,
         MAIN_EDIT_REQUEST_KEY,
         MAIN_TRACK_CHANGED_REQUEST_KEY -> controller.onTimeTrackChanged()
+
         MAIN_CALENDAR_REQUEST_KEY -> controller.onDateSelected(requireLong(data))
         else -> super.handleFragmentResult(requestKey, data)
     }
 
     override fun render(state: MainState) {
         renderNightModeButton(state)
-        binding.addButton.setLoading(state.isLoading)
+//        binding.addButton.setLoading(state.isLoading)
         renderStopWatcher(state.stopWatcherData, state.stopWatcherTime)
         renderTrack(state.trackState)
+        renderFab(state.isFabExtended)
+    }
+
+    private fun renderFab(isExpanded: Boolean) = isExpanded.render(RENDER_FAB) {
+        TransitionManager.beginDelayedTransition(binding.addButtonContainer)
+        binding.addButton.isExtended = isExpanded
     }
 
     private fun renderNightModeButton(state: MainState) {

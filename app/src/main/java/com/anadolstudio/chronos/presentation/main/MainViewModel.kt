@@ -1,6 +1,7 @@
 package com.anadolstudio.chronos.presentation.main
 
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.recyclerview.widget.RecyclerView
 import com.anadolstudio.chronos.R
 import com.anadolstudio.chronos.base.viewmodel.BaseContentViewModel
 import com.anadolstudio.chronos.presentation.calendar.CalendarNavigationArgs
@@ -58,6 +59,7 @@ class MainViewModel @Inject constructor(
         const val MAIN_EDIT_REQUEST_KEY = "MAIN_EDIT_REQUEST_KEY"
         const val MAIN_STOP_WATCHER_KEY = "MAIN_STOP_WATCHER_KEY"
         const val MAIN_ADD_TRACK_KEY = "MAIN_ADD_TRACK_KEY"
+        const val BOTTOM_DIRECTION = 1
     }
 
     private var stopWatcherDisposable: Disposable? = null
@@ -251,4 +253,11 @@ class MainViewModel @Inject constructor(
             )
     )
 
+    override fun onRecyclerScrollStateChanged(recycler: RecyclerView) {
+        if (state.trackState.trackRootList.isEmpty()) return
+
+        val isBottom = !recycler.canScrollVertically(BOTTOM_DIRECTION)
+
+        updateState { copy(isFabExtended = isBottom) }
+    }
 }

@@ -5,9 +5,7 @@
     android:id="@+id/cardView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginHorizontal="@dimen/padding_main"
-    android:layout_marginTop="@dimen/padding_xsmall"
-    android:layout_marginBottom="@dimen/padding_large"
+    android:layout_margin="@dimen/padding_main"
     android:stateListAnimator="@animator/item_card_normal"
     app:cardBackgroundColor="@color/colorPrimary"
     app:cardCornerRadius="@dimen/radius_large">
