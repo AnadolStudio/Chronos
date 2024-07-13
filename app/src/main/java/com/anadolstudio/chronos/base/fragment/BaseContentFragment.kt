@@ -37,4 +37,10 @@ abstract class BaseContentFragment<
 
     protected abstract fun createViewModelLazy(): Lazy<ViewModel>
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+
+        stateMap.clear()
+    }
+
 }
