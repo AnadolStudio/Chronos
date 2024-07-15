@@ -15,7 +15,9 @@ import com.anadolstudio.chronos.presentation.statistic.StatisticNavigationArgs
 import com.anadolstudio.chronos.presentation.stopwatcher.StopWatcherArgs
 import com.anadolstudio.chronos.presentation.track.TrackNavigationArgs
 import com.anadolstudio.chronos.util.TODAY
+import com.anadolstudio.chronos.util.correctByTimeZone
 import com.anadolstudio.chronos.util.minusDay
+import com.anadolstudio.chronos.util.orToday
 import com.anadolstudio.chronos.util.plusDay
 import com.anadolstudio.chronos.util.startWeek
 import com.anadolstudio.domain.repository.chronos.ChronosRepository
@@ -45,7 +47,7 @@ class MainViewModel @Inject constructor(
 ) : BaseContentViewModel<MainState>(
         initState = MainState(
                 isNightMode = nightModeRepository.nightMode == AppCompatDelegate.MODE_NIGHT_YES,
-                currentDate = preferenceRepository.lastSelectedDate,
+                currentDate = preferenceRepository.lastSelectedDate.correctByTimeZone().orToday,
                 stopWatcherData = stopWatcherRepository.stopWatcherData,
                 stopWatcherTime = stopWatcherRepository.currentDelta
         )
@@ -224,9 +226,9 @@ class MainViewModel @Inject constructor(
 
     override fun onDateSelected(dateTime: Long) = changeCurrentDate(DateTime(dateTime).withTimeAtStartOfDay())
 
-    override fun onPreviousDateSelected() = changeCurrentDate(state.trackState.currentDate.minusDay())
+    override fun onPreviousDateSelected() = changeCurrentDate(state.trackState.currentDate.minusDay().correctByTimeZone())
 
-    override fun onNextDateSelected() = changeCurrentDate(state.trackState.currentDate.plusDay())
+    override fun onNextDateSelected() = changeCurrentDate(state.trackState.currentDate.plusDay().correctByTimeZone())
 
     private fun changeCurrentDate(currentDate: DateTime) {
         if (currentDate.isAfter(TODAY) || state.isAppBarScrolling) return

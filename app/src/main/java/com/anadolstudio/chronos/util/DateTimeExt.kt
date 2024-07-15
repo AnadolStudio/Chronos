@@ -30,7 +30,7 @@ fun DateTime.toSimpleDateFormat(): String = this.toString("dd.MM.YYYY")
 
 fun DateTime.toWeekDayDateFormat(): String = this.toString("EE, dd MMMM").replaceFirstChar { it.uppercase() }
 
-val TODAY: DateTime get() = DateTime.now().withTimeAtStartOfDay()
+val TODAY: DateTime get() = DateTime.now().withTimeAtStartOfDay().correctByTimeZone()
 
 val DateTime.startWeek: DateTime get() = this.minusDays(dayOfWeek - 1)
 
@@ -38,10 +38,19 @@ val DateTime.endWeek: DateTime get() = this.plusDays(SUNDAY - dayOfWeek)
 
 val DateTime.startMonth: DateTime get() = this.minusDays(dayOfMonth - 1)
 
-val DateTime.endMonth: DateTime get() {
-    val nextMonth = this.plusMonth()
+val DateTime.endMonth: DateTime
+    get() {
+        val nextMonth = this.plusMonth()
 
-    return nextMonth.minusDays(nextMonth.dayOfMonth)
-}
+        return nextMonth.minusDays(nextMonth.dayOfMonth)
+    }
 
 val DateTime.orToday: DateTime get() = if (isAfter(TODAY)) TODAY else this
+
+val DateTime.totalDays: Long get() = TimeUnit.MILLISECONDS.toDays(millis)
+
+fun DateTime.correctByTimeZone(): DateTime {
+    val offset = zone.getOffset(millis)
+
+    return withTimeAtStartOfDay().plus(offset.toLong())
+}

@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.anadolstudio.data.repository.chronos.ChronosDatabase
 import com.anadolstudio.data.repository.chronos.ChronosRepositoryImpl
+import com.anadolstudio.data.repository.chronos.Migration_1_2
 import com.anadolstudio.data.repository.chronos.main_category.MainCategoryDao
 import com.anadolstudio.data.repository.chronos.subcategory.SubcategoryDao
 import com.anadolstudio.data.repository.chronos.track.TrackDao
@@ -16,6 +17,8 @@ class DatabaseModule {
     @Provides
     fun provideDatabase(context: Context): ChronosDatabase = Room
             .databaseBuilder(context, ChronosDatabase::class.java, ChronosDatabase.DATABASE)
+            .addMigrations(Migration_1_2())
+            .allowMainThreadQueries()
             .build()
 
     @Provides

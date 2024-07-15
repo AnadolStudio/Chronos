@@ -11,7 +11,7 @@ import com.anadolstudio.data.repository.chronos.track.TrackDao
 import com.anadolstudio.data.repository.chronos.track.TrackEntity
 
 @Database(
-        version = 1,
+        version = 2,
         entities = [
             MainCategoryEntity::class,
             SubcategoryEntity::class,
