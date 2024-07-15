@@ -9,7 +9,6 @@ import com.anadolstudio.chronos.presentation.categories.model.CategoryUi
 import com.anadolstudio.chronos.presentation.delegates.StopWatcherDelegate
 import com.anadolstudio.chronos.presentation.detail.track.TrackDetailNavigationArgs
 import com.anadolstudio.chronos.presentation.edit.category.EditCategoryNavigationArgs
-import com.anadolstudio.chronos.presentation.main.behavior.ScrollState
 import com.anadolstudio.chronos.presentation.main.model.TrackRootUi
 import com.anadolstudio.chronos.presentation.main.model.toTrackRootUi
 import com.anadolstudio.chronos.presentation.statistic.StatisticNavigationArgs
@@ -27,6 +26,7 @@ import com.anadolstudio.domain.repository.common.ResourceRepository
 import com.anadolstudio.domain.repository.stop_watcher.StopWatcherData
 import com.anadolstudio.domain.repository.stop_watcher.StopWatcherRepository
 import com.anadolstudio.utils.util.rx.smartSubscribe
+import com.anadolstudio.view.coordinator.ScrollState
 import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.Single
@@ -229,7 +229,7 @@ class MainViewModel @Inject constructor(
     override fun onNextDateSelected() = changeCurrentDate(state.trackState.currentDate.plusDay())
 
     private fun changeCurrentDate(currentDate: DateTime) {
-        if (currentDate.isAfter(TODAY)) return
+        if (currentDate.isAfter(TODAY) || state.isAppBarScrolling) return
 
         preferenceRepository.lastSelectedDate = currentDate
         updateState { copy(trackState = trackState.copy(currentDate = currentDate)) }
@@ -252,6 +252,6 @@ class MainViewModel @Inject constructor(
     )
 
     override fun onAppBarScrollStateChanged(scrollState: ScrollState) = updateState {
-        copy(appBarScrollState = scrollState)
+        copy(isAppBarScrolling = scrollState == ScrollState.SCROLLING)
     }
 }

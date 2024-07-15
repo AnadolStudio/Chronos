@@ -1,9 +1,9 @@
 package com.anadolstudio.chronos.presentation.main
 
 import com.anadolstudio.chronos.presentation.categories.model.CategoryUi
-import com.anadolstudio.chronos.presentation.main.behavior.ScrollState
 import com.anadolstudio.chronos.presentation.main.model.TrackRootUi
 import com.anadolstudio.ui.viewmodel.BaseController
+import com.anadolstudio.view.coordinator.ScrollState
 
 interface MainController : BaseController {
     fun onCalendarClicked()

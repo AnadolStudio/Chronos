@@ -2,7 +2,6 @@ package com.anadolstudio.chronos.presentation.main
 
 import com.anadolstudio.chronos.presentation.categories.model.CategoryUi
 import com.anadolstudio.chronos.presentation.categories.model.toCategoryUi
-import com.anadolstudio.chronos.presentation.main.behavior.ScrollState
 import com.anadolstudio.chronos.presentation.main.model.TrackRootUi
 import com.anadolstudio.chronos.util.TODAY
 import com.anadolstudio.domain.repository.chronos.main_category.MainCategoryDomain
@@ -17,7 +16,7 @@ data class MainState(
         val stopWatcherTime: Time? = null,
         val categoryState: MainCategoryState = MainCategoryState(),
         val isLoading: Boolean = true,
-        val appBarScrollState: ScrollState = ScrollState.IDLE
+        val isAppBarScrolling: Boolean = false
 ) {
     constructor(
             stopWatcherData: StopWatcherData,

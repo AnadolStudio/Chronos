@@ -14,7 +14,6 @@ import com.anadolstudio.chronos.presentation.main.MainViewModel.Companion.MAIN_E
 import com.anadolstudio.chronos.presentation.main.MainViewModel.Companion.MAIN_STOP_WATCHER_KEY
 import com.anadolstudio.chronos.presentation.main.MainViewModel.Companion.MAIN_TRACK_CHANGED_REQUEST_KEY
 import com.anadolstudio.chronos.presentation.main.behavior.MainAppBarBehavior
-import com.anadolstudio.chronos.presentation.main.behavior.ScrollState
 import com.anadolstudio.chronos.util.toWeekDayDateFormat
 import com.anadolstudio.chronos.view.diagram.ProgressData
 import com.anadolstudio.domain.repository.stop_watcher.StopWatcherData
@@ -95,8 +94,6 @@ class MainFragment : BaseContentFragment<MainState, MainViewModel, MainControlle
     }
 
     override fun render(state: MainState) {
-        if (state.appBarScrollState != ScrollState.IDLE) return
-
         renderNightModeButton(state)
         renderStopWatcher(state.stopWatcherData, state.stopWatcherTime)
         renderDiagram(state.trackState)
