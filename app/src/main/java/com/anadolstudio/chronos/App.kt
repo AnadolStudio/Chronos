@@ -6,6 +6,8 @@ import com.anadolstudio.chronos.di.DI
 import com.anadolstudio.chronos.di.SharedComponent
 import com.anadolstudio.chronos.di.SharedComponentProvider
 import com.anadolstudio.data.repository.common.PreferencesStorage
+import com.anadolstudio.utils.timber.PrettyLoggingTree
+import timber.log.Timber
 import javax.inject.Inject
 
 class App : Application(), SharedComponentProvider {
@@ -19,6 +21,8 @@ class App : Application(), SharedComponentProvider {
         DI.init(applicationContext)
         DI.getComponent().inject(this)
         AppCompatDelegate.setDefaultNightMode(preferences.nightMode)
+
+        Timber.plant(PrettyLoggingTree(this, getString(R.string.app_name)))
     }
 
     override fun getModule(): SharedComponent = DI.getComponent()

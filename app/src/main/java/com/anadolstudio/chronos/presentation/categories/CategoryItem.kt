@@ -17,7 +17,7 @@ class CategoryItem(
     override fun bind(binding: ItemCategoryBinding, item: BaseGroupItem<ItemCategoryBinding>) {
         if (item !is CategoryItem) return
 
-        binding.cardView.scaleAnimationOnClick(action = { onClick.invoke(item.categoryUi) })
+        binding.cardView.scaleAnimationOnClick{ onClick.invoke(item.categoryUi) }
         binding.categoryVew.setup(item.categoryUi)
     }
 

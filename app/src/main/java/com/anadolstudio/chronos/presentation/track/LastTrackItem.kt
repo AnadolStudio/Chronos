@@ -17,7 +17,7 @@ class LastTrackItem(
     override fun bind(binding: ItemLastTrackBinding, item: BaseGroupItem<ItemLastTrackBinding>) {
         if (item !is LastTrackItem) return
 
-        binding.chipVew.scaleAnimationOnClick(action = { onClick.invoke(item.categoryUi) })
+        binding.chipVew.scaleAnimationOnClick { onClick.invoke(item.categoryUi) }
         binding.chipVew.setText(item.categoryUi.name)
         binding.chipVew.setBackgroundColor(item.categoryUi.color)
     }

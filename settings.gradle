@@ -21,6 +21,7 @@ include(
         ":core:view",
         ":core:paginator",
         ":core:utils",
+        ":core:analytics",
         ":domain",
         ":data",
 )
@@ -29,3 +30,4 @@ project(':core:ui').projectDir = new File(rootDir, '/AndroidCoreBase/ui')
 project(':core:view').projectDir = new File(rootDir, '/AndroidCoreBase/view')
 project(':core:paginator').projectDir = new File(rootDir, '/AndroidCoreBase/paginator')
 project(':core:utils').projectDir = new File(rootDir, '/AndroidCoreBase/utils')
+project(':core:analytics').projectDir = new File(rootDir, '/AndroidCoreBase/analytics')
